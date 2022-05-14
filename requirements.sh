@@ -1,1 +1,1 @@
-dotnet build submodules/SharpMonoInjector/SharpMonoInjector.Console
+dotnet build submodules/SharpMonoInjector4.8/SharpMonoInjector.Console
