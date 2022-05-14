@@ -4,6 +4,7 @@ Internal cheats for Robocraft 2015.
 
 ## Requirements
 
+- Windows 10
 - Microsoft .NET SDK 6.0.2
 - Microsoft .NET Framework 4.8
 
