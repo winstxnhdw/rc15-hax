@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [["$1" == "dev"]]
+if [ "$1" = "--dev" ]
 then
   dotnet build rc15-hax
 fi
