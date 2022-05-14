@@ -46,7 +46,7 @@ sh launch.sh --dev
 Build and publish dnSpy
 
 ```bash
-sh requirements_dev.sh
+sh requirements.sh --dev
 ```
 
 Run dnSpy.exe
