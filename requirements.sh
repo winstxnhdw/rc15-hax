@@ -1,0 +1,1 @@
+dotnet build submodules/SharpMonoInjector/SharpMonoInjector.Console

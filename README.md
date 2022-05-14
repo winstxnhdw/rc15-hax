@@ -2,6 +2,11 @@
 
 Internal cheats for Robocraft 2015.
 
+## Requirements
+
+- Microsoft .NET SDK 6.0.2
+- Microsoft .NET Framework 4.8 (for Development)
+
 ## Installation
 
 ```bash
