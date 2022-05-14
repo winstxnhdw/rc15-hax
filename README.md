@@ -1,12 +1,13 @@
 # rc15-hax
 
-Internal cheats for Robocraft 2015.
+Internal cheats for Robocraft 2015. Most importantly, no [Visual Studio](https://en.wiktionary.org/wiki/dog_shit) required.
 
 ## Requirements
 
 - Windows 10
 - Microsoft .NET SDK 6.0.2
 - Microsoft .NET Framework 4.8
+- C# 10.0
 
 ## Installation
 
