@@ -26,13 +26,7 @@ sh requirements.sh
 Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Finally, run the following bash script to inject our assembly into the game.
 
 ```bash
-sh load.sh
-```
-
-When you are done, either close the game or run the following script to prevent any memory leaks.
-
-```bash
-sh unload.sh
+sh launch.sh
 ```
 
 ## Development

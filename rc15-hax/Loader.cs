@@ -9,10 +9,6 @@ namespace RC15_HAX {
             Loader.mainGameObject.AddComponent<Hax>();
             DontDestroyOnLoad(Loader.mainGameObject);
         }
-
-        public static void Unload() {
-            Destroy(Loader.mainGameObject);
-        }
     }
 }
 
