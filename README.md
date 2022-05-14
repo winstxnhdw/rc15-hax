@@ -23,6 +23,12 @@ Build and install the dependencies
 sh requirements.sh
 ```
 
+If you are planning to do development, use the `--dev` flag. This will compile dnSpy on top of the default requirements.
+
+```bash
+sh requirements.sh --dev
+```
+
 ## Usage
 
 Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Finally, run the following bash script to inject our assembly into the game.
@@ -33,24 +39,14 @@ sh launch.sh
 
 ## Development
 
-### Testing hax
+Run the compiled dnSpy.exe
+
+```bash
+dnSpy48/dnSpy.exe &
+```
 
 Use the `--dev` flag on `launch.sh` to build before injecting.
 
 ```bash
 sh launch.sh --dev
-```
-
-### Building dnSpy
-
-Build and publish dnSpy
-
-```bash
-sh requirements.sh --dev
-```
-
-Run dnSpy.exe
-
-```bash
-dnSpy48/dnSpy.exe &
 ```
