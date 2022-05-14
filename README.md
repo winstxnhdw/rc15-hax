@@ -32,6 +32,14 @@ sh launch.sh
 
 ## Development
 
+### Testing hax
+
+Use the `--dev` flag on `launch.sh` to build before injecting.
+
+```bash
+sh launch.sh --dev
+```
+
 ### Building dnSpy
 
 Build and publish dnSpy
@@ -44,10 +52,4 @@ Run dnSpy.exe
 
 ```bash
 dnSpy48/dnSpy.exe &
-```
-
-### Testing hax
-
-```bash
-sh launch.sh --dev
 ```
