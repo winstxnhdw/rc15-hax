@@ -1,0 +1,8 @@
+[submodule "submodules/SharpMonoInjector"]
+	path = submodules/SharpMonoInjector
+	url = git@github.com:wh0am15533/SharpMonoInjector.git
+	shallow = true
+[submodule "submodules/dnSpy"]
+	path = submodules/dnSpy
+	url = git@github.com:dnSpy/dnSpy.git
+	shallow = true
