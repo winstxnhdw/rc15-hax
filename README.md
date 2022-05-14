@@ -32,6 +32,8 @@ sh launch.sh
 
 ## Development
 
+### Building dnSpy
+
 Build and publish dnSpy
 
 ```bash
@@ -42,4 +44,10 @@ Run dnSpy.exe
 
 ```bash
 dnSpy48/dnSpy.exe &
+```
+
+### Testing hax
+
+```bash
+sh launch.sh --dev
 ```
