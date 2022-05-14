@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class Loader : MonoBehaviour {
-    static GameObject mainGameObject;
+    static GameObject? mainGameObject;
 
     public static void Load() {
         Loader.mainGameObject = new GameObject();
