@@ -8,8 +8,34 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
   <ItemGroup>
-    <PackageReference Include="UnityEngine" Version="1.0.0" />
+
+    <Reference Include="Assembly-CSharp">
+      <HintPath>./References/Assembly-CSharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion> 
+    </Reference>
+
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>./References/Assembly-CSharp-firstpass.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion> 
+    </Reference>
+
+    <Reference Include="Assembly-UnityScript">
+      <HintPath>./References/Assembly-UnityScript.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion> 
+    </Reference>
+
+    <Reference Include="Assembly-UnityScript-firstpass">
+      <HintPath>./References/Assembly-UnityScript-firstpass.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion> 
+    </Reference>
+
+    <Reference Include="UnityEngine">
+      <HintPath>./References/UnityEngine.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion> 
+    </Reference>
+    
   </ItemGroup>
 
 </Project>
