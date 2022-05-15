@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using UnityEngine;
 using Simulation;
 
@@ -18,6 +16,10 @@ public class Hax : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.Escape)) Settings.menuToggle = !Settings.menuToggle;
         }
 
+        if (Input.GetKey(KeyCode.UpArrow)) {
+            Rigidbody rigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
+            rigidbody.position = rigidbody.position + (Camera.main.transform.forward * 5.0f);
+        }
     }
 
     void OnGUI() {
@@ -25,52 +27,45 @@ public class Hax : MonoBehaviour {
         GUI.Window(0, this.windowRect, this.RenderWindow, "Hax Menu");
     }
 
-    void ToggleNoRecoil() {
-        foreach (UnityEngine.Object weapon in FindObjectsOfType<BaseWeapon>()) {
-            BaseWeapon? currentWeapon = weapon as BaseWeapon;
-            if (currentWeapon == null) continue;
+    void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
+        var upperLeft = centered ? position - size / 2f : position;
+        GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+    }
 
-            currentWeapon.WeaponStats.RecoilForce = 0.0f;
+    void ToggleNoRecoil() {
+        foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
+            weapon.WeaponStats.RecoilForce = 0.0f;
         }
     }
 
     void ToggleMaxAccurancy() {
-        foreach (UnityEngine.Object weapon in FindObjectsOfType<BaseWeapon>()) {
-            BaseWeapon? currentWeapon = weapon as BaseWeapon;
-            if (currentWeapon == null) continue;
-
-            currentWeapon.Accuracy.BaseInAccuracyDegrees = 0.0f;
-            currentWeapon.Accuracy.MovementInAccuracyDegrees = 0.0f;
-            currentWeapon.Accuracy.RepeatFireInAccuracyTotalDegrees = 0.0f;
-            currentWeapon.Accuracy.FireInstantAccuracyDecayDegrees = 0.0f;
+        foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
+            weapon.Accuracy.BaseInAccuracyDegrees = 0.0f;
+            weapon.Accuracy.MovementInAccuracyDegrees = 0.0f;
+            weapon.Accuracy.RepeatFireInAccuracyTotalDegrees = 0.0f;
+            weapon.Accuracy.FireInstantAccuracyDecayDegrees = 0.0f;
         }
     }
 
     void ToggleMaxROM() {
-        foreach (UnityEngine.Object weapon in FindObjectsOfType<BaseWeapon>()) {
-            BaseWeapon? currentWeapon = weapon as BaseWeapon;
-            if (currentWeapon == null) continue;
-
-            currentWeapon.MoveLimits.MaxHorizAngle = 180.0f;
-            currentWeapon.MoveLimits.MinHorizAngle = -180.0f;
-            currentWeapon.MoveLimits.MaxVerticalAngle = 180.0f;
-            currentWeapon.MoveLimits.MinVerticalAngle = -180.0f;
+        foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
+            weapon.MoveLimits.MaxHorizAngle = 180.0f;
+            weapon.MoveLimits.MinHorizAngle = -180.0f;
+            weapon.MoveLimits.MaxVerticalAngle = 180.0f;
+            weapon.MoveLimits.MinVerticalAngle = -180.0f;
         }
     }
 
     void ToggleDeathLaser() {
-        foreach (UnityEngine.Object weapon in FindObjectsOfType<BaseWeapon>()) {
-            BaseWeapon? currentWeapon = weapon as BaseWeapon;
-            if (currentWeapon == null) continue;
-
-            currentWeapon.WeaponStats.ProjectileRange = 5000.0f;
-            currentWeapon.WeaponStats.ProjectileSpeed = 1000.0f;
-            currentWeapon.WeaponStats.ProtoniumDamageScale = 100000.0f;
-            currentWeapon.WeaponStats.DamageInflicted = 1000000;
-            currentWeapon.WeaponStats.ProjectileImpactForce = 100000.0f;
-            currentWeapon.WeaponStats.DamageRatioConducted = 10000000.0f;
-            currentWeapon.WeaponStats.DamageRatioPassedToChasis = 10000000.0f;
-            currentWeapon.WeaponStats.ShootThrough = true;
+        foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
+            weapon.WeaponStats.ProjectileRange = 5000.0f;
+            weapon.WeaponStats.ProjectileSpeed = 1000.0f;
+            weapon.WeaponStats.ProtoniumDamageScale = 100000.0f;
+            weapon.WeaponStats.DamageInflicted = 1000000;
+            weapon.WeaponStats.ProjectileImpactForce = 100000.0f;
+            weapon.WeaponStats.DamageRatioConducted = 10000000.0f;
+            weapon.WeaponStats.DamageRatioPassedToChasis = 10000000.0f;
+            weapon.WeaponStats.ShootThrough = true;
         }
     }
 
