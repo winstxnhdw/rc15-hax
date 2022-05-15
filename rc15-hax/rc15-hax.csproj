@@ -8,7 +8,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-
   <ItemGroup>
 
     <Reference Include="Assembly-CSharp">
