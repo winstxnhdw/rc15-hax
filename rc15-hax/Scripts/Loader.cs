@@ -9,4 +9,8 @@ public class Loader : MonoBehaviour {
         Loader.mainGameObject.AddComponent<Hax>();
         DontDestroyOnLoad(Loader.mainGameObject);
     }
+
+    public static void Unload() {
+        Destroy(Loader.mainGameObject);
+    }
 }

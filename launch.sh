@@ -2,6 +2,7 @@
 
 if [ "$1" = "--dev" ]
 then
+  rm -rf rc15-hax/bin
   dotnet build rc15-hax
 fi
 
