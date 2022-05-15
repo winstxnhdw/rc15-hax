@@ -4,22 +4,36 @@ using Simulation;
 namespace RC15_HAX;
 public class Hax : MonoBehaviour {
     Rect windowRect;
+    Rigidbody? playerRigidbody;
+    bool rigidBodyInstatiated;
 
     void Awake() {
         this.windowRect = this.GetWindowRect(1000, 1000);
+        this.rigidBodyInstatiated = false;
     }
 
     void Update() {
         if (Input.GetKeyUp(KeyCode.Pause)) Loader.Unload();
-
         if (Input.GetKey(KeyCode.Space)) {
             if (Input.GetKeyUp(KeyCode.Escape)) Settings.menuToggle = !Settings.menuToggle;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow)) {
-            Rigidbody rigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
-            rigidbody.position = rigidbody.position + (Camera.main.transform.forward * 5.0f);
+        if (Settings.menuToggle) {
+            if (Input.GetKeyUp(KeyCode.Escape)) Settings.menuToggle = false;
         }
+
+        if (Settings.noClipToggle) {
+            this.PerformNoClip();
+        }
+
+        else {
+            this.playerRigidbody!.isKinematic = false;
+            this.rigidBodyInstatiated = false;
+        }
+    }
+
+    void ResetPlayerOrientation() {
+        this.playerRigidbody!.rotation = Quaternion.Euler(Main.Camera.transform.eulerAngles.x, Main.Camera.transform.eulerAngles.y, 0.0f);
     }
 
     void OnGUI() {
@@ -27,9 +41,38 @@ public class Hax : MonoBehaviour {
         GUI.Window(0, this.windowRect, this.RenderWindow, "Hax Menu");
     }
 
-    void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
-        var upperLeft = centered ? position - size / 2f : position;
-        GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+    // void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
+    //     var upperLeft = centered ? position - size / 2f : position;
+    //     GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+    // }
+
+    void PerformNoClip() {
+        if (!this.rigidBodyInstatiated) {
+            this.playerRigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
+            this.rigidBodyInstatiated = true;
+        }
+
+        this.playerRigidbody!.isKinematic = true;
+
+        if (Input.anyKey) {
+            this.ResetPlayerOrientation();
+
+            if (Input.GetKey(KeyCode.W)) {
+                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera.transform.forward;
+            }
+
+            else if (Input.GetKey(KeyCode.A)) {
+                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera.transform.right;
+            }
+
+            else if (Input.GetKey(KeyCode.S)) {
+                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera.transform.forward;
+            }
+
+            else if (Input.GetKey(KeyCode.D)) {
+                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera.transform.right;
+            }
+        }
     }
 
     void ToggleNoRecoil() {
@@ -69,6 +112,10 @@ public class Hax : MonoBehaviour {
         }
     }
 
+    void ToggleNoClip() {
+        Settings.noClipToggle = !Settings.noClipToggle;
+    }
+
     void ToggleCameraShake() {
         CameraShake cameraShakeObject = FindObjectOfType<CameraShake>();
         cameraShakeObject.enabled = !cameraShakeObject.enabled;
@@ -93,6 +140,10 @@ public class Hax : MonoBehaviour {
 
         if (GUI.Button(this.CreateButtonRect(4), "Death Laser")) {
             this.ToggleDeathLaser();
+        }
+
+        if (GUI.Button(this.CreateButtonRect(5), "No Clip")) {
+            this.ToggleNoClip();
         }
     }
 
