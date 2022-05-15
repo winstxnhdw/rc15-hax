@@ -18,10 +18,6 @@ public class Hax : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.Escape)) Settings.menuToggle = !Settings.menuToggle;
         }
 
-        if (Settings.menuToggle) {
-            if (Input.GetKeyUp(KeyCode.Escape)) Settings.menuToggle = false;
-        }
-
         if (Settings.noClipToggle) {
             this.PerformNoClip();
         }
