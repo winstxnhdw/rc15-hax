@@ -33,7 +33,7 @@ public class Hax : MonoBehaviour {
     }
 
     void ResetPlayerOrientation() {
-        this.playerRigidbody!.rotation = Quaternion.Euler(Main.Camera.transform.eulerAngles.x, Main.Camera.transform.eulerAngles.y, 0.0f);
+        this.playerRigidbody!.rotation = Quaternion.Euler(Main.Camera!.transform.eulerAngles.x, Main.Camera!.transform.eulerAngles.y, 0.0f);
     }
 
     void OnGUI() {
@@ -58,19 +58,19 @@ public class Hax : MonoBehaviour {
             this.ResetPlayerOrientation();
 
             if (Input.GetKey(KeyCode.W)) {
-                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera.transform.forward;
+                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera!.transform.forward;
             }
 
             else if (Input.GetKey(KeyCode.A)) {
-                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera.transform.right;
+                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera!.transform.right;
             }
 
             else if (Input.GetKey(KeyCode.S)) {
-                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera.transform.forward;
+                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera!.transform.forward;
             }
 
             else if (Input.GetKey(KeyCode.D)) {
-                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera.transform.right;
+                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera!.transform.right;
             }
         }
     }
