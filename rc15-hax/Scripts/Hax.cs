@@ -27,9 +27,8 @@ public class Hax : MonoBehaviour {
             this.rigidBodyInstatiated = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftAlt)) {
-            this.playerRigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
-            this.ResetPlayerOrientation();
+        if (Input.GetKeyUp(KeyCode.Backslash)) {
+            FindObjectOfType<LocalPlayerRigidbody>().rb.rotation = Quaternion.Euler(0.0f, Main.Camera!.transform.eulerAngles.y, 0.0f);
         }
     }
 
@@ -38,14 +37,20 @@ public class Hax : MonoBehaviour {
     }
 
     void OnGUI() {
+        foreach (Rigidbody body in FindObjectsOfType<Rigidbody>()) {
+            Vector3 w2s = Main.Camera!.WorldToScreenPoint(body.position);
+            if (w2s.z <= 0.0f) continue;
+            DrawBox(new Vector2(w2s.x, w2s.y), new Vector2(50.0f, 50.0f), true);
+        }
+
         if (!Settings.menuToggle) return;
         GUI.Window(0, this.windowRect, this.RenderWindow, "Hax Menu");
     }
 
-    // void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
-    //     var upperLeft = centered ? position - size / 2f : position;
-    //     GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
-    // }
+    void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
+        var upperLeft = centered ? position - size / 2f : position;
+        GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+    }
 
     void PerformNoClip() {
         if (!this.rigidBodyInstatiated) {
@@ -178,6 +183,18 @@ public class Hax : MonoBehaviour {
             foreach (CubeWheel cubeWheel in FindObjectsOfType<CubeWheel>()) {
                 cubeWheel.maxRPM = 2000.0f;
                 cubeWheel.friction.groundFrictionMultiplier = 3.0f;
+            }
+        }
+
+        if (GUI.Button(this.CreateButtonRectRow2(2), "Boost")) {
+            foreach (CubeAerofoil cubeAerofoil in FindObjectsOfType<CubeAerofoil>()) {
+                cubeAerofoil.dragMinVelocity = float.MaxValue;
+                cubeAerofoil.dragMaxVelocity = float.MaxValue;
+            }
+
+            foreach (CubeJet cubeJet in FindObjectsOfType<CubeJet>()) {
+                cubeJet.ForceMagnitude = 15000.0f;
+                cubeJet.MaxVelocity = float.MaxValue;
             }
         }
     }
