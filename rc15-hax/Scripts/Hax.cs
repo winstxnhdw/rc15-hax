@@ -62,7 +62,7 @@ public class Hax : MonoBehaviour {
     void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
         Vector2 upperLeft = centered ? position - size / 2f : position;
         GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, 0.2f);
-        GUI.DrawTexture(new Rect(position.x - upperLeft.x, position.y - upperLeft.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+        GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
     }
 
     void PerformNoClip() {
