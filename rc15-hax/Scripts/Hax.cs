@@ -26,6 +26,11 @@ public class Hax : MonoBehaviour {
             this.playerRigidbody!.isKinematic = false;
             this.rigidBodyInstatiated = false;
         }
+
+        if (Input.GetKeyUp(KeyCode.LeftAlt)) {
+            this.playerRigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
+            this.ResetPlayerOrientation();
+        }
     }
 
     void ResetPlayerOrientation() {
@@ -68,6 +73,14 @@ public class Hax : MonoBehaviour {
             else if (Input.GetKey(KeyCode.D)) {
                 this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera!.transform.right;
             }
+
+            if (Input.GetKey(KeyCode.Space)) {
+                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera!.transform.up;
+            }
+
+            else if (Input.GetKey(KeyCode.LeftShift)) {
+                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera!.transform.up;
+            }
         }
     }
 
@@ -92,19 +105,34 @@ public class Hax : MonoBehaviour {
             weapon.MoveLimits.MinHorizAngle = -180.0f;
             weapon.MoveLimits.MaxVerticalAngle = 180.0f;
             weapon.MoveLimits.MinVerticalAngle = -180.0f;
+            weapon.WeaponStats.AimSpeed = float.MaxValue;
         }
     }
 
     void ToggleDeathLaser() {
         foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-            weapon.WeaponStats.ProjectileRange = 5000.0f;
+            weapon.WeaponStats.ProjectileRange = float.MaxValue;
             weapon.WeaponStats.ProjectileSpeed = 1000.0f;
-            weapon.WeaponStats.ProtoniumDamageScale = 100000.0f;
-            weapon.WeaponStats.DamageInflicted = 1000000;
-            weapon.WeaponStats.ProjectileImpactForce = 100000.0f;
-            weapon.WeaponStats.DamageRatioConducted = 10000000.0f;
-            weapon.WeaponStats.DamageRatioPassedToChasis = 10000000.0f;
+            weapon.WeaponStats.ProtoniumDamageScale = float.MaxValue;
+            weapon.WeaponStats.ProjectileImpactForce = float.MaxValue;
+            weapon.WeaponStats.DamageRatioConducted = float.MaxValue;
+            weapon.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
             weapon.WeaponStats.ShootThrough = true;
+        }
+    }
+
+    void ToggleUltimateNanoBeam() {
+        foreach (NanoBeam nanoBeam in FindObjectsOfType<NanoBeam>()) {
+            nanoBeam.beamStats.damagePerSecond = 1000000;
+            nanoBeam.beamStats.healPerSecond = 1000000;
+            nanoBeam.WeaponStats.ProjectileRange = float.MaxValue;
+            nanoBeam.WeaponStats.ProjectileSpeed = 1000.0f;
+            nanoBeam.WeaponStats.ProtoniumDamageScale = float.MaxValue;
+            nanoBeam.WeaponStats.DamageInflicted = int.MaxValue;
+            nanoBeam.WeaponStats.ProjectileImpactForce = float.MaxValue;
+            nanoBeam.WeaponStats.DamageRatioConducted = float.MaxValue;
+            nanoBeam.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
+            nanoBeam.WeaponStats.ShootThrough = true;
         }
     }
 
@@ -141,6 +169,17 @@ public class Hax : MonoBehaviour {
         if (GUI.Button(this.CreateButtonRect(5), "No Clip")) {
             this.ToggleNoClip();
         }
+
+        if (GUI.Button(this.CreateButtonRectRow2(0), "Ultimate NanoBeam")) {
+            this.ToggleUltimateNanoBeam();
+        }
+
+        if (GUI.Button(this.CreateButtonRectRow2(1), "Dejavu")) {
+            foreach (CubeWheel cubeWheel in FindObjectsOfType<CubeWheel>()) {
+                cubeWheel.maxRPM = 2000.0f;
+                cubeWheel.friction.groundFrictionMultiplier = 3.0f;
+            }
+        }
     }
 
     Rect CreateButtonRect(int index) {
@@ -149,6 +188,16 @@ public class Hax : MonoBehaviour {
         int height = 30;
         int x = (int)this.windowRect.x - ((int)windowRect.width / 2) + padding + (index * width);
         int y = (int)this.windowRect.y;
+
+        return new Rect(x, y, width, height);
+    }
+
+    Rect CreateButtonRectRow2(int index) {
+        int padding = 60;
+        int width = 150;
+        int height = 30;
+        int x = (int)this.windowRect.x - ((int)windowRect.width / 2) + padding + (index * width);
+        int y = (int)this.windowRect.y + height * 2;
 
         return new Rect(x, y, width, height);
     }

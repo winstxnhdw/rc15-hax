@@ -6,7 +6,8 @@ public static class Main {
 
     public static Camera? Camera {
         get {
-            return Main.camera ? Main.camera : Camera.main;
+            if (!Main.camera) Main.camera = Camera.main;
+            return Main.camera;
         }
     }
 }
