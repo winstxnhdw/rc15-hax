@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using Simulation;
 
@@ -30,6 +31,15 @@ public class Hax : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.Backslash)) {
             FindObjectOfType<LocalPlayerRigidbody>().rb.rotation = Quaternion.Euler(0.0f, Main.Camera!.transform.eulerAngles.y, 0.0f);
         }
+
+        // if (Settings.aimBotToggle) {
+        //     if (Input.GetMouseButton(0)) {
+        //         Rigidbody closestRigidBody = FindObjectsOfType<Rigidbody>().OrderBy(rb => Vector3.Distance(Main.Camera!.transform.position, rb.worldCenterOfMass)).First();
+        //         Vector2 w2s = Camera.main.WorldToScreenPoint(closestRigidBody.worldCenterOfMass);
+        //         Vector2 translatedCursorPosition = w2s - ScreenInfo.GetScreenCentre2D();
+        //         Main.Camera!.transform.localEulerAngles = new Vector3(-translatedCursorPosition.y, translatedCursorPosition.x, 0.0f);
+        //     }
+        // }
     }
 
     void ResetPlayerOrientation() {
@@ -37,10 +47,12 @@ public class Hax : MonoBehaviour {
     }
 
     void OnGUI() {
-        foreach (Rigidbody body in FindObjectsOfType<Rigidbody>()) {
-            Vector3 w2s = Main.Camera!.WorldToScreenPoint(body.position);
-            if (w2s.z <= 0.0f) continue;
-            DrawBox(new Vector2(w2s.x, w2s.y), new Vector2(50.0f, 50.0f), true);
+        if (Settings.espToggle) {
+            foreach (Rigidbody body in FindObjectsOfType<Rigidbody>()) {
+                Vector3 w2s = Camera.main.WorldToScreenPoint(body.worldCenterOfMass);
+                if (w2s.z <= 0.0f) continue;
+                DrawBox(new Vector2(w2s.x, Screen.height - w2s.y), new Vector2(50.0f, 50.0f), true);
+            }
         }
 
         if (!Settings.menuToggle) return;
@@ -48,8 +60,9 @@ public class Hax : MonoBehaviour {
     }
 
     void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
-        var upperLeft = centered ? position - size / 2f : position;
-        GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+        Vector2 upperLeft = centered ? position - size / 2f : position;
+        GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, 0.2f);
+        GUI.DrawTexture(new Rect(position.x - upperLeft.x, position.y - upperLeft.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
     }
 
     void PerformNoClip() {
@@ -145,6 +158,14 @@ public class Hax : MonoBehaviour {
         Settings.noClipToggle = !Settings.noClipToggle;
     }
 
+    void ToggleAimBot() {
+        Settings.aimBotToggle = !Settings.aimBotToggle;
+    }
+
+    void ToggleESP() {
+        Settings.espToggle = !Settings.espToggle;
+    }
+
     void ToggleCameraShake() {
         CameraShake cameraShakeObject = FindObjectOfType<CameraShake>();
         cameraShakeObject.enabled = !cameraShakeObject.enabled;
@@ -196,6 +217,14 @@ public class Hax : MonoBehaviour {
                 cubeJet.ForceMagnitude = 15000.0f;
                 cubeJet.MaxVelocity = float.MaxValue;
             }
+        }
+
+        if (GUI.Button(this.CreateButtonRectRow2(3), "ESP")) {
+            this.ToggleESP();
+        }
+
+        if (GUI.Button(this.CreateButtonRectRow2(4), "AimBot")) {
+            this.ToggleAimBot();
         }
     }
 
