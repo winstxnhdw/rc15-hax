@@ -9,7 +9,8 @@ public class InputListener : MonoBehaviour {
 
     Dictionary<Func<bool>, Action> keyActionsDict = new Dictionary<Func<bool>, Action>() {
         {() => Input.GetKeyUp(KeyCode.Return),      () => InputListener.onEnterPress?.Invoke()},
-        {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()}
+        {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
+        {() => Input.GetKeyUp(KeyCode.Pause),       () => Loader.Unload()}
     };
 
     void Update() {
