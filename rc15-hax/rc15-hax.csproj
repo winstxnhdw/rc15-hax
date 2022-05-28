@@ -6,6 +6,7 @@
     <TargetFramework>net48</TargetFramework>
     <RootNamespace>rc15_hax</RootNamespace>
     <ImplicitUsings>disable</ImplicitUsings>
+    <!-- <AppConfig>app.config</AppConfig> -->
     <Nullable>enable</Nullable>
 
   </PropertyGroup>
@@ -13,30 +14,28 @@
   <ItemGroup>
 
     <Reference Include="Assembly-CSharp">
-      <HintPath>./References/Assembly-CSharp.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion> 
+      <HintPath>./rc15-hax/References/Assembly-CSharp.dll</HintPath>
     </Reference>
 
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>./References/Assembly-CSharp-firstpass.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion> 
-    </Reference>
-
-    <Reference Include="Assembly-UnityScript">
-      <HintPath>./References/Assembly-UnityScript.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion> 
-    </Reference>
-
-    <Reference Include="Assembly-UnityScript-firstpass">
-      <HintPath>./References/Assembly-UnityScript-firstpass.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion> 
     </Reference>
 
     <Reference Include="UnityEngine">
       <HintPath>./References/UnityEngine.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion> 
     </Reference>
-    
+
+    <Reference Include="UnityEngine.UI">
+      <HintPath>./References/UnityEngine.UI.dll</HintPath>
+    </Reference>
+
+    <Reference Include="mscorlib"/>
+    <Reference Include="System"/>
+    <Reference Include="System.Core"/>
+    <Reference Include="System.Drawing"/>
+    <Reference Include="System.Threading"/>
+    <Reference Include="System.Configuration"/>
+
   </ItemGroup>
 
 </Project>
