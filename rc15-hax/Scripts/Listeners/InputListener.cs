@@ -1,13 +1,17 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace RC15_HAX;
 public class InputListener : MonoBehaviour {
-    public static event Action? onEnterPress;
-    public static event Action? onBackquotePress;
+    delegate bool boolFunction();
+    delegate void voidFunction();
 
-    Dictionary<Func<bool>, Action> keyActionsDict = new Dictionary<Func<bool>, Action>() {
+    public delegate void OnBackquotePressDelegate();
+    public delegate void onEnterPressDelegate();
+    public static event onEnterPressDelegate? onEnterPress;
+    public static event OnBackquotePressDelegate? onBackquotePress;
+
+    Dictionary<boolFunction, voidFunction> keyActionsDict = new Dictionary<boolFunction, voidFunction>() {
         {() => Input.GetKeyUp(KeyCode.Return),      () => InputListener.onEnterPress?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.Pause),       () => Loader.Unload()}
@@ -18,7 +22,7 @@ public class InputListener : MonoBehaviour {
     }
 
     void KeyboardListener() {
-        foreach (KeyValuePair<Func<bool>, Action> keyAction in this.keyActionsDict) {
+        foreach (KeyValuePair<boolFunction, voidFunction> keyAction in this.keyActionsDict) {
             if (!(keyAction.Key())) continue;
             keyAction.Value();
         }
