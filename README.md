@@ -39,7 +39,7 @@ sh launch.sh
 
 ## Development
 
-> During development, never use the `System` namespace. RC15 uses a old and incompatible version of mscorlib which is incompatible with .NET 4.8.
+> During development, never use the `System` namespace. RC15 uses an old and incompatible version of `mscorlib` which is incompatible with .NET 4.8.
 
 Run the compiled dnSpy.exe
 

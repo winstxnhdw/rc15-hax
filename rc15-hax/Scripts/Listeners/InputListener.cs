@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class InputListener : MonoBehaviour {
-    delegate bool boolFunction();
-    delegate void voidFunction();
+    delegate bool BoolFunction();
+    delegate void VoidFunction();
 
     public delegate void OnBackquotePressDelegate();
     public delegate void onEnterPressDelegate();
     public static event onEnterPressDelegate? onEnterPress;
     public static event OnBackquotePressDelegate? onBackquotePress;
 
-    Dictionary<boolFunction, voidFunction> keyActionsDict = new Dictionary<boolFunction, voidFunction>() {
+    Dictionary<BoolFunction, VoidFunction> keyActionsDict = new Dictionary<BoolFunction, VoidFunction>() {
         {() => Input.GetKeyUp(KeyCode.Return),      () => InputListener.onEnterPress?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.Pause),       () => Loader.Unload()}
@@ -22,7 +22,7 @@ public class InputListener : MonoBehaviour {
     }
 
     void KeyboardListener() {
-        foreach (KeyValuePair<boolFunction, voidFunction> keyAction in this.keyActionsDict) {
+        foreach (KeyValuePair<BoolFunction, VoidFunction> keyAction in this.keyActionsDict) {
             if (!(keyAction.Key())) continue;
             keyAction.Value();
         }

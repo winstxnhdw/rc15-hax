@@ -6,7 +6,6 @@
     <TargetFramework>net48</TargetFramework>
     <RootNamespace>rc15_hax</RootNamespace>
     <ImplicitUsings>disable</ImplicitUsings>
-    <!-- <AppConfig>app.config</AppConfig> -->
     <Nullable>enable</Nullable>
 
   </PropertyGroup>
@@ -29,12 +28,12 @@
       <HintPath>./References/UnityEngine.UI.dll</HintPath>
     </Reference>
 
-    <Reference Include="mscorlib"/>
     <Reference Include="System"/>
     <Reference Include="System.Core"/>
     <Reference Include="System.Drawing"/>
     <Reference Include="System.Threading"/>
     <Reference Include="System.Configuration"/>
+    <Reference Include="mscorlib"/>
 
   </ItemGroup>
 
