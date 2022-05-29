@@ -1,13 +1,13 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-public static class Main {
-    static Camera? camera;
+public static class Global {
+    static Camera camera = Camera.main;
 
-    public static Camera? Camera {
+    public static Camera Camera {
         get {
-            if (!Main.camera) Main.camera = Camera.main;
-            return Main.camera;
+            if (!Global.camera) Global.camera = Camera.main;
+            return Global.camera;
         }
     }
 }

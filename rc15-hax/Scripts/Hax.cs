@@ -29,21 +29,21 @@ public class Hax : MonoBehaviour {
         }
 
         if (Input.GetKeyUp(KeyCode.Backslash)) {
-            FindObjectOfType<LocalPlayerRigidbody>().rb.rotation = Quaternion.Euler(0.0f, Main.Camera!.transform.eulerAngles.y, 0.0f);
+            FindObjectOfType<LocalPlayerRigidbody>().rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
         }
 
         // if (Settings.aimBotToggle) {
         //     if (Input.GetMouseButton(0)) {
-        //         Rigidbody closestRigidBody = FindObjectsOfType<Rigidbody>().OrderBy(rb => Vector3.Distance(Main.Camera!.transform.position, rb.worldCenterOfMass)).First();
+        //         Rigidbody closestRigidBody = FindObjectsOfType<Rigidbody>().OrderBy(rb => Vector3.Distance(Global.Camera.transform.position, rb.worldCenterOfMass)).First();
         //         Vector2 w2s = Camera.main.WorldToScreenPoint(closestRigidBody.worldCenterOfMass);
         //         Vector2 translatedCursorPosition = w2s - ScreenInfo.GetScreenCentre2D();
-        //         Main.Camera!.transform.localEulerAngles = new Vector3(-translatedCursorPosition.y, translatedCursorPosition.x, 0.0f);
+        //         Global.Camera.transform.localEulerAngles = new Vector3(-translatedCursorPosition.y, translatedCursorPosition.x, 0.0f);
         //     }
         // }
     }
 
     void ResetPlayerOrientation() {
-        this.playerRigidbody!.rotation = Quaternion.Euler(Main.Camera!.transform.eulerAngles.x, Main.Camera!.transform.eulerAngles.y, 0.0f);
+        this.playerRigidbody!.rotation = Quaternion.Euler(Global.Camera.transform.eulerAngles.x, Global.Camera.transform.eulerAngles.y, 0.0f);
     }
 
     void OnGUI() {
@@ -77,27 +77,27 @@ public class Hax : MonoBehaviour {
             this.ResetPlayerOrientation();
 
             if (Input.GetKey(KeyCode.W)) {
-                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera!.transform.forward;
+                this.playerRigidbody.position = this.playerRigidbody.position + Global.Camera.transform.forward;
             }
 
             else if (Input.GetKey(KeyCode.A)) {
-                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera!.transform.right;
+                this.playerRigidbody.position = this.playerRigidbody.position - Global.Camera.transform.right;
             }
 
             else if (Input.GetKey(KeyCode.S)) {
-                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera!.transform.forward;
+                this.playerRigidbody.position = this.playerRigidbody.position - Global.Camera.transform.forward;
             }
 
             else if (Input.GetKey(KeyCode.D)) {
-                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera!.transform.right;
+                this.playerRigidbody.position = this.playerRigidbody.position + Global.Camera.transform.right;
             }
 
             if (Input.GetKey(KeyCode.Space)) {
-                this.playerRigidbody.position = this.playerRigidbody.position + Main.Camera!.transform.up;
+                this.playerRigidbody.position = this.playerRigidbody.position + Global.Camera.transform.up;
             }
 
             else if (Input.GetKey(KeyCode.LeftShift)) {
-                this.playerRigidbody.position = this.playerRigidbody.position - Main.Camera!.transform.up;
+                this.playerRigidbody.position = this.playerRigidbody.position - Global.Camera.transform.up;
             }
         }
     }
