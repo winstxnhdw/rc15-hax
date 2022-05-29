@@ -10,6 +10,10 @@ public class Console : MonoBehaviour {
         InputListener.onBackquotePress += this.ShowConsole;
     }
 
+    void Start() {
+        Console.Print($"{this.GetType().Name} loaded.");
+    }
+
     void OnGUI() {
         this.RenderConsole();
     }
@@ -26,7 +30,7 @@ public class Console : MonoBehaviour {
         this.scroll = GUI.BeginScrollView(scrollRect, this.scroll, viewport);
 
         for (int i = 0; i < logs.Count; i++) {
-            Rect labelRect = new Rect(ConsoleSettings.TextLeftPadding, (ConsoleSettings.TextSpacing * i), 0.0f, ConsoleSettings.LabelHeight);
+            Rect labelRect = new Rect(ConsoleSettings.TextLeftPadding, ConsoleSettings.TextTopPadding + (ConsoleSettings.TextSpacing * i), 0.0f, ConsoleSettings.LabelHeight);
             GUI.Label(labelRect, logs[i], ConsoleSettings.guiStyle);
         }
 

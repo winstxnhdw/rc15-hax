@@ -1,21 +1,20 @@
-using System.Linq;
 using UnityEngine;
 using Simulation;
 
 namespace RC15_HAX;
 public class Hax : MonoBehaviour {
     Rect windowRect;
-    Rigidbody? playerRigidbody;
+    Rigidbody playerRigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
     bool rigidBodyInstatiated;
 
     void Awake() {
-        InputListener.onF4Press += this.ShowMenu;
+        InputListener.onF8Press += this.ShowMenu;
         this.windowRect = this.GetWindowRect(1000, 1000);
         this.rigidBodyInstatiated = false;
     }
 
     void Start() {
-        Console.Print("Hax loaded.");
+        Console.Print($"{this.GetType().Name} loaded.");
     }
 
     void Update() {
@@ -26,7 +25,7 @@ public class Hax : MonoBehaviour {
         }
 
         else {
-            this.playerRigidbody!.isKinematic = false;
+            this.playerRigidbody.isKinematic = false;
             this.rigidBodyInstatiated = false;
         }
 
@@ -45,7 +44,7 @@ public class Hax : MonoBehaviour {
     }
 
     void ResetPlayerOrientation() {
-        this.playerRigidbody!.rotation = Quaternion.Euler(Global.Camera.transform.eulerAngles.x, Global.Camera.transform.eulerAngles.y, 0.0f);
+        this.playerRigidbody.rotation = Quaternion.Euler(Global.Camera.transform.eulerAngles.x, Global.Camera.transform.eulerAngles.y, 0.0f);
     }
 
     void OnGUI() {
@@ -78,7 +77,7 @@ public class Hax : MonoBehaviour {
             this.rigidBodyInstatiated = true;
         }
 
-        this.playerRigidbody!.isKinematic = true;
+        this.playerRigidbody.isKinematic = true;
 
         if (Input.anyKey) {
             this.ResetPlayerOrientation();
@@ -260,5 +259,9 @@ public class Hax : MonoBehaviour {
         int y = (Screen.height - height) / 2;
 
         return new Rect(x, y, width, height);
+    }
+
+    void OnDestroy() {
+        InputListener.onF8Press -= this.ShowMenu;
     }
 }

@@ -5,14 +5,18 @@ namespace RC15_HAX;
 public class InputListener : MonoBehaviour {
     delegate bool BoolFunction();
 
-    public static event Global.Action? onF4Press;
+    public static event Global.Action? onF8Press;
     public static event Global.Action? onBackquotePress;
 
     Dictionary<BoolFunction, Global.Action> keyActionsDict = new Dictionary<BoolFunction, Global.Action>() {
-        {() => Input.GetKeyUp(KeyCode.F4),      () => InputListener.onF4Press?.Invoke()},
+        {() => Input.GetKeyUp(KeyCode.F8),      () => InputListener.onF8Press?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.Pause),       () => Loader.Unload()}
     };
+
+    void Start() {
+        Console.Print($"{this.GetType().Name} loaded.");
+    }
 
     void Update() {
         this.KeyboardListener();
