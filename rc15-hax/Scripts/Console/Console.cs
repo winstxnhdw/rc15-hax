@@ -2,16 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace RC15_HAX;
-public class Console : MonoBehaviour {
+public class Console : HaxComponents {
     List<string> frozenLogs = new List<string>();
     Vector2 scroll;
 
     void Awake() {
         InputListener.onBackquotePress += this.ShowConsole;
-    }
-
-    void Start() {
-        Console.Print($"{this.GetType().Name} loaded.");
     }
 
     void OnGUI() {

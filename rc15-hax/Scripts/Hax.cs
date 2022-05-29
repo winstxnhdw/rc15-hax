@@ -2,7 +2,7 @@ using UnityEngine;
 using Simulation;
 
 namespace RC15_HAX;
-public class Hax : MonoBehaviour {
+public class Hax : HaxComponents {
     Rect windowRect;
     Rigidbody playerRigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
     bool rigidBodyInstatiated;
@@ -11,10 +11,6 @@ public class Hax : MonoBehaviour {
         InputListener.onF8Press += this.ShowMenu;
         this.windowRect = this.GetWindowRect(1000, 1000);
         this.rigidBodyInstatiated = false;
-    }
-
-    void Start() {
-        Console.Print($"{this.GetType().Name} loaded.");
     }
 
     void Update() {

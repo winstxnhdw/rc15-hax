@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace RC15_HAX;
-public class InputListener : MonoBehaviour {
+public class InputListener : HaxComponents {
     delegate bool BoolFunction();
 
     public static event Global.Action? onF8Press;
@@ -13,10 +13,6 @@ public class InputListener : MonoBehaviour {
         {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.Pause),       () => Loader.Unload()}
     };
-
-    void Start() {
-        Console.Print($"{this.GetType().Name} loaded.");
-    }
 
     void Update() {
         this.KeyboardListener();
