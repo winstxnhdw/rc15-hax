@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Console : MonoBehaviour {
+    List<string> frozenLogs = new List<string>();
     Vector2 scroll;
 
     void Awake() {
-        InputListener.onBackquotePress += this.OnToggleDebug;
+        InputListener.onBackquotePress += this.ShowConsole;
     }
 
     void OnGUI() {
@@ -15,21 +16,32 @@ public class Console : MonoBehaviour {
 
     void RenderConsole() {
         if (!ConsoleSettings.ShowConsole) return;
+        List<string> logs = !ConsoleSettings.PauseConsole ? ConsoleSettings.Logs : this.frozenLogs;
 
-        Rect console = new Rect(0.0f, 0.0f, Screen.width, 0.2f * Screen.height);
+        Rect console = new Rect(0.0f, 0.0f, ConsoleSettings.ConsoleWidth, ConsoleSettings.ConsoleHeight);
         GUI.Box(console, "");
 
-        Rect viewport = new Rect(0.0f, 0.0f, 0.9f * Screen.width, ConsoleSettings.Logs.Count * ConsoleSettings.LabelHeight);
+        Rect viewport = new Rect(0.0f, 0.0f, Screen.width, logs.Count * ConsoleSettings.LabelHeight);
         Rect scrollRect = new Rect(0.0f, 0.0f, Screen.width, console.height - 5.0f);
         this.scroll = GUI.BeginScrollView(scrollRect, this.scroll, viewport);
 
-        for (int i = 0; i < ConsoleSettings.Logs.Count; i++) {
+        for (int i = 0; i < logs.Count; i++) {
             Rect labelRect = new Rect(ConsoleSettings.TextLeftPadding, (ConsoleSettings.TextSpacing * i), 0.0f, ConsoleSettings.LabelHeight);
-            GUI.Label(labelRect, ConsoleSettings.Logs[i], ConsoleSettings.guiStyle);
+            GUI.Label(labelRect, logs[i], ConsoleSettings.guiStyle);
         }
 
         GUI.EndScrollView();
     }
+
+    void PauseConsole() {
+        ConsoleSettings.PauseConsole = !ConsoleSettings.PauseConsole;
+        this.frozenLogs.Clear();
+        this.frozenLogs.AddRange(ConsoleSettings.Logs);
+    }
+
+    void ClearConsole() => ConsoleSettings.Logs.Clear();
+
+    void ShowConsole() => ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
 
     void ConsolePrint(string log) => ConsoleSettings.Logs.Add(log);
 
@@ -43,9 +55,7 @@ public class Console : MonoBehaviour {
 
     void ConsolePrint(IList<int> logs) => ConsolePrint(new List<int>(logs).ConvertAll(x => x.ToString()));
 
-    void OnToggleDebug() => ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
-
     void OnDestroy() {
-        InputListener.onBackquotePress -= this.OnToggleDebug;
+        InputListener.onBackquotePress -= this.ShowConsole;
     }
 }

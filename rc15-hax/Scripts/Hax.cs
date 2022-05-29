@@ -9,15 +9,13 @@ public class Hax : MonoBehaviour {
     bool rigidBodyInstatiated;
 
     void Awake() {
+        InputListener.onF4Press += this.ShowMenu;
         this.windowRect = this.GetWindowRect(1000, 1000);
         this.rigidBodyInstatiated = false;
     }
 
     void Update() {
         if (Input.GetKeyUp(KeyCode.Pause)) Loader.Unload();
-        if (Input.GetKey(KeyCode.Space)) {
-            if (Input.GetKeyUp(KeyCode.Escape)) Settings.menuToggle = !Settings.menuToggle;
-        }
 
         if (Settings.noClipToggle) {
             this.PerformNoClip();
@@ -57,6 +55,11 @@ public class Hax : MonoBehaviour {
 
         if (!Settings.menuToggle) return;
         GUI.Window(0, this.windowRect, this.RenderWindow, "Hax Menu");
+    }
+
+    void ShowMenu() {
+        Screen.lockCursor = !Screen.lockCursor;
+        Settings.menuToggle = !Settings.menuToggle;
     }
 
     void DrawBox(Vector2 position, Vector2 size, bool centered = true) {

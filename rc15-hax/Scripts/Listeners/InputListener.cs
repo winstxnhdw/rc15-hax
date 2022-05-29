@@ -4,15 +4,12 @@ using UnityEngine;
 namespace RC15_HAX;
 public class InputListener : MonoBehaviour {
     delegate bool BoolFunction();
-    delegate void VoidFunction();
 
-    public delegate void OnBackquotePressDelegate();
-    public delegate void onEnterPressDelegate();
-    public static event onEnterPressDelegate? onEnterPress;
-    public static event OnBackquotePressDelegate? onBackquotePress;
+    public static event Global.Action? onF4Press;
+    public static event Global.Action? onBackquotePress;
 
-    Dictionary<BoolFunction, VoidFunction> keyActionsDict = new Dictionary<BoolFunction, VoidFunction>() {
-        {() => Input.GetKeyUp(KeyCode.Return),      () => InputListener.onEnterPress?.Invoke()},
+    Dictionary<BoolFunction, Global.Action> keyActionsDict = new Dictionary<BoolFunction, Global.Action>() {
+        {() => Input.GetKeyUp(KeyCode.F4),      () => InputListener.onF4Press?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.Pause),       () => Loader.Unload()}
     };
@@ -22,7 +19,7 @@ public class InputListener : MonoBehaviour {
     }
 
     void KeyboardListener() {
-        foreach (KeyValuePair<BoolFunction, VoidFunction> keyAction in this.keyActionsDict) {
+        foreach (KeyValuePair<BoolFunction, Global.Action> keyAction in this.keyActionsDict) {
             if (!(keyAction.Key())) continue;
             keyAction.Value();
         }
