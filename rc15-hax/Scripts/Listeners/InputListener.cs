@@ -9,7 +9,7 @@ public class InputListener : HaxComponents {
     public static event Global.Action? onBackquotePress;
 
     Dictionary<BoolFunction, Global.Action> keyActionsDict = new Dictionary<BoolFunction, Global.Action>() {
-        {() => Input.GetKeyUp(KeyCode.F8),      () => InputListener.onF8Press?.Invoke()},
+        {() => Input.GetKeyUp(KeyCode.F8),          () => InputListener.onF8Press?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.Pause),       () => Loader.Unload()}
     };
