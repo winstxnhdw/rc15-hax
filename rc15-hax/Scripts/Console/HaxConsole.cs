@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,11 +37,11 @@ public class Console : MonoBehaviour {
 
     void ConsolePrint(int log) => ConsolePrint(log.ToString());
 
-    void ConsolePrint(IEnumerable<string> logs) => ConsoleSettings.Logs.AddRange(logs);
+    void ConsolePrint(IList<string> logs) => ConsoleSettings.Logs.AddRange(logs);
 
-    void ConsolePrint(IEnumerable<float> logs) => ConsolePrint(logs.Select(log => log.ToString()));
+    void ConsolePrint(IList<float> logs) => ConsolePrint(new List<float>(logs).ConvertAll(x => x.ToString()));
 
-    void ConsolePrint(IEnumerable<int> logs) => ConsolePrint(logs.Select(log => log.ToString()));
+    void ConsolePrint(IList<int> logs) => ConsolePrint(new List<int>(logs).ConvertAll(x => x.ToString()));
 
     void OnToggleDebug() => ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
 
