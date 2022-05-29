@@ -14,6 +14,10 @@ public class Hax : MonoBehaviour {
         this.rigidBodyInstatiated = false;
     }
 
+    void Start() {
+        Console.Print("Hax loaded.");
+    }
+
     void Update() {
         if (Input.GetKeyUp(KeyCode.Pause)) Loader.Unload();
 

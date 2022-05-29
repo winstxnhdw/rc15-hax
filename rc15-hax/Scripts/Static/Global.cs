@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public static class Global {
-    public delegate void Action();
     static Camera camera = Camera.main;
+
+    public delegate void Action();
 
     public static Camera Camera {
         get {

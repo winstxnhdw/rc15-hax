@@ -43,17 +43,17 @@ public class Console : MonoBehaviour {
 
     void ShowConsole() => ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
 
-    void ConsolePrint(string log) => ConsoleSettings.Logs.Add(log);
+    public static void Print(string log) => ConsoleSettings.Logs.Add(log);
 
-    void ConsolePrint(float log) => ConsolePrint(log.ToString());
+    public static void Print(float log) => Print(log.ToString());
 
-    void ConsolePrint(int log) => ConsolePrint(log.ToString());
+    public static void Print(int log) => Print(log.ToString());
 
-    void ConsolePrint(IList<string> logs) => ConsoleSettings.Logs.AddRange(logs);
+    public static void Print(IList<string> logs) => ConsoleSettings.Logs.AddRange(logs);
 
-    void ConsolePrint(IList<float> logs) => ConsolePrint(new List<float>(logs).ConvertAll(x => x.ToString()));
+    public static void Print(IList<float> logs) => Print(new List<float>(logs).ConvertAll(x => x.ToString()));
 
-    void ConsolePrint(IList<int> logs) => ConsolePrint(new List<int>(logs).ConvertAll(x => x.ToString()));
+    public static void Print(IList<int> logs) => Print(new List<int>(logs).ConvertAll(x => x.ToString()));
 
     void OnDestroy() {
         InputListener.onBackquotePress -= this.ShowConsole;
