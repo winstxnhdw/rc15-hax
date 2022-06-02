@@ -17,6 +17,7 @@ public class Console : HaxComponents {
 
     void RenderConsole() {
         if (!ConsoleSettings.ShowConsole) return;
+
         List<string> logs = !ConsoleSettings.PauseConsole ? ConsoleSettings.Logs : this.frozenLogs;
 
         Rect console = ConsoleSettings.ConsoleRect;

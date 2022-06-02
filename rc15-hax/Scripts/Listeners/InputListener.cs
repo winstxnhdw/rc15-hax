@@ -8,9 +8,9 @@ public class InputListener : HaxComponents {
     public static event Global.Action? onEscapePress;
 
     Dictionary<Global.Func<bool>, Global.Action> keyActionsDict = new Dictionary<Global.Func<bool>, Global.Action>() {
-        {() => Input.GetKeyUp(KeyCode.F8),          () => InputListener.onF8Press?.Invoke()},
-        {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
-        {() => Input.GetKeyUp(KeyCode.Escape),      () => InputListener.onEscapePress?.Invoke()}
+        {() => Input.GetKeyDown(KeyCode.F8),          () => InputListener.onF8Press?.Invoke()},
+        {() => Input.GetKeyDown(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
+        {() => Input.GetKeyDown(KeyCode.Escape),      () => InputListener.onEscapePress?.Invoke()}
     };
 
     void Update() {
