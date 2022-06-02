@@ -9,6 +9,7 @@ public class Hax : HaxComponents {
 
     void Awake() {
         InputListener.onF8Press += this.ShowMenu;
+        InputListener.onEscapePress += this.HideMenu;
         this.windowRect = this.GetWindowRect(1000, 1000);
         this.rigidBodyInstatiated = false;
     }
@@ -48,13 +49,15 @@ public class Hax : HaxComponents {
             foreach (Rigidbody body in FindObjectsOfType<Rigidbody>()) {
                 Vector3 w2s = Camera.main.WorldToScreenPoint(body.worldCenterOfMass);
                 if (w2s.z <= 0.0f) continue;
-                DrawBox(new Vector2(w2s.x, Screen.height - w2s.y), new Vector2(50.0f, 50.0f), true);
+                DrawBox(new Vector2(w2s.x, Screen.height - w2s.y), new Vector2(20.0f, 20.0f), true);
             }
         }
 
         if (!Settings.MenuToggle) return;
         GUI.Window(0, this.windowRect, this.RenderWindow, "Hax Menu");
     }
+
+    void HideMenu() => Settings.MenuToggle = false;
 
     void ShowMenu() {
         Screen.lockCursor = Settings.MenuToggle ? true : false;
@@ -259,5 +262,6 @@ public class Hax : HaxComponents {
 
     void OnDestroy() {
         InputListener.onF8Press -= this.ShowMenu;
+        InputListener.onEscapePress -= this.HideMenu;
     }
 }
