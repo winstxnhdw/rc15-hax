@@ -8,6 +8,7 @@ public class Console : HaxComponents {
 
     void Awake() {
         InputListener.onBackquotePress += this.ShowConsole;
+        InputListener.onEscapePress += this.HideConsole;
     }
 
     void OnGUI() {
@@ -41,6 +42,8 @@ public class Console : HaxComponents {
     void ClearConsole() => ConsoleSettings.Logs.Clear();
 
     void ShowConsole() => ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
+
+    void HideConsole() => ConsoleSettings.ShowConsole = false;
 
     public static void Print(string log) => ConsoleSettings.Logs.Add(log);
 
