@@ -52,13 +52,13 @@ public class Hax : HaxComponents {
             }
         }
 
-        if (!Settings.menuToggle) return;
+        if (!Settings.MenuToggle) return;
         GUI.Window(0, this.windowRect, this.RenderWindow, "Hax Menu");
     }
 
     void ShowMenu() {
-        Screen.lockCursor = !Screen.lockCursor;
-        Settings.menuToggle = !Settings.menuToggle;
+        Screen.lockCursor = Settings.MenuToggle ? true : false;
+        Settings.MenuToggle = !Settings.MenuToggle;
     }
 
     void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
