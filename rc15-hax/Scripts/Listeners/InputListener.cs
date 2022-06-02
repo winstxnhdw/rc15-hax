@@ -3,15 +3,12 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class InputListener : HaxComponents {
-    delegate bool BoolFunction();
-
     public static event Global.Action? onF8Press;
     public static event Global.Action? onBackquotePress;
 
-    Dictionary<BoolFunction, Global.Action> keyActionsDict = new Dictionary<BoolFunction, Global.Action>() {
+    Dictionary<Global.Func<bool>, Global.Action> keyActionsDict = new Dictionary<Global.Func<bool>, Global.Action>() {
         {() => Input.GetKeyUp(KeyCode.F8),          () => InputListener.onF8Press?.Invoke()},
-        {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
-        {() => Input.GetKeyUp(KeyCode.Pause),       () => Loader.Unload()}
+        {() => Input.GetKeyUp(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()}
     };
 
     void Update() {
@@ -19,7 +16,7 @@ public class InputListener : HaxComponents {
     }
 
     void KeyboardListener() {
-        foreach (KeyValuePair<BoolFunction, Global.Action> keyAction in this.keyActionsDict) {
+        foreach (KeyValuePair<Global.Func<bool>, Global.Action> keyAction in this.keyActionsDict) {
             if (!(keyAction.Key())) continue;
             keyAction.Value();
         }

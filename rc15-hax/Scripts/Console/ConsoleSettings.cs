@@ -3,19 +3,17 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public static class ConsoleSettings {
-    static float SizeRatio => Screen.height / 1080.0f;
+    static float ConsoleHeight => 0.2f * Screen.height;
 
-    public static float TextLeftPadding => 15.0f * SizeRatio;
+    static float ConsoleWidth => Screen.width;
 
-    public static float TextTopPadding => 15.0f * SizeRatio;
+    public static float TextLeftPadding => 15.0f * Settings.SizeRatio;
 
-    public static float TextSpacing => 25.0f * SizeRatio;
+    public static float TextTopPadding => 15.0f * Settings.SizeRatio;
 
-    public static float LabelHeight => 25.0f * SizeRatio;
+    public static float TextSpacing => 25.0f * Settings.SizeRatio;
 
-    public static float ConsoleHeight => 0.2f * Screen.height;
-
-    public static float ConsoleWidth => Screen.width;
+    public static float LabelHeight => 25.0f * Settings.SizeRatio;
 
     public static bool ShowConsole { get; set; } = false;
 
@@ -27,8 +25,12 @@ public static class ConsoleSettings {
         get {
             GUIStyle style = new GUIStyle();
             style.normal.textColor = Color.white;
-            style.fontSize = (int)(20.0f * SizeRatio);
+            style.fontSize = (int)(20.0f * Settings.SizeRatio);
             return style;
         }
     }
+
+    public static Rect ConsoleRect => new Rect(0.0f, 0.0f, ConsoleSettings.ConsoleWidth, ConsoleSettings.ConsoleHeight);
+
+    public static Rect ScrollRect => new Rect(0.0f, 0.0f, Screen.width, ConsoleSettings.ConsoleHeight - 5.0f);
 }
