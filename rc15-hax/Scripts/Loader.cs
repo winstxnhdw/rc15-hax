@@ -7,6 +7,7 @@ public class Loader : MonoBehaviour {
     public static void Load() {
         DontDestroyOnLoad(Loader.mainGameObject);
 
+        Loader.mainGameObject.AddComponent<CursorController>();
         Loader.mainGameObject.AddComponent<InputListener>();
         Loader.mainGameObject.AddComponent<Console>();
         Loader.mainGameObject.AddComponent<Hax>();
