@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RC15_HAX;
 public class Console : HaxComponents {
     List<string> frozenLogs = new List<string>();
-    Vector2 scroll = Vector2.zero;
+    Vector2 Scroll { get; set; } = Vector2.zero;
 
     void Awake() {
         InputListener.onBackquotePress += this.ShowConsole;
@@ -24,7 +24,7 @@ public class Console : HaxComponents {
         GUI.Box(console, "Console");
 
         Rect viewport = new Rect(0.0f, 0.0f, Screen.width, logs.Count * ConsoleSettings.LabelHeight);
-        this.scroll = GUI.BeginScrollView(ConsoleSettings.ScrollRect, this.scroll, viewport);
+        this.Scroll = GUI.BeginScrollView(ConsoleSettings.ScrollRect, this.Scroll, viewport);
 
         for (int i = 0; i < logs.Count; i++) {
             Rect labelRect = new Rect(ConsoleSettings.TextLeftPadding, ConsoleSettings.TextTopPadding + (ConsoleSettings.TextSpacing * i), 0.0f, ConsoleSettings.LabelHeight);
