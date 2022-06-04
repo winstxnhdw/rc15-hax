@@ -2,18 +2,18 @@
 
 namespace RC15_HAX;
 public class Loader : MonoBehaviour {
-    static GameObject mainGameObject = new GameObject();
+    static GameObject HaxGameObject { get; } = new GameObject();
 
     public static void Load() {
-        DontDestroyOnLoad(Loader.mainGameObject);
+        DontDestroyOnLoad(Loader.HaxGameObject);
 
-        Loader.mainGameObject.AddComponent<CursorController>();
-        Loader.mainGameObject.AddComponent<InputListener>();
-        Loader.mainGameObject.AddComponent<Console>();
-        Loader.mainGameObject.AddComponent<Hax>();
+        Loader.HaxGameObject.AddComponent<CursorController>();
+        Loader.HaxGameObject.AddComponent<InputListener>();
+        Loader.HaxGameObject.AddComponent<Console>();
+        Loader.HaxGameObject.AddComponent<Hax>();
     }
 
     public static void Unload() {
-        Destroy(Loader.mainGameObject);
+        Destroy(Loader.HaxGameObject);
     }
 }

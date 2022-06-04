@@ -1,267 +1,418 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Simulation;
 
 namespace RC15_HAX;
 public class Hax : HaxComponents {
-    Rect windowRect;
-    Rigidbody playerRigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
-    bool rigidBodyInstatiated;
+    bool HaxPaused { get; set; } = false;
+    bool IsNoClipping { get; set; } = false;
+
+    ObjectCache<LocalPlayerRigidbody> PlayerRigidbody { get; } = new ObjectCache<LocalPlayerRigidbody>();
+    ObjectCache<Rigidbody> Rigidbodies { get; } = new ObjectCache<Rigidbody>();
 
     void Awake() {
-        InputListener.onF8Press += this.ShowMenu;
-        InputListener.onEscapePress += this.HideMenu;
-        this.windowRect = this.GetWindowRect(1000, 1000);
-        this.rigidBodyInstatiated = false;
+        InputListener.onPausePress += this.ToggleHaxPause;
+        InputListener.onF9Press += this.ToggleNoClip;
+        InputListener.onF10Press += this.GetNames;
+        InputListener.onBackslashPress += this.RectifyOrientation;
+    }
+
+    protected override void Start() {
+        base.Start();
+        this.PlayerRigidbody.Init(this);
+        this.Rigidbodies.Init(this);
     }
 
     void Update() {
-        if (Input.GetKeyUp(KeyCode.Pause)) Loader.Unload();
-
-        if (Settings.noClipToggle) {
-            this.PerformNoClip();
+        if (this.HaxPaused) {
+            this.RevertHaxParams();
+            return;
         }
-
-        else {
-            this.playerRigidbody.isKinematic = false;
-            this.rigidBodyInstatiated = false;
-        }
-
-        if (Input.GetKeyUp(KeyCode.Backslash)) {
-            FindObjectOfType<LocalPlayerRigidbody>().rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
-        }
-
-        // if (Settings.aimBotToggle) {
-        //     if (Input.GetMouseButton(0)) {
-        //         Rigidbody closestRigidBody = FindObjectsOfType<Rigidbody>().OrderBy(rb => Vector3.Distance(Global.Camera.transform.position, rb.worldCenterOfMass)).First();
-        //         Vector2 w2s = Camera.main.WorldToScreenPoint(closestRigidBody.worldCenterOfMass);
-        //         Vector2 translatedCursorPosition = w2s - ScreenInfo.GetScreenCentre2D();
-        //         Global.Camera.transform.localEulerAngles = new Vector3(-translatedCursorPosition.y, translatedCursorPosition.x, 0.0f);
-        //     }
-        // }
-    }
-
-    void ResetPlayerOrientation() {
-        this.playerRigidbody.rotation = Quaternion.Euler(Global.Camera.transform.eulerAngles.x, Global.Camera.transform.eulerAngles.y, 0.0f);
     }
 
     void OnGUI() {
-        if (Settings.espToggle) {
-            foreach (Rigidbody body in FindObjectsOfType<Rigidbody>()) {
-                Vector3 w2s = Camera.main.WorldToScreenPoint(body.worldCenterOfMass);
-                if (w2s.z <= 0.0f) continue;
-                DrawBox(new Vector2(w2s.x, Screen.height - w2s.y), new Vector2(20.0f, 20.0f), true);
-            }
+        if (this.HaxPaused) return;
+
+        this.DrawESP();
+        this.NoClip();
+    }
+
+    void GetNames() {
+        foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
+            if (rigidbody.name.Contains(" ") || rigidbody.name == "Player Machine Root") continue;
+            Console.Print(rigidbody.name);
         }
-
-        if (!Settings.MenuToggle) return;
-        GUI.Window(0, this.windowRect, this.RenderWindow, "Hax Menu");
     }
 
-    void HideMenu() => Settings.MenuToggle = false;
+    void RevertHaxParams() {
 
-    void ShowMenu() {
-        Screen.lockCursor = Settings.MenuToggle ? true : false;
-        Settings.MenuToggle = !Settings.MenuToggle;
     }
 
-    void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
-        Vector2 upperLeft = centered ? position - size / 2f : position;
-        GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, 0.2f);
-        GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+    void GodMode() {
+        // PlayerRigidBody.GetComponent<PhysicsRaycaster>().enabled = false;
     }
 
-    void PerformNoClip() {
-        if (!this.rigidBodyInstatiated) {
-            this.playerRigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
-            this.rigidBodyInstatiated = true;
-        }
+    void NoClip() {
+        if (!this.IsNoClipping) return;
 
-        this.playerRigidbody.isKinematic = true;
+        Rigidbody playerRigidbody = this.PlayerRigidbody.Objects[0].rb;
+        playerRigidbody.isKinematic = true;
 
         if (Input.anyKey) {
-            this.ResetPlayerOrientation();
+            // Reset player's roll
+            this.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(
+                Global.Camera.transform.eulerAngles.x,
+                Global.Camera.transform.eulerAngles.y,
+                0.0f
+            );
 
+            Transform cameraTransform = Global.Camera.transform;
+
+            // Forward-back
             if (Input.GetKey(KeyCode.W)) {
-                this.playerRigidbody.position = this.playerRigidbody.position + Global.Camera.transform.forward;
-            }
-
-            else if (Input.GetKey(KeyCode.A)) {
-                this.playerRigidbody.position = this.playerRigidbody.position - Global.Camera.transform.right;
+                playerRigidbody.position += cameraTransform.forward;
             }
 
             else if (Input.GetKey(KeyCode.S)) {
-                this.playerRigidbody.position = this.playerRigidbody.position - Global.Camera.transform.forward;
+                playerRigidbody.position -= cameraTransform.forward;
             }
 
-            else if (Input.GetKey(KeyCode.D)) {
-                this.playerRigidbody.position = this.playerRigidbody.position + Global.Camera.transform.right;
+            // Right-left
+            if (Input.GetKey(KeyCode.D)) {
+                playerRigidbody.position += cameraTransform.right;
             }
 
+            else if (Input.GetKey(KeyCode.A)) {
+                playerRigidbody.position -= cameraTransform.right;
+            }
+
+            // Up-down
             if (Input.GetKey(KeyCode.Space)) {
-                this.playerRigidbody.position = this.playerRigidbody.position + Global.Camera.transform.up;
+                playerRigidbody.position += cameraTransform.up;
             }
 
             else if (Input.GetKey(KeyCode.LeftShift)) {
-                this.playerRigidbody.position = this.playerRigidbody.position - Global.Camera.transform.up;
+                playerRigidbody.position -= cameraTransform.up;
             }
         }
     }
 
-    void ToggleNoRecoil() {
-        foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-            weapon.WeaponStats.RecoilForce = 0.0f;
+    void DrawESP() {
+        if (!bool.Parse(HaxSettings.Params["EnableESP"])) return;
+
+        foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
+            if (rigidbody.name.Contains(" ")) continue;
+            if (!rigidbody.name.Contains("AI")) continue;
+            if (!rigidbody.name.Contains("Rigidbody")) continue;
+
+
+            Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;
+            Vector3 rigidbodyScreenPosition = Global.Camera.WorldToScreenPoint(rigidbodyWorldPosition);
+
+            if (rigidbodyScreenPosition.z <= 0.0f) continue;
+
+            float flatDistanceFromRigidbody = Vector3.Distance(rigidbodyWorldPosition, Global.Camera.transform.position);
+            rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
+            Size size = new Size(Settings.OutlineBoxSize, Settings.OutlineBoxSize) / flatDistanceFromRigidbody;
+            this.DrawOutlineBox(rigidbodyScreenPosition, size, Settings.BoxLineWidth);
+
+            float halfWidth = 0.5f * size.Width;
+            float halfHeight = 0.5f * size.Height;
+            Vector2 textPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y - halfHeight - 20.0f);
+            this.DrawLabel(textPosition, $"{rigidbody.name}: {Mathf.RoundToInt(flatDistanceFromRigidbody).ToString()}m");
         }
     }
 
-    void ToggleMaxAccurancy() {
-        foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-            weapon.Accuracy.BaseInAccuracyDegrees = 0.0f;
-            weapon.Accuracy.MovementInAccuracyDegrees = 0.0f;
-            weapon.Accuracy.RepeatFireInAccuracyTotalDegrees = 0.0f;
-            weapon.Accuracy.FireInstantAccuracyDecayDegrees = 0.0f;
-        }
+    void DrawLabel(Vector2 position, string label) => GUI.Label(new Rect(position.x, position.y, 500.0f, 50.0f), label);
+
+    // Draw a box outline with position as its centre
+    void DrawOutlineBox(Vector2 centrePosition, Size size, float lineWidth) {
+        float halfWidth = 0.5f * size.Width;
+        float halfHeight = 0.5f * size.Height;
+        float left = centrePosition.x - halfWidth;
+        float right = centrePosition.x + halfWidth;
+        float top = centrePosition.y - halfHeight;
+        float bottom = centrePosition.y + halfHeight;
+
+        // Top face
+        Vector2 topLeft = new Vector2(left, top);
+        this.DrawBox(topLeft, new Size(size.Width, lineWidth));
+
+        // Right face
+        Vector2 topRight = new Vector2(right, top);
+        this.DrawBox(topRight - new Vector2(lineWidth, 0.0f), new Size(lineWidth, size.Height));
+
+        // Bottom face
+        Vector2 bottomLeft = new Vector2(left, bottom);
+        this.DrawBox(bottomLeft - new Vector2(0.0f, lineWidth), new Size(size.Width, lineWidth));
+
+        // Left face
+        this.DrawBox(topLeft, new Size(lineWidth, size.Height));
     }
 
-    void ToggleMaxROM() {
-        foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-            weapon.MoveLimits.MaxHorizAngle = 180.0f;
-            weapon.MoveLimits.MinHorizAngle = -180.0f;
-            weapon.MoveLimits.MaxVerticalAngle = 180.0f;
-            weapon.MoveLimits.MinVerticalAngle = -180.0f;
-            weapon.WeaponStats.AimSpeed = float.MaxValue;
-        }
+    void DrawBox(Vector2 position, Size size) {
+        Rect rect = new Rect(position.x, position.y, size.Width, size.Height);
+        GUI.DrawTexture(rect, Texture2D.whiteTexture, ScaleMode.StretchToFill);
     }
 
-    void ToggleDeathLaser() {
-        foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-            weapon.WeaponStats.ProjectileRange = float.MaxValue;
-            weapon.WeaponStats.ProjectileSpeed = 1000.0f;
-            weapon.WeaponStats.ProtoniumDamageScale = float.MaxValue;
-            weapon.WeaponStats.ProjectileImpactForce = float.MaxValue;
-            weapon.WeaponStats.DamageRatioConducted = float.MaxValue;
-            weapon.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
-            weapon.WeaponStats.ShootThrough = true;
-        }
-    }
-
-    void ToggleUltimateNanoBeam() {
-        foreach (NanoBeam nanoBeam in FindObjectsOfType<NanoBeam>()) {
-            nanoBeam.beamStats.damagePerSecond = 1000000;
-            nanoBeam.beamStats.healPerSecond = 1000000;
-            nanoBeam.WeaponStats.ProjectileRange = float.MaxValue;
-            nanoBeam.WeaponStats.ProjectileSpeed = 1000.0f;
-            nanoBeam.WeaponStats.ProtoniumDamageScale = float.MaxValue;
-            nanoBeam.WeaponStats.DamageInflicted = int.MaxValue;
-            nanoBeam.WeaponStats.ProjectileImpactForce = float.MaxValue;
-            nanoBeam.WeaponStats.DamageRatioConducted = float.MaxValue;
-            nanoBeam.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
-            nanoBeam.WeaponStats.ShootThrough = true;
-        }
-    }
+    // Resets player's pitch and roll
+    void RectifyOrientation() => this.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
 
     void ToggleNoClip() {
-        Settings.noClipToggle = !Settings.noClipToggle;
+        this.IsNoClipping = !this.IsNoClipping;
+        if (!this.IsNoClipping) this.PlayerRigidbody.Objects[0].rb.isKinematic = false;
     }
 
-    void ToggleAimBot() {
-        Settings.aimBotToggle = !Settings.aimBotToggle;
-    }
+    void ToggleHaxPause() => this.HaxPaused = !this.HaxPaused;
 
-    void ToggleESP() {
-        Settings.espToggle = !Settings.espToggle;
-    }
+    // Rect windowRect;
 
-    void ToggleCameraShake() {
-        CameraShake cameraShakeObject = FindObjectOfType<CameraShake>();
-        cameraShakeObject.enabled = !cameraShakeObject.enabled;
-    }
+    // void Awake() {
+    //     InputListener.onF8Press += this.ShowMenu;
+    //     InputListener.onEscapePress += this.HideMenu;
+    //     this.windowRect = this.GetWindowRect(1000, 1000);
+    // }
 
-    void RenderWindow(int windowIndex) {
-        if (GUI.Button(this.CreateButtonRect(0), "Toggle CameraShake")) {
-            this.ToggleCameraShake();
-        }
+    // void Update() {
+    //     if (Input.GetKeyUp(KeyCode.Pause)) Loader.Unload();
 
-        if (GUI.Button(this.CreateButtonRect(1), "No recoil")) {
-            this.ToggleNoRecoil();
-        }
+    //     if (Settings.noClipToggle) {
+    //         this.PerformNoClip();
+    //     }
 
-        if (GUI.Button(this.CreateButtonRect(2), "100% Accuracy")) {
-            this.ToggleMaxAccurancy();
-        }
+    //     else {
+    //         FindObjectOfType<LocalPlayerRigidbody>().rb.isKinematic = false;
+    //     }
 
-        if (GUI.Button(this.CreateButtonRect(3), "No ROM")) {
-            this.ToggleMaxROM();
-        }
+    //     if (Input.GetKeyUp(KeyCode.Backslash)) {
+    //         FindObjectOfType<LocalPlayerRigidbody>().rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
+    //     }
 
-        if (GUI.Button(this.CreateButtonRect(4), "Death Laser")) {
-            this.ToggleDeathLaser();
-        }
+    //     // if (Settings.aimBotToggle) {
+    //     //     if (Input.GetMouseButton(0)) {
+    //     //         Rigidbody closestRigidBody = FindObjectsOfType<Rigidbody>().OrderBy(rb => Vector3.Distance(Global.Camera.transform.position, rb.worldCenterOfMass)).First();
+    //     //         Vector2 w2s = Camera.main.WorldToScreenPoint(closestRigidBody.worldCenterOfMass);
+    //     //         Vector2 translatedCursorPosition = w2s - ScreenInfo.GetScreenCentre2D();
+    //     //         Global.Camera.transform.localEulerAngles = new Vector3(-translatedCursorPosition.y, translatedCursorPosition.x, 0.0f);
+    //     //     }
+    //     // }
+    // }
 
-        if (GUI.Button(this.CreateButtonRect(5), "No Clip")) {
-            this.ToggleNoClip();
-        }
+    // void ResetPlayerOrientation() {
+    //     FindObjectOfType<LocalPlayerRigidbody>().rb.rotation = Quaternion.Euler(Global.Camera.transform.eulerAngles.x, Global.Camera.transform.eulerAngles.y, 0.0f);
+    // }
 
-        if (GUI.Button(this.CreateButtonRectRow2(0), "Ultimate NanoBeam")) {
-            this.ToggleUltimateNanoBeam();
-        }
+    // void OnGUI() {
+    //     if (Settings.espToggle) {
+    //         foreach (Rigidbody body in FindObjectsOfType<Rigidbody>()) {
+    //             Vector3 w2s = Camera.main.WorldToScreenPoint(body.worldCenterOfMass);
+    //             if (w2s.z <= 0.0f) continue;
+    //             DrawBox(new Vector2(w2s.x, Screen.height - w2s.y), new Vector2(20.0f, 20.0f), true);
+    //         }
+    //     }
 
-        if (GUI.Button(this.CreateButtonRectRow2(1), "Dejavu")) {
-            foreach (CubeWheel cubeWheel in FindObjectsOfType<CubeWheel>()) {
-                cubeWheel.maxRPM = 2000.0f;
-                cubeWheel.friction.groundFrictionMultiplier = 3.0f;
-            }
-        }
+    //     if (!Settings.MenuToggle) return;
+    //     GUI.Window(0, this.windowRect, this.RenderWindow, "Hax Menu");
+    // }
 
-        if (GUI.Button(this.CreateButtonRectRow2(2), "Boost")) {
-            foreach (CubeAerofoil cubeAerofoil in FindObjectsOfType<CubeAerofoil>()) {
-                cubeAerofoil.dragMinVelocity = float.MaxValue;
-                cubeAerofoil.dragMaxVelocity = float.MaxValue;
-            }
+    // void HideMenu() => Settings.MenuToggle = false;
 
-            foreach (CubeJet cubeJet in FindObjectsOfType<CubeJet>()) {
-                cubeJet.ForceMagnitude = 15000.0f;
-                cubeJet.MaxVelocity = float.MaxValue;
-            }
-        }
+    // void ShowMenu() => Settings.MenuToggle = !Settings.MenuToggle;
 
-        if (GUI.Button(this.CreateButtonRectRow2(3), "ESP")) {
-            this.ToggleESP();
-        }
+    // void DrawBox(Vector2 position, Vector2 size, bool centered = true) {
+    //     Vector2 upperLeft = centered ? position - size / 2f : position;
+    //     GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, 0.2f);
+    //     GUI.DrawTexture(new Rect(position.x, position.y, size.x, size.y), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+    // }
 
-        if (GUI.Button(this.CreateButtonRectRow2(4), "AimBot")) {
-            this.ToggleAimBot();
-        }
-    }
+    // void PerformNoClip() {
+    //     Rigidbody playerRigidbody = FindObjectOfType<LocalPlayerRigidbody>().rb;
 
-    Rect CreateButtonRect(int index) {
-        int padding = 60;
-        int width = 150;
-        int height = 30;
-        int x = (int)this.windowRect.x - ((int)windowRect.width / 2) + padding + (index * width);
-        int y = (int)this.windowRect.y;
+    //     playerRigidbody.isKinematic = true;
 
-        return new Rect(x, y, width, height);
-    }
+    //     if (Input.anyKey) {
+    //         this.ResetPlayerOrientation();
 
-    Rect CreateButtonRectRow2(int index) {
-        int padding = 60;
-        int width = 150;
-        int height = 30;
-        int x = (int)this.windowRect.x - ((int)windowRect.width / 2) + padding + (index * width);
-        int y = (int)this.windowRect.y + height * 2;
+    //         if (Input.GetKey(KeyCode.W)) {
+    //             playerRigidbody.position = playerRigidbody.position + Global.Camera.transform.forward;
+    //         }
 
-        return new Rect(x, y, width, height);
-    }
+    //         else if (Input.GetKey(KeyCode.A)) {
+    //             playerRigidbody.position = playerRigidbody.position - Global.Camera.transform.right;
+    //         }
 
-    Rect GetWindowRect(int width, int height) {
-        int x = (Screen.width - width) / 2;
-        int y = (Screen.height - height) / 2;
+    //         else if (Input.GetKey(KeyCode.S)) {
+    //             playerRigidbody.position = playerRigidbody.position - Global.Camera.transform.forward;
+    //         }
 
-        return new Rect(x, y, width, height);
-    }
+    //         else if (Input.GetKey(KeyCode.D)) {
+    //             playerRigidbody.position = playerRigidbody.position + Global.Camera.transform.right;
+    //         }
 
-    void OnDestroy() {
-        InputListener.onF8Press -= this.ShowMenu;
-        InputListener.onEscapePress -= this.HideMenu;
-    }
+    //         if (Input.GetKey(KeyCode.Space)) {
+    //             playerRigidbody.position = playerRigidbody.position + Global.Camera.transform.up;
+    //         }
+
+    //         else if (Input.GetKey(KeyCode.LeftShift)) {
+    //             playerRigidbody.position = playerRigidbody.position - Global.Camera.transform.up;
+    //         }
+    //     }
+    // }
+
+    // void ToggleNoRecoil() {
+
+    //     foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
+    //         weapon.WeaponStats.RecoilForce = 0.0f;
+    //     }
+    // }
+
+    // void ToggleMaxAccurancy() {
+    //     foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
+    //         weapon.Accuracy.BaseInAccuracyDegrees = 0.0f;
+    //         weapon.Accuracy.MovementInAccuracyDegrees = 0.0f;
+    //         weapon.Accuracy.RepeatFireInAccuracyTotalDegrees = 0.0f;
+    //         weapon.Accuracy.FireInstantAccuracyDecayDegrees = 0.0f;
+    //     }
+    // }
+
+    // void ToggleMaxROM() {
+    //     foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
+    //         weapon.MoveLimits.MaxHorizAngle = 180.0f;
+    //         weapon.MoveLimits.MinHorizAngle = -180.0f;
+    //         weapon.MoveLimits.MaxVerticalAngle = 180.0f;
+    //         weapon.MoveLimits.MinVerticalAngle = -180.0f;
+    //         weapon.WeaponStats.AimSpeed = float.MaxValue;
+    //     }
+    // }
+
+    // void ToggleDeathLaser() {
+    //     foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
+    //         weapon.WeaponStats.ProjectileRange = float.MaxValue;
+    //         weapon.WeaponStats.ProjectileSpeed = 1000.0f;
+    //         weapon.WeaponStats.ProtoniumDamageScale = float.MaxValue;
+    //         weapon.WeaponStats.ProjectileImpactForce = float.MaxValue;
+    //         weapon.WeaponStats.DamageRatioConducted = float.MaxValue;
+    //         weapon.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
+    //     }
+    // }
+
+    // void ToggleUltimateNanoBeam() {
+    //     foreach (NanoBeam nanoBeam in FindObjectsOfType<NanoBeam>()) {
+    //         nanoBeam.beamStats.damagePerSecond = 1000000;
+    //         nanoBeam.beamStats.healPerSecond = 1000000;
+    //         nanoBeam.WeaponStats.ProjectileRange = float.MaxValue;
+    //         nanoBeam.WeaponStats.ProjectileSpeed = 1000.0f;
+    //         nanoBeam.WeaponStats.ProtoniumDamageScale = float.MaxValue;
+    //         nanoBeam.WeaponStats.ProjectileImpactForce = float.MaxValue;
+    //         nanoBeam.WeaponStats.DamageRatioConducted = float.MaxValue;
+    //         nanoBeam.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
+    //     }
+    // }
+
+    // void ToggleNoClip() {
+    //     Settings.noClipToggle = !Settings.noClipToggle;
+    // }
+
+    // void ToggleAimBot() {
+    //     Settings.aimBotToggle = !Settings.aimBotToggle;
+    // }
+
+    // void ToggleESP() {
+    //     Settings.espToggle = !Settings.espToggle;
+    // }
+
+    // void ToggleCameraShake() {
+    //     CameraShake cameraShakeObject = FindObjectOfType<CameraShake>();
+    //     cameraShakeObject.enabled = !cameraShakeObject.enabled;
+    // }
+
+    // void RenderWindow(int windowIndex) {
+    //     if (GUI.Button(this.CreateButtonRect(0), "Toggle CameraShake")) {
+    //         this.ToggleCameraShake();
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRect(1), "No recoil")) {
+    //         this.ToggleNoRecoil();
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRect(2), "100% Accuracy")) {
+    //         this.ToggleMaxAccurancy();
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRect(3), "No ROM")) {
+    //         this.ToggleMaxROM();
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRect(4), "Death Laser")) {
+    //         this.ToggleDeathLaser();
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRect(5), "No Clip")) {
+    //         this.ToggleNoClip();
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRectRow2(0), "Ultimate NanoBeam")) {
+    //         this.ToggleUltimateNanoBeam();
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRectRow2(1), "Dejavu")) {
+    //         foreach (CubeWheel cubeWheel in FindObjectsOfType<CubeWheel>()) {
+    //             cubeWheel.maxRPM = 2000.0f;
+    //             cubeWheel.friction.groundFrictionMultiplier = 3.0f;
+    //         }
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRectRow2(2), "Boost")) {
+    //         foreach (CubeAerofoil cubeAerofoil in FindObjectsOfType<CubeAerofoil>()) {
+    //             cubeAerofoil.dragMinVelocity = float.MaxValue;
+    //             cubeAerofoil.dragMaxVelocity = float.MaxValue;
+    //         }
+
+    //         foreach (CubeJet cubeJet in FindObjectsOfType<CubeJet>()) {
+    //             cubeJet.ForceMagnitude = 15000.0f;
+    //             cubeJet.MaxVelocity = float.MaxValue;
+    //         }
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRectRow2(3), "ESP")) {
+    //         this.ToggleESP();
+    //     }
+
+    //     if (GUI.Button(this.CreateButtonRectRow2(4), "AimBot")) {
+    //         this.ToggleAimBot();
+    //     }
+    // }
+
+    // Rect CreateButtonRect(int index) {
+    //     int padding = 60;
+    //     int width = 150;
+    //     int height = 30;
+    //     int x = (int)this.windowRect.x - ((int)windowRect.width / 2) + padding + (index * width);
+    //     int y = (int)this.windowRect.y;
+
+    //     return new Rect(x, y, width, height);
+    // }
+
+    // Rect CreateButtonRectRow2(int index) {
+    //     int padding = 60;
+    //     int width = 150;
+    //     int height = 30;
+    //     int x = (int)this.windowRect.x - ((int)windowRect.width / 2) + padding + (index * width);
+    //     int y = (int)this.windowRect.y + height * 2;
+
+    //     return new Rect(x, y, width, height);
+    // }
+
+    // Rect GetWindowRect(int width, int height) {
+    //     int x = (Screen.width - width) / 2;
+    //     int y = (Screen.height - height) / 2;
+
+    //     return new Rect(x, y, width, height);
+    // }
+
+    // void OnDestroy() {
+    //     InputListener.onF8Press -= this.ShowMenu;
+    //     InputListener.onEscapePress -= this.HideMenu;
+    // }
 }
