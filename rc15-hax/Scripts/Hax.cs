@@ -123,13 +123,13 @@ public class Hax : HaxComponents {
             float halfHeight = 0.5f * size.Height;
 
             Vector2 nameTextPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y - halfHeight - 20.0f);
-            this.DrawLabel(nameTextPosition, $"{rigidbody.name}: {Mathf.RoundToInt(flatDistanceFromRigidbody).ToString()}m");
+            GUIHelper.DrawLabel(nameTextPosition, $"{rigidbody.name}: {Mathf.RoundToInt(flatDistanceFromRigidbody).ToString()}m");
 
             int coordinateX = Mathf.RoundToInt(rigidbodyScreenPosition.x);
             int coordinateY = Mathf.RoundToInt(rigidbodyScreenPosition.y);
             int coordinateZ = Mathf.RoundToInt(rigidbodyScreenPosition.z);
             Vector2 coordinatesTextPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y + halfHeight);
-            this.DrawLabel(coordinatesTextPosition, $"{coordinateX}, {coordinateY}, {coordinateZ}");
+            GUIHelper.DrawLabel(coordinatesTextPosition, $"{coordinateX}, {coordinateY}, {coordinateZ}");
         }
     }
 
@@ -141,38 +141,6 @@ public class Hax : HaxComponents {
 
     // Resets player's pitch and roll
     void RectifyOrientation() => this.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
-
-    void DrawLabel(Vector2 position, string label) => GUI.Label(new Rect(position.x, position.y, 500.0f, 50.0f), label);
-
-    // Draw a box outline with position as its centre
-    void DrawOutlineBox(Vector2 centrePosition, Size size, float lineWidth) {
-        float halfWidth = 0.5f * size.Width;
-        float halfHeight = 0.5f * size.Height;
-        float left = centrePosition.x - halfWidth;
-        float right = centrePosition.x + halfWidth;
-        float top = centrePosition.y - halfHeight;
-        float bottom = centrePosition.y + halfHeight;
-
-        // Top face
-        Vector2 topLeft = new Vector2(left, top);
-        this.DrawBox(topLeft, new Size(size.Width, lineWidth));
-
-        // Right face
-        Vector2 topRight = new Vector2(right, top);
-        this.DrawBox(topRight - new Vector2(lineWidth, 0.0f), new Size(lineWidth, size.Height));
-
-        // Bottom face
-        Vector2 bottomLeft = new Vector2(left, bottom);
-        this.DrawBox(bottomLeft - new Vector2(0.0f, lineWidth), new Size(size.Width, lineWidth));
-
-        // Left face
-        this.DrawBox(topLeft, new Size(lineWidth, size.Height));
-    }
-
-    void DrawBox(Vector2 position, Size size) {
-        Rect rect = new Rect(position.x, position.y, size.Width, size.Height);
-        GUI.DrawTexture(rect, Texture2D.whiteTexture, ScaleMode.StretchToFill);
-    }
 
     void ToggleNoClip() {
         this.IsNoClipping = !this.IsNoClipping;
