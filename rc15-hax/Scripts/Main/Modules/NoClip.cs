@@ -17,7 +17,7 @@ public class NoClip : HaxComponents {
     }
 
     void PerformNoClip() {
-        if (!this.IsNoClipping || this.InDimensionalRift) return;
+        if (!this.IsNoClipping) return;
 
         Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Objects[0].rb;
         playerRigidbody.isKinematic = true;
@@ -61,6 +61,8 @@ public class NoClip : HaxComponents {
     }
 
     void ToggleNoClip() {
+        if (!Loader.HaxModules.activeSelf || this.InDimensionalRift) return;
+
         this.IsNoClipping = !this.IsNoClipping;
         NoClip.noClipped?.Invoke(this.IsNoClipping);
         if (!this.IsNoClipping) Player.Freeze(false);

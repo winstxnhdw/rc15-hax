@@ -5,6 +5,7 @@ namespace RC15_HAX;
 public class Console : HaxComponents {
     List<string> FrozenLogs { get; set; } = new List<string>();
     static Vector2 Scroll { get; set; } = Vector2.zero;
+    static Rect Viewport { get; set; } = new Rect(0, 0, 0, 0);
 
     void Awake() {
         InputListener.onBackquotePress += this.ShowConsole;
@@ -23,7 +24,7 @@ public class Console : HaxComponents {
         Rect console = ConsoleSettings.ConsoleRect;
         GUI.Box(console, "Console");
 
-        Rect viewport = new Rect(0.0f, 0.0f, 0.9f * console.width, logs.Count * ConsoleSettings.LabelHeight);
+        Console.Viewport = new Rect(0.0f, 0.0f, 0.9f * console.width, logs.Count * ConsoleSettings.LabelHeight);
         Console.Scroll = GUI.BeginScrollView(ConsoleSettings.ScrollRect, Console.Scroll, viewport);
 
         for (int i = 0; i < logs.Count; i++) {
@@ -46,7 +47,7 @@ public class Console : HaxComponents {
 
     void HideConsole() => ConsoleSettings.ShowConsole = false;
 
-    static void ScrollToBottom() => Console.Scroll = new Vector2(0.0f, ConsoleSettings.ScrollRect.height);
+    static void ScrollToBottom() => Console.Scroll = new Vector2(0.0f, Console.Viewport.height);
 
     public static void Print(string log) {
         ConsoleSettings.Logs.Add(log);

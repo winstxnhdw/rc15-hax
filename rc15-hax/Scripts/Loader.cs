@@ -5,6 +5,8 @@ public class Loader : MonoBehaviour {
     static GameObject HaxGameObject { get; } = new GameObject();
     public static GameObject HaxModules { get; } = new GameObject();
 
+    static void AddHaxModules<T>() where T : Component => Loader.HaxModules.AddComponent<T>();
+
     public static void Load() {
         DontDestroyOnLoad(Loader.HaxGameObject);
 
@@ -18,11 +20,12 @@ public class Loader : MonoBehaviour {
     }
 
     static void LoadHaxModules() {
-        Loader.HaxModules.AddComponent<NoCameraShake>();
-        Loader.HaxModules.AddComponent<PlayerESP>();
-        Loader.HaxModules.AddComponent<NoClip>();
-        Loader.HaxModules.AddComponent<DimensionalRift>();
-        Loader.HaxModules.AddComponent<Player>();
+        AddHaxModules<NoCameraShake>();
+        AddHaxModules<PlayerESP>();
+        AddHaxModules<NoClip>();
+        AddHaxModules<DimensionalRift>();
+        AddHaxModules<Player>();
+        AddHaxModules<IronWall>();
     }
 
     public static void Unload() {

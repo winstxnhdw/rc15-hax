@@ -30,6 +30,8 @@ public static class HaxSettings {
         {"MaxVelocity",                         "1000000"},
         // General parameters
         {"EnableESP",                           "true"},
-        {"NoCameraShake",                       "true"}
+        {"NoCameraShake",                       "true"},
+        {"IronWall",                            "true"},
+        {"IronWallIntervals",                    "1"},
     };
 }

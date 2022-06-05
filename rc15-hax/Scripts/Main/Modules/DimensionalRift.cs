@@ -20,7 +20,7 @@ public class DimensionalRift : HaxComponents {
     }
 
     void PerformDimensionalRift() {
-        if (!this.IsDimensionalRifting || this.IsNoClipping) return;
+        if (!this.IsDimensionalRifting) return;
 
         Player.Freeze(true);
         Transform cameraTransform = Global.Camera.transform;
@@ -62,6 +62,8 @@ public class DimensionalRift : HaxComponents {
     }
 
     void ToggleDimensionalRift() {
+        if (!Loader.HaxModules.activeSelf || this.IsNoClipping) return;
+
         this.SimulationCameraPosition = Global.Camera.transform.position;
         this.IsDimensionalRifting = !this.IsDimensionalRifting;
         DimensionalRift.inDimensionalRift?.Invoke(this.IsDimensionalRifting);

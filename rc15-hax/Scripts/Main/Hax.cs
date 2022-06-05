@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace RC15_HAX;
 public class Hax : HaxComponents {
     bool HaxPaused { get; set; } = false;
@@ -8,12 +10,17 @@ public class Hax : HaxComponents {
 
     void Update() {
         if (this.HaxPaused || HaxObjects.TopBarObject.Objects.Length > 0) {
-            Loader.HaxModules.SetActive(false);
+            SetActiveGameObject(Loader.HaxModules, false);
             this.RevertHaxParams();
             return;
         }
 
-        Loader.HaxModules.SetActive(true);
+        SetActiveGameObject(Loader.HaxModules, true);
+    }
+
+    void SetActiveGameObject(GameObject gameObject, bool isActive) {
+        if (gameObject.activeSelf == isActive) return;
+        gameObject.SetActive(isActive);
     }
 
     void GetNames() {
