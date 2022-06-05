@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-public class HaxGUI : HaxComponents {
+public class PlayerESP : HaxComponents {
     void OnGUI() {
         this.DrawESP();
     }

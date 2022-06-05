@@ -8,10 +8,8 @@ public class InputListener : HaxComponents {
     public static event Global.Action? onF10Press;
     public static event Global.Action? onBackquotePress;
     public static event Global.Action? onBackslashPress;
-    public static event Global.Action? onLeftShiftPress;
     public static event Global.Action? onEscapePress;
     public static event Global.Action? onPausePress;
-
 
     Dictionary<Global.Func<bool>, Global.Action> keyActionsDict = new Dictionary<Global.Func<bool>, Global.Action>() {
         {() => Input.GetKeyDown(KeyCode.F8),          () => InputListener.onF8Press?.Invoke()},
@@ -19,7 +17,6 @@ public class InputListener : HaxComponents {
         {() => Input.GetKeyDown(KeyCode.F10),         () => InputListener.onF10Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Backslash),   () => InputListener.onBackslashPress?.Invoke()},
-        {() => Input.GetKeyDown(KeyCode.LeftShift),   () => InputListener.onLeftShiftPress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Escape),      () => InputListener.onEscapePress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Pause),       () => InputListener.onPausePress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.End),         () => Loader.Unload()}

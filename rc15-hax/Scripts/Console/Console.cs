@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Console : HaxComponents {
-    List<string> frozenLogs = new List<string>();
-    Vector2 Scroll { get; set; } = Vector2.zero;
+    List<string> FrozenLogs { get; set; } = new List<string>();
+    static Vector2 Scroll { get; set; } = Vector2.zero;
 
     void Awake() {
         InputListener.onBackquotePress += this.ShowConsole;
@@ -18,13 +18,13 @@ public class Console : HaxComponents {
     void RenderConsole() {
         if (!ConsoleSettings.ShowConsole) return;
 
-        List<string> logs = !ConsoleSettings.PauseConsole ? ConsoleSettings.Logs : this.frozenLogs;
+        List<string> logs = !ConsoleSettings.PauseConsole ? ConsoleSettings.Logs : this.FrozenLogs;
 
         Rect console = ConsoleSettings.ConsoleRect;
         GUI.Box(console, "Console");
 
         Rect viewport = new Rect(0.0f, 0.0f, 0.9f * console.width, logs.Count * ConsoleSettings.LabelHeight);
-        this.Scroll = GUI.BeginScrollView(ConsoleSettings.ScrollRect, this.Scroll, viewport);
+        Console.Scroll = GUI.BeginScrollView(ConsoleSettings.ScrollRect, Console.Scroll, viewport);
 
         for (int i = 0; i < logs.Count; i++) {
             Rect labelRect = new Rect(ConsoleSettings.TextLeftPadding, ConsoleSettings.TextTopPadding + (ConsoleSettings.TextSpacing * i), 0.0f, ConsoleSettings.LabelHeight);
@@ -36,8 +36,8 @@ public class Console : HaxComponents {
 
     void PauseConsole() {
         ConsoleSettings.PauseConsole = !ConsoleSettings.PauseConsole;
-        this.frozenLogs.Clear();
-        this.frozenLogs.AddRange(ConsoleSettings.Logs);
+        this.FrozenLogs.Clear();
+        this.FrozenLogs.AddRange(ConsoleSettings.Logs);
     }
 
     void ClearConsole() => ConsoleSettings.Logs.Clear();
@@ -46,7 +46,12 @@ public class Console : HaxComponents {
 
     void HideConsole() => ConsoleSettings.ShowConsole = false;
 
-    public static void Print(string log) => ConsoleSettings.Logs.Add(log);
+    static void ScrollToBottom() => Console.Scroll = new Vector2(0.0f, ConsoleSettings.ScrollRect.height);
+
+    public static void Print(string log) {
+        ConsoleSettings.Logs.Add(log);
+        Console.ScrollToBottom();
+    }
 
     public static void Print(bool log) => Print(log.ToString());
 
@@ -54,7 +59,10 @@ public class Console : HaxComponents {
 
     public static void Print(int log) => Print(log.ToString());
 
-    public static void Print(IList<string> logs) => ConsoleSettings.Logs.AddRange(logs);
+    public static void Print(IList<string> logs) {
+        ConsoleSettings.Logs.AddRange(logs);
+        Console.ScrollToBottom();
+    }
 
     public static void Print(IList<bool> logs) => Print(new List<bool>(logs).ConvertAll(x => x.ToString()));
 

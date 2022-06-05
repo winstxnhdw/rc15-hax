@@ -5,8 +5,8 @@ using Mothership;
 namespace RC15_HAX;
 public class HaxObjects : HaxComponents {
     public static ObjectCache<LocalPlayerRigidbody> PlayerRigidbody { get; } = new ObjectCache<LocalPlayerRigidbody>();
-    public static ObjectCache<Rigidbody> Rigidbodies { get; } = new ObjectCache<Rigidbody>();
-    public static ObjectCache<CameraShake> CameraShakeObject { get; } = new ObjectCache<CameraShake>();
+    public static ObjectCache<Rigidbody> Rigidbodies { get; } = new ObjectCache<Rigidbody>(3);
+    public static ObjectCache<CameraShake> CameraShakeObject { get; } = new ObjectCache<CameraShake>(10);
     public static ObjectCache<SimulationCamera> SimulationCameraObject { get; } = new ObjectCache<SimulationCamera>();
     public static ObjectCache<TopBar> TopBarObject { get; } = new ObjectCache<TopBar>(10);
 
