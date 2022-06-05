@@ -25,7 +25,7 @@ public class Console : HaxComponents {
         GUI.Box(console, "Console");
 
         Console.Viewport = new Rect(0.0f, 0.0f, 0.9f * console.width, logs.Count * ConsoleSettings.LabelHeight);
-        Console.Scroll = GUI.BeginScrollView(ConsoleSettings.ScrollRect, Console.Scroll, viewport);
+        Console.Scroll = GUI.BeginScrollView(ConsoleSettings.ScrollRect, Console.Scroll, Console.Viewport);
 
         for (int i = 0; i < logs.Count; i++) {
             Rect labelRect = new Rect(ConsoleSettings.TextLeftPadding, ConsoleSettings.TextTopPadding + (ConsoleSettings.TextSpacing * i), 0.0f, ConsoleSettings.LabelHeight);
