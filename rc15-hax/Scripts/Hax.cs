@@ -10,6 +10,7 @@ public class Hax : HaxComponents {
 
     ObjectCache<LocalPlayerRigidbody> PlayerRigidbody { get; } = new ObjectCache<LocalPlayerRigidbody>();
     ObjectCache<Rigidbody> Rigidbodies { get; } = new ObjectCache<Rigidbody>();
+    ObjectCache<CameraShake> CameraShakeObject { get; } = new ObjectCache<CameraShake>();
 
     void Awake() {
         InputListener.onPausePress += this.ToggleHaxPause;
@@ -22,6 +23,7 @@ public class Hax : HaxComponents {
         base.Start();
         this.PlayerRigidbody.Init(this);
         this.Rigidbodies.Init(this);
+        this.CameraShakeObject.Init(this);
     }
 
     void Update() {
@@ -29,18 +31,20 @@ public class Hax : HaxComponents {
             this.RevertHaxParams();
             return;
         }
+
+        this.NoClip();
+        this.NoCameraShake();
+        this.GodMode();
     }
 
     void OnGUI() {
         if (this.HaxPaused) return;
 
         this.DrawESP();
-        this.NoClip();
     }
 
     void GetNames() {
         foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
-            if (rigidbody.name.Contains(" ") || rigidbody.name == "Player Machine Root") continue;
             Console.Print(rigidbody.name);
         }
     }
@@ -50,7 +54,8 @@ public class Hax : HaxComponents {
     }
 
     void GodMode() {
-        // PlayerRigidBody.GetComponent<PhysicsRaycaster>().enabled = false;
+        Rigidbody playerRigidbody = this.PlayerRigidbody.Objects[0].rb;
+        playerRigidbody.GetComponent<PhysicsRaycaster>().enabled = false;
     }
 
     void NoClip() {
@@ -102,10 +107,7 @@ public class Hax : HaxComponents {
         if (!bool.Parse(HaxSettings.Params["EnableESP"])) return;
 
         foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
-            if (rigidbody.name.Contains(" ")) continue;
-            if (!rigidbody.name.Contains("AI")) continue;
-            if (!rigidbody.name.Contains("Rigidbody")) continue;
-
+            if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
 
             Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;
             Vector3 rigidbodyScreenPosition = Global.Camera.WorldToScreenPoint(rigidbodyWorldPosition);
@@ -119,10 +121,26 @@ public class Hax : HaxComponents {
 
             float halfWidth = 0.5f * size.Width;
             float halfHeight = 0.5f * size.Height;
-            Vector2 textPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y - halfHeight - 20.0f);
-            this.DrawLabel(textPosition, $"{rigidbody.name}: {Mathf.RoundToInt(flatDistanceFromRigidbody).ToString()}m");
+
+            Vector2 nameTextPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y - halfHeight - 20.0f);
+            this.DrawLabel(nameTextPosition, $"{rigidbody.name}: {Mathf.RoundToInt(flatDistanceFromRigidbody).ToString()}m");
+
+            int coordinateX = Mathf.RoundToInt(rigidbodyScreenPosition.x);
+            int coordinateY = Mathf.RoundToInt(rigidbodyScreenPosition.y);
+            int coordinateZ = Mathf.RoundToInt(rigidbodyScreenPosition.z);
+            Vector2 coordinatesTextPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y + halfHeight);
+            this.DrawLabel(coordinatesTextPosition, $"{coordinateX}, {coordinateY}, {coordinateZ}");
         }
     }
+
+    void NoCameraShake() {
+        if (!bool.Parse(HaxSettings.Params["NoCameraShake"])) return;
+
+        CameraShakeObject.Objects[0].enabled = false;
+    }
+
+    // Resets player's pitch and roll
+    void RectifyOrientation() => this.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
 
     void DrawLabel(Vector2 position, string label) => GUI.Label(new Rect(position.x, position.y, 500.0f, 50.0f), label);
 
@@ -155,9 +173,6 @@ public class Hax : HaxComponents {
         Rect rect = new Rect(position.x, position.y, size.Width, size.Height);
         GUI.DrawTexture(rect, Texture2D.whiteTexture, ScaleMode.StretchToFill);
     }
-
-    // Resets player's pitch and roll
-    void RectifyOrientation() => this.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
 
     void ToggleNoClip() {
         this.IsNoClipping = !this.IsNoClipping;

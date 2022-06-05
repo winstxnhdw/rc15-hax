@@ -12,19 +12,11 @@ class ObjectCache<T> where T : Object {
     }
 
     IEnumerator ICacheObjects() {
-        Console.Print("Caching object(s)..");
+        Console.Print($"Caching {typeof(T).FullName} object(s)..");
 
         while (true) {
             if (this.StopCaching) yield break;
-
-            try {
-                this.Objects = GameObject.FindObjectsOfType<T>();
-            }
-
-            catch {
-                Console.Print($"Failed to cache {typeof(T).FullName} object(s)..");
-            }
-
+            this.Objects = GameObject.FindObjectsOfType<T>();
             yield return new WaitForSeconds(UpdateInterval);
         }
     }

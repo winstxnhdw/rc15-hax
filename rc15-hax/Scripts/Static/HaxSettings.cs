@@ -29,6 +29,7 @@ public static class HaxSettings {
         {"ForceMagnitude",                      "15000"},
         {"MaxVelocity",                         "1000000"},
         // General parameters
-        {"EnableESP",                           "true"}
+        {"EnableESP",                           "true"},
+        {"NoCameraShake",                       "true"}
     };
 }

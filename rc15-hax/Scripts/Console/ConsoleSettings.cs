@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public static class ConsoleSettings {
-    static float ConsoleHeight => 0.2f * Screen.height;
+    static float ConsoleHeight => 0.3f * Screen.height;
 
     static float ConsoleWidth => Screen.width;
 
