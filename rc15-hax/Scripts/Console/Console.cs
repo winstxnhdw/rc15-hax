@@ -23,7 +23,7 @@ public class Console : HaxComponents {
         Rect console = ConsoleSettings.ConsoleRect;
         GUI.Box(console, "Console");
 
-        Rect viewport = new Rect(0.0f, 0.0f, Screen.width, logs.Count * ConsoleSettings.LabelHeight);
+        Rect viewport = new Rect(0.0f, 0.0f, 0.9f * console.width, logs.Count * ConsoleSettings.LabelHeight);
         this.Scroll = GUI.BeginScrollView(ConsoleSettings.ScrollRect, this.Scroll, viewport);
 
         for (int i = 0; i < logs.Count; i++) {
@@ -48,11 +48,15 @@ public class Console : HaxComponents {
 
     public static void Print(string log) => ConsoleSettings.Logs.Add(log);
 
+    public static void Print(bool log) => Print(log.ToString());
+
     public static void Print(float log) => Print(log.ToString());
 
     public static void Print(int log) => Print(log.ToString());
 
     public static void Print(IList<string> logs) => ConsoleSettings.Logs.AddRange(logs);
+
+    public static void Print(IList<bool> logs) => Print(new List<bool>(logs).ConvertAll(x => x.ToString()));
 
     public static void Print(IList<float> logs) => Print(new List<float>(logs).ConvertAll(x => x.ToString()));
 

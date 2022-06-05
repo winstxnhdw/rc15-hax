@@ -1,72 +1,153 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using Simulation;
 
 namespace RC15_HAX;
 public class Hax : HaxComponents {
     bool HaxPaused { get; set; } = false;
     bool IsNoClipping { get; set; } = false;
+    bool IsDimensionalRifting { get; set; } = false;
 
-    ObjectCache<LocalPlayerRigidbody> PlayerRigidbody { get; } = new ObjectCache<LocalPlayerRigidbody>();
-    ObjectCache<Rigidbody> Rigidbodies { get; } = new ObjectCache<Rigidbody>();
-    ObjectCache<CameraShake> CameraShakeObject { get; } = new ObjectCache<CameraShake>();
+    Vector3 RiftEndPosition { get; set; } = Vector3.zero;
+    HaxGUI? haxGUI { get; set; }
 
     void Awake() {
         InputListener.onPausePress += this.ToggleHaxPause;
         InputListener.onF9Press += this.ToggleNoClip;
         InputListener.onF10Press += this.GetNames;
         InputListener.onBackslashPress += this.RectifyOrientation;
-    }
+        InputListener.onLeftShiftPress += this.ToggleDimensionalRift;
 
-    protected override void Start() {
-        base.Start();
-        this.PlayerRigidbody.Init(this);
-        this.Rigidbodies.Init(this);
-        this.CameraShakeObject.Init(this);
+        this.haxGUI = GetComponent<HaxGUI>();
     }
 
     void Update() {
-        if (this.HaxPaused) {
+        if (this.HaxPaused || HaxObjects.TopBarObject.Objects.Length > 0) {
+            this.EnableHaxGUI(false);
             this.RevertHaxParams();
             return;
         }
 
+        this.EnableHaxGUI(true);
         this.NoClip();
         this.NoCameraShake();
         this.GodMode();
-    }
-
-    void OnGUI() {
-        if (this.HaxPaused) return;
-
-        this.DrawESP();
+        this.DimensionalRift();
     }
 
     void GetNames() {
-        foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
-            Console.Print(rigidbody.name);
-        }
+        // foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
+        //     Console.Print(rigidbody.name);
+        // }
+
+        // System.Type t = System.Type.GetType("PlayerTeamsContainer");
+        // System.Object obj = DoInvoke(t, "GetPlayersOnEnemyTeam", new System.Object[] { TargetType.Player });
+        // IList<int> collection = (IList<int>)obj;
+
+        // foreach (int id in collection) {
+        //     Console.Print(id);
+        // }
     }
+
+    // public static System.Object DoInvoke(System.Type type, string methodName, System.Object[] parameters) {
+    //     System.Type[] types = new System.Type[parameters.Length];
+
+    //     for (int i = 0; i < parameters.Length; i++) {
+    //         types[i] = parameters[i].GetType();
+    //     }
+
+    //     MethodInfo method = type.GetMethod(methodName, (BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public), null, types, null);
+    //     return DoInvoke2(type, method, parameters);
+    // }
+
+    // public static System.Object DoInvoke2(System.Type type, MethodInfo method, System.Object[] parameters) {
+    //     if (method.IsStatic) {
+    //         return method.Invoke(null, parameters);
+    //     }
+
+    //     System.Object obj = type.InvokeMember(null,
+    //     BindingFlags.DeclaredOnly |
+    //     BindingFlags.Public | BindingFlags.NonPublic |
+    //     BindingFlags.Instance | BindingFlags.CreateInstance, null, null, new System.Object[0]);
+
+    //     return method.Invoke(obj, parameters);
+    // }
 
     void RevertHaxParams() {
 
     }
 
+    void DimensionalRift() {
+        if (!this.IsDimensionalRifting || this.IsNoClipping) return;
+
+        this.FreezePlayer(true);
+        Transform simulationCameraTransform = HaxObjects.SimulationCameraObject.Objects[0].transform;
+        Transform cameraTransform = Global.Camera.transform;
+
+        // Forward-back
+        if (Input.GetKey(KeyCode.W)) {
+            HaxObjects.SimulationCameraObject.Objects[0].transform.position += cameraTransform.forward;
+        }
+
+        else if (Input.GetKey(KeyCode.S)) {
+            HaxObjects.SimulationCameraObject.Objects[0].transform.position -= cameraTransform.forward;
+        }
+
+        // Right-left
+        if (Input.GetKey(KeyCode.D)) {
+            HaxObjects.SimulationCameraObject.Objects[0].transform.position += cameraTransform.right;
+        }
+
+        else if (Input.GetKey(KeyCode.A)) {
+            HaxObjects.SimulationCameraObject.Objects[0].transform.position -= cameraTransform.right;
+        }
+
+        // Up-down
+        if (Input.GetKey(KeyCode.Space)) {
+            HaxObjects.SimulationCameraObject.Objects[0].transform.position += cameraTransform.up;
+        }
+
+        else if (Input.GetKey(KeyCode.LeftShift)) {
+            HaxObjects.SimulationCameraObject.Objects[0].transform.position -= cameraTransform.up;
+        }
+
+        this.RiftEndPosition = HaxObjects.SimulationCameraObject.Objects[0].transform.position;
+
+
+        // float closestBodyOnScreen = float.MaxValue;
+        // Vector2 closestBodyPosition = Vector2.zero;
+
+        // foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
+        //     if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
+
+        //     Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;
+        //     Vector3 rigidbodyScreenPosition = Global.Camera.WorldToScreenPoint(rigidbodyWorldPosition);
+
+        //     if (rigidbodyScreenPosition.z <= 0.0f) continue;
+        //     rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
+
+        //     Vector2 rigidbodyScreenPosition2D = rigidbodyScreenPosition;
+        //     float crosshairToBodyDistance = (rigidbodyScreenPosition2D - ScreenInfo.GetScreenCentre()).sqrMagnitude;
+        //     if (crosshairToBodyDistance < closestBodyOnScreen) {
+        //         closestBodyOnScreen = crosshairToBodyDistance;
+        //         closestBodyPosition = rigidbodyScreenPosition2D;
+        //     }
+        // }
+
+        // Global.Camera.transform.localEulerAngles = new Vector3(-closestBodyPosition.y, closestBodyPosition.x, 0.0f);
+    }
+
     void GodMode() {
-        Rigidbody playerRigidbody = this.PlayerRigidbody.Objects[0].rb;
-        playerRigidbody.GetComponent<PhysicsRaycaster>().enabled = false;
+        Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Objects[0].rb;
     }
 
     void NoClip() {
-        if (!this.IsNoClipping) return;
+        if (!this.IsNoClipping || this.IsDimensionalRifting) return;
 
-        Rigidbody playerRigidbody = this.PlayerRigidbody.Objects[0].rb;
+        Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Objects[0].rb;
         playerRigidbody.isKinematic = true;
 
         if (Input.anyKey) {
             // Reset player's roll
-            this.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(
+            HaxObjects.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(
                 Global.Camera.transform.eulerAngles.x,
                 Global.Camera.transform.eulerAngles.y,
                 0.0f
@@ -103,48 +184,31 @@ public class Hax : HaxComponents {
         }
     }
 
-    void DrawESP() {
-        if (!bool.Parse(HaxSettings.Params["EnableESP"])) return;
-
-        foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
-            if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
-
-            Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;
-            Vector3 rigidbodyScreenPosition = Global.Camera.WorldToScreenPoint(rigidbodyWorldPosition);
-
-            if (rigidbodyScreenPosition.z <= 0.0f) continue;
-
-            float flatDistanceFromRigidbody = Vector3.Distance(rigidbodyWorldPosition, Global.Camera.transform.position);
-            rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
-            Size size = new Size(Settings.OutlineBoxSize, Settings.OutlineBoxSize) / flatDistanceFromRigidbody;
-            this.DrawOutlineBox(rigidbodyScreenPosition, size, Settings.BoxLineWidth);
-
-            float halfWidth = 0.5f * size.Width;
-            float halfHeight = 0.5f * size.Height;
-
-            Vector2 nameTextPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y - halfHeight - 20.0f);
-            GUIHelper.DrawLabel(nameTextPosition, $"{rigidbody.name}: {Mathf.RoundToInt(flatDistanceFromRigidbody).ToString()}m");
-
-            int coordinateX = Mathf.RoundToInt(rigidbodyScreenPosition.x);
-            int coordinateY = Mathf.RoundToInt(rigidbodyScreenPosition.y);
-            int coordinateZ = Mathf.RoundToInt(rigidbodyScreenPosition.z);
-            Vector2 coordinatesTextPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y + halfHeight);
-            GUIHelper.DrawLabel(coordinatesTextPosition, $"{coordinateX}, {coordinateY}, {coordinateZ}");
-        }
-    }
-
     void NoCameraShake() {
         if (!bool.Parse(HaxSettings.Params["NoCameraShake"])) return;
-
-        CameraShakeObject.Objects[0].enabled = false;
+        HaxObjects.CameraShakeObject.Objects[0].enabled = false;
     }
 
     // Resets player's pitch and roll
-    void RectifyOrientation() => this.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
+    void RectifyOrientation() => HaxObjects.PlayerRigidbody.Objects[0].rb.rotation = Quaternion.Euler(0.0f, Global.Camera.transform.eulerAngles.y, 0.0f);
+
+    void FreezePlayer(bool isFrozen) => HaxObjects.PlayerRigidbody.Objects[0].rb.isKinematic = isFrozen;
+
+    void EnableHaxGUI(bool enable) => this.haxGUI!.enabled = enable;
 
     void ToggleNoClip() {
         this.IsNoClipping = !this.IsNoClipping;
-        if (!this.IsNoClipping) this.PlayerRigidbody.Objects[0].rb.isKinematic = false;
+        if (!this.IsNoClipping) this.FreezePlayer(false);
+    }
+
+    void ToggleDimensionalRift() {
+        this.IsDimensionalRifting = !this.IsDimensionalRifting;
+
+        if (!this.IsDimensionalRifting) {
+            HaxObjects.PlayerRigidbody.Objects[0].rb.transform.position = this.RiftEndPosition;
+            this.RectifyOrientation();
+            this.FreezePlayer(false);
+        }
     }
 
     void ToggleHaxPause() => this.HaxPaused = !this.HaxPaused;

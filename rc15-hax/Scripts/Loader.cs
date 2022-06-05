@@ -11,6 +11,8 @@ public class Loader : MonoBehaviour {
         Loader.HaxGameObject.AddComponent<InputListener>();
         Loader.HaxGameObject.AddComponent<Console>();
         Loader.HaxGameObject.AddComponent<Hax>();
+        Loader.HaxGameObject.AddComponent<HaxGUI>();
+        Loader.HaxGameObject.AddComponent<HaxObjects>();
     }
 
     public static void Unload() {

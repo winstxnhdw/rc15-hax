@@ -2,14 +2,12 @@ using System.Collections;
 using UnityEngine;
 
 namespace RC15_HAX;
-class ObjectCache<T> where T : Object {
+public class ObjectCache<T> where T : Object {
     float UpdateInterval { get; set; }
     bool StopCaching { get; set; } = false;
     public T[] Objects { get; set; } = new T[0];
 
-    public ObjectCache(float updateInterval = 5.0f) {
-        this.UpdateInterval = updateInterval;
-    }
+    public ObjectCache(float updateInterval = 5.0f) => this.UpdateInterval = updateInterval;
 
     IEnumerator ICacheObjects() {
         Console.Print($"Caching {typeof(T).FullName} object(s)..");
