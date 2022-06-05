@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace RC15_HAX;
 public static class GUIHelper {
     public static void DrawLabel(Vector2 position, string label) => GUI.Label(new Rect(position.x, position.y, 500.0f, 50.0f), label);
 
