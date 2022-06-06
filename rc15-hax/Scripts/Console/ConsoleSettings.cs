@@ -13,7 +13,7 @@ public static class ConsoleSettings {
 
     public static float TextSpacing => 25.0f * Settings.SizeRatio;
 
-    public static float LabelHeight => 25.5f * Settings.SizeRatio;
+    public static float LabelHeight => 25.7f * Settings.SizeRatio;
 
     public static bool ShowConsole { get; set; } = false;
 

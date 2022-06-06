@@ -8,7 +8,7 @@ public class AerofoilMod : HaxComponents {
     }
 
     void OnDisable() {
-        HaxObjects.AerofoilObjects.Stop();
+        HaxObjects.AerofoilObjects.StopLog();
     }
 
     void Update() {

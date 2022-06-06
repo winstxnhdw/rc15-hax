@@ -10,6 +10,7 @@ public class Console : HaxComponents {
     void Awake() {
         InputListener.onBackquotePress += this.ShowConsole;
         InputListener.onEscapePress += this.HideConsole;
+        InputListener.onDeletePress += this.ClearConsole;
     }
 
     void OnGUI() {
@@ -73,5 +74,7 @@ public class Console : HaxComponents {
 
     void OnDestroy() {
         InputListener.onBackquotePress -= this.ShowConsole;
+        InputListener.onEscapePress -= this.HideConsole;
+        InputListener.onDeletePress -= this.ClearConsole;
     }
 }

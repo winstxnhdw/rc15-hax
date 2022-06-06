@@ -8,6 +8,7 @@ public class InputListener : HaxComponents {
     public static event Global.Action? onF10Press;
     public static event Global.Action? onBackquotePress;
     public static event Global.Action? onBackslashPress;
+    public static event Global.Action? onDeletePress;
     public static event Global.Action? onEscapePress;
     public static event Global.Action? onPausePress;
 
@@ -17,6 +18,7 @@ public class InputListener : HaxComponents {
         {() => Input.GetKeyDown(KeyCode.F10),         () => InputListener.onF10Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Backslash),   () => InputListener.onBackslashPress?.Invoke()},
+        {() => Input.GetKeyDown(KeyCode.Delete),      () => InputListener.onDeletePress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Escape),      () => InputListener.onEscapePress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Pause),       () => InputListener.onPausePress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.End),         () => Loader.Unload()}

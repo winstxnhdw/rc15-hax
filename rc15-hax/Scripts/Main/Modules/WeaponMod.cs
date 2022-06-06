@@ -1,5 +1,5 @@
 namespace RC15_HAX;
-public class WeaponMode : HaxComponents {
+public class WeaponMod : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableWeaponMod");
 
     void OnEnable() {
@@ -8,7 +8,8 @@ public class WeaponMode : HaxComponents {
     }
 
     void OnDisable() {
-        HaxObjects.BaseWeaponObjects.Stop();
+        print("Disabling Weapon Mod");
+        HaxObjects.BaseWeaponObjects.StopLog();
     }
 
     void Update() {

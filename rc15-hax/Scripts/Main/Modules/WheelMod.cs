@@ -9,7 +9,7 @@ public class WheelMod : HaxComponents {
     }
 
     void OnDisable() {
-        HaxObjects.WheelObjects.Stop();
+        HaxObjects.WheelObjects.StopLog();
     }
 
     void Update() {

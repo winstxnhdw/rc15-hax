@@ -29,6 +29,10 @@ public class Loader : MonoBehaviour {
         AddHaxModules<Player>();
         AddHaxModules<IronWall>();
         AddHaxModules<PlasmaMod>();
+        AddHaxModules<WeaponMod>();
+        AddHaxModules<AerofoilMod>();
+        AddHaxModules<JetMod>();
+        AddHaxModules<WheelMod>();
     }
 
     public static void Unload() {

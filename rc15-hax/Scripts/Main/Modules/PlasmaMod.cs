@@ -8,7 +8,7 @@ public class PlasmaMod : HaxComponents {
     }
 
     void OnDisable() {
-        HaxObjects.PlasmaCannonObjects.Stop();
+        HaxObjects.PlasmaCannonObjects.StopLog();
     }
 
     void Update() {

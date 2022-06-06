@@ -8,7 +8,7 @@ public class JetMod : HaxComponents {
     }
 
     void OnDisable() {
-        HaxObjects.CubeJetObjects.Stop();
+        HaxObjects.CubeJetObjects.StopLog();
     }
 
     void Update() {

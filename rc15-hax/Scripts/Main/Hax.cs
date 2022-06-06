@@ -10,6 +10,7 @@ public class Hax : HaxComponents {
 
     void Update() {
         if (this.HaxPaused || HaxObjects.TopBarObject.Objects.Length > 0) {
+
             SetActiveGameObject(Loader.HaxModules, false);
             this.RevertHaxParams();
             return;
@@ -80,42 +81,6 @@ public class Hax : HaxComponents {
     //     //     }
     //     // }
 
-    // void ToggleNoRecoil() {
-
-    //     foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-    //         weapon.WeaponStats.RecoilForce = 0.0f;
-    //     }
-    // }
-
-    // void ToggleMaxAccurancy() {
-    //     foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-    //         weapon.Accuracy.BaseInAccuracyDegrees = 0.0f;
-    //         weapon.Accuracy.MovementInAccuracyDegrees = 0.0f;
-    //         weapon.Accuracy.RepeatFireInAccuracyTotalDegrees = 0.0f;
-    //         weapon.Accuracy.FireInstantAccuracyDecayDegrees = 0.0f;
-    //     }
-    // }
-
-    // void ToggleMaxROM() {
-    //     foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-    //         weapon.MoveLimits.MaxHorizAngle = 180.0f;
-    //         weapon.MoveLimits.MinHorizAngle = -180.0f;
-    //         weapon.MoveLimits.MaxVerticalAngle = 180.0f;
-    //         weapon.MoveLimits.MinVerticalAngle = -180.0f;
-    //         weapon.WeaponStats.AimSpeed = float.MaxValue;
-    //     }
-    // }
-
-    // void ToggleDeathLaser() {
-    //     foreach (BaseWeapon weapon in FindObjectsOfType<BaseWeapon>()) {
-    //         weapon.WeaponStats.ProjectileRange = float.MaxValue;
-    //         weapon.WeaponStats.ProjectileSpeed = 1000.0f;
-    //         weapon.WeaponStats.ProtoniumDamageScale = float.MaxValue;
-    //         weapon.WeaponStats.ProjectileImpactForce = float.MaxValue;
-    //         weapon.WeaponStats.DamageRatioConducted = float.MaxValue;
-    //         weapon.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
-    //     }
-    // }
 
     // void ToggleUltimateNanoBeam() {
     //     foreach (NanoBeam nanoBeam in FindObjectsOfType<NanoBeam>()) {
@@ -127,15 +92,6 @@ public class Hax : HaxComponents {
     //         nanoBeam.WeaponStats.ProjectileImpactForce = float.MaxValue;
     //         nanoBeam.WeaponStats.DamageRatioConducted = float.MaxValue;
     //         nanoBeam.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
-    //     }
-    // }
-
-    //     if (GUI.Button(this.CreateButtonRectRow2(3), "ESP")) {
-    //         this.ToggleESP();
-    //     }
-
-    //     if (GUI.Button(this.CreateButtonRectRow2(4), "AimBot")) {
-    //         this.ToggleAimBot();
     //     }
     // }
 }
