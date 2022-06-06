@@ -35,6 +35,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<WheelMod>();
         AddHaxModules<RotorMod>();
         AddHaxModules<FakeCrosshair>();
+        AddHaxModules<NoFog>();
     }
 
     public static void Unload() {

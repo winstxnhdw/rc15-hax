@@ -63,8 +63,6 @@ public static class HaxSettings {
         {"maxSteeringAngle",                    "30"},
         // Aerofoil parameters
         {"EnableAerofoilMod",                   "true"},
-        {"massWithFullLift",                    "0"},
-        {"massWithNoLift",                      "0"},
         {"aerofoilMaxCarryingMass",             "1000000"},
         {"horizontalCarryingMassScale",         "0"},
         // Jet parameters
@@ -81,6 +79,7 @@ public static class HaxSettings {
         // General parameters
         {"EnableESP",                           "true"},
         {"NoCameraShake",                       "true"},
+        {"NoFog",                               "true"},
         {"IronWall",                            "true"},
         {"IronWallIntervals",                   "1"},
     };
