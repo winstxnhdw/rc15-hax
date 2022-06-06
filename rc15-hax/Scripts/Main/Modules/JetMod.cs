@@ -20,7 +20,6 @@ public class JetMod : HaxComponents {
 
         foreach (CubeJet cubeJet in HaxObjects.CubeJetObjects.Objects) {
             cubeJet.ForceMagnitude = HaxSettings.GetFloat("ForceMagnitude");
-            cubeJet.MaxVelocity = HaxSettings.GetFloat("MaxVelocity");
         }
     }
 }

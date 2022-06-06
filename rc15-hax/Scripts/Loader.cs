@@ -33,6 +33,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<AerofoilMod>();
         AddHaxModules<JetMod>();
         AddHaxModules<WheelMod>();
+        AddHaxModules<RotorMod>();
         AddHaxModules<FakeCrosshair>();
     }
 

@@ -22,6 +22,8 @@ public class WheelMod : HaxComponents {
         foreach (CubeWheel cubeWheel in HaxObjects.WheelObjects.Objects) {
             cubeWheel.maxRPM = HaxSettings.GetFloat("maxRPM");
             cubeWheel.friction.groundFrictionMultiplier = HaxSettings.GetFloat("groundFrictionMultiplier");
+            cubeWheel.stoppingBrakeTorque = HaxSettings.GetFloat("stoppingBrakeTorque");
+            cubeWheel.maxSteeringAngle = HaxSettings.GetFloat("maxSteeringAngle");
         }
     }
 }

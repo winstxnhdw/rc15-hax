@@ -19,8 +19,9 @@ public class AerofoilMod : HaxComponents {
         if (!ModEnabled) return;
 
         foreach (CubeAerofoil cubeAerofoil in HaxObjects.AerofoilObjects.Objects) {
-            cubeAerofoil.dragMinVelocity = HaxSettings.GetFloat("dragMinVelocity");
-            cubeAerofoil.dragMaxVelocity = HaxSettings.GetFloat("dragMaxVelocity");
+            cubeAerofoil.massWithFullLift = HaxSettings.GetFloat("massWithFullLift");
+            cubeAerofoil.massWithNoLift = HaxSettings.GetFloat("massWithNoLift");
+            cubeAerofoil.maxCarryingMass = HaxSettings.GetFloat("aerofoilMaxCarryingMass");
         }
     }
 }

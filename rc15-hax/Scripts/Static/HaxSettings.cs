@@ -6,14 +6,26 @@ public static class HaxSettings {
         Console.Print($"Invalid key: {key}");
     }
 
+    static void PrintInvalidType(string key, string type) {
+        Console.Print($"{key} is not a {type}");
+    }
+
     public static bool GetBool(string key) {
         if (!HaxSettings.Params.TryGetValue(key, out string param)) HaxSettings.PrintInvalidKey(key);
-        return bool.Parse(param);
+        if (!bool.TryParse(param, out bool value)) HaxSettings.PrintInvalidType(key, "bool");
+        return value;
     }
 
     public static float GetFloat(string key) {
         if (!HaxSettings.Params.TryGetValue(key, out string param)) HaxSettings.PrintInvalidKey(key);
-        return float.Parse(param);
+        if (!float.TryParse(param, out float value)) HaxSettings.PrintInvalidType(key, "float");
+        return value;
+    }
+
+    public static int GetInt(string key) {
+        if (!HaxSettings.Params.TryGetValue(key, out string param)) HaxSettings.PrintInvalidKey(key);
+        if (!int.TryParse(param, out int value)) HaxSettings.PrintInvalidType(key, "int");
+        return value;
     }
 
     static Dictionary<string, string> Params { get; } = new Dictionary<string, string> {
@@ -36,22 +48,31 @@ public static class HaxSettings {
         // Plasma Cannon parameters
         {"EnablePlasmaMod",                     "true"},
         {"fireTwice",                           "true"},
-        {"secondFireDelay",                     "0.1"},
+        {"secondFireDelay",                     "0"},
         {"secondFireDeviation",                 "0"},
-        {"PlasmaProjectileSpeed",               "5000"},
+        {"PlasmaProjectileSpeed",               "200"},
         {"PlasmaProjectileRange",               "1000000"},
+        // Tesla parameters
+        {"EnableTeslaMod",                      "false"},
+        {"TeslaDamage",                         "1000000"},
         // Wheel parameters
         {"EnableWheelMod",                      "false"},
-        {"maxRPM",                              "2000"},
-        {"groundFrictionMultiplier",            "3"},
+        {"maxRPM",                              "1500"},
+        {"groundFrictionMultiplier",            "8"},
+        {"stoppingBrakeTorque",                 "4000"},
+        {"maxSteeringAngle",                    "30"},
         // Aerofoil parameters
-        {"EnableAerofoilMod",                   "false"},
-        {"dragMinVelocity",                     "1000000"},
-        {"dragMaxVelocity",                     "1000000"},
+        {"EnableAerofoilMod",                   "true"},
+        {"massWithFullLift",                    "0"},
+        {"massWithNoLift",                      "0"},
+        {"aerofoilMaxCarryingMass",             "1000000"},
         // Jet parameters
-        {"EnableJetMod",                        "false"},
-        {"ForceMagnitude",                      "15000"},
-        {"MaxVelocity",                         "1000000"},
+        {"EnableJetMod",                        "true"},
+        {"ForceMagnitude",                      "2000"},
+        // Rotor parameters
+        {"EnableRotorMod",                      "false"},
+        {"rotorMaxCarryingMass",                "1000000"},
+        {"driftAcceleration",                   "0"},
         // Fake crosshair
         {"GapSize",                             "7"},
         {"Thickness",                           "3"},

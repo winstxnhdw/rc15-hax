@@ -44,7 +44,10 @@ public class Console : HaxComponents {
 
     void ClearConsole() => ConsoleSettings.Logs.Clear();
 
-    void ShowConsole() => ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
+    void ShowConsole() {
+        Console.ScrollToBottom();
+        ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
+    }
 
     void HideConsole() => ConsoleSettings.ShowConsole = false;
 
