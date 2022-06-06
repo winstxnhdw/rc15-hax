@@ -5,7 +5,7 @@ public class NoCameraShake : HaxComponents {
     }
 
     void DisableCameraShake() {
-        if (!bool.Parse(HaxSettings.Params["NoCameraShake"])) return;
+        if (!HaxSettings.GetBool("NoCameraShake")) return;
         HaxObjects.CameraShakeObject.Objects[0].enabled = false;
     }
 }

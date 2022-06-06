@@ -2,14 +2,27 @@ using System.Collections.Generic;
 
 namespace RC15_HAX;
 public static class HaxSettings {
-    public static Dictionary<string, string> Params { get; } = new Dictionary<string, string> {
+    static void PrintInvalidKey(string key) {
+        Console.Print($"Invalid key: {key}");
+    }
+
+    public static bool GetBool(string key) {
+        if (!HaxSettings.Params.TryGetValue(key, out string param)) HaxSettings.PrintInvalidKey(key);
+        return bool.Parse(param);
+    }
+
+    public static float GetFloat(string key) {
+        if (!HaxSettings.Params.TryGetValue(key, out string param)) HaxSettings.PrintInvalidKey(key);
+        return float.Parse(param);
+    }
+
+    static Dictionary<string, string> Params { get; } = new Dictionary<string, string> {
         // Weapon projectile parameters
+        {"EnableWeaponMod",                     "true"},
         {"ProjectileSpeed",                     "1000000"},
-        {"ProjectileImpactForce",               "1000000"},
         {"ProjectileRange",                     "1000000"},
-        {"ProtoniumDamageScale",                "1000000"},
         // Weapon accuracy parameters
-        {"RecoilForce",                         "1000000"},
+        {"RecoilForce",                         "0"},
         {"BaseInAccuracyDegrees",               "0"},
         {"MovementInAccuracyDegrees",           "0"},
         {"RepeatFireInAccuracyTotalDegrees",    "0"},
@@ -19,19 +32,30 @@ public static class HaxSettings {
         {"MinHorizAngle",                       "-180"},
         {"MaxVerticalAngle",                    "180"},
         {"MinVerticalAngle",                    "-180"},
+        // Plasma Cannon parameters
+        {"EnablePlasmaMod",                     "true"},
+        {"fireTwice",                           "true"},
+        {"secondFireDelay",                     "0"},
+        {"secondFireDeviation",                 "0"},
+        {"PlasmaProjectileSpeed",               "10000"},
+        {"PlasmaProjectileRange",               "1000000"},
         // Wheel parameters
+        {"EnableWheelMod",                      "false"},
         {"maxRPM",                              "2000"},
         {"groundFrictionMultiplier",            "3"},
         // Aerofoil parameters
+        {"EnableAerofoilMod",                   "false"},
         {"dragMinVelocity",                     "1000000"},
         {"dragMaxVelocity",                     "1000000"},
         // Jet parameters
+        {"EnableJetMod",                        "false"},
         {"ForceMagnitude",                      "15000"},
         {"MaxVelocity",                         "1000000"},
         // General parameters
         {"EnableESP",                           "true"},
         {"NoCameraShake",                       "true"},
         {"IronWall",                            "true"},
-        {"IronWallIntervals",                    "1"},
+        {"IronWallIntervals",                   "1"},
     };
 }
+

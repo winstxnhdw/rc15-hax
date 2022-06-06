@@ -20,12 +20,15 @@ public class Loader : MonoBehaviour {
     }
 
     static void LoadHaxModules() {
+        DontDestroyOnLoad(Loader.HaxModules);
+
         AddHaxModules<NoCameraShake>();
         AddHaxModules<PlayerESP>();
         AddHaxModules<NoClip>();
         AddHaxModules<DimensionalRift>();
         AddHaxModules<Player>();
         AddHaxModules<IronWall>();
+        AddHaxModules<PlasmaMod>();
     }
 
     public static void Unload() {

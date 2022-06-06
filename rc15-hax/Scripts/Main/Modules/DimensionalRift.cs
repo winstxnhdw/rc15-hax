@@ -6,13 +6,18 @@ public class DimensionalRift : HaxComponents {
     bool IsNoClipping { get; set; } = false;
 
     Vector3 SimulationCameraPosition { get; set; }
-    Vector3 RiftEndPosition { get; set; } = Vector3.zero;
+    Vector3 RiftEndPosition { get; set; }
 
     public static event Global.Action<bool>? inDimensionalRift;
 
-    void Awake() {
+    void OnEnable() {
         InputListener.onF10Press += this.ToggleDimensionalRift;
         NoClip.noClipped += ListenForNoClip;
+    }
+
+    void OnDisable() {
+        InputListener.onF10Press -= this.ToggleDimensionalRift;
+        NoClip.noClipped -= ListenForNoClip;
     }
 
     void Update() {
@@ -24,7 +29,6 @@ public class DimensionalRift : HaxComponents {
 
         Player.Freeze(true);
         Transform cameraTransform = Global.Camera.transform;
-
         HaxObjects.SimulationCameraObject.Objects[0].transform.position = this.SimulationCameraPosition;
 
         // Forward-back
@@ -71,13 +75,7 @@ public class DimensionalRift : HaxComponents {
         if (!this.IsDimensionalRifting) {
             Player.Freeze(false);
             Player.RectifyRoll();
-            Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Objects[0].rb;
-            playerRigidbody.transform.position = this.RiftEndPosition;
+            HaxObjects.PlayerRigidbody.Objects[0].rb.transform.position = this.RiftEndPosition;
         }
-    }
-
-    void OnDestroy() {
-        InputListener.onF10Press -= this.ToggleDimensionalRift;
-        NoClip.noClipped -= ListenForNoClip;
     }
 }

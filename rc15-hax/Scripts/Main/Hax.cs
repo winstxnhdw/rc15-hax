@@ -18,9 +18,9 @@ public class Hax : HaxComponents {
         SetActiveGameObject(Loader.HaxModules, true);
     }
 
-    void SetActiveGameObject(GameObject gameObject, bool isActive) {
-        if (gameObject.activeSelf == isActive) return;
-        gameObject.SetActive(isActive);
+    void SetActiveGameObject(GameObject go, bool isActive) {
+        if (go.activeSelf == isActive) return;
+        go.SetActive(isActive);
     }
 
     void GetNames() {
@@ -129,25 +129,6 @@ public class Hax : HaxComponents {
     //         nanoBeam.WeaponStats.DamageRatioPassedToChasis = float.MaxValue;
     //     }
     // }
-
-    //     if (GUI.Button(this.CreateButtonRectRow2(1), "Dejavu")) {
-    //         foreach (CubeWheel cubeWheel in FindObjectsOfType<CubeWheel>()) {
-    //             cubeWheel.maxRPM = 2000.0f;
-    //             cubeWheel.friction.groundFrictionMultiplier = 3.0f;
-    //         }
-    //     }
-
-    //     if (GUI.Button(this.CreateButtonRectRow2(2), "Boost")) {
-    //         foreach (CubeAerofoil cubeAerofoil in FindObjectsOfType<CubeAerofoil>()) {
-    //             cubeAerofoil.dragMinVelocity = float.MaxValue;
-    //             cubeAerofoil.dragMaxVelocity = float.MaxValue;
-    //         }
-
-    //         foreach (CubeJet cubeJet in FindObjectsOfType<CubeJet>()) {
-    //             cubeJet.ForceMagnitude = 15000.0f;
-    //             cubeJet.MaxVelocity = float.MaxValue;
-    //         }
-    //     }
 
     //     if (GUI.Button(this.CreateButtonRectRow2(3), "ESP")) {
     //         this.ToggleESP();

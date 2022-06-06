@@ -7,7 +7,7 @@ public class PlayerESP : HaxComponents {
     }
 
     void DrawESP() {
-        if (!bool.Parse(HaxSettings.Params["EnableESP"])) return;
+        if (!HaxSettings.GetBool("EnableESP")) return;
 
         foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
             if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;

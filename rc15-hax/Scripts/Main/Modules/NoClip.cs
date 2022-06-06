@@ -7,9 +7,14 @@ public class NoClip : HaxComponents {
 
     public static event Global.Action<bool>? noClipped;
 
-    void Awake() {
+    void OnEnable() {
         InputListener.onF9Press += this.ToggleNoClip;
         DimensionalRift.inDimensionalRift += ListenForDimensionalRift;
+    }
+
+    void OnDisable() {
+        InputListener.onF9Press -= this.ToggleNoClip;
+        DimensionalRift.inDimensionalRift -= ListenForDimensionalRift;
     }
 
     void Update() {
@@ -20,7 +25,7 @@ public class NoClip : HaxComponents {
         if (!this.IsNoClipping) return;
 
         Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Objects[0].rb;
-        playerRigidbody.isKinematic = true;
+        Player.Freeze(true);
 
         if (Input.anyKey) {
             Player.RectifyRoll();
@@ -66,10 +71,5 @@ public class NoClip : HaxComponents {
         this.IsNoClipping = !this.IsNoClipping;
         NoClip.noClipped?.Invoke(this.IsNoClipping);
         if (!this.IsNoClipping) Player.Freeze(false);
-    }
-
-    void OnDestroy() {
-        InputListener.onF9Press -= this.ToggleNoClip;
-        DimensionalRift.inDimensionalRift -= ListenForDimensionalRift;
     }
 }

@@ -11,6 +11,7 @@ public class ObjectCache<T> where T : Object {
 
     IEnumerator ICacheObjects() {
         Console.Print($"Caching {typeof(T).FullName} object(s)..");
+        this.StopCaching = true;
 
         while (true) {
             if (this.StopCaching) yield break;
@@ -21,5 +22,5 @@ public class ObjectCache<T> where T : Object {
 
     public void Init(MonoBehaviour self) => self.StartCoroutine(this.ICacheObjects());
 
-    public void Stop() => this.StopCaching = !this.StopCaching;
+    public void Stop() => this.StopCaching = false;
 }
