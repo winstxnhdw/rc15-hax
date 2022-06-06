@@ -1,6 +1,6 @@
 # rc15-hax
 
-Internal cheats for Robocraft 2015. Most importantly, no [Visual Studio](https://en.wiktionary.org/wiki/dog_shit) required.
+`rc15-hax` is a developer-friendly windows-only no-hook internal cheat for the Robocraft 2015 project.
 
 ## Requirements
 
@@ -31,7 +31,7 @@ sh requirements.sh --dev
 
 ## Usage
 
-Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Finally, run the following bash script to inject our assembly into the game. Press `F4` to open the cheats menu.
+Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Read the [wiki](https://github.com/winstxnhdw/rc15-hax/wiki) to learn about its features.
 
 ```bash
 sh launch.sh
@@ -52,3 +52,13 @@ Use the `--dev` flag on `launch.sh` to build before injecting.
 ```bash
 sh launch.sh --dev
 ```
+
+## Motivations
+
+### Zero Executables
+
+The repository contains zero executable to maintain transparency and assure the safe of the cheat—unlike the sketchy binaries that are found on forums like UnknownCheats/MPGH.
+
+### No Visual Studio
+
+Most cheats on GitHub like [MuckInternal](https://github.com/win32kbase/MuckInternal), contains redundant boilerplate that Visual Studio generates, bloating the codebase and ruining the user experience—requiring the user to install Visual Studio just to build the source code. On the otherhand, this repository can be developed on/used completely via the command line (or more specifically Git bash).
