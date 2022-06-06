@@ -1,6 +1,7 @@
 namespace RC15_HAX;
 public class WeaponMod : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableWeaponMod");
+    bool ProjectileModEnabled { get; } = HaxSettings.GetBool("EnableProjectileMod");
 
     void OnEnable() {
         if (!this.ModEnabled) return;
@@ -8,7 +9,6 @@ public class WeaponMod : HaxComponents {
     }
 
     void OnDisable() {
-        print("Disabling Weapon Mod");
         HaxObjects.BaseWeaponObjects.StopLog();
     }
 
@@ -20,10 +20,6 @@ public class WeaponMod : HaxComponents {
         if (!this.ModEnabled) return;
 
         foreach (BaseWeapon baseWeapon in HaxObjects.BaseWeaponObjects.Objects) {
-            // Projectile
-            baseWeapon.WeaponStats.ProjectileSpeed = HaxSettings.GetFloat("ProjectileSpeed");
-            baseWeapon.WeaponStats.ProjectileRange = HaxSettings.GetFloat("ProjectileRange");
-
             // Accuracy
             baseWeapon.WeaponStats.RecoilForce = HaxSettings.GetFloat("RecoilForce");
             baseWeapon.Accuracy.BaseInAccuracyDegrees = HaxSettings.GetFloat("BaseInAccuracyDegrees");
@@ -36,6 +32,11 @@ public class WeaponMod : HaxComponents {
             baseWeapon.MoveLimits.MinHorizAngle = HaxSettings.GetFloat("MinHorizAngle");
             baseWeapon.MoveLimits.MaxVerticalAngle = HaxSettings.GetFloat("MaxVerticalAngle");
             baseWeapon.MoveLimits.MinVerticalAngle = HaxSettings.GetFloat("MinVerticalAngle");
+
+            // Projectile
+            if (!ProjectileModEnabled) continue;
+            baseWeapon.WeaponStats.ProjectileSpeed = HaxSettings.GetFloat("ProjectileSpeed");
+            baseWeapon.WeaponStats.ProjectileRange = HaxSettings.GetFloat("ProjectileRange");
         }
     }
 }

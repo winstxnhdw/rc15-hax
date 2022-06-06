@@ -18,10 +18,11 @@ public static class HaxSettings {
 
     static Dictionary<string, string> Params { get; } = new Dictionary<string, string> {
         // Weapon projectile parameters
-        {"EnableWeaponMod",                     "true"},
+        {"EnableProjectileMod",                 "false"},
         {"ProjectileSpeed",                     "1000000"},
         {"ProjectileRange",                     "1000000"},
         // Weapon accuracy parameters
+        {"EnableWeaponMod",                     "true"},
         {"RecoilForce",                         "0"},
         {"BaseInAccuracyDegrees",               "0"},
         {"MovementInAccuracyDegrees",           "0"},
@@ -35,9 +36,9 @@ public static class HaxSettings {
         // Plasma Cannon parameters
         {"EnablePlasmaMod",                     "true"},
         {"fireTwice",                           "true"},
-        {"secondFireDelay",                     "0"},
+        {"secondFireDelay",                     "0.1"},
         {"secondFireDeviation",                 "0"},
-        {"PlasmaProjectileSpeed",               "10000"},
+        {"PlasmaProjectileSpeed",               "5000"},
         {"PlasmaProjectileRange",               "1000000"},
         // Wheel parameters
         {"EnableWheelMod",                      "false"},
@@ -51,6 +52,10 @@ public static class HaxSettings {
         {"EnableJetMod",                        "false"},
         {"ForceMagnitude",                      "15000"},
         {"MaxVelocity",                         "1000000"},
+        // Fake crosshair
+        {"GapSize",                             "7"},
+        {"Thickness",                           "3"},
+        {"Length",                              "15"},
         // General parameters
         {"EnableESP",                           "true"},
         {"NoCameraShake",                       "true"},
