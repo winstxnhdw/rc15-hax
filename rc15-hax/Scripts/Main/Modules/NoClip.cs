@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-public class NoClip : HaxComponents {
+public class NoClip : HaxModules {
     bool IsNoClipping { get; set; } = false;
     bool InDimensionalRift { get; set; } = false;
 

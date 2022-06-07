@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-public class DimensionalRift : HaxComponents {
+public class DimensionalRift : HaxModules {
     bool IsDimensionalRifting { get; set; } = false;
     bool IsNoClipping { get; set; } = false;
 

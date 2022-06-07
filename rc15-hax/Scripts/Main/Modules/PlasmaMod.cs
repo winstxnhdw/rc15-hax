@@ -1,5 +1,5 @@
 namespace RC15_HAX;
-public class PlasmaMod : HaxComponents {
+public class PlasmaMod : HaxModules {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnablePlasmaMod");
 
     protected override void OnEnable() {
@@ -8,6 +8,7 @@ public class PlasmaMod : HaxComponents {
     }
 
     protected override void OnDisable() {
+        this.ModPlasma();
         HaxObjects.PlasmaCannonObjects.StopLog();
     }
 
@@ -19,15 +20,17 @@ public class PlasmaMod : HaxComponents {
         if (!ModEnabled) return;
 
         foreach (PlasmaCannon plasmaCannon in HaxObjects.PlasmaCannonObjects.Objects) {
-            plasmaCannon.secondPlasmaShot.fireTwice = HaxSettings.GetBool("fireTwice");
+            base.ModifyValues(ref plasmaCannon.secondPlasmaShot.fireTwice, "fireTwice");
 
-            plasmaCannon.secondPlasmaShot.secondFireDelay = HaxSettings.GetFloat("secondFireDelay");
+            base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDelay, "secondFireDelay");
 
-            plasmaCannon.secondPlasmaShot.secondFireDeviation = HaxSettings.GetFloat("secondFireDeviation");
+            base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDeviation, "secondFireDeviation");
 
-            plasmaCannon.WeaponStats.ProjectileSpeed = HaxSettings.GetFloat("PlasmaProjectileSpeed");
+            base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileSpeed, "PlasmaProjectileSpeed");
 
-            plasmaCannon.WeaponStats.ProjectileRange = HaxSettings.GetFloat("PlasmaProjectileRange");
+            base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileRange, "PlasmaProjectileRange");
+
+            base.DefaultStored = true;
         }
     }
 }

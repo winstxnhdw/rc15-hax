@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-public class FakeCrosshair : HaxComponents {
+public class FakeCrosshair : HaxModules {
     bool UseFakeCrosshair { get; set; } = false;
     float GapSize { get; } = HaxSettings.GetFloat("GapSize");
     float Thickness { get; } = HaxSettings.GetFloat("Thickness");

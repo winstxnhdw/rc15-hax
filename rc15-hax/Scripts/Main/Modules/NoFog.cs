@@ -1,25 +1,25 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-public class NoFog : HaxComponents {
+public class NoFog : HaxModules {
     bool ModEnabled { get; } = HaxSettings.GetBool("NoFog");
 
     protected override void OnEnable() {
         base.OnEnable();
-        this.EnableFog();
+        this.EnableNoFog();
     }
 
     protected override void OnDisable() {
         base.OnDisable();
-        this.DisableFog();
+        this.DisableNoFog();
     }
 
-    void EnableFog() {
+    void EnableNoFog() {
         if (!ModEnabled) return;
-        RenderSettings.fog = true;
+        RenderSettings.fog = false;
     }
 
-    void DisableFog() {
-        RenderSettings.fog = false;
+    void DisableNoFog() {
+        RenderSettings.fog = true;
     }
 }

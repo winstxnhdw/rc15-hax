@@ -1,5 +1,5 @@
 namespace RC15_HAX;
-public class WeaponMod : HaxComponents {
+public class WeaponMod : HaxModules {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableWeaponMod");
     bool ProjectileModEnabled { get; } = HaxSettings.GetBool("EnableProjectileMod");
 

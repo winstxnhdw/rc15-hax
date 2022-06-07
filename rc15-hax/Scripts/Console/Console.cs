@@ -58,16 +58,16 @@ public class Console : HaxComponents {
         Console.ScrollToBottom();
     }
 
+    public static void Print(IList<string> logs) {
+        ConsoleSettings.Logs.AddRange(logs);
+        Console.ScrollToBottom();
+    }
+
     public static void Print(bool log) => Print(log.ToString());
 
     public static void Print(float log) => Print(log.ToString());
 
     public static void Print(int log) => Print(log.ToString());
-
-    public static void Print(IList<string> logs) {
-        ConsoleSettings.Logs.AddRange(logs);
-        Console.ScrollToBottom();
-    }
 
     public static void Print(IList<bool> logs) => Print(new List<bool>(logs).ConvertAll(x => x.ToString()));
 

@@ -1,5 +1,5 @@
 namespace RC15_HAX;
-public class WheelMod : HaxComponents {
+public class WheelMod : HaxModules {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableWheelMod");
 
     protected override void OnEnable() {

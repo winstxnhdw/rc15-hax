@@ -1,5 +1,5 @@
 namespace RC15_HAX;
-public class JetMod : HaxComponents {
+public class JetMod : HaxModules {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableJetMod");
 
     protected override void OnEnable() {

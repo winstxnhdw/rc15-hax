@@ -1,9 +1,9 @@
 namespace RC15_HAX;
 public struct Params {
-    string Default { get; set; }
-    string Current { get; set; }
+    public string Default { get; set; }
+    public string Current { get; set; }
 
-    public Params(string defaultValue, string currentValue) {
+    public Params(string currentValue, string defaultValue = "") {
         this.Default = defaultValue;
         this.Current = currentValue;
     }

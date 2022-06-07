@@ -13,6 +13,7 @@ public class Loader : MonoBehaviour {
         Loader.HaxGameObject.AddComponent<CursorController>();
         Loader.HaxGameObject.AddComponent<InputListener>();
         Loader.HaxGameObject.AddComponent<Console>();
+        Loader.HaxGameObject.AddComponent<ConsoleInputField>();
         Loader.HaxGameObject.AddComponent<Hax>();
         Loader.HaxGameObject.AddComponent<HaxObjects>();
 

@@ -10,22 +10,18 @@ public class Hax : HaxComponents {
 
     void Update() {
         if (this.HaxPaused || HaxObjects.TopBarObject.Objects.Length > 0) {
-
+            HaxSettings.ParseDefaultValues = true;
             SetActiveGameObject(Loader.HaxModules, false);
-            this.RevertHaxParams();
             return;
         }
 
+        HaxSettings.ParseDefaultValues = false;
         SetActiveGameObject(Loader.HaxModules, true);
     }
 
     void SetActiveGameObject(GameObject go, bool isActive) {
         if (go.activeSelf == isActive) return;
         go.SetActive(isActive);
-    }
-
-    void RevertHaxParams() {
-
     }
 
     // void AimBot() {

@@ -1,5 +1,5 @@
 namespace RC15_HAX;
-public class NoCameraShake : HaxComponents {
+public class NoCameraShake : HaxModules {
     bool ModEnabled { get; } = HaxSettings.GetBool("NoCameraShake");
 
     protected override void OnEnable() {

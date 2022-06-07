@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-public class Player : HaxComponents {
+public class Player : HaxModules {
     protected override void OnEnable() {
         base.OnEnable();
         InputListener.onBackslashPress += Player.RectifyOrientation;

@@ -7,6 +7,8 @@ public static class ConsoleSettings {
 
     static float ConsoleWidth => Screen.width;
 
+    public static float FieldTextTopPadding => Mathf.Clamp(5.0f * Settings.SizeRatio, 0.0f, ConsoleSettings.FieldContainerRect.height);
+
     public static float TextLeftPadding => 15.0f * Settings.SizeRatio;
 
     public static float TextTopPadding => 15.0f * Settings.SizeRatio;
@@ -21,6 +23,8 @@ public static class ConsoleSettings {
 
     public static List<string> Logs { get; } = new List<string>();
 
+    public static string FieldText { get; set; } = "";
+
     public static GUIStyle guiStyle {
         get {
             GUIStyle style = new GUIStyle();
@@ -32,5 +36,9 @@ public static class ConsoleSettings {
 
     public static Rect ConsoleRect => new Rect(0.0f, 0.0f, ConsoleSettings.ConsoleWidth, ConsoleSettings.ConsoleHeight);
 
-    public static Rect ScrollRect => new Rect(0.0f, 0.0f, Screen.width, ConsoleSettings.ConsoleHeight - 5.0f);
+    public static Rect ScrollRect => new Rect(0.0f, 2.0f, ConsoleSettings.ConsoleRect.width, ConsoleSettings.ConsoleRect.height - 2.0f);
+
+    public static Rect FieldContainerRect = new Rect(0, ConsoleSettings.ConsoleHeight, Screen.width, ConsoleSettings.ConsoleHeight * 0.1f);
+
+    public static Rect FieldRect = new Rect(ConsoleSettings.TextLeftPadding, ConsoleSettings.ConsoleHeight + ConsoleSettings.FieldTextTopPadding, FieldContainerRect.width - ConsoleSettings.TextLeftPadding, ConsoleSettings.FieldContainerRect.height);
 }

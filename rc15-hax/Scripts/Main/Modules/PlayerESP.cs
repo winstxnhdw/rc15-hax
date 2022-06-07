@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-public class PlayerESP : HaxComponents {
+public class PlayerESP : HaxModules {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnablePlayerESP");
     float TextBottomPadding { get; } = HaxSettings.GetFloat("TextBottomPadding");
     float OutlineBoxSize { get; } = HaxSettings.GetFloat("OutlineBoxSize") * Settings.SizeRatio;
