@@ -69,11 +69,8 @@ public static class HaxSettings {
         {"fireTwice",                           SetParams("true")},
         {"secondFireDelay",                     SetParams("0")},
         {"secondFireDeviation",                 SetParams("0")},
-        {"PlasmaProjectileSpeed",               SetParams("20000")},
+        {"PlasmaProjectileSpeed",               SetParams("250")},
         {"PlasmaProjectileRange",               SetParams("1000000000000")},
-        // Tesla parameters
-        {"EnableTeslaMod",                      SetParams("true")},
-        {"TeslaDamage",                         SetParams("2147483647")},
         // Wheel parameters
         {"EnableWheelMod",                      SetParams("false")},
         {"maxRPM",                              SetParams("1000")},
@@ -86,7 +83,7 @@ public static class HaxSettings {
         {"horizontalCarryingMassScale",         SetParams("0")},
         // Jet parameters
         {"EnableJetMod",                        SetParams("true")},
-        {"ForceMagnitude",                      SetParams("2000")},
+        {"ForceMagnitude",                      SetParams("2500")},
         // Rotor parameters
         {"EnableRotorMod",                      SetParams("false")},
         {"rotorMaxCarryingMass",                SetParams("1000000000000")},
