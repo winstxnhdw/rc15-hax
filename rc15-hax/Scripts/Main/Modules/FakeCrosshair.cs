@@ -7,6 +7,15 @@ public class FakeCrosshair : HaxComponents {
     float Thickness { get; } = HaxSettings.GetFloat("Thickness");
     float Length { get; } = HaxSettings.GetFloat("Length");
 
+    Vector2 TopCrosshairPosition { get; set; }
+    Vector2 BottomCrosshairPosition { get; set; }
+    Vector2 LeftCrosshairPosition { get; set; }
+    Vector2 RightCrosshairPosition { get; set; }
+
+    void Awake() {
+        this.InitialiseCrosshairPositions();
+    }
+
     void OnEnable() {
         InputListener.onF11Press += this.ToggleCrosshair;
     }
@@ -19,28 +28,31 @@ public class FakeCrosshair : HaxComponents {
         this.RenderFakeCrosshair();
     }
 
-    void RenderFakeCrosshair() {
-        if (!this.UseFakeCrosshair) return;
-
+    void InitialiseCrosshairPositions() {
         float halfWidth = 0.5f * this.Thickness;
         float lengthToCentre = this.GapSize + this.Length;
         Vector2 screenCentre = ScreenInfo.GetScreenCentre();
 
+        this.TopCrosshairPosition = new Vector2(screenCentre.x - halfWidth, screenCentre.y - lengthToCentre);
+        this.RightCrosshairPosition = new Vector2(screenCentre.x + this.GapSize, screenCentre.y - halfWidth);
+        this.BottomCrosshairPosition = new Vector2(screenCentre.x - halfWidth, screenCentre.y + this.GapSize);
+        this.LeftCrosshairPosition = new Vector2(screenCentre.x - lengthToCentre, screenCentre.y - halfWidth);
+    }
+
+    void RenderFakeCrosshair() {
+        if (!this.UseFakeCrosshair) return;
+
         // Top crosshair
-        Vector2 topCrosshairPosition = new Vector2(screenCentre.x - halfWidth, screenCentre.y - lengthToCentre);
-        GUIHelper.DrawBox(topCrosshairPosition, new Size(this.Thickness, this.Length));
+        GUIHelper.DrawBox(this.TopCrosshairPosition, new Size(this.Thickness, this.Length));
 
         // Right crosshair
-        Vector2 rightCrosshairPosition = new Vector2(screenCentre.x + this.GapSize, screenCentre.y - halfWidth);
-        GUIHelper.DrawBox(rightCrosshairPosition, new Size(this.Length, this.Thickness));
+        GUIHelper.DrawBox(this.RightCrosshairPosition, new Size(this.Length, this.Thickness));
 
         // Bottom crosshair
-        Vector2 bottomCrosshairPosition = new Vector2(screenCentre.x - halfWidth, screenCentre.y + this.GapSize);
-        GUIHelper.DrawBox(bottomCrosshairPosition, new Size(this.Thickness, this.Length));
+        GUIHelper.DrawBox(this.BottomCrosshairPosition, new Size(this.Thickness, this.Length));
 
         // Left crosshair
-        Vector2 leftCrosshairPosition = new Vector2(screenCentre.x - lengthToCentre, screenCentre.y - halfWidth);
-        GUIHelper.DrawBox(leftCrosshairPosition, new Size(this.Length, this.Thickness));
+        GUIHelper.DrawBox(this.LeftCrosshairPosition, new Size(this.Length, this.Thickness));
     }
 
     void ToggleCrosshair() => this.UseFakeCrosshair = !this.UseFakeCrosshair;

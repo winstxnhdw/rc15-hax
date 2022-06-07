@@ -8,6 +8,11 @@ public struct Size {
         this.Height = height;
     }
 
+    public Size(float size) {
+        this.Width = size;
+        this.Height = size;
+    }
+
     public static Size operator +(Size a, Size b) => new Size(a.Width + b.Width, a.Height + b.Height);
 
     public static Size operator -(Size a, Size b) => new Size(a.Width - b.Width, a.Height - b.Height);

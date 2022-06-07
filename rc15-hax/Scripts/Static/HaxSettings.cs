@@ -28,11 +28,12 @@ public static class HaxSettings {
         return value;
     }
 
+    // Max int value is 2147483647
     static Dictionary<string, string> Params { get; } = new Dictionary<string, string> {
         // Weapon projectile parameters
         {"EnableProjectileMod",                 "false"},
-        {"ProjectileSpeed",                     "1000000"},
-        {"ProjectileRange",                     "1000000"},
+        {"ProjectileSpeed",                     "1000000000000"},
+        {"ProjectileRange",                     "1000000000000"},
         // Weapon accuracy parameters
         {"EnableWeaponMod",                     "true"},
         {"RecoilForce",                         "0"},
@@ -40,7 +41,7 @@ public static class HaxSettings {
         {"MovementInAccuracyDegrees",           "0"},
         {"RepeatFireInAccuracyTotalDegrees",    "0"},
         // Weapon movement limits
-        {"AimSpeed",                            "1000000"},
+        {"AimSpeed",                            "1000000000000"},
         {"MaxHorizAngle",                       "180"},
         {"MinHorizAngle",                       "-180"},
         {"MaxVerticalAngle",                    "180"},
@@ -51,37 +52,38 @@ public static class HaxSettings {
         {"secondFireDelay",                     "0"},
         {"secondFireDeviation",                 "0"},
         {"PlasmaProjectileSpeed",               "200"},
-        {"PlasmaProjectileRange",               "1000000"},
+        {"PlasmaProjectileRange",               "1000000000000"},
         // Tesla parameters
-        {"EnableTeslaMod",                      "false"},
-        {"TeslaDamage",                         "1000000"},
+        {"EnableTeslaMod",                      "true"},
+        {"TeslaDamage",                         "2147483647"},
         // Wheel parameters
         {"EnableWheelMod",                      "false"},
-        {"maxRPM",                              "1500"},
+        {"maxRPM",                              "1000"},
         {"groundFrictionMultiplier",            "8"},
         {"stoppingBrakeTorque",                 "4000"},
         {"maxSteeringAngle",                    "30"},
         // Aerofoil parameters
         {"EnableAerofoilMod",                   "true"},
-        {"aerofoilMaxCarryingMass",             "1000000"},
+        {"aerofoilMaxCarryingMass",             "1000000000000"},
         {"horizontalCarryingMassScale",         "0"},
         // Jet parameters
         {"EnableJetMod",                        "true"},
         {"ForceMagnitude",                      "2000"},
         // Rotor parameters
         {"EnableRotorMod",                      "false"},
-        {"rotorMaxCarryingMass",                "1000000"},
+        {"rotorMaxCarryingMass",                "1000000000000"},
         {"driftAcceleration",                   "0"},
         // Fake crosshair
         {"GapSize",                             "7"},
         {"Thickness",                           "3"},
         {"Length",                              "15"},
-        // General parameters
+        // ESP parameters
         {"EnableESP",                           "true"},
+        {"OutlineBoxSize",                      "4000"},
+        {"TextBottomPadding",                   "20"},
+        // General parameters
         {"NoCameraShake",                       "true"},
-        {"NoFog",                               "true"},
-        {"IronWall",                            "true"},
-        {"IronWallIntervals",                   "1"},
+        {"NoFog",                               "true"}
     };
 }
 

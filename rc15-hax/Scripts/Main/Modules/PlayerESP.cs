@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class PlayerESP : HaxComponents {
+    float TextBottomPadding { get; } = HaxSettings.GetFloat("TextBottomPadding");
+    float OutlineBoxSize { get; } = HaxSettings.GetFloat("OutlineBoxSize") * Settings.SizeRatio;
+
     void OnGUI() {
         this.DrawESP();
     }
@@ -17,16 +20,16 @@ public class PlayerESP : HaxComponents {
 
             if (rigidbodyScreenPosition.z <= 0.0f) continue;
 
-            float flatDistanceFromRigidbody = Vector3.Distance(rigidbodyWorldPosition, Global.Camera.transform.position);
+            float distanceFromRigidbody = Vector3.Distance(rigidbodyWorldPosition, Global.Camera.transform.position);
             rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
-            Size size = new Size(Settings.OutlineBoxSize, Settings.OutlineBoxSize) / flatDistanceFromRigidbody;
+            Size size = new Size(this.OutlineBoxSize) / distanceFromRigidbody;
             GUIHelper.DrawOutlineBox(rigidbodyScreenPosition, size, Settings.BoxLineWidth);
 
             float halfWidth = 0.5f * size.Width;
             float halfHeight = 0.5f * size.Height;
 
-            Vector2 nameTextPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y - halfHeight - 20.0f);
-            GUIHelper.DrawLabel(nameTextPosition, $"{rigidbody.name}: {Mathf.RoundToInt(flatDistanceFromRigidbody).ToString()}m");
+            Vector2 nameTextPosition = new Vector2(rigidbodyScreenPosition.x - halfWidth, rigidbodyScreenPosition.y - halfHeight - this.TextBottomPadding);
+            GUIHelper.DrawLabel(nameTextPosition, $"{rigidbody.name}: {Mathf.RoundToInt(distanceFromRigidbody).ToString()}m");
 
             int coordinateX = Mathf.RoundToInt(rigidbodyScreenPosition.x);
             int coordinateY = Mathf.RoundToInt(rigidbodyScreenPosition.y);

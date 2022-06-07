@@ -27,9 +27,9 @@ public class Loader : MonoBehaviour {
         AddHaxModules<NoClip>();
         AddHaxModules<DimensionalRift>();
         AddHaxModules<Player>();
-        AddHaxModules<IronWall>();
         AddHaxModules<PlasmaMod>();
         AddHaxModules<WeaponMod>();
+        AddHaxModules<TeslaMod>();
         AddHaxModules<AerofoilMod>();
         AddHaxModules<JetMod>();
         AddHaxModules<WheelMod>();
