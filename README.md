@@ -1,6 +1,6 @@
 # rc15-hax
 
-`rc15-hax` is a developer-friendly windows-only no-hook internal cheat for the Robocraft 2015 project.
+`rc15-hax` is a developer-friendly Windows-only no-hook internal cheat for the Robocraft 2015 project.
 
 ## Requirements
 
