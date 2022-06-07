@@ -4,12 +4,22 @@ namespace RC15_HAX;
 public class NoFog : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("NoFog");
 
-    void OnEnable() {
-        if (!ModEnabled) return;
-        RenderSettings.fog = false;
+    protected override void OnEnable() {
+        base.OnEnable();
+        this.EnableFog();
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
+        base.OnDisable();
+        this.DisableFog();
+    }
+
+    void EnableFog() {
+        if (!ModEnabled) return;
         RenderSettings.fog = true;
+    }
+
+    void DisableFog() {
+        RenderSettings.fog = false;
     }
 }

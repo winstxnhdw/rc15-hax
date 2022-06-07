@@ -2,12 +2,12 @@ namespace RC15_HAX;
 public class PlasmaMod : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnablePlasmaMod");
 
-    void OnEnable() {
+    protected override void OnEnable() {
         if (!ModEnabled) return;
         HaxObjects.PlasmaCannonObjects.Init(this);
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
         HaxObjects.PlasmaCannonObjects.StopLog();
     }
 

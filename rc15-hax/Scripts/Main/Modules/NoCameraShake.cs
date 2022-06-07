@@ -2,12 +2,12 @@ namespace RC15_HAX;
 public class NoCameraShake : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("NoCameraShake");
 
-    void OnEnable() {
+    protected override void OnEnable() {
         if (!ModEnabled) return;
         HaxObjects.CameraShakeObject.Init(this);
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
         HaxObjects.CameraShakeObject.StopLog();
     }
 

@@ -16,11 +16,13 @@ public class FakeCrosshair : HaxComponents {
         this.InitialiseCrosshairPositions();
     }
 
-    void OnEnable() {
+    protected override void OnEnable() {
+        base.OnEnable();
         InputListener.onF11Press += this.ToggleCrosshair;
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
+        base.OnDisable();
         InputListener.onF11Press -= this.ToggleCrosshair;
     }
 

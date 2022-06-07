@@ -2,12 +2,12 @@ namespace RC15_HAX;
 public class AerofoilMod : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableAerofoilMod");
 
-    void OnEnable() {
+    protected override void OnEnable() {
         if (!ModEnabled) return;
         HaxObjects.AerofoilObjects.Init(this);
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
         HaxObjects.AerofoilObjects.StopLog();
     }
 

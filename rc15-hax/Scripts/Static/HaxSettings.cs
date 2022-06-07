@@ -78,7 +78,7 @@ public static class HaxSettings {
         {"Thickness",                           "3"},
         {"Length",                              "15"},
         // ESP parameters
-        {"EnableESP",                           "true"},
+        {"EnablePlayerESP",                     "true"},
         {"OutlineBoxSize",                      "4000"},
         {"TextBottomPadding",                   "20"},
         // General parameters

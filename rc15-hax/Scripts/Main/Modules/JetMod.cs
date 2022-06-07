@@ -2,12 +2,12 @@ namespace RC15_HAX;
 public class JetMod : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableJetMod");
 
-    void OnEnable() {
+    protected override void OnEnable() {
         if (!ModEnabled) return;
         HaxObjects.CubeJetObjects.Init(this);
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
         HaxObjects.CubeJetObjects.StopLog();
     }
 

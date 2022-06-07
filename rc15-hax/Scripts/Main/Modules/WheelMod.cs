@@ -2,13 +2,12 @@ namespace RC15_HAX;
 public class WheelMod : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableWheelMod");
 
-    void OnEnable() {
+    protected override void OnEnable() {
         if (!this.ModEnabled) return;
-
         HaxObjects.WheelObjects.Init(this);
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
         HaxObjects.WheelObjects.StopLog();
     }
 

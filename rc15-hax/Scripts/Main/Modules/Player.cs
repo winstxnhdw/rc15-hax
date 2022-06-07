@@ -2,11 +2,13 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Player : HaxComponents {
-    void OnEnable() {
+    protected override void OnEnable() {
+        base.OnEnable();
         InputListener.onBackslashPress += Player.RectifyOrientation;
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
+        base.OnDisable();
         InputListener.onBackslashPress -= Player.RectifyOrientation;
     }
 

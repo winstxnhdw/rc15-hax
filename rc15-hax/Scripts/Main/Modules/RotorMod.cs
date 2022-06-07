@@ -4,12 +4,12 @@ namespace RC15_HAX;
 public class RotorMod : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableRotorMod");
 
-    void OnEnable() {
+    protected override void OnEnable() {
         if (!ModEnabled) return;
         HaxObjects.RotorObjects.Init(this);
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
         HaxObjects.RotorObjects.StopLog();
     }
 

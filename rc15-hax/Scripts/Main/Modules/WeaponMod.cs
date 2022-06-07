@@ -3,12 +3,12 @@ public class WeaponMod : HaxComponents {
     bool ModEnabled { get; } = HaxSettings.GetBool("EnableWeaponMod");
     bool ProjectileModEnabled { get; } = HaxSettings.GetBool("EnableProjectileMod");
 
-    void OnEnable() {
+    protected override void OnEnable() {
         if (!this.ModEnabled) return;
         HaxObjects.BaseWeaponObjects.Init(this);
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
         HaxObjects.BaseWeaponObjects.StopLog();
     }
 

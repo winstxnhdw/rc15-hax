@@ -10,13 +10,13 @@ public class DimensionalRift : HaxComponents {
 
     public static event Global.Action<bool>? inDimensionalRift;
 
-    void OnEnable() {
+    protected override void OnEnable() {
         HaxObjects.SimulationCameraObject.Init(this);
         InputListener.onF10Press += this.ToggleDimensionalRift;
         NoClip.noClipped += ListenForNoClip;
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
         HaxObjects.SimulationCameraObject.StopLog();
         InputListener.onF10Press -= this.ToggleDimensionalRift;
         NoClip.noClipped -= ListenForNoClip;

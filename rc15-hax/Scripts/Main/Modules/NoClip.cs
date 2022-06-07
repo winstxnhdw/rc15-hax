@@ -7,12 +7,14 @@ public class NoClip : HaxComponents {
 
     public static event Global.Action<bool>? noClipped;
 
-    void OnEnable() {
+    protected override void OnEnable() {
+        base.OnEnable();
         InputListener.onF9Press += this.ToggleNoClip;
         DimensionalRift.inDimensionalRift += ListenForDimensionalRift;
     }
 
-    void OnDisable() {
+    protected override void OnDisable() {
+        base.OnDisable();
         InputListener.onF9Press -= this.ToggleNoClip;
         DimensionalRift.inDimensionalRift -= ListenForDimensionalRift;
     }
