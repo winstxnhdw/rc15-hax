@@ -1,6 +1,6 @@
 namespace RC15_HAX;
 public class AerofoilMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetBool("EnableAerofoilMod");
+    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnableAerofoilMod");
 
     protected override void OnEnable() {
         if (!ModEnabled) return;
@@ -19,8 +19,8 @@ public class AerofoilMod : HaxModules {
         if (!ModEnabled) return;
 
         foreach (CubeAerofoil cubeAerofoil in HaxObjects.AerofoilObjects.Objects) {
-            cubeAerofoil.maxCarryingMass = HaxSettings.GetFloat("aerofoilMaxCarryingMass");
-            cubeAerofoil.horizontalCarryingMassScale = HaxSettings.GetFloat("horizontalCarryingMassScale");
+            cubeAerofoil.maxCarryingMass = HaxSettings.GetValue<float>("aerofoilMaxCarryingMass");
+            cubeAerofoil.horizontalCarryingMassScale = HaxSettings.GetValue<float>("horizontalCarryingMassScale");
         }
     }
 }

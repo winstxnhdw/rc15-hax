@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 
 namespace RC15_HAX;
-public class ObjectCache<T> : ObjectCacheBase<T> where T : Object {
-    public T Object { get; set; }
+public class ObjectsCache<T> : ObjectCacheBase<T> where T : Object {
+    public T[] Objects { get; set; }
 
-    public ObjectCache(float updateInterval = 2.0f) : base(updateInterval) {
-        this.Object = GameObject.FindObjectOfType<T>();
+    public ObjectsCache(float updateInterval = 5.0f) : base(updateInterval) {
+        this.Objects = GameObject.FindObjectsOfType<T>();
     }
 
     IEnumerator ICacheObjects() {
@@ -19,7 +19,7 @@ public class ObjectCache<T> : ObjectCacheBase<T> where T : Object {
                 yield break;
             }
 
-            this.Object = GameObject.FindObjectOfType<T>();
+            this.Objects = GameObject.FindObjectsOfType<T>();
             yield return new WaitForSeconds(UpdateInterval);
         }
     }

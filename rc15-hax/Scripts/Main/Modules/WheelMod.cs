@@ -1,6 +1,6 @@
 namespace RC15_HAX;
 public class WheelMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetBool("EnableWheelMod");
+    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnableWheelMod");
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
@@ -19,10 +19,10 @@ public class WheelMod : HaxModules {
         if (!this.ModEnabled) return;
 
         foreach (CubeWheel cubeWheel in HaxObjects.WheelObjects.Objects) {
-            cubeWheel.maxRPM = HaxSettings.GetFloat("maxRPM");
-            cubeWheel.friction.groundFrictionMultiplier = HaxSettings.GetFloat("groundFrictionMultiplier");
-            cubeWheel.stoppingBrakeTorque = HaxSettings.GetFloat("stoppingBrakeTorque");
-            cubeWheel.maxSteeringAngle = HaxSettings.GetFloat("maxSteeringAngle");
+            cubeWheel.maxRPM = HaxSettings.GetValue<float>("maxRPM");
+            cubeWheel.friction.groundFrictionMultiplier = HaxSettings.GetValue<float>("groundFrictionMultiplier");
+            cubeWheel.stoppingBrakeTorque = HaxSettings.GetValue<float>("stoppingBrakeTorque");
+            cubeWheel.maxSteeringAngle = HaxSettings.GetValue<float>("maxSteeringAngle");
         }
     }
 }

@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Hax : HaxComponents {
-    bool HaxPaused { get; set; } = false;
+    public static bool HaxPaused { get; set; } = false;
 
     void Awake() {
         InputListener.onPausePress += this.ToggleHaxPause;
     }
 
     void Update() {
-        if (this.HaxPaused || HaxObjects.TopBarObject.Objects.Length > 0) {
+        if (Hax.HaxPaused || HaxObjects.PlayerRigidbody.Object == null) {
             HaxSettings.ParseDefaultValues = true;
             SetActiveGameObject(Loader.HaxModules, false);
             return;
@@ -48,7 +48,7 @@ public class Hax : HaxComponents {
     // Global.Camera.transform.localEulerAngles = new Vector3(-closestBodyPosition.y, closestBodyPosition.x, 0.0f);
     // }
 
-    void ToggleHaxPause() => this.HaxPaused = !this.HaxPaused;
+    void ToggleHaxPause() => Hax.HaxPaused = !Hax.HaxPaused;
 
     void OnDestroy() {
         InputListener.onPausePress -= this.ToggleHaxPause;

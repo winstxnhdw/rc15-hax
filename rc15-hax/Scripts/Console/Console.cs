@@ -36,9 +36,9 @@ public class Console : HaxComponents {
     }
 
     public static void PauseConsole() {
-        ConsoleSettings.PauseConsole = !ConsoleSettings.PauseConsole;
         Console.FrozenLogs.Clear();
         Console.FrozenLogs.AddRange(ConsoleSettings.Logs);
+        ConsoleSettings.PauseConsole = !ConsoleSettings.PauseConsole;
     }
 
     public static void ClearConsole() => ConsoleSettings.Logs.Clear();
@@ -50,17 +50,11 @@ public class Console : HaxComponents {
 
     void HideConsole() => ConsoleSettings.ShowConsole = false;
 
-    static void ScrollToBottom() => Console.Scroll = new Vector2(0.0f, Console.Viewport.height);
+    public static void ScrollToBottom() => Console.Scroll = new Vector2(0.0f, Console.Viewport.height);
 
-    public static void Print(object log) {
-        ConsoleSettings.Logs.Add(log.ToString());
-        Console.ScrollToBottom();
-    }
+    public static void Print(object log) => ConsoleSettings.Logs.Add(log.ToString());
 
-    public static void Print(IList<string> logs) {
-        ConsoleSettings.Logs.AddRange(logs);
-        Console.ScrollToBottom();
-    }
+    public static void Print(IList<string> logs) => ConsoleSettings.Logs.AddRange(logs);
 
     public static void Print(IList<bool> logs) => Print(new List<bool>(logs).ConvertAll(x => x.ToString()));
 

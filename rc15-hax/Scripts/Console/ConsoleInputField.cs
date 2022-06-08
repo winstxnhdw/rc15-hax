@@ -36,6 +36,7 @@ public class ConsoleInputField : HaxComponents {
         }
 
         ConsoleSettings.FieldText = string.Empty;
+        Console.ScrollToBottom();
     }
 
     void RenderConsoleInput() {

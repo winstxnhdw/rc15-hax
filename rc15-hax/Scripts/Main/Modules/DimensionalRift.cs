@@ -1,4 +1,5 @@
 using UnityEngine;
+using Simulation;
 
 namespace RC15_HAX;
 public class DimensionalRift : HaxModules {
@@ -27,11 +28,13 @@ public class DimensionalRift : HaxModules {
     }
 
     void PerformDimensionalRift() {
-        if (!this.IsDimensionalRifting) return;
+        SimulationCamera simulationCamera = HaxObjects.SimulationCameraObject.Object;
+
+        if (!this.IsDimensionalRifting || simulationCamera == null) return;
 
         Player.Freeze(true);
         Transform cameraTransform = Global.Camera.transform;
-        HaxObjects.SimulationCameraObject.Objects[0].transform.position = this.SimulationCameraPosition;
+        simulationCamera.transform.position = this.SimulationCameraPosition;
 
         // Forward-back
         if (Input.GetKey(KeyCode.W)) {
@@ -68,7 +71,7 @@ public class DimensionalRift : HaxModules {
     }
 
     void ToggleDimensionalRift() {
-        if (!Loader.HaxModules.activeSelf || this.IsNoClipping) return;
+        if (this.IsNoClipping) return;
 
         this.SimulationCameraPosition = Global.Camera.transform.position;
         this.IsDimensionalRifting = !this.IsDimensionalRifting;
@@ -77,7 +80,7 @@ public class DimensionalRift : HaxModules {
         if (!this.IsDimensionalRifting) {
             Player.Freeze(false);
             Player.RectifyRoll();
-            HaxObjects.PlayerRigidbody.Objects[0].rb.transform.position = this.RiftEndPosition;
+            HaxObjects.PlayerRigidbody.Object.rb.transform.position = this.RiftEndPosition;
         }
     }
 }

@@ -2,7 +2,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class RotorMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetBool("EnableRotorMod");
+    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnableRotorMod");
 
     protected override void OnEnable() {
         if (!ModEnabled) return;
@@ -21,8 +21,8 @@ public class RotorMod : HaxModules {
         if (!ModEnabled) return;
 
         foreach (CubeRotor cubeRotor in HaxObjects.RotorObjects.Objects) {
-            cubeRotor.maxCarryingMass = HaxSettings.GetFloat("rotorMaxCarryingMass");
-            cubeRotor.driftAcceleration = HaxSettings.GetFloat("driftAcceleration");
+            cubeRotor.maxCarryingMass = HaxSettings.GetValue<float>("rotorMaxCarryingMass");
+            cubeRotor.driftAcceleration = HaxSettings.GetValue<float>("driftAcceleration");
         }
     }
 }

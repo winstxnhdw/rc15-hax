@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class PlayerESP : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetBool("EnablePlayerESP");
-    float TextBottomPadding { get; } = HaxSettings.GetFloat("TextBottomPadding");
-    float OutlineBoxSize { get; } = HaxSettings.GetFloat("OutlineBoxSize") * Settings.SizeRatio;
+    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnablePlayerESP");
+    float TextBottomPadding { get; } = HaxSettings.GetValue<float>("TextBottomPadding");
+    float OutlineBoxSize { get; } = HaxSettings.GetValue<float>("OutlineBoxSize") * Settings.SizeRatio;
 
     void OnGUI() {
         this.DrawESP();
@@ -12,7 +12,6 @@ public class PlayerESP : HaxModules {
 
     void DrawESP() {
         if (!ModEnabled) return;
-
         foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
             if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
 

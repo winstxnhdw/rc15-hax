@@ -1,10 +1,13 @@
+using Simulation;
+
 namespace RC15_HAX;
 public class PlasmaMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetBool("EnablePlasmaMod");
+    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnablePlasmaMod");
 
     protected override void OnEnable() {
         if (!ModEnabled) return;
         HaxObjects.PlasmaCannonObjects.Init(this);
+        this.ModPlamsaTimingData();
     }
 
     protected override void OnDisable() {
@@ -32,5 +35,20 @@ public class PlasmaMod : HaxModules {
 
             base.DefaultStored = true;
         }
+
+        this.ModPlamsaTimingData();
+    }
+
+    void ModPlamsaTimingData() {
+        float[] plasmaFirePeriods = new float[6];
+        for (int i = 0; i < 6; i++) {
+            plasmaFirePeriods[i] = HaxSettings.GetValue<float>($"plasmaFirePeriod{i}");
+        }
+
+        FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
+        if (fireTimingData == null) return;
+        fireTimingData.plasmaFirePeriod = plasmaFirePeriods;
+        fireTimingData.plasmaFlamFirePeriod = HaxSettings.GetValue<float>("plasmaFlamFirePeriod");
+        fireTimingData.plasmaCannonZoomedFoV = HaxSettings.GetValue<float>("plasmaCannonZoomedFoV");
     }
 }

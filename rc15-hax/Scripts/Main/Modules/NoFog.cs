@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class NoFog : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetBool("NoFog");
+    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("NoFog");
 
     protected override void OnEnable() {
         base.OnEnable();

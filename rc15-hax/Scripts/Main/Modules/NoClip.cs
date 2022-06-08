@@ -26,7 +26,7 @@ public class NoClip : HaxModules {
     void PerformNoClip() {
         if (!this.IsNoClipping) return;
 
-        Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Objects[0].rb;
+        Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Object.rb;
         Player.Freeze(true);
 
         if (Input.anyKey) {

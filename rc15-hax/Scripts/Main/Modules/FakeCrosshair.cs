@@ -3,9 +3,9 @@ using UnityEngine;
 namespace RC15_HAX;
 public class FakeCrosshair : HaxModules {
     bool UseFakeCrosshair { get; set; } = false;
-    float GapSize { get; } = HaxSettings.GetFloat("GapSize");
-    float Thickness { get; } = HaxSettings.GetFloat("Thickness");
-    float Length { get; } = HaxSettings.GetFloat("Length");
+    float GapSize { get; } = HaxSettings.GetValue<float>("GapSize");
+    float Thickness { get; } = HaxSettings.GetValue<float>("Thickness");
+    float Length { get; } = HaxSettings.GetValue<float>("Length");
 
     Vector2 TopCrosshairPosition { get; set; }
     Vector2 BottomCrosshairPosition { get; set; }

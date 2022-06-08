@@ -1,6 +1,6 @@
 namespace RC15_HAX;
 public class JetMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetBool("EnableJetMod");
+    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnableJetMod");
 
     protected override void OnEnable() {
         if (!ModEnabled) return;
@@ -19,7 +19,7 @@ public class JetMod : HaxModules {
         if (!ModEnabled) return;
 
         foreach (CubeJet cubeJet in HaxObjects.CubeJetObjects.Objects) {
-            cubeJet.ForceMagnitude = HaxSettings.GetFloat("ForceMagnitude");
+            cubeJet.ForceMagnitude = HaxSettings.GetValue<float>("ForceMagnitude");
         }
     }
 }
