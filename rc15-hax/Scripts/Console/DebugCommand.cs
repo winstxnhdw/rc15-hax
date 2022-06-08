@@ -10,3 +10,13 @@ public class DebugCommand : DebugCommandBase {
         this.Command.Invoke();
     }
 }
+
+public class DebugCommand<T> : DebugCommandBase {
+    Global.Action<T> Command { get; set; }
+
+    public DebugCommand(string commandName, string commandDescription, string commandFormat, Global.Action<T> command) : base(commandName, commandDescription, commandFormat) {
+        this.Command = command;
+    }
+
+    public void Invoke(T value) => this.Command.Invoke(value);
+}

@@ -11,6 +11,7 @@ public class Loader : MonoBehaviour {
         DontDestroyOnLoad(Loader.HaxGameObject);
 
         Loader.HaxGameObject.AddComponent<CursorController>();
+        Loader.HaxGameObject.AddComponent<DebugController>();
         Loader.HaxGameObject.AddComponent<InputListener>();
         Loader.HaxGameObject.AddComponent<Console>();
         Loader.HaxGameObject.AddComponent<ConsoleInputField>();
@@ -23,19 +24,25 @@ public class Loader : MonoBehaviour {
     static void LoadHaxModules() {
         DontDestroyOnLoad(Loader.HaxModules);
 
-        AddHaxModules<NoCameraShake>();
         AddHaxModules<PlayerESP>();
         AddHaxModules<NoClip>();
         AddHaxModules<DimensionalRift>();
         AddHaxModules<Player>();
+
+        AddHaxModules<FakeCrosshair>();
+        AddHaxModules<NoCameraShake>();
+        AddHaxModules<NoFog>();
+
         AddHaxModules<PlasmaMod>();
         AddHaxModules<WeaponMod>();
+        AddHaxModules<RailMod>();
+        AddHaxModules<SMGMod>();
+
         AddHaxModules<AerofoilMod>();
         AddHaxModules<JetMod>();
         AddHaxModules<WheelMod>();
         AddHaxModules<RotorMod>();
-        AddHaxModules<FakeCrosshair>();
-        AddHaxModules<NoFog>();
+        AddHaxModules<LegMod>();
     }
 
     public static void Unload() {

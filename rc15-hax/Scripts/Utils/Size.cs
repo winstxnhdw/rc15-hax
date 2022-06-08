@@ -1,7 +1,7 @@
 namespace RC15_HAX;
 public struct Size {
-    public float Width { get; set; }
-    public float Height { get; set; }
+    public float Width { get; }
+    public float Height { get; }
 
     public Size(float width, float height) {
         this.Width = width;
