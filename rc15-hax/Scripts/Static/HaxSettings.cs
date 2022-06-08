@@ -102,7 +102,7 @@ public static class HaxSettings {
         {"railFirePeriod3",                     SetParams("0.3")},
         {"railFirePeriod4",                     SetParams("0.3")},
         {"railFirePeriod5",                     SetParams("0.3")},
-        {"railFireDelay",                       SetParams("0.4")},
+        {"railFireDelay",                       SetParams("0.7")},
         {"railGunZoomedFov",                    SetParams("60")},
         // Wheel parameters
         {"EnableWheelMod",                      SetParams("False")},
@@ -126,10 +126,10 @@ public static class HaxSettings {
         {"timeGroundedBeforeJump",              SetParams("0")},
         {"lightLegMass",                        SetParams("0")},
         {"heavyLegMass",                        SetParams("0")},
-        {"maxUpwardsForce",                     SetParams("50")},
-        {"jumpHeight",                          SetParams("3")},
-        {"maxWorkingSpeed",                     SetParams("20")},
-        {"maxLateralSpeed",                     SetParams("15")},
+        {"maxUpwardsForce",                     SetParams("25")},
+        {"jumpHeight",                          SetParams("2")},
+        {"maxWorkingSpeed",                     SetParams("11")},
+        {"maxLateralSpeed",                     SetParams("9")},
         // Fake crosshair
         {"GapSize",                             SetParams("7")},
         {"Thickness",                           SetParams("3")},

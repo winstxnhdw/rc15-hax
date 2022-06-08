@@ -12,16 +12,6 @@ public class ObjectCacheBase<T> where T : Object {
         this.UpdateInterval = updateInterval;
     }
 
-    IEnumerator ICacheObjects() {
-        Console.Print($"Caching {this.TypeName} object(s)..");
-        this.StopCaching = false;
-        yield return this.MainLoop();
-    }
-
-    protected virtual IEnumerator MainLoop() {
-        yield return new WaitForSeconds(UpdateInterval);
-    }
-
     public void Stop() => this.StopCaching = true;
 
     public void StopLog() => Console.Print($"Stopping cache for {this.TypeName} object(s).");

@@ -11,16 +11,16 @@ public class ObjectsCache<T> : ObjectCacheBase<T> where T : Object {
 
     IEnumerator ICacheObjects() {
         Console.Print($"Caching {base.TypeName} object(s)..");
-        this.StopCaching = false;
+        base.StopCaching = false;
 
         while (true) {
-            if (this.StopCaching) {
-                this.StopLog();
+            if (base.StopCaching) {
+                base.StopLog();
                 yield break;
             }
 
             this.Objects = GameObject.FindObjectsOfType<T>();
-            yield return new WaitForSeconds(UpdateInterval);
+            yield return new WaitForSeconds(base.UpdateInterval);
         }
     }
 
