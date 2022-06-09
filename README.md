@@ -6,7 +6,7 @@
 
 - Windows 10
 - [Microsoft .NET SDK 6.0.2](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.300-windows-x64-installer)
-- Microsoft .NET Framework 4.8
+- [Microsoft .NET Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
 - C# 10.0
 
 ## Installation
