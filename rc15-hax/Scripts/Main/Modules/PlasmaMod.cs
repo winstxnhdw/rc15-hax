@@ -2,7 +2,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class PlasmaMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnablePlasmaMod");
+    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlasmaMod"); }
 
     protected override void OnEnable() {
         if (!ModEnabled) return;

@@ -2,7 +2,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class LegMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnableLegMod");
+    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableLegMod"); }
 
     protected override void OnEnable() {
         if (!ModEnabled) return;

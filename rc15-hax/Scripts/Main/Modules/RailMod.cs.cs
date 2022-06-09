@@ -2,8 +2,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class RailMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnableRailMod");
-
+    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRailMod"); }
     protected override void OnEnable() {
         this.ModRail();
     }

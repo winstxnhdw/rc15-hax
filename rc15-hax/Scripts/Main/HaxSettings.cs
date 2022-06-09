@@ -12,8 +12,8 @@ public static class HaxSettings {
     }
 
     static void StoreDefaultValues(string key, string defaultValue) {
-        if (string.IsNullOrWhiteSpace(defaultValue)) return;
-        HaxSettings.Params[key] = new Params(GetParams(key).Current, defaultValue); ;
+        if (Global.IsNullOrWhiteSpace(defaultValue)) return;
+        HaxSettings.Params[key] = new Params(GetParams(key).Current, defaultValue);
     }
 
     static void PrintInvalidType<T>(string key, string param) {
@@ -41,14 +41,14 @@ public static class HaxSettings {
         HaxSettings.StoreDefaultValues(key, defaultValue);
         string paramValue = GetParamValue(GetParams(key));
 
-        if (string.IsNullOrWhiteSpace(paramValue)) {
+        if (Global.IsNullOrWhiteSpace(paramValue)) {
             Console.Print($"No default values found for {key}.");
-            return default(T);
+            return default;
         }
 
         if (!valueParserDict.TryGetValue(typeof(T).FullName, out Global.Func<string, T> valueParser)) {
             Console.Print("No valid type specified.");
-            return default(T);
+            return default;
         }
 
         return valueParser(paramValue);
@@ -108,7 +108,7 @@ public static class HaxSettings {
         {"railFirePeriod3",                     SetParams("0.3")},
         {"railFirePeriod4",                     SetParams("0.3")},
         {"railFirePeriod5",                     SetParams("0.3")},
-        {"railFireDelay",                       SetParams("0.7")},
+        {"railFireDelay",                       SetParams("0.8")},
         {"railGunZoomedFov",                    SetParams("60")},
         // Wheel parameters
         {"EnableWheelMod",                      SetParams("False")},

@@ -2,7 +2,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class RotorMod : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnableRotorMod");
+    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRotorMod"); }
 
     protected override void OnEnable() {
         if (!ModEnabled) return;

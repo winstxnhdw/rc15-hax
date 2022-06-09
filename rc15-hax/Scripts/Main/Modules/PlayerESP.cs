@@ -2,9 +2,19 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class PlayerESP : HaxModules {
-    bool ModEnabled { get; } = HaxSettings.GetValue<bool>("EnablePlayerESP");
-    float TextBottomPadding { get; } = HaxSettings.GetValue<float>("TextBottomPadding");
-    float OutlineBoxSize { get; } = HaxSettings.GetValue<float>("OutlineBoxSize") * Settings.SizeRatio;
+    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlayerESP"); }
+    float TextBottomPadding { get => HaxSettings.GetValue<float>("TextBottomPadding"); }
+    float OutlineBoxSize { get => HaxSettings.GetValue<float>("OutlineBoxSize") * Settings.SizeRatio; }
+
+    protected override void OnEnable() {
+        base.OnEnable();
+        Console.Print($"PlayerESP: {this.ModEnabled}");
+    }
+
+    protected override void OnDisable() {
+        base.OnDisable();
+        Console.Print($"PlayerESP: {this.ModEnabled}");
+    }
 
     void OnGUI() {
         this.DrawESP();
@@ -13,6 +23,7 @@ public class PlayerESP : HaxModules {
     void DrawESP() {
         if (!ModEnabled) return;
         foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
+            if (rigidbody == null) continue;
             if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
 
             Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;
@@ -22,6 +33,7 @@ public class PlayerESP : HaxModules {
 
             float distanceFromRigidbody = Vector3.Distance(rigidbodyWorldPosition, Global.Camera.transform.position);
             rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
+
             Size size = new Size(this.OutlineBoxSize) / distanceFromRigidbody;
             GUIHelper.DrawOutlineBox(rigidbodyScreenPosition, size, Settings.BoxLineWidth);
 
