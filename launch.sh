@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git pull
+
 if [ "$1" = "--dev" ]
 then
   rm -r rc15-hax/bin
