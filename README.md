@@ -2,9 +2,6 @@
 
 `rc15-hax` is a developer-friendly Windows-only no-hook internal cheat for the Robocraft 2015 project.
 
-<div align="center">
-    <img src="resources/railmod.gif" />
-</div>
 ## Requirements
 
 - Windows 10
