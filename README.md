@@ -6,7 +6,7 @@
     <img src="resources/showcase.gif" />
 </div>
 
-> Aimbot is a bit stuttery here because I am one-shotting all the bots and only updating the enemy's status every 3 seconds, which is more than sufficient in an actual match.
+> Aimbot is a bit stuttery here because I am one-shotting all the bots and only updating the enemy's status every 3 seconds, which is often more than sufficient in an actual match, but not so much in practice mode.
 
 ## Requirements
 
