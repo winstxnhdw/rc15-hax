@@ -5,7 +5,7 @@
 ## Requirements
 
 - Windows 10
-- Microsoft .NET SDK 6.0.2
+- [Microsoft .NET SDK 6.0.2](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.300-windows-x64-installer)
 - Microsoft .NET Framework 4.8
 - C# 10.0
 
