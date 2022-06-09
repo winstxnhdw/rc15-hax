@@ -24,6 +24,7 @@ public class Loader : MonoBehaviour {
     static void LoadHaxModules() {
         DontDestroyOnLoad(Loader.HaxModules);
 
+        AddHaxModules<Aimbot>();
         AddHaxModules<PlayerESP>();
         AddHaxModules<NoClip>();
         AddHaxModules<DimensionalRift>();
@@ -43,7 +44,6 @@ public class Loader : MonoBehaviour {
         AddHaxModules<WheelMod>();
         AddHaxModules<RotorMod>();
         AddHaxModules<LegMod>();
-        AddHaxModules<Aimbot>();
     }
 
     public static void Unload() {
