@@ -31,7 +31,7 @@ sh requirements.sh --dev
 
 ## Usage
 
-Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Read the [wiki](https://github.com/winstxnhdw/rc15-hax/wiki) to learn about its features.
+Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Read the [wiki](https://github.com/winstxnhdw/rc15-hax/wiki/Features) to learn about its features.
 
 ```bash
 sh launch.sh
@@ -39,7 +39,7 @@ sh launch.sh
 
 ## Development
 
-> During development, never use the `System` and `System.Linq` namespace. RC15 uses an old and incompatible version of `mscorlib` which is incompatible with .NET 4.8.
+> If you plan to do development, whether on your own or to contribute, please look at the [Development Guidelines](https://github.com/winstxnhdw/rc15-hax/wiki/Development-Guidelines) in the wiki to learn about some of the pervasive issues.
 
 Run the compiled dnSpy.exe
 

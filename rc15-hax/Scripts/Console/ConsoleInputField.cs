@@ -18,7 +18,6 @@ public class ConsoleInputField : HaxComponents {
 
     void OnSubmit() {
         if (!ConsoleSettings.ShowConsole) return;
-        if (string.IsNullOrEmpty(ConsoleSettings.FieldText)) return;
 
         ConsoleSettings.FieldText = Regex.Replace(ConsoleSettings.FieldText, @"\s+", " ");
         Console.Print(ConsoleSettings.FieldText);
@@ -26,17 +25,17 @@ public class ConsoleInputField : HaxComponents {
 
         bool commandFound = false;
 
-        for (int i = 0; i < DebugController.CommandList.Count; i++) {
-            DebugCommandBase? commandBase = DebugController.CommandList[i] as DebugCommandBase;
+        // for (int i = 0; i < DebugController.CommandList.Count; i++) {
+        foreach (object command in DebugController.CommandList) {
+            DebugCommandBase? commandBase = command as DebugCommandBase;
             if (commandBase!.Name != input[0]) continue;
-            commandFound = true;
+            if (command as DebugCommand == null) continue;
 
-            if (DebugController.CommandList[i] as DebugCommand != null) {
-                (DebugController.CommandList[i] as DebugCommand)?.Invoke();
-            }
+            commandFound = true;
+            (command as DebugCommand)?.Invoke();
         }
 
-        if (!commandFound) {
+        if (!commandFound && !Global.IsNullOrWhiteSpace(ConsoleSettings.FieldText)) {
             Console.Print($"Command '{input[0]}' not found.");
         }
 
