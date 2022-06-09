@@ -49,6 +49,5 @@ public class PlasmaMod : HaxModules {
         if (fireTimingData == null) return;
         fireTimingData.plasmaFirePeriod = plasmaFirePeriods;
         fireTimingData.plasmaFlamFirePeriod = HaxSettings.GetValue<float>("plasmaFlamFirePeriod");
-        fireTimingData.plasmaCannonZoomedFoV = HaxSettings.GetValue<float>("plasmaCannonZoomedFoV");
     }
 }

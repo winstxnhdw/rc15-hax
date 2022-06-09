@@ -19,7 +19,6 @@ public class SMGMod : HaxModules {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
         if (fireTimingData == null) return;
         fireTimingData.groupFirePeriod = groupFirePeriods;
-        fireTimingData.laserCannonZoomedFoV = HaxSettings.GetValue<float>("laserCannonZoomedFoV");
         fireTimingData.Start();
     }
 }

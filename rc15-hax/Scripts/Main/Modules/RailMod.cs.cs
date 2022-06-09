@@ -25,7 +25,6 @@ public class RailMod : HaxModules {
         fireTimingData.railReloadDuration = railReloadDurations;
         fireTimingData.railFirePeriod = railFirePeriods;
         fireTimingData.railFireDelay = HaxSettings.GetValue<float>("railFireDelay");
-        fireTimingData.railGunZoomedFov = HaxSettings.GetValue<float>("railGunZoomedFov");
         fireTimingData.Start();
     }
 }

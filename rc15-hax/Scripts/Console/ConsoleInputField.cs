@@ -7,12 +7,15 @@ public class ConsoleInputField : HaxComponents {
     void OnGUI() {
         this.RenderConsoleInput();
 
-        if (Event.current.keyCode == KeyCode.Return) {
-            this.OnSubmit();
-        }
+        Event e = Event.current;
+        if (e.type == EventType.keyDown) {
+            if (e.keyCode == KeyCode.Return) {
+                this.OnSubmit();
+            }
 
-        else if (Event.current.keyCode == KeyCode.Escape) {
-            GUI.FocusControl(null);
+            else if (e.keyCode == KeyCode.Escape) {
+                GUI.FocusControl(null);
+            }
         }
     }
 

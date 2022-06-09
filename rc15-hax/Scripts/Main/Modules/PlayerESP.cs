@@ -6,16 +6,6 @@ public class PlayerESP : HaxModules {
     float TextBottomPadding { get => HaxSettings.GetValue<float>("TextBottomPadding"); }
     float OutlineBoxSize { get => HaxSettings.GetValue<float>("OutlineBoxSize") * Settings.SizeRatio; }
 
-    protected override void OnEnable() {
-        base.OnEnable();
-        Console.Print($"PlayerESP: {this.ModEnabled}");
-    }
-
-    protected override void OnDisable() {
-        base.OnDisable();
-        Console.Print($"PlayerESP: {this.ModEnabled}");
-    }
-
     void OnGUI() {
         this.DrawESP();
     }
