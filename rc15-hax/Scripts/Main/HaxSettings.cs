@@ -12,7 +12,7 @@ public static class HaxSettings {
     }
 
     static void StoreDefaultValues(string key, string defaultValue) {
-        if (string.IsNullOrEmpty(defaultValue)) return;
+        if (string.IsNullOrWhiteSpace(defaultValue)) return;
         HaxSettings.Params[key] = new Params(GetParams(key).Current, defaultValue); ;
     }
 
@@ -20,35 +20,41 @@ public static class HaxSettings {
         Console.Print($"{key} of type {typeof(T).FullName} is invalid. Value: {param}");
     }
 
-    public static T GetValue<T>(string key, string defaultValue = "") {
+    public static T? GetValue<T>(string key, string defaultValue = "") {
+        Dictionary<string, Global.Func<string, T>> valueParserDict = new Dictionary<string, Global.Func<string, T>>() {
+            {"System.Boolean", (string paramValue) => {
+                if (!bool.TryParse(paramValue, out bool value)) PrintInvalidType<T>(key, paramValue);
+                return (T)(object)value;
+            }},
+
+            {"System.Int32", (string paramValue) => {
+                if (!int.TryParse(paramValue, out int value)) PrintInvalidType<T>(key, paramValue);
+                return (T)(object)value;
+            }},
+
+            {"System.Single", (string paramValue) => {
+                if (!float.TryParse(paramValue, out float value)) PrintInvalidType<T>(key, paramValue);
+                return (T)(object)value;
+            }},
+        };
+
         HaxSettings.StoreDefaultValues(key, defaultValue);
         string paramValue = GetParamValue(GetParams(key));
 
-        if (string.IsNullOrEmpty(paramValue)) {
+        if (string.IsNullOrWhiteSpace(paramValue)) {
             Console.Print($"No default values found for {key}.");
-            return default(T)!;
+            return default(T);
         }
 
-        switch (typeof(T).FullName) {
-            case "System.Boolean":
-                if (!bool.TryParse(paramValue, out bool boolValue)) PrintInvalidType<T>(key, paramValue);
-                return (T)(object)boolValue;
-
-            case "System.Int32":
-                if (!int.TryParse(paramValue, out int intValue)) PrintInvalidType<T>(key, paramValue);
-                return (T)(object)intValue;
-
-            case "System.Single":
-                if (!float.TryParse(paramValue, out float floatValue)) PrintInvalidType<T>(key, paramValue);
-                return (T)(object)floatValue;
-
-            default:
-                Console.Print("No valid type specified.");
-                return default(T)!;
+        if (!valueParserDict.TryGetValue(typeof(T).FullName, out Global.Func<string, T> valueParser)) {
+            Console.Print("No valid type specified.");
+            return default(T);
         }
+
+        return valueParser(paramValue);
     }
 
-    static Params SetParams(string paramValue) => new Params(paramValue);
+    static Params SetParams(string paramValue) => new Params(paramValue, string.Empty);
 
     // Max int value is 2147483647
     static Dictionary<string, Params> Params { get; } = new Dictionary<string, Params> {

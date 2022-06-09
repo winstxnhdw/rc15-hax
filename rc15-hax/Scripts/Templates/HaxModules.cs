@@ -18,6 +18,6 @@ public class HaxModules : HaxComponents {
             Console.Print($"Default value of {keyParam}: {defaultValue}");
         }
 
-        value = HaxSettings.GetValue<T>(keyParam, defaultValue);
+        value = HaxSettings.GetValue<T>(keyParam, defaultValue)!;
     }
 }
