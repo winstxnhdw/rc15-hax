@@ -2,6 +2,8 @@ using UnityEngine;
 using Simulation;
 namespace RC15_HAX;
 public class Aimbot : HaxModules {
+    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableAimbot"); }
+
     protected override void OnEnable() {
         base.OnEnable();
         InputListener.onLeftAlt += this.TriggerAimbot;
@@ -15,6 +17,8 @@ public class Aimbot : HaxModules {
     }
 
     void TriggerAimbot() {
+        if (!ModEnabled) return;
+
         float closestBodyOnScreen = float.MaxValue;
         Vector3 closestBodyPosition = Vector3.zero;
 
