@@ -5,8 +5,6 @@ using UnityEngine;
 namespace RC15_HAX;
 public class ConsoleInputField : HaxComponents {
     void OnGUI() {
-        this.RenderConsoleInput();
-
         Event e = Event.current;
         if (e.type == EventType.keyDown) {
             if (e.keyCode == KeyCode.Return) {
@@ -17,6 +15,8 @@ public class ConsoleInputField : HaxComponents {
                 GUI.FocusControl(null);
             }
         }
+
+        this.RenderConsoleInput();
     }
 
     void OnSubmit() {
