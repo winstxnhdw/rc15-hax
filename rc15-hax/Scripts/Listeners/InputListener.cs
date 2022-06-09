@@ -29,7 +29,6 @@ public class InputListener : HaxComponents {
     };
 
     void Update() {
-        if (!Input.anyKey) return;
         this.KeyboardListener();
     }
 
