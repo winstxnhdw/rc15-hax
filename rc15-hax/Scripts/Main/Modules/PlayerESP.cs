@@ -13,7 +13,6 @@ public class PlayerESP : HaxModules {
     void DrawESP() {
         if (!ModEnabled) return;
         foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
-            if (rigidbody == null) continue;
             if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
 
             Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;

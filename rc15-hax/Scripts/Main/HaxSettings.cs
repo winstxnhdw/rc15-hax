@@ -143,7 +143,8 @@ public static class HaxSettings {
         {"TextBottomPadding",                   SetParams("20")},
         // General parameters
         {"NoCameraShake",                       SetParams("True")},
-        {"NoFog",                               SetParams("True")}
+        {"NoFog",                               SetParams("True")},
+        {"farClipPlane",                        SetParams("1000000000000")},
     };
 }
 

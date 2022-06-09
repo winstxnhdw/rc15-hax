@@ -43,6 +43,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<WheelMod>();
         AddHaxModules<RotorMod>();
         AddHaxModules<LegMod>();
+        AddHaxModules<Aimbot>();
     }
 
     public static void Unload() {

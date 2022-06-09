@@ -1,23 +1,46 @@
-// void AimBot() {
-// float closestBodyOnScreen = float.MaxValue;
-// Vector2 closestBodyPosition = Vector2.zero;
+using UnityEngine;
+using Simulation;
+namespace RC15_HAX;
+public class Aimbot : HaxModules {
+    protected override void OnEnable() {
+        base.OnEnable();
+        InputListener.onLeftAlt += this.TriggerAimbot;
+        InputListener.onLeftAltUp += this.StopAimbot;
+    }
 
-// foreach (Rigidbody rigidbody in Rigidbodies.Objects) {
-//     if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
+    protected override void OnDisable() {
+        base.OnDisable();
+        InputListener.onLeftAlt -= this.TriggerAimbot;
+        InputListener.onLeftAltUp -= this.StopAimbot;
+    }
 
-//     Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;
-//     Vector3 rigidbodyScreenPosition = Global.Camera.WorldToScreenPoint(rigidbodyWorldPosition);
+    void TriggerAimbot() {
+        float closestBodyOnScreen = float.MaxValue;
+        Vector3 closestBodyPosition = Vector3.zero;
 
-//     if (rigidbodyScreenPosition.z <= 0.0f) continue;
-//     rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
+        foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
+            if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
 
-//     Vector2 rigidbodyScreenPosition2D = rigidbodyScreenPosition;
-//     float crosshairToBodyDistance = (rigidbodyScreenPosition2D - ScreenInfo.GetScreenCentre()).sqrMagnitude;
-//     if (crosshairToBodyDistance < closestBodyOnScreen) {
-//         closestBodyOnScreen = crosshairToBodyDistance;
-//         closestBodyPosition = rigidbodyScreenPosition2D;
-//     }
-// }
+            Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;
+            Vector3 rigidbodyScreenPosition = Global.Camera.WorldToScreenPoint(rigidbodyWorldPosition);
 
-// Global.Camera.transform.localEulerAngles = new Vector3(-closestBodyPosition.y, closestBodyPosition.x, 0.0f);
-// }
+            if (rigidbodyScreenPosition.z <= 0.0f) continue;
+            rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
+
+            Vector2 rigidbodyScreenPosition2D = rigidbodyScreenPosition;
+            float crosshairToBodyDistance = (rigidbodyScreenPosition2D - ScreenInfo.GetScreenCentre()).sqrMagnitude;
+            if (crosshairToBodyDistance < closestBodyOnScreen) {
+                closestBodyOnScreen = crosshairToBodyDistance;
+                closestBodyPosition = rigidbodyWorldPosition;
+            }
+        }
+
+        if (closestBodyPosition != Vector3.zero) Global.Camera.transform.LookAt(closestBodyPosition);
+    }
+
+    void StopAimbot() {
+        SimulationCamera simulationCamera = HaxObjects.SimulationCameraObject.Object;
+        Global.Camera.transform.position = simulationCamera.transform.position;
+        Global.Camera.transform.eulerAngles = simulationCamera.transform.eulerAngles;
+    }
+}
