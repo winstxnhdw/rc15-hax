@@ -81,7 +81,6 @@ public static class HaxSettings {
         {"groupFirePeriod2",                    SetParams("0")},
         {"groupFirePeriod3",                    SetParams("0")},
         {"groupFirePeriod4",                    SetParams("0")},
-        {"laserCannonZoomedFoV",                SetParams("60")},
         // Plasma Cannon parameters
         {"EnablePlasmaMod",                     SetParams("False")},
         {"fireTwice",                           SetParams("True")},
@@ -96,7 +95,6 @@ public static class HaxSettings {
         {"plasmaFirePeriod4",                   SetParams("0")},
         {"plasmaFirePeriod5",                   SetParams("0")},
         {"plasmaFlamFirePeriod",                SetParams("0.5")},
-        {"plasmaCannonZoomedFoV",               SetParams("60")},
         // Rail Launcher parameters
         {"EnableRailMod",                       SetParams("True")},
         {"railReloadDuration0",                 SetParams("0")},
@@ -109,7 +107,6 @@ public static class HaxSettings {
         {"railFirePeriod4",                     SetParams("0.3")},
         {"railFirePeriod5",                     SetParams("0.3")},
         {"railFireDelay",                       SetParams("0.8")},
-        {"railGunZoomedFov",                    SetParams("60")},
         // Wheel parameters
         {"EnableWheelMod",                      SetParams("False")},
         {"maxRPM",                              SetParams("1000")},
