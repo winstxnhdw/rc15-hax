@@ -6,14 +6,14 @@ public class Aimbot : HaxModules {
 
     protected override void OnEnable() {
         base.OnEnable();
-        InputListener.onLeftAlt += this.TriggerAimbot;
-        InputListener.onLeftAltUp += this.StopAimbot;
+        InputListener.onLeftControl += this.TriggerAimbot;
+        InputListener.onLeftControlUp += this.StopAimbot;
     }
 
     protected override void OnDisable() {
         base.OnDisable();
-        InputListener.onLeftAlt -= this.TriggerAimbot;
-        InputListener.onLeftAltUp -= this.StopAimbot;
+        InputListener.onLeftControl -= this.TriggerAimbot;
+        InputListener.onLeftControlUp -= this.StopAimbot;
     }
 
     void TriggerAimbot() {
@@ -29,10 +29,11 @@ public class Aimbot : HaxModules {
             Vector3 rigidbodyScreenPosition = Global.Camera.WorldToScreenPoint(rigidbodyWorldPosition);
 
             if (rigidbodyScreenPosition.z <= 0.0f) continue;
-            rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
 
+            rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
             Vector2 rigidbodyScreenPosition2D = rigidbodyScreenPosition;
             float crosshairToBodyDistance = (rigidbodyScreenPosition2D - ScreenInfo.GetScreenCentre()).sqrMagnitude;
+
             if (crosshairToBodyDistance < closestBodyOnScreen) {
                 closestBodyOnScreen = crosshairToBodyDistance;
                 closestBodyPosition = rigidbodyWorldPosition;

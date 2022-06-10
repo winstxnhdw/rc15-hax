@@ -118,7 +118,7 @@ public static class HaxSettings {
         {"aerofoilMaxCarryingMass",             SetParams("1000000000000")},
         {"horizontalCarryingMassScale",         SetParams("0")},
         // Jet parameters
-        {"EnableJetMod",                        SetParams("True")},
+        {"EnableJetMod",                        SetParams("False")},
         {"ForceMagnitude",                      SetParams("2500")},
         // Rotor parameters
         {"EnableRotorMod",                      SetParams("False")},
