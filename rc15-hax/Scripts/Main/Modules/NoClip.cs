@@ -3,7 +3,7 @@ using UnityEngine;
 namespace RC15_HAX;
 public class NoClip : HaxModules {
     bool IsNoClipping { get; set; } = false;
-    bool InDimensionalRift { get; set; } = false;
+    bool InPhantom { get; set; } = false;
     float NoClipSpeedMultiplier { get => HaxSettings.GetValue<float>("NoClipSpeedMultiplier"); }
 
     public static event Global.Action<bool>? noClipped;
@@ -11,13 +11,13 @@ public class NoClip : HaxModules {
     protected override void OnEnable() {
         base.OnEnable();
         InputListener.onF9Press += this.ToggleNoClip;
-        DimensionalRift.inDimensionalRift += ListenForDimensionalRift;
+        Phantom.inPhantom += ListenForPhantom;
     }
 
     protected override void OnDisable() {
         base.OnDisable();
         InputListener.onF9Press -= this.ToggleNoClip;
-        DimensionalRift.inDimensionalRift -= ListenForDimensionalRift;
+        Phantom.inPhantom -= ListenForPhantom;
         this.IsNoClipping = false;
     }
 
@@ -67,12 +67,12 @@ public class NoClip : HaxModules {
         }
     }
 
-    void ListenForDimensionalRift(bool inDimensionalRift) {
-        this.InDimensionalRift = inDimensionalRift;
+    void ListenForPhantom(bool inPhantom) {
+        this.InPhantom = inPhantom;
     }
 
     void ToggleNoClip() {
-        if (!Loader.HaxModules.activeSelf || this.InDimensionalRift) return;
+        if (!Loader.HaxModules.activeSelf || this.InPhantom) return;
 
         this.IsNoClipping = !this.IsNoClipping;
         NoClip.noClipped?.Invoke(this.IsNoClipping);

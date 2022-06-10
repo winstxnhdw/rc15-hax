@@ -74,7 +74,7 @@ Most cheats on GitHub, like [MuckInternal](https://github.com/win32kbase/MuckInt
 Have a funny video you are willing to share? Create a GIF and submit a pull request to this repository!
 
 <div align="center">
-    <img src="resources/dimensional_rift.gif" />
+    <img src="resources/phantom.gif" />
 </div>
 
 > By courtesy of @suggondeez

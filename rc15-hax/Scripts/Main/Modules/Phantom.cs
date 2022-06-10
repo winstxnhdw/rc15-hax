@@ -2,35 +2,35 @@ using UnityEngine;
 using Simulation;
 
 namespace RC15_HAX;
-public class DimensionalRift : HaxModules {
-    bool IsDimensionalRifting { get; set; } = false;
+public class Phantom : HaxModules {
+    bool IsPhantom { get; set; } = false;
     bool IsNoClipping { get; set; } = false;
     float NoClipSpeedMultiplier { get => HaxSettings.GetValue<float>("NoClipSpeedMultiplier"); }
 
     Vector3 SimulationCameraPosition { get; set; }
-    Vector3 RiftEndPosition { get; set; }
+    Vector3 PhantomEndPosition { get; set; }
 
-    public static event Global.Action<bool>? inDimensionalRift;
+    public static event Global.Action<bool>? inPhantom;
 
     protected override void OnEnable() {
-        InputListener.onF10Press += this.ToggleDimensionalRift;
+        InputListener.onF10Press += this.TogglePhantom;
         NoClip.noClipped += ListenForNoClip;
     }
 
     protected override void OnDisable() {
-        InputListener.onF10Press -= this.ToggleDimensionalRift;
+        InputListener.onF10Press -= this.TogglePhantom;
         NoClip.noClipped -= ListenForNoClip;
-        this.IsDimensionalRifting = false;
+        this.IsPhantom = false;
     }
 
     void Update() {
-        this.PerformDimensionalRift();
+        this.BecomePhantom();
     }
 
-    void PerformDimensionalRift() {
+    void BecomePhantom() {
         SimulationCamera simulationCamera = HaxObjects.SimulationCameraObject.Object;
 
-        if (!this.IsDimensionalRifting || simulationCamera == null) return;
+        if (!this.IsPhantom || simulationCamera == null) return;
 
         Player.Freeze(true);
         Vector3 directionVector = Vector3.zero;
@@ -65,24 +65,24 @@ public class DimensionalRift : HaxModules {
         }
 
         this.SimulationCameraPosition = directionVector * this.NoClipSpeedMultiplier;
-        this.RiftEndPosition = this.SimulationCameraPosition;
+        this.PhantomEndPosition = this.SimulationCameraPosition;
     }
 
     void ListenForNoClip(bool isNoClipping) {
         this.IsNoClipping = isNoClipping;
     }
 
-    void ToggleDimensionalRift() {
+    void TogglePhantom() {
         if (this.IsNoClipping) return;
 
         this.SimulationCameraPosition = Global.Camera.transform.position;
-        this.IsDimensionalRifting = !this.IsDimensionalRifting;
-        DimensionalRift.inDimensionalRift?.Invoke(this.IsDimensionalRifting);
+        this.IsPhantom = !this.IsPhantom;
+        Phantom.inPhantom?.Invoke(this.IsPhantom);
 
-        if (!this.IsDimensionalRifting) {
+        if (!this.IsPhantom) {
             Player.Freeze(false);
             Player.RectifyRoll();
-            HaxObjects.PlayerRigidbody.Object.rb.transform.position = this.RiftEndPosition;
+            HaxObjects.PlayerRigidbody.Object.rb.transform.position = this.PhantomEndPosition;
         }
     }
 }

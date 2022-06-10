@@ -27,7 +27,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<Aimbot>();
         AddHaxModules<PlayerESP>();
         AddHaxModules<NoClip>();
-        AddHaxModules<DimensionalRift>();
+        AddHaxModules<Phantom>();
         AddHaxModules<Player>();
 
         AddHaxModules<FakeCrosshair>();
