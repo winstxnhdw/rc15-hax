@@ -37,7 +37,7 @@ sh requirements.sh --dev
 
 ## Usage
 
-Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Run the following command on git bash when you have logged into the game. Read the [wiki](https://github.com/winstxnhdw/rc15-hax/wiki/Features) to learn about its features.
+Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Run the following command on Git bash when you have logged into the game. Read the [wiki](https://github.com/winstxnhdw/rc15-hax/wiki/Features) to learn about its features.
 
 ```bash
 sh launch.sh
