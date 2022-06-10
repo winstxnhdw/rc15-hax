@@ -17,6 +17,7 @@ public class NoClip : HaxModules {
         base.OnDisable();
         InputListener.onF9Press -= this.ToggleNoClip;
         DimensionalRift.inDimensionalRift -= ListenForDimensionalRift;
+        this.IsNoClipping = false;
     }
 
     void Update() {
