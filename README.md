@@ -75,6 +75,5 @@ Have a funny video you are willing to share? Create a GIF and submit a pull requ
 
 <div align="center">
     <img src="resources/phantom.gif" />
+    <p align="center">By courtesy of @suggondeez</p>
 </div>
-
-> By courtesy of @suggondeez
