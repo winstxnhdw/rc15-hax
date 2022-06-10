@@ -45,6 +45,11 @@ public class Aimbot : HaxModules {
 
     void StopAimbot() {
         SimulationCamera simulationCamera = HaxObjects.SimulationCameraObject.Object;
+        if (simulationCamera == null) {
+            Console.Print("No simulation camera found.")
+            return;
+        }
+
         Global.Camera.transform.position = simulationCamera.transform.position;
         Global.Camera.transform.eulerAngles = simulationCamera.transform.eulerAngles;
     }

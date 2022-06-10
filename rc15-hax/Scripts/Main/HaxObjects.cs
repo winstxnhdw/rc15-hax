@@ -22,6 +22,7 @@ public class HaxObjects : HaxComponents {
         base.Start();
         HaxObjects.PlayerRigidbody.Init(this);
         HaxObjects.Rigidbodies.Init(this);
+        HaxObjects.SimulationCameraObject.Init(this);
         HaxObjects.FireTimingDataObject.Init(this);
     }
 }

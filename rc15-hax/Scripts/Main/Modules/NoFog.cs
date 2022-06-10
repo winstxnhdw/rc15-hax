@@ -19,7 +19,7 @@ public class NoFog : HaxModules {
         if (!ModEnabled) return;
 
         RenderSettings.fog = false;
-        Global.Camera.farClipPlane = float.MaxValue;
+        Global.Camera.farClipPlane = HaxSettings.GetValue<float>("farClipPlane");
     }
 
     void DisableNoFog() {
