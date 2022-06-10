@@ -144,7 +144,7 @@ public static class HaxSettings {
         // General parameters
         {"NoCameraShake",                       SetParams("True")},
         {"NoFog",                               SetParams("True")},
-        {"farClipPlane",                        SetParams("1000000000000")},
+        {"farClipPlane",                        SetParams("100000")},
         {"EnableAimbot",                        SetParams("True")}
     };
 }
