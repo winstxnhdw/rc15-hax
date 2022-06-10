@@ -21,6 +21,7 @@ public class DimensionalRift : HaxModules {
         HaxObjects.SimulationCameraObject.StopLog();
         InputListener.onF10Press -= this.ToggleDimensionalRift;
         NoClip.noClipped -= ListenForNoClip;
+        this.IsDimensionalRifting = false;
     }
 
     void Update() {
