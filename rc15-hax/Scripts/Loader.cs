@@ -33,6 +33,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<FakeCrosshair>();
         AddHaxModules<NoCameraShake>();
         AddHaxModules<NoFog>();
+        AddHaxModules<RoofSpawn>();
 
         AddHaxModules<PlasmaMod>();
         AddHaxModules<WeaponMod>();

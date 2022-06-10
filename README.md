@@ -68,3 +68,13 @@ The repository contains zero executable to maintain transparency and assure the 
 ### No Visual Studio
 
 Most cheats on GitHub, like [MuckInternal](https://github.com/win32kbase/MuckInternal), contain a lot of redundant boilerplate that Visual Studio generates—bloating the codebase and ruining the developing experience—requiring the user to install Visual Studio just to build the source code. On the otherhand, this repository can be developed on/used completely via the command line (or more specifically Git bash).
+
+## Featured
+
+Have a funny video you are willing to share? Create a GIF and submit a pull request to this repository!
+
+<div align="center">
+    <img src="resources/dimensional_rift.gif" />
+</div>
+
+> By courtesy of @suggondeez

@@ -5,6 +5,7 @@ namespace RC15_HAX;
 public class DimensionalRift : HaxModules {
     bool IsDimensionalRifting { get; set; } = false;
     bool IsNoClipping { get; set; } = false;
+    float NoClipSpeedMultiplier { get => HaxSettings.GetValue<float>("NoClipSpeedMultiplier"); }
 
     Vector3 SimulationCameraPosition { get; set; }
     Vector3 RiftEndPosition { get; set; }
@@ -32,36 +33,38 @@ public class DimensionalRift : HaxModules {
         if (!this.IsDimensionalRifting || simulationCamera == null) return;
 
         Player.Freeze(true);
+        Vector3 directionVector = Vector3.zero;
         Transform cameraTransform = Global.Camera.transform;
         simulationCamera.transform.position = this.SimulationCameraPosition;
 
         // Forward-back
         if (Input.GetKey(KeyCode.W)) {
-            this.SimulationCameraPosition += cameraTransform.forward;
+            directionVector = cameraTransform.forward;
         }
 
         else if (Input.GetKey(KeyCode.S)) {
-            this.SimulationCameraPosition -= cameraTransform.forward;
+            directionVector = -cameraTransform.forward;
         }
 
         // Right-left
         if (Input.GetKey(KeyCode.D)) {
-            this.SimulationCameraPosition += cameraTransform.right;
+            directionVector = cameraTransform.right;
         }
 
         else if (Input.GetKey(KeyCode.A)) {
-            this.SimulationCameraPosition -= cameraTransform.right;
+            directionVector = -cameraTransform.right;
         }
 
         // Up-down
         if (Input.GetKey(KeyCode.Space)) {
-            this.SimulationCameraPosition += cameraTransform.up;
+            directionVector = cameraTransform.up;
         }
 
         else if (Input.GetKey(KeyCode.LeftShift)) {
-            this.SimulationCameraPosition -= cameraTransform.up;
+            directionVector = -cameraTransform.up;
         }
 
+        this.SimulationCameraPosition = directionVector * this.NoClipSpeedMultiplier;
         this.RiftEndPosition = this.SimulationCameraPosition;
     }
 

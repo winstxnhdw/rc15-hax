@@ -3,7 +3,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class HaxObjects : HaxComponents {
-    public static ObjectCache<LocalPlayerRigidbody> PlayerRigidbody { get; } = new ObjectCache<LocalPlayerRigidbody>();
+    public static ObjectCache<LocalPlayerRigidbody> PlayerRigidbody { get; } = new ObjectCache<LocalPlayerRigidbody>(1);
     public static ObjectCache<CameraShake> CameraShakeObject { get; } = new ObjectCache<CameraShake>();
     public static ObjectCache<FireTimingData> FireTimingDataObject { get; } = new ObjectCache<FireTimingData>();
     public static ObjectCache<SimulationCamera> SimulationCameraObject { get; } = new ObjectCache<SimulationCamera>();

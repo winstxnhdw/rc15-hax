@@ -4,6 +4,7 @@ namespace RC15_HAX;
 public class NoClip : HaxModules {
     bool IsNoClipping { get; set; } = false;
     bool InDimensionalRift { get; set; } = false;
+    float NoClipSpeedMultiplier { get => HaxSettings.GetValue<float>("NoClipSpeedMultiplier"); }
 
     public static event Global.Action<bool>? noClipped;
 
@@ -32,35 +33,37 @@ public class NoClip : HaxModules {
 
         if (Input.anyKey) {
             Player.RectifyRoll();
-
             Transform cameraTransform = Global.Camera.transform;
+            Vector3 directionVector = Vector3.zero;
 
             // Forward-back
             if (Input.GetKey(KeyCode.W)) {
-                playerRigidbody.position += cameraTransform.forward;
+                directionVector = cameraTransform.forward;
             }
 
             else if (Input.GetKey(KeyCode.S)) {
-                playerRigidbody.position -= cameraTransform.forward;
+                directionVector = -cameraTransform.forward;
             }
 
             // Right-left
             if (Input.GetKey(KeyCode.D)) {
-                playerRigidbody.position += cameraTransform.right;
+                directionVector = cameraTransform.right;
             }
 
             else if (Input.GetKey(KeyCode.A)) {
-                playerRigidbody.position -= cameraTransform.right;
+                directionVector = -cameraTransform.right;
             }
 
             // Up-down
             if (Input.GetKey(KeyCode.Space)) {
-                playerRigidbody.position += cameraTransform.up;
+                directionVector = cameraTransform.up;
             }
 
             else if (Input.GetKey(KeyCode.LeftShift)) {
-                playerRigidbody.position -= cameraTransform.up;
+                directionVector = -cameraTransform.up;
             }
+
+            playerRigidbody.position += directionVector * this.NoClipSpeedMultiplier;
         }
     }
 

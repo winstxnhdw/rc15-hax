@@ -10,6 +10,9 @@ public class RailMod : HaxModules {
     void ModRail() {
         if (!ModEnabled) return;
 
+        FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
+        if (fireTimingData == null) return;
+
         float[] railReloadDurations = new float[6];
         for (int i = 0; i < 4; i++) {
             railReloadDurations[i] = HaxSettings.GetValue<float>($"railReloadDuration{i}");
@@ -20,8 +23,6 @@ public class RailMod : HaxModules {
             railFirePeriods[i] = HaxSettings.GetValue<float>($"railFirePeriod{i}");
         }
 
-        FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
-        if (fireTimingData == null) return;
         fireTimingData.railReloadDuration = railReloadDurations;
         fireTimingData.railFirePeriod = railFirePeriods;
         fireTimingData.railFireDelay = HaxSettings.GetValue<float>("railFireDelay");

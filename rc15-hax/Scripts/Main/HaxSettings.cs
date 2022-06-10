@@ -141,11 +141,14 @@ public static class HaxSettings {
         {"EnablePlayerESP",                     SetParams("True")},
         {"OutlineBoxSize",                      SetParams("4000")},
         {"TextBottomPadding",                   SetParams("20")},
-        // General parameters
-        {"NoCameraShake",                       SetParams("True")},
+        // No fog parameters
         {"NoFog",                               SetParams("True")},
         {"farClipPlane",                        SetParams("100000")},
-        {"EnableAimbot",                        SetParams("True")}
+        // General parameters
+        {"NoCameraShake",                       SetParams("True")},
+        {"NoClipSpeedMultiplier",               SetParams("1")},
+        {"EnableAimbot",                        SetParams("True")},
+        {"SpawnInRoof",                         SetParams("False")}
     };
 }
 
