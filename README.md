@@ -71,7 +71,7 @@ Most cheats on GitHub, like [MuckInternal](https://github.com/win32kbase/MuckInt
 
 ## Featured
 
-Have a funny video of you using this cheat that you are willing to share? Create a GIF and submit a pull request to this repository! Want to stay anonymous? PM me on my Telegram.
+Have a funny video of you using this cheat that you are willing to share? Create a GIF and submit a pull request to this repository! Want to stay anonymous? Hit me up on Telegram.
 
 <div align="center">
     <img src="resources/phantom.gif" />
