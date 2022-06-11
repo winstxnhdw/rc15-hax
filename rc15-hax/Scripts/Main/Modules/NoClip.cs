@@ -2,10 +2,11 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class NoClip : HaxModules {
-    int noClipSpeedMultiplier = Mathf.Clamp(HaxSettings.GetValue<int>("NoClipSpeedMultiplier"), 0, int.MaxValue);
+    static Global.Func<int, int> ClampNoClipSpeed = (int value) => Mathf.Clamp(value, 1, int.MaxValue);
+    int noClipSpeedMultiplier = NoClip.ClampNoClipSpeed(HaxSettings.GetValue<int>("NoClipSpeedMultiplier"));
     int NoClipSpeedMultiplier {
         get => this.noClipSpeedMultiplier;
-        set => this.noClipSpeedMultiplier = Mathf.Clamp(value, 0, int.MaxValue);
+        set => this.noClipSpeedMultiplier = NoClip.ClampNoClipSpeed(value);
     }
 
     bool IsNoClipping { get; set; } = false;

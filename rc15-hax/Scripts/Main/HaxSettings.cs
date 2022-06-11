@@ -54,10 +54,10 @@ public static class HaxSettings {
         return valueParser(paramValue);
     }
 
-    static Params SetParams(string paramValue) => new Params(paramValue, string.Empty);
+    public static Params SetParams(string paramValue) => new Params(paramValue, string.Empty);
 
     // Max int value is 2147483647
-    static Dictionary<string, Params> Params { get; } = new Dictionary<string, Params> {
+    public static Dictionary<string, Params> Params { get; } = new Dictionary<string, Params> {
         // Weapon projectile parameters
         {"EnableProjectileMod",                 SetParams("False")},
         {"ProjectileSpeed",                     SetParams("1000000000000")},
