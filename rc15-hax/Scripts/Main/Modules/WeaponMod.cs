@@ -35,7 +35,7 @@ public class WeaponMod : HaxModules {
             base.ModifyValues(ref baseWeapon.MoveLimits.MinVerticalAngle, "MinVerticalAngle");
 
             // Projectile
-            if (!ProjectileModEnabled) {
+            if (this.ProjectileModEnabled) {
                 base.ModifyValues(ref baseWeapon.WeaponStats.ProjectileSpeed, "ProjectileSpeed");
                 base.ModifyValues(ref baseWeapon.WeaponStats.ProjectileRange, "ProjectileRange");
             };

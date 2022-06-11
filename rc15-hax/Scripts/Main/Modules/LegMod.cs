@@ -5,7 +5,7 @@ public class LegMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableLegMod"); }
 
     protected override void OnEnable() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
         HaxObjects.LegObjects.Init(this);
     }
 
@@ -18,7 +18,7 @@ public class LegMod : HaxModules {
     }
 
     void ModLeg() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         foreach (CubeLeg cubeLeg in HaxObjects.LegObjects.Objects) {
             cubeLeg.timeGroundedBeforeJump = HaxSettings.GetValue<float>("timeGroundedBeforeJump");

@@ -3,7 +3,7 @@ public class NoCameraShake : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("NoCameraShake"); }
 
     protected override void OnEnable() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
         HaxObjects.CameraShakeObject.Init(this);
     }
 

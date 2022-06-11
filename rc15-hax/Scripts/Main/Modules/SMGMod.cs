@@ -9,15 +9,16 @@ public class SMGMod : HaxModules {
     }
 
     void ModSMG() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
+
+        FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
+        if (fireTimingData == null) return;
 
         float[] groupFirePeriods = new float[5];
         for (int i = 0; i < 5; i++) {
             groupFirePeriods[i] = HaxSettings.GetValue<float>($"groupFirePeriod{i}");
         }
 
-        FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
-        if (fireTimingData == null) return;
         fireTimingData.groupFirePeriod = groupFirePeriods;
         fireTimingData.Start();
     }

@@ -5,7 +5,7 @@ public class PlasmaMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlasmaMod"); }
 
     protected override void OnEnable() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
         HaxObjects.PlasmaCannonObjects.Init(this);
         this.ModPlamsaTimingData();
     }
@@ -20,7 +20,7 @@ public class PlasmaMod : HaxModules {
     }
 
     void ModPlasma() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         foreach (PlasmaCannon plasmaCannon in HaxObjects.PlasmaCannonObjects.Objects) {
             base.ModifyValues(ref plasmaCannon.secondPlasmaShot.fireTwice, "fireTwice");
@@ -40,13 +40,15 @@ public class PlasmaMod : HaxModules {
     }
 
     void ModPlamsaTimingData() {
+        FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
+        if (fireTimingData == null) return;
+
         float[] plasmaFirePeriods = new float[6];
+
         for (int i = 0; i < 6; i++) {
             plasmaFirePeriods[i] = HaxSettings.GetValue<float>($"plasmaFirePeriod{i}");
         }
 
-        FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
-        if (fireTimingData == null) return;
         fireTimingData.plasmaFirePeriod = plasmaFirePeriods;
         fireTimingData.plasmaFlamFirePeriod = HaxSettings.GetValue<float>("plasmaFlamFirePeriod");
     }

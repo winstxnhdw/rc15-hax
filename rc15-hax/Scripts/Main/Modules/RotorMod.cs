@@ -5,7 +5,7 @@ public class RotorMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRotorMod"); }
 
     protected override void OnEnable() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
         HaxObjects.RotorObjects.Init(this);
     }
 
@@ -18,7 +18,7 @@ public class RotorMod : HaxModules {
     }
 
     void ModRotor() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         foreach (CubeRotor cubeRotor in HaxObjects.RotorObjects.Objects) {
             cubeRotor.maxCarryingMass = HaxSettings.GetValue<float>("rotorMaxCarryingMass");

@@ -3,7 +3,7 @@ public class JetMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableJetMod"); }
 
     protected override void OnEnable() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
         HaxObjects.CubeJetObjects.Init(this);
     }
 
@@ -16,7 +16,7 @@ public class JetMod : HaxModules {
     }
 
     void ModJet() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         foreach (CubeJet cubeJet in HaxObjects.CubeJetObjects.Objects) {
             cubeJet.ForceMagnitude = HaxSettings.GetValue<float>("ForceMagnitude");

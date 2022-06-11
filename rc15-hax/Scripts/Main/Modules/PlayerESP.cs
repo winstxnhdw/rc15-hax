@@ -11,7 +11,7 @@ public class PlayerESP : HaxModules {
     }
 
     void DrawESP() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
             if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;

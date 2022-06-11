@@ -16,7 +16,7 @@ public class RoofSpawn : HaxModules {
     }
 
     void SpawnInRoof() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Object.rb;
         Vector3 currentPosition = playerRigidbody.worldCenterOfMass;

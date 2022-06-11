@@ -8,7 +8,7 @@ public class RailMod : HaxModules {
     }
 
     void ModRail() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
         if (fireTimingData == null) return;

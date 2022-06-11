@@ -3,7 +3,7 @@ public class AerofoilMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableAerofoilMod"); }
 
     protected override void OnEnable() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
         HaxObjects.AerofoilObjects.Init(this);
     }
 
@@ -16,7 +16,7 @@ public class AerofoilMod : HaxModules {
     }
 
     void ModAerofoil() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         foreach (CubeAerofoil cubeAerofoil in HaxObjects.AerofoilObjects.Objects) {
             cubeAerofoil.maxCarryingMass = HaxSettings.GetValue<float>("aerofoilMaxCarryingMass");

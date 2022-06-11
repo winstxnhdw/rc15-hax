@@ -17,7 +17,7 @@ public class Aimbot : HaxModules {
     }
 
     void TriggerAimbot() {
-        if (!ModEnabled) return;
+        if (!this.ModEnabled) return;
 
         float closestBodyOnScreen = float.MaxValue;
         Vector3 closestBodyPosition = Vector3.zero;
