@@ -1,10 +1,14 @@
 # rc15-hax
 
-`rc15-hax` is a developer-friendly Windows-only no-hook internal cheat for the Robocraft 2015 project.
+<p align="center"><b>World's first open-source internal cheat for Robocraft</b></p>
 
 <div align="center">
     <img src="resources/showcase.gif" />
 </div>
+
+## Abstract
+
+`rc15-hax` is a pure internal cheat for the [Robocraft 2015 project](https://github.com/phoenix-softworks/RC15-Launcher-Public) by [Phoenix Softworks](https://github.com/phoenix-softworks). It is aimed at developers that absolutely despise the Visual Studio ecosystem. Since RC15 is Windows-only, so is the cheat. Currently, there is no code detouring, and so features are somewhat limited, but feel free to contribute!
 
 ## Requirements
 
