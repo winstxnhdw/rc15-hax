@@ -4,6 +4,7 @@ namespace RC15_HAX;
 
 public class RoofSpawn : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("SpawnInRoof"); }
+    float RoofPositionY { get => 280.0f; }
 
     protected override void OnEnable() {
         base.OnEnable();
@@ -19,7 +20,7 @@ public class RoofSpawn : HaxModules {
 
         Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Object.rb;
         Vector3 currentPosition = playerRigidbody.worldCenterOfMass;
-        currentPosition.y = 280.0f;
+        currentPosition.y = this.RoofPositionY;
         playerRigidbody.position = currentPosition;
         Player.RectifyRoll();
     }
