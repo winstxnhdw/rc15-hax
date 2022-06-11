@@ -9,8 +9,8 @@ public class InputListener : HaxComponents {
     public static event Global.Action? onF11Press;
     public static event Global.Action? onBackquotePress;
     public static event Global.Action? onBackslashPress;
-    public static event Global.Action? onMinusPress;
-    public static event Global.Action? onEqualsPress;
+    public static event Global.Action? onAlpha1Press;
+    public static event Global.Action? onAlpha3Press;
     public static event Global.Action? onLeftControl;
     public static event Global.Action? onLeftControlUp;
     public static event Global.Action? onEscapePress;
@@ -23,8 +23,8 @@ public class InputListener : HaxComponents {
         {() => Input.GetKeyDown(KeyCode.F9),          () => InputListener.onF9Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.F10),         () => InputListener.onF10Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.F11),         () => InputListener.onF11Press?.Invoke()},
-        {() => Input.GetKeyDown(KeyCode.Equals),      () => InputListener.onEqualsPress?.Invoke()},
-        {() => Input.GetKeyDown(KeyCode.Minus),       () => InputListener.onMinusPress?.Invoke()},
+        {() => Input.GetKeyDown(KeyCode.Alpha1),      () => InputListener.onAlpha1Press?.Invoke()},
+        {() => Input.GetKeyDown(KeyCode.Alpha3),      () => InputListener.onAlpha3Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.BackQuote),   () => InputListener.onBackquotePress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Backslash),   () => InputListener.onBackslashPress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Escape),      () => InputListener.onEscapePress?.Invoke()},

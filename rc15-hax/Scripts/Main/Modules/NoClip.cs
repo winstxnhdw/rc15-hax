@@ -15,16 +15,16 @@ public class NoClip : HaxModules {
 
     protected override void OnEnable() {
         base.OnEnable();
-        InputListener.onMinusPress += this.DecreaseNoClipSpeed;
-        InputListener.onEqualsPress += this.IncreaseNoClipSpeed;
+        InputListener.onAlpha1Press += this.DecreaseNoClipSpeed;
+        InputListener.onAlpha3Press += this.IncreaseNoClipSpeed;
         InputListener.onF9Press += this.ToggleNoClip;
         Phantom.inPhantom += ListenForPhantom;
     }
 
     protected override void OnDisable() {
         base.OnDisable();
-        InputListener.onMinusPress -= this.DecreaseNoClipSpeed;
-        InputListener.onEqualsPress -= this.IncreaseNoClipSpeed;
+        InputListener.onAlpha1Press -= this.DecreaseNoClipSpeed;
+        InputListener.onAlpha3Press -= this.IncreaseNoClipSpeed;
         InputListener.onF9Press -= this.ToggleNoClip;
         Phantom.inPhantom -= ListenForPhantom;
 
