@@ -2,9 +2,14 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class NoClip : HaxModules {
+    int noClipSpeedMultiplier = Mathf.Clamp(HaxSettings.GetValue<int>("NoClipSpeedMultiplier"), 0, int.MaxValue);
+    int NoClipSpeedMultiplier {
+        get => this.noClipSpeedMultiplier;
+        set => this.noClipSpeedMultiplier = Mathf.Clamp(value, 0, int.MaxValue);
+    }
+
     bool IsNoClipping { get; set; } = false;
     bool InPhantom { get; set; } = false;
-    float NoClipSpeedMultiplier { get; set; } = HaxSettings.GetValue<float>("NoClipSpeedMultiplier");
 
     public static event Global.Action<bool>? noClipped;
 
@@ -74,9 +79,9 @@ public class NoClip : HaxModules {
 
     void ListenForPhantom(bool inPhantom) => this.InPhantom = inPhantom;
 
-    void DecreaseNoClipSpeed() => this.NoClipSpeedMultiplier -= 1.0f;
+    void DecreaseNoClipSpeed() => this.NoClipSpeedMultiplier -= 1;
 
-    void IncreaseNoClipSpeed() => this.NoClipSpeedMultiplier += 1.0f;
+    void IncreaseNoClipSpeed() => this.NoClipSpeedMultiplier += 1;
 
     void ToggleNoClip() {
         if (!Loader.HaxModules.activeSelf || this.InPhantom) return;
