@@ -4,20 +4,25 @@ namespace RC15_HAX;
 public class NoClip : HaxModules {
     bool IsNoClipping { get; set; } = false;
     bool InPhantom { get; set; } = false;
-    float NoClipSpeedMultiplier { get => HaxSettings.GetValue<float>("NoClipSpeedMultiplier"); }
+    float NoClipSpeedMultiplier { get; set; } = HaxSettings.GetValue<float>("NoClipSpeedMultiplier");
 
     public static event Global.Action<bool>? noClipped;
 
     protected override void OnEnable() {
         base.OnEnable();
+        InputListener.onMinusPress += this.DecreaseNoClipSpeed;
+        InputListener.onEqualsPress += this.IncreaseNoClipSpeed;
         InputListener.onF9Press += this.ToggleNoClip;
         Phantom.inPhantom += ListenForPhantom;
     }
 
     protected override void OnDisable() {
         base.OnDisable();
+        InputListener.onMinusPress -= this.DecreaseNoClipSpeed;
+        InputListener.onEqualsPress -= this.IncreaseNoClipSpeed;
         InputListener.onF9Press -= this.ToggleNoClip;
         Phantom.inPhantom -= ListenForPhantom;
+
         this.IsNoClipping = false;
     }
 
@@ -67,9 +72,11 @@ public class NoClip : HaxModules {
         }
     }
 
-    void ListenForPhantom(bool inPhantom) {
-        this.InPhantom = inPhantom;
-    }
+    void ListenForPhantom(bool inPhantom) => this.InPhantom = inPhantom;
+
+    void DecreaseNoClipSpeed() => this.NoClipSpeedMultiplier -= 1.0f;
+
+    void IncreaseNoClipSpeed() => this.NoClipSpeedMultiplier += 1.0f;
 
     void ToggleNoClip() {
         if (!Loader.HaxModules.activeSelf || this.InPhantom) return;
