@@ -45,7 +45,7 @@ sh launch.sh
 
 ## Development
 
-> If you plan to do development, whether on your own or to contribute, please look at the [Development Guidelines](https://github.com/winstxnhdw/rc15-hax/wiki/Development-Guidelines) in the wiki to learn about some of the pervasive issues.
+>**Note**: If you plan to do development, whether on your own or to contribute, please look at the [Development Guidelines](https://github.com/winstxnhdw/rc15-hax/wiki/Development-Guidelines) in the wiki to learn about some of the pervasive issues.
 
 Run the compiled dnSpy.exe
 
