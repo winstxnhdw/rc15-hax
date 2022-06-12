@@ -2,13 +2,6 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class NoClip : HaxModules {
-    static Global.Func<int, int> ClampNoClipSpeed = (int value) => Mathf.Clamp(value, 1, int.MaxValue);
-    int noClipSpeedMultiplier = NoClip.ClampNoClipSpeed(HaxSettings.GetValue<int>("NoClipSpeedMultiplier"));
-    int NoClipSpeedMultiplier {
-        get => this.noClipSpeedMultiplier;
-        set => this.noClipSpeedMultiplier = NoClip.ClampNoClipSpeed(value);
-    }
-
     bool IsNoClipping { get; set; } = false;
     bool InPhantom { get; set; } = false;
 
@@ -74,15 +67,15 @@ public class NoClip : HaxModules {
                 directionVector = -cameraTransform.up;
             }
 
-            playerRigidbody.position += directionVector * this.NoClipSpeedMultiplier;
+            playerRigidbody.position += directionVector * NoClipSettings.NoClipSpeedMultiplier;
         }
     }
 
     void ListenForPhantom(bool inPhantom) => this.InPhantom = inPhantom;
 
-    void DecreaseNoClipSpeed() => this.NoClipSpeedMultiplier -= 1;
+    void DecreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier -= 1;
 
-    void IncreaseNoClipSpeed() => this.NoClipSpeedMultiplier += 1;
+    void IncreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier += 1;
 
     void ToggleNoClip() {
         if (!Loader.HaxModules.activeSelf || this.InPhantom) return;

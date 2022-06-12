@@ -56,7 +56,10 @@ public class DebugController : HaxComponents {
     void ConvertSettingsToCommands() {
         foreach (KeyValuePair<string, Params> settings in HaxSettings.Params) {
             DebugCommand<string> command = new DebugCommand<string>(settings.Key, $"Sets the value of {settings.Key}", $"{settings.Key} <value>",
-            (string newValue) => HaxSettings.Params[settings.Key] = new Params(newValue, settings.Value.Default));
+            (string newValue) => {
+                HaxSettings.Params[settings.Key] = new Params(newValue, settings.Value.Default);
+                Console.Print($"{settings.Key} is now set from {settings.Value.Current} to {newValue}.");
+            });
 
             DebugController.CommandList.Add(command);
         }

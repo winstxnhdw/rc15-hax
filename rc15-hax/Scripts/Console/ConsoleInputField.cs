@@ -31,10 +31,16 @@ public class ConsoleInputField : HaxComponents {
         foreach (object command in DebugController.CommandList) {
             DebugCommandBase? commandBase = command as DebugCommandBase;
             if (commandBase!.Name != input[0]) continue;
-            if (command as DebugCommand == null) continue;
-
             commandFound = true;
-            (command as DebugCommand)?.Invoke();
+
+            if (command as DebugCommand != null) {
+                (command as DebugCommand)?.Invoke();
+            }
+
+            else if (command as DebugCommand<string> != null) {
+                (command as DebugCommand<string>)?.Invoke(input[1]);
+            }
+
         }
 
         if (!commandFound && !Global.IsNullOrWhiteSpace(ConsoleSettings.FieldText)) {

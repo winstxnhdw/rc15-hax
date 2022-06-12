@@ -5,7 +5,6 @@ namespace RC15_HAX;
 public class Phantom : HaxModules {
     bool IsPhantom { get; set; } = false;
     bool IsNoClipping { get; set; } = false;
-    float NoClipSpeedMultiplier { get => HaxSettings.GetValue<float>("NoClipSpeedMultiplier"); }
 
     Vector3 SimulationCameraPosition { get; set; }
     Vector3 PhantomEndPosition { get; set; }
@@ -64,7 +63,7 @@ public class Phantom : HaxModules {
             directionVector = -cameraTransform.up;
         }
 
-        this.SimulationCameraPosition = directionVector * this.NoClipSpeedMultiplier;
+        this.SimulationCameraPosition = directionVector * NoClipSettings.NoClipSpeedMultiplier;
         this.PhantomEndPosition = this.SimulationCameraPosition;
     }
 
