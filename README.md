@@ -84,3 +84,8 @@ Have a funny video of you using this cheat that you are willing to share? Create
     <img src="resources/Dima81.gif" />
     <p align="center">By courtesy of @Dima81</p>
 </div>
+
+<div align="center">
+    <img src="resources/Joey_Kuruma.gif" />
+    <p align="center">By courtesy of @Joey_Kuruma</p>
+</div>
