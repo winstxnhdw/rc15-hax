@@ -3,7 +3,7 @@
 <p align="center"><b>World's first open-source internal cheat for Robocraft</b></p>
 
 <div align="center">
-    <img src="resources/showcase.gif" />
+    <img src="https://raw.githubusercontent.com/wiki/winstxnhdw/rc15-hax/resources/showcase.gif" />
 </div>
 
 ## Abstract
@@ -76,16 +76,16 @@ Most cheats on GitHub, like [MuckInternal](https://github.com/win32kbase/MuckInt
 Have a funny video of you using this cheat that you are willing to share? Create a GIF and submit a pull request to this repository! Want to stay anonymous? Hit me up on Telegram.
 
 <div align="center">
-    <img src="resources/phantom.gif" />
+    <img src="https://raw.githubusercontent.com/wiki/winstxnhdw/rc15-hax/resources/phantom.gif" />
     <p align="center">By courtesy of @suggondeez</p>
 </div>
 
 <div align="center">
-    <img src="resources/Dima81.gif" />
+    <img src="https://raw.githubusercontent.com/wiki/winstxnhdw/rc15-hax/resources/Dima81.gif" />
     <p align="center">By courtesy of @Dima81</p>
 </div>
 
 <div align="center">
-    <img src="resources/Joey_Kuruma.gif" />
+    <img src="https://raw.githubusercontent.com/wiki/winstxnhdw/rc15-hax/resources/Joey_Kuruma.gif" />
     <p align="center">By courtesy of @Joey_Kuruma</p>
 </div>
