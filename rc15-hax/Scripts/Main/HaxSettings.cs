@@ -4,58 +4,6 @@ namespace RC15_HAX;
 public static class HaxSettings {
     public static bool ParseDefaultValues { get; set; } = false;
 
-    static string GetParamValue(Params param) => HaxSettings.ParseDefaultValues ? param.Default : param.Current;
-
-    static Params GetParams(string key, string defaultValue = "") {
-        if (!HaxSettings.Params.TryGetValue(key, out Params param)) Console.Print($"Invalid key: {key}");
-        return param;
-    }
-
-    static void StoreDefaultValues(string key, string defaultValue) {
-        if (Global.IsNullOrWhiteSpace(defaultValue)) return;
-        HaxSettings.Params[key] = new Params(GetParams(key).Current, defaultValue);
-    }
-
-    static void PrintInvalidType<T>(string key, string param) {
-        Console.Print($"{key} of type {typeof(T).FullName} is invalid. Value: {param}");
-    }
-
-    public static T? GetValue<T>(string key, string defaultValue = "") {
-        Dictionary<string, Global.Func<string, T>> valueParserDict = new Dictionary<string, Global.Func<string, T>>() {
-            {"System.Boolean", (string paramValue) => {
-                if (!bool.TryParse(paramValue, out bool value)) PrintInvalidType<T>(key, paramValue);
-                return (T)(object)value;
-            }},
-
-            {"System.Int32", (string paramValue) => {
-                if (!int.TryParse(paramValue, out int value)) PrintInvalidType<T>(key, paramValue);
-                return (T)(object)value;
-            }},
-
-            {"System.Single", (string paramValue) => {
-                if (!float.TryParse(paramValue, out float value)) PrintInvalidType<T>(key, paramValue);
-                return (T)(object)value;
-            }},
-        };
-
-        HaxSettings.StoreDefaultValues(key, defaultValue);
-        string paramValue = GetParamValue(GetParams(key));
-
-        if (Global.IsNullOrWhiteSpace(paramValue)) {
-            Console.Print($"No default values found for {key}.");
-            return default;
-        }
-
-        if (!valueParserDict.TryGetValue(typeof(T).FullName, out Global.Func<string, T> valueParser)) {
-            Console.Print("No valid type specified.");
-            return default;
-        }
-
-        return valueParser(paramValue);
-    }
-
-    public static Params SetParams(string paramValue) => new Params(paramValue, string.Empty);
-
     // Max int value is 2147483647
     public static Dictionary<string, Params> Params { get; } = new Dictionary<string, Params> {
         // Weapon projectile parameters
@@ -150,5 +98,57 @@ public static class HaxSettings {
         {"EnableAimbot",                        SetParams("True")},
         {"SpawnInRoof",                         SetParams("False")}
     };
+
+    public static T? GetValue<T>(string key, string defaultValue = "") {
+        Dictionary<string, Global.Func<string, T>> valueParserDict = new Dictionary<string, Global.Func<string, T>>() {
+            {"System.Boolean", (string paramValue) => {
+                if (!bool.TryParse(paramValue, out bool value)) PrintInvalidType<T>(key, paramValue);
+                return (T)(object)value;
+            }},
+
+            {"System.Int32", (string paramValue) => {
+                if (!int.TryParse(paramValue, out int value)) PrintInvalidType<T>(key, paramValue);
+                return (T)(object)value;
+            }},
+
+            {"System.Single", (string paramValue) => {
+                if (!float.TryParse(paramValue, out float value)) PrintInvalidType<T>(key, paramValue);
+                return (T)(object)value;
+            }},
+        };
+
+        HaxSettings.StoreDefaultValues(key, defaultValue);
+        string paramValue = GetParamValue(GetParams(key));
+
+        if (Global.IsNullOrWhiteSpace(paramValue)) {
+            Console.Print($"No default values found for {key}.");
+            return default;
+        }
+
+        if (!valueParserDict.TryGetValue(typeof(T).FullName, out Global.Func<string, T> valueParser)) {
+            Console.Print("No valid type specified.");
+            return default;
+        }
+
+        return valueParser(paramValue);
+    }
+
+    static Params SetParams(string paramValue) => new Params(paramValue, string.Empty);
+
+    static string GetParamValue(Params param) => HaxSettings.ParseDefaultValues ? param.Default : param.Current;
+
+    static Params GetParams(string key, string defaultValue = "") {
+        if (!HaxSettings.Params.TryGetValue(key, out Params param)) Console.Print($"Invalid key: {key}");
+        return param;
+    }
+
+    static void StoreDefaultValues(string key, string defaultValue) {
+        if (Global.IsNullOrWhiteSpace(defaultValue)) return;
+        HaxSettings.Params[key] = new Params(GetParams(key).Current, defaultValue);
+    }
+
+    static void PrintInvalidType<T>(string key, string param) {
+        Console.Print($"{key} of type {typeof(T).FullName} is invalid. Value: {param}");
+    }
 }
 

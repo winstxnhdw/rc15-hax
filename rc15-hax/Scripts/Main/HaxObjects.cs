@@ -11,7 +11,7 @@ public class HaxObjects : HaxComponents {
     public static ObjectsCache<BaseWeapon> BaseWeaponObjects { get; } = new ObjectsCache<BaseWeapon>();
     public static ObjectsCache<PlasmaCannon> PlasmaCannonObjects { get; } = new ObjectsCache<PlasmaCannon>();
 
-    public static ObjectsCache<Rigidbody> Rigidbodies { get; } = new ObjectsCache<Rigidbody>(3);
+    public static ObjectsCache<Rigidbody> Rigidbodies { get; } = new ObjectsCache<Rigidbody>(2);
     public static ObjectsCache<CubeAerofoil> AerofoilObjects { get; } = new ObjectsCache<CubeAerofoil>();
     public static ObjectsCache<CubeJet> CubeJetObjects { get; } = new ObjectsCache<CubeJet>();
     public static ObjectsCache<CubeRotor> RotorObjects { get; } = new ObjectsCache<CubeRotor>();
