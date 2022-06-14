@@ -82,10 +82,10 @@ Have a funny video of you using this cheat that you are willing to share? Create
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/wiki/winstxnhdw/rc15-hax/resources/Dima81.gif" />
-    <p align="center">By courtesy of Dima81#2505</p>
+    <p align="center">By courtesy of @Dima81#2505</p>
 </div>
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/wiki/winstxnhdw/rc15-hax/resources/Joey_Kuruma.gif" />
-    <p align="center">By courtesy of JoeyK#5858</p>
+    <p align="center">By courtesy of @JoeyK#5858</p>
 </div>
