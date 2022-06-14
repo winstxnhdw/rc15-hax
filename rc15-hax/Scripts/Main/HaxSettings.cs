@@ -46,9 +46,9 @@ public static class HaxSettings {
         // Rail Launcher parameters
         {"EnableRailMod",                       SetParams("True")},
         {"railReloadDuration0",                 SetParams("0")},
-        {"railReloadDuration1",                 SetParams("9")},
-        {"railReloadDuration2",                 SetParams("9")},
-        {"railReloadDuration3",                 SetParams("9")},
+        {"railReloadDuration1",                 SetParams("8")},
+        {"railReloadDuration2",                 SetParams("8")},
+        {"railReloadDuration3",                 SetParams("8")},
         {"railFirePeriod1",                     SetParams("0.3")},
         {"railFirePeriod2",                     SetParams("0.3")},
         {"railFirePeriod3",                     SetParams("0.3")},

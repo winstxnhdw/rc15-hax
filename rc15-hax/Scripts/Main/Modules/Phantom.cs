@@ -32,38 +32,10 @@ public class Phantom : HaxModules {
         if (!this.IsPhantom || simulationCamera == null) return;
 
         Player.Freeze(true);
-        Vector3 directionVector = Vector3.zero;
-        Transform cameraTransform = Global.Camera.transform;
+
+        if (!Input.anyKey) return;
         simulationCamera.transform.position = this.SimulationCameraPosition;
-
-        // Forward-back
-        if (Input.GetKey(KeyCode.W)) {
-            directionVector = cameraTransform.forward;
-        }
-
-        else if (Input.GetKey(KeyCode.S)) {
-            directionVector = -cameraTransform.forward;
-        }
-
-        // Right-left
-        if (Input.GetKey(KeyCode.D)) {
-            directionVector = cameraTransform.right;
-        }
-
-        else if (Input.GetKey(KeyCode.A)) {
-            directionVector = -cameraTransform.right;
-        }
-
-        // Up-down
-        if (Input.GetKey(KeyCode.Space)) {
-            directionVector = cameraTransform.up;
-        }
-
-        else if (Input.GetKey(KeyCode.LeftShift)) {
-            directionVector = -cameraTransform.up;
-        }
-
-        this.SimulationCameraPosition = directionVector * NoClipSettings.NoClipSpeedMultiplier;
+        this.SimulationCameraPosition = Global.GetNoClipInputVector();
         this.PhantomEndPosition = this.SimulationCameraPosition;
     }
 

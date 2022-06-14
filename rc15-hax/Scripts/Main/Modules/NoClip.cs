@@ -35,40 +35,9 @@ public class NoClip : HaxModules {
         Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Object.rb;
         Player.Freeze(true);
 
-        if (Input.anyKey) {
-            Player.RectifyRoll();
-            Transform cameraTransform = Global.Camera.transform;
-            Vector3 directionVector = Vector3.zero;
-
-            // Forward-back
-            if (Input.GetKey(KeyCode.W)) {
-                directionVector = cameraTransform.forward;
-            }
-
-            else if (Input.GetKey(KeyCode.S)) {
-                directionVector = -cameraTransform.forward;
-            }
-
-            // Right-left
-            if (Input.GetKey(KeyCode.D)) {
-                directionVector = cameraTransform.right;
-            }
-
-            else if (Input.GetKey(KeyCode.A)) {
-                directionVector = -cameraTransform.right;
-            }
-
-            // Up-down
-            if (Input.GetKey(KeyCode.Space)) {
-                directionVector = cameraTransform.up;
-            }
-
-            else if (Input.GetKey(KeyCode.LeftShift)) {
-                directionVector = -cameraTransform.up;
-            }
-
-            playerRigidbody.position += directionVector * NoClipSettings.NoClipSpeedMultiplier;
-        }
+        if (!Input.anyKey) return;
+        Player.RectifyRoll();
+        playerRigidbody.position += Global.GetNoClipInputVector();
     }
 
     void ListenForPhantom(bool inPhantom) => this.InPhantom = inPhantom;
