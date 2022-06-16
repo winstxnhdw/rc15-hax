@@ -3,15 +3,13 @@ using UnityEngine;
 namespace RC15_HAX;
 readonly public struct Body {
     float OriginalMass { get; }
-    public float DeltaTime { get; }
+    float DeltaTime { get; }
+    Vector3 PreviousPosition { get; }
 
     public int ID { get; }
     public float PositionX { get; }
     public float PositionY { get; }
     public float PositionZ { get; }
-    public float PreviousPositionX { get; }
-    public float PreviousPositionY { get; }
-    public float PreviousPositionZ { get; }
     public Rigidbody Rigidbody { get; }
 
     public Body(int id, Rigidbody rigidbody, float dt) {
@@ -20,9 +18,7 @@ readonly public struct Body {
         this.PositionX = rigidbody.worldCenterOfMass.x;
         this.PositionY = rigidbody.worldCenterOfMass.y;
         this.PositionZ = rigidbody.worldCenterOfMass.z;
-        this.PreviousPositionX = rigidbody.worldCenterOfMass.x;
-        this.PreviousPositionY = rigidbody.worldCenterOfMass.y;
-        this.PreviousPositionZ = rigidbody.worldCenterOfMass.z;
+        this.PreviousPosition = new Vector3(this.PositionX, this.PositionY, this.PositionZ);
         this.OriginalMass = rigidbody.mass;
         this.DeltaTime = dt;
     }
@@ -33,16 +29,12 @@ readonly public struct Body {
         this.PositionX = rigidbody.worldCenterOfMass.x;
         this.PositionY = rigidbody.worldCenterOfMass.y;
         this.PositionZ = rigidbody.worldCenterOfMass.z;
-        this.PreviousPositionX = body.PositionX;
-        this.PreviousPositionY = body.PositionY;
-        this.PreviousPositionZ = body.PositionZ;
+        this.PreviousPosition = body.Position;
         this.OriginalMass = body.OriginalMass;
         this.DeltaTime = body.DeltaTime;
     }
 
     public Vector3 Position => new Vector3(this.PositionX, this.PositionY, this.PositionZ);
-
-    public Vector3 PreviousPosition => new Vector3(this.PreviousPositionX, this.PreviousPositionY, this.PreviousPositionZ);
 
     public Vector3 ScreenPosition {
         get {

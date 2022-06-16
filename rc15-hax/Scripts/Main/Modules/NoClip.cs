@@ -4,6 +4,7 @@ namespace RC15_HAX;
 public class NoClip : HaxModules {
     bool IsNoClipping { get; set; } = false;
     bool InPhantom { get; set; } = false;
+    float NoClipSpeedGranularity { get => HaxSettings.GetValue<float>("NoClipSpeedGranularity"); }
 
     public static event Global.Action<bool>? noClipped;
 
@@ -42,9 +43,9 @@ public class NoClip : HaxModules {
 
     void ListenForPhantom(bool inPhantom) => this.InPhantom = inPhantom;
 
-    void DecreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier -= 1;
+    void DecreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier -= this.NoClipSpeedGranularity;
 
-    void IncreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier += 1;
+    void IncreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier += this.NoClipSpeedGranularity;
 
     void ToggleNoClip() {
         if (!Loader.HaxModules.activeSelf || this.InPhantom) return;

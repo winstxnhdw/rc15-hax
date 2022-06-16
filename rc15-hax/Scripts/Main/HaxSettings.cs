@@ -92,9 +92,11 @@ public static class HaxSettings {
         // No fog parameters
         {"NoFog",                               SetParams("True")},
         {"farClipPlane",                        SetParams("100000")},
+        // NoClip parameters
+        {"NoClipSpeedMultiplier",               SetParams("1")},
+        {"NoClipSpeedGranularity",              SetParams("0.1")},
         // General parameters
         {"NoCameraShake",                       SetParams("True")},
-        {"NoClipSpeedMultiplier",               SetParams("1")},
         {"EnableAimbot",                        SetParams("True")},
         {"SpawnInRoof",                         SetParams("False")}
     };

@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public static class NoClipSettings {
-    static Global.Func<int, int> ClampNoClipSpeed = (int value) => Mathf.Clamp(value, 1, int.MaxValue);
+    static Global.Func<float, float> ClampNoClipSpeed = (float value) => Mathf.Clamp(value, 0.1f, float.MaxValue);
 
-    static int noClipSpeedMultiplier = NoClipSettings.ClampNoClipSpeed(HaxSettings.GetValue<int>("NoClipSpeedMultiplier"));
+    static float noClipSpeedMultiplier = NoClipSettings.ClampNoClipSpeed(HaxSettings.GetValue<float>("NoClipSpeedMultiplier"));
 
-    public static int NoClipSpeedMultiplier {
+    public static float NoClipSpeedMultiplier {
         get => NoClipSettings.noClipSpeedMultiplier;
         set => NoClipSettings.noClipSpeedMultiplier = NoClipSettings.ClampNoClipSpeed(value);
     }
