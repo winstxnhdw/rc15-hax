@@ -6,16 +6,7 @@ public class PlayerESP : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlayerESP"); }
     float TextBottomPadding { get => HaxSettings.GetValue<float>("TextBottomPadding"); }
     float OutlineBoxSize { get => HaxSettings.GetValue<float>("OutlineBoxSize") * Settings.SizeRatio; }
-    int RigidBodyID { get; set; } = 0;
-    readonly struct InitialBody {
-        public string ID { get; }
-        public float OriginalMass { get; }
-
-        public InitialBody(string id, float originalMass) {
-            this.ID = id;
-            this.OriginalMass = originalMass;
-        }
-    }
+    int RigidBodyID { get; set; }
 
     public static Dictionary<int, Body> RigidbodyDict { get; } = new Dictionary<int, Body>();
     Dictionary<int, Body> PreviousRigidbodyDict { get; set; } = new Dictionary<int, Body>();
@@ -23,6 +14,7 @@ public class PlayerESP : HaxModules {
     protected override void OnEnable() {
         base.OnEnable();
         HaxObjects.Rigidbodies.Init(this);
+        this.RigidBodyID = 0;
     }
 
     protected override void OnDisable() {
@@ -59,7 +51,6 @@ public class PlayerESP : HaxModules {
                 this.RigidBodyID++;
             }
 
-            Console.Print(currentBody.Velocity);
             PlayerESP.RigidbodyDict.Add(rigidbodyInstanceID, currentBody);
         }
     }
@@ -78,7 +69,7 @@ public class PlayerESP : HaxModules {
             float halfHeight = 0.5f * size.Height;
 
             Vector2 topTextPosition = new Vector2(bodyScreenPosition.x - halfWidth, bodyScreenPosition.y - halfHeight - this.TextBottomPadding);
-            GUIHelper.DrawLabel(topTextPosition, $"{currentBody.ID}# {currentBody.Mass} [{currentBody.Health}]");
+            GUIHelper.DrawLabel(topTextPosition, $"{currentBody.ID:00}# {currentBody.Mass} [{currentBody.Health}]");
 
             Vector2 bottomTextPosition = new Vector2(bodyScreenPosition.x - halfWidth, bodyScreenPosition.y + halfHeight);
             GUIHelper.DrawLabel(bottomTextPosition, $"{currentBody.StrDistanceToCamera} [{currentBody.StrVelocity}]");
