@@ -20,7 +20,6 @@ public class HaxObjects : HaxComponents {
 
     protected override void Start() {
         base.Start();
-        HaxObjects.Rigidbodies.Init(this);
         HaxObjects.PlayerRigidbody.Init(this);
         HaxObjects.FireTimingDataObject.Init(this);
         HaxObjects.SimulationCameraObject.Init(this);

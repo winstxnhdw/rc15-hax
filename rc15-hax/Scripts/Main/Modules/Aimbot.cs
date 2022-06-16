@@ -22,21 +22,13 @@ public class Aimbot : HaxModules {
         float closestBodyOnScreen = float.MaxValue;
         Vector3 closestBodyPosition = Vector3.zero;
 
-        foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
-            if (!rigidbody.name.StartsWith("AIB") && rigidbody.name != "RigidBodyParent__") continue;
-
-            Vector3 rigidbodyWorldPosition = rigidbody.worldCenterOfMass;
-            Vector3 rigidbodyScreenPosition = Global.Camera.WorldToScreenPoint(rigidbodyWorldPosition);
-
-            if (rigidbodyScreenPosition.z <= 0.0f) continue;
-
-            rigidbodyScreenPosition.y = Screen.height - rigidbodyScreenPosition.y;
-            Vector2 rigidbodyScreenPosition2D = rigidbodyScreenPosition;
-            float crosshairToBodyDistance = (rigidbodyScreenPosition2D - ScreenInfo.GetScreenCentre()).sqrMagnitude;
+        foreach (Body body in PlayerESP.RigidbodyDict.Values) {
+            if (body.ScreenPosition.z <= 0.0f) continue;
+            float crosshairToBodyDistance = (body.ScreenPosition2D - ScreenInfo.GetScreenCentre()).sqrMagnitude;
 
             if (crosshairToBodyDistance < closestBodyOnScreen) {
                 closestBodyOnScreen = crosshairToBodyDistance;
-                closestBodyPosition = rigidbodyWorldPosition;
+                closestBodyPosition = body.Position;
             }
         }
 

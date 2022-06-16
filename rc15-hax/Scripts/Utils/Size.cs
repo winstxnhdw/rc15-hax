@@ -1,5 +1,5 @@
 namespace RC15_HAX;
-public struct Size {
+readonly public struct Size {
     public float Width { get; }
     public float Height { get; }
 

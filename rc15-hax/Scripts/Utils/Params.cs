@@ -1,5 +1,5 @@
 namespace RC15_HAX;
-public struct Params {
+readonly public struct Params {
     public string Default { get; }
     public string Current { get; }
 
