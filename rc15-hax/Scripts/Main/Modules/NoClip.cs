@@ -35,13 +35,12 @@ public class NoClip : HaxModules {
     void PerformNoClip() {
         if (!this.IsNoClipping) return;
 
-        Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Object.rb;
         Player.EnableCollisions(false);
         Player.Freeze(true);
 
         if (!Input.anyKey) return;
         Player.RectifyRoll();
-        playerRigidbody.position += Global.GetNoClipInputVector();
+        HaxObjects.PlayerRigidbody.position += Global.GetNoClipInputVector();
     }
 
     void ToggleNoClip() {

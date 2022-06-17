@@ -22,7 +22,7 @@ public class UndergroundSpawn : HaxModules {
     void SpawnUnderground() {
         if (!this.ModEnabled) return;
 
-        Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Object.rb;
+        Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody;
         Vector3 currentPosition = playerRigidbody.worldCenterOfMass;
         currentPosition.y = this.UndergroundPositionY;
         playerRigidbody.position = currentPosition;

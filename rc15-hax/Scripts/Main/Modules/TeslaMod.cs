@@ -21,7 +21,7 @@ public class TeslaMod : HaxModules {
     void ModTesla() {
         if (!this.ModEnabled) return;
 
-        foreach (Collider collider in HaxObjects.PlayerRigidbody.Object.rb.gameObject.GetComponentsInChildren<Collider>()) {
+        foreach (Collider collider in HaxObjects.PlayerRigidbody.gameObject.GetComponentsInChildren<Collider>()) {
             string colliderName = collider.transform.name;
             if (colliderName != "blade1Collision" && !colliderName.StartsWith("CollisionArm")) continue;
             collider.enabled = false;

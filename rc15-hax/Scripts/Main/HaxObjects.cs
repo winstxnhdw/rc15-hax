@@ -3,7 +3,9 @@ using Simulation;
 
 namespace RC15_HAX;
 public class HaxObjects : HaxComponents {
-    public static ObjectCache<LocalPlayerRigidbody> PlayerRigidbody { get; } = new ObjectCache<LocalPlayerRigidbody>(1);
+    static ObjectCache<LocalPlayerRigidbody> playerRigidbody = new ObjectCache<LocalPlayerRigidbody>(1);
+    public static Rigidbody PlayerRigidbody { get => playerRigidbody.Object.GetComponent<Rigidbody>(); }
+
     public static ObjectCache<CameraShake> CameraShakeObject { get; } = new ObjectCache<CameraShake>();
     public static ObjectCache<FireTimingData> FireTimingDataObject { get; } = new ObjectCache<FireTimingData>();
     public static ObjectCache<SimulationCamera> SimulationCameraObject { get; } = new ObjectCache<SimulationCamera>();
@@ -20,7 +22,7 @@ public class HaxObjects : HaxComponents {
 
     protected override void Start() {
         base.Start();
-        HaxObjects.PlayerRigidbody.Init(this);
+        HaxObjects.playerRigidbody.Init(this);
         HaxObjects.FireTimingDataObject.Init(this);
         HaxObjects.SimulationCameraObject.Init(this);
     }

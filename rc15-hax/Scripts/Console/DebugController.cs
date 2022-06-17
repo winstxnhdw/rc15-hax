@@ -25,14 +25,13 @@ public class DebugController : HaxComponents {
         });
 
         DebugCommand player = new DebugCommand("player", "Shows your status.", "player", () => {
-            LocalPlayerRigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Object;
+            Rigidbody rigidbody = HaxObjects.PlayerRigidbody;
 
-            if (playerRigidbody == null) {
+            if (rigidbody == null) {
                 Console.Print("Exists: false");
                 return;
             }
 
-            Rigidbody rigidbody = playerRigidbody.rb;
             Console.Print("Exists: true");
             Console.Print($"Position: x: {rigidbody.worldCenterOfMass.x}, y: {rigidbody.worldCenterOfMass.y}, z: {rigidbody.worldCenterOfMass.z}");
             Console.Print($"Velocity: {rigidbody.velocity} m/s");

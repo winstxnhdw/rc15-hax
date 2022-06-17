@@ -9,7 +9,7 @@ public class Hax : HaxComponents {
     }
 
     void Update() {
-        if (Hax.HaxPaused || HaxObjects.PlayerRigidbody.Object == null) {
+        if (Hax.HaxPaused || HaxObjects.PlayerRigidbody == null) {
             HaxSettings.ParseDefaultValues = true;
             SetActiveGameObject(Loader.HaxModules, false);
             return;

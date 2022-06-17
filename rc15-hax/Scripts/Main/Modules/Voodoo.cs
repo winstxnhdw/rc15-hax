@@ -39,7 +39,7 @@ public class Voodoo : HaxModules {
     void ToggleVoodoo() {
         this.IsDoingBlackMagic = !this.IsDoingBlackMagic;
         this.VoodooBodies = new List<Body>(PlayerESP.RigidbodyDict.Values);
-        this.SpawnPoint = HaxObjects.PlayerRigidbody.Object.rb.worldCenterOfMass;
+        this.SpawnPoint = HaxObjects.PlayerRigidbody.worldCenterOfMass;
         this.CameraForwardSpawnPoint = Global.Camera.transform.forward * this.VoodooForwardOffset;
 
         if (this.IsDoingBlackMagic) return;
