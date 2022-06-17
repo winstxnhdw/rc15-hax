@@ -13,7 +13,8 @@ public class NoClip : HaxModules {
         InputListener.onAlpha1Press += this.DecreaseNoClipSpeed;
         InputListener.onAlpha3Press += this.IncreaseNoClipSpeed;
         InputListener.onF9Press += this.ToggleNoClip;
-        Phantom.inPhantom += ListenForPhantom;
+        UndergroundSpawn.spawnedUnderground += this.ToggleNoClip;
+        Freecam.inPhantom += ListenForPhantom;
     }
 
     protected override void OnDisable() {
@@ -21,7 +22,8 @@ public class NoClip : HaxModules {
         InputListener.onAlpha1Press -= this.DecreaseNoClipSpeed;
         InputListener.onAlpha3Press -= this.IncreaseNoClipSpeed;
         InputListener.onF9Press -= this.ToggleNoClip;
-        Phantom.inPhantom -= ListenForPhantom;
+        UndergroundSpawn.spawnedUnderground -= this.ToggleNoClip;
+        Freecam.inPhantom -= ListenForPhantom;
 
         this.IsNoClipping = false;
     }
@@ -34,6 +36,7 @@ public class NoClip : HaxModules {
         if (!this.IsNoClipping) return;
 
         Rigidbody playerRigidbody = HaxObjects.PlayerRigidbody.Object.rb;
+        Player.EnableCollisions(false);
         Player.Freeze(true);
 
         if (!Input.anyKey) return;
@@ -41,17 +44,20 @@ public class NoClip : HaxModules {
         playerRigidbody.position += Global.GetNoClipInputVector();
     }
 
-    void ListenForPhantom(bool inPhantom) => this.InPhantom = inPhantom;
-
-    void DecreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier -= this.NoClipSpeedGranularity;
-
-    void IncreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier += this.NoClipSpeedGranularity;
-
     void ToggleNoClip() {
         if (!Loader.HaxModules.activeSelf || this.InPhantom) return;
 
         this.IsNoClipping = !this.IsNoClipping;
         NoClip.noClipped?.Invoke(this.IsNoClipping);
-        if (!this.IsNoClipping) Player.Freeze(false);
+
+        if (this.IsNoClipping) return;
+        Player.EnableCollisions(true);
+        Player.Freeze(false);
     }
+
+    void DecreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier -= this.NoClipSpeedGranularity;
+
+    void IncreaseNoClipSpeed() => NoClipSettings.NoClipSpeedMultiplier += this.NoClipSpeedGranularity;
+
+    void ListenForPhantom(bool inPhantom) => this.InPhantom = inPhantom;
 }

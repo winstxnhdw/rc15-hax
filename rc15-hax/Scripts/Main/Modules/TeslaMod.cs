@@ -4,6 +4,16 @@ namespace RC15_HAX;
 public class TeslaMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableTeslaMod"); }
 
+    protected override void OnEnable() {
+        if (!this.ModEnabled) return;
+        base.OnEnable();
+    }
+
+    protected override void OnDisable() {
+        if (!this.ModEnabled) return;
+        base.OnDisable();
+    }
+
     void Update() {
         this.ModTesla();
     }
@@ -13,7 +23,7 @@ public class TeslaMod : HaxModules {
 
         foreach (Collider collider in HaxObjects.PlayerRigidbody.Object.rb.gameObject.GetComponentsInChildren<Collider>()) {
             string colliderName = collider.transform.name;
-            if (!(colliderName == "blade1Collision" || colliderName.StartsWith("CollisionArm"))) continue;
+            if (colliderName != "blade1Collision" && !colliderName.StartsWith("CollisionArm")) continue;
             collider.enabled = false;
         }
     }

@@ -4,20 +4,25 @@ public class NoCameraShake : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
+        base.OnEnable();
         HaxObjects.CameraShakeObject.Init(this);
-    }
-
-    protected override void OnDisable() {
-        HaxObjects.CameraShakeObject.StopLog();
-    }
-
-    void Update() {
         this.DisableCameraShake();
     }
 
+    protected override void OnDisable() {
+        if (!this.ModEnabled) return;
+
+        base.OnDisable();
+        HaxObjects.CameraShakeObject.StopLog();
+        this.EnableCameraShake();
+    }
+
     void DisableCameraShake() {
-        CameraShake cameraShake = HaxObjects.CameraShakeObject.Object;
-        if (!ModEnabled || cameraShake == null) return;
-        cameraShake.enabled = false;
+        HaxObjects.CameraShakeObject.Object.enabled = false;
+    }
+
+    void EnableCameraShake() {
+        HaxObjects.CameraShakeObject.Object.enabled = true;
     }
 }

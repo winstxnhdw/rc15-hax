@@ -6,13 +6,16 @@ public class PlasmaMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
         HaxObjects.PlasmaCannonObjects.Init(this);
         this.ModPlamsaTimingData();
     }
 
     protected override void OnDisable() {
-        this.ModPlasma();
+        if (!this.ModEnabled) return;
+
         HaxObjects.PlasmaCannonObjects.StopLog();
+        this.ModPlasma();
     }
 
     void Update() {

@@ -5,12 +5,17 @@ public class WeaponMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
+        base.OnEnable();
         HaxObjects.BaseWeaponObjects.Init(this);
     }
 
     protected override void OnDisable() {
-        this.ModWeapon();
+        if (!this.ModEnabled) return;
+
         HaxObjects.BaseWeaponObjects.StopLog();
+        base.OnDisable();
+        this.ModWeapon();
     }
 
     void Update() {

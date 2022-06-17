@@ -4,10 +4,15 @@ public class JetMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
+        base.OnEnable();
         HaxObjects.CubeJetObjects.Init(this);
     }
 
     protected override void OnDisable() {
+        if (!this.ModEnabled) return;
+
+        base.OnDisable();
         HaxObjects.CubeJetObjects.StopLog();
     }
 

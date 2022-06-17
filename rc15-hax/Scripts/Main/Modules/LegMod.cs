@@ -6,10 +6,15 @@ public class LegMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
+        base.OnEnable();
         HaxObjects.LegObjects.Init(this);
     }
 
     protected override void OnDisable() {
+        if (!this.ModEnabled) return;
+
+        base.OnDisable();
         HaxObjects.LegObjects.StopLog();
     }
 

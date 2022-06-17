@@ -31,8 +31,6 @@ public class PlayerESP : HaxModules {
     }
 
     void CalculateESP() {
-        if (!this.ModEnabled) return;
-
         this.PreviousRigidbodyDict = new Dictionary<int, Body>(PlayerESP.RigidbodyDict);
         PlayerESP.RigidbodyDict.Clear();
 

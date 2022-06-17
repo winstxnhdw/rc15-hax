@@ -5,12 +5,16 @@ public class Aimbot : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableAimbot"); }
 
     protected override void OnEnable() {
+        if (!this.ModEnabled) return;
+
         base.OnEnable();
         InputListener.onLeftControl += this.TriggerAimbot;
         InputListener.onLeftControlUp += this.StopAimbot;
     }
 
     protected override void OnDisable() {
+        if (!this.ModEnabled) return;
+
         base.OnDisable();
         InputListener.onLeftControl -= this.TriggerAimbot;
         InputListener.onLeftControlUp -= this.StopAimbot;
@@ -26,10 +30,10 @@ public class Aimbot : HaxModules {
             if (body.ScreenPosition.z <= 0.0f) continue;
             float crosshairToBodyDistance = (body.ScreenPosition2D - ScreenInfo.GetScreenCentre()).sqrMagnitude;
 
-            if (crosshairToBodyDistance < closestBodyOnScreen) {
-                closestBodyOnScreen = crosshairToBodyDistance;
-                closestBodyPosition = body.Position;
-            }
+            if (crosshairToBodyDistance >= closestBodyOnScreen) continue;
+
+            closestBodyOnScreen = crosshairToBodyDistance;
+            closestBodyPosition = body.Position;
         }
 
         if (closestBodyPosition != Vector3.zero) Global.Camera.transform.LookAt(closestBodyPosition);
@@ -37,11 +41,6 @@ public class Aimbot : HaxModules {
 
     void StopAimbot() {
         SimulationCamera simulationCamera = HaxObjects.SimulationCameraObject.Object;
-        if (simulationCamera == null) {
-            Console.Print("No simulation camera found.");
-            return;
-        }
-
         Global.Camera.transform.position = simulationCamera.transform.position;
         Global.Camera.transform.eulerAngles = simulationCamera.transform.eulerAngles;
     }

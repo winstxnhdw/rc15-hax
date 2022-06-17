@@ -3,13 +3,21 @@ using Simulation;
 namespace RC15_HAX;
 public class RailMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRailMod"); }
+
     protected override void OnEnable() {
+        if (!this.ModEnabled) return;
+
+        base.OnEnable();
         this.ModRail();
     }
 
-    void ModRail() {
+    protected override void OnDisable() {
         if (!this.ModEnabled) return;
 
+        base.OnDisable();
+    }
+
+    void ModRail() {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
         if (fireTimingData == null) return;
 
