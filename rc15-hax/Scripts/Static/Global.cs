@@ -12,7 +12,12 @@ public static class Global {
 
     public static bool IsNullOrWhiteSpace(string value) {
         if (value == null) return true;
-        return value.Contains(" ") || value.Length == 0 ? true : false;
+
+        foreach (char c in value) {
+            if (!char.IsWhiteSpace(c)) return false;
+        }
+
+        return true;
     }
 
     public static Vector3 GetNoClipInputVector() {

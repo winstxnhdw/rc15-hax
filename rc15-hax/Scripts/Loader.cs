@@ -27,14 +27,14 @@ public class Loader : MonoBehaviour {
         AddHaxModules<Aimbot>();
         AddHaxModules<PlayerESP>();
         AddHaxModules<NoClip>();
-        AddHaxModules<Phantom>();
+        AddHaxModules<Freecam>();
         AddHaxModules<Voodoo>();
         AddHaxModules<Player>();
 
         AddHaxModules<FakeCrosshair>();
         AddHaxModules<NoCameraShake>();
         AddHaxModules<NoFog>();
-        AddHaxModules<RoofSpawn>();
+        AddHaxModules<UndergroundSpawn>();
 
         AddHaxModules<PlasmaMod>();
         AddHaxModules<WeaponMod>();
