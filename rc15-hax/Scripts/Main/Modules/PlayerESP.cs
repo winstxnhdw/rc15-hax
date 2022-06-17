@@ -69,7 +69,7 @@ public class PlayerESP : HaxModules {
             float halfHeight = 0.5f * size.Height;
 
             Vector2 topTextPosition = new Vector2(bodyScreenPosition.x - halfWidth, bodyScreenPosition.y - halfHeight - this.TextBottomPadding);
-            GUIHelper.DrawLabel(topTextPosition, $"{currentBody.ID:00}# {currentBody.Mass} [{currentBody.Health}]");
+            GUIHelper.DrawLabel(topTextPosition, $"#{currentBody.ID:00} {currentBody.Mass} [{currentBody.Health}]");
 
             Vector2 bottomTextPosition = new Vector2(bodyScreenPosition.x - halfWidth, bodyScreenPosition.y + halfHeight);
             GUIHelper.DrawLabel(bottomTextPosition, $"{currentBody.StrDistanceToCamera} [{currentBody.StrVelocity}]");

@@ -28,6 +28,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<PlayerESP>();
         AddHaxModules<NoClip>();
         AddHaxModules<Phantom>();
+        AddHaxModules<Voodoo>();
         AddHaxModules<Player>();
 
         AddHaxModules<FakeCrosshair>();
@@ -39,6 +40,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<WeaponMod>();
         AddHaxModules<RailMod>();
         AddHaxModules<SMGMod>();
+        AddHaxModules<TeslaMod>();
 
         AddHaxModules<AerofoilMod>();
         AddHaxModules<JetMod>();

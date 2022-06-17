@@ -96,9 +96,11 @@ public static class HaxSettings {
         {"NoClipSpeedMultiplier",               SetParams("1")},
         {"NoClipSpeedGranularity",              SetParams("0.1")},
         // General parameters
-        {"NoCameraShake",                       SetParams("True")},
         {"EnableAimbot",                        SetParams("True")},
-        {"SpawnInRoof",                         SetParams("False")}
+        {"EnableTeslaMod",                      SetParams("True")},
+        {"NoCameraShake",                       SetParams("True")},
+        {"SpawnInRoof",                         SetParams("False")},
+        {"VoodooForwardOffset",                 SetParams("10")}
     };
 
     public static T? GetValue<T>(string key, string defaultValue = "") {
