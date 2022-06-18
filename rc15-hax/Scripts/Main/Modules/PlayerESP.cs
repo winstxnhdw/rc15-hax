@@ -19,7 +19,7 @@ public class PlayerESP : HaxModules {
 
     protected override void OnDisable() {
         base.OnDisable();
-        HaxObjects.Rigidbodies.StopLog();
+        HaxObjects.Rigidbodies.Stop();
     }
 
     void OnGUI() {

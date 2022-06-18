@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public static class Global {
+    public const float twoPi = Mathf.PI * 2.0f;
     static Camera camera = Camera.main;
 
     public static bool IsNullOrWhiteSpace(string value) {
@@ -19,6 +20,22 @@ public static class Global {
         type.GetType()
             .GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance)
             .SetValue(type, value);
+    }
+
+    public static void PrintAllAncestors(Transform transform) {
+        Console.Print($"Layer {transform.gameObject.layer}: {transform.name}");
+
+        if (transform.parent != null) {
+            Global.PrintAllAncestors(transform.parent);
+        }
+    }
+
+    public static void PrintAllDescendents(Transform transform) {
+        Console.Print($"Layer {transform.gameObject.layer}: {transform.name}");
+
+        foreach (Transform child in transform) {
+            Global.PrintAllDescendents(child);
+        }
     }
 
     public static Vector3 GetNoClipInputVector() {

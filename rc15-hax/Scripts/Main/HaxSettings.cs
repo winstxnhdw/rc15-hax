@@ -24,14 +24,14 @@ public static class HaxSettings {
         {"MaxVerticalAngle",                    SetParams("180")},
         {"MinVerticalAngle",                    SetParams("-180")},
         // SMG parameters
-        {"EnableSMGMod",                        SetParams("False")},
+        {"EnableSMGMod",                        SetParams("True")},
         {"groupFirePeriod0",                    SetParams("0")},
         {"groupFirePeriod1",                    SetParams("0")},
         {"groupFirePeriod2",                    SetParams("0")},
         {"groupFirePeriod3",                    SetParams("0")},
         {"groupFirePeriod4",                    SetParams("0")},
         // Plasma Cannon parameters
-        {"EnablePlasmaMod",                     SetParams("False")},
+        {"EnablePlasmaMod",                     SetParams("True")},
         {"fireTwice",                           SetParams("True")},
         {"secondFireDelay",                     SetParams("0")},
         {"secondFireDeviation",                 SetParams("0")},
@@ -43,7 +43,7 @@ public static class HaxSettings {
         {"plasmaFirePeriod3",                   SetParams("0")},
         {"plasmaFirePeriod4",                   SetParams("0")},
         {"plasmaFirePeriod5",                   SetParams("0")},
-        {"plasmaFlamFirePeriod",                SetParams("0.5")},
+        {"plasmaFlamFirePeriod",                SetParams("0")},
         // Rail Launcher parameters
         {"EnableRailMod",                       SetParams("True")},
         {"railReloadDuration0",                 SetParams("0")},
@@ -56,6 +56,9 @@ public static class HaxSettings {
         {"railFirePeriod4",                     SetParams("0.3")},
         {"railFirePeriod5",                     SetParams("0.3")},
         {"railFireDelay",                       SetParams("0.8")},
+        // Tesla Blade parameters
+        {"EnableTeslaMod",                      SetParams("True")},
+        {"EnableTeslaField",                    SetParams("True")},
         // Wheel parameters
         {"EnableWheelMod",                      SetParams("False")},
         {"maxRPM",                              SetParams("1000")},
@@ -101,7 +104,6 @@ public static class HaxSettings {
         {"UndergroundPositionOffset",           SetParams("10")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
-        {"EnableTeslaMod",                      SetParams("True")},
         {"NoCameraShake",                       SetParams("True")},
         {"VoodooForwardOffset",                 SetParams("10")}
     };

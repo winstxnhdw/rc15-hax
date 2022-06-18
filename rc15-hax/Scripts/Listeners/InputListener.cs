@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class InputListener : HaxComponents {
+    public static event Action onF5Press;
     public static event Action onF8Press;
     public static event Action onF9Press;
     public static event Action onF10Press;
@@ -20,6 +21,7 @@ public class InputListener : HaxComponents {
     Dictionary<Func<bool>, Action> keyActionsDict = new Dictionary<Func<bool>, Action>() {
         {() => Input.GetKey(KeyCode.LeftControl),     () => InputListener.onLeftControl?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.LeftControl),   () => InputListener.onLeftControlUp?.Invoke()},
+        {() => Input.GetKeyDown(KeyCode.F5),          () => InputListener.onF5Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.F8),          () => InputListener.onF8Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.F9),          () => InputListener.onF9Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.F10),         () => InputListener.onF10Press?.Invoke()},

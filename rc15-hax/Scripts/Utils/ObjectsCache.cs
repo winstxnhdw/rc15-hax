@@ -11,18 +11,20 @@ public class ObjectsCache<T> : ObjectCacheBase<T> where T : Object {
 
     IEnumerator ICacheObjects() {
         Console.Print($"Caching {base.TypeName} object(s)..");
-        base.StopCaching = false;
 
         while (true) {
-            if (base.StopCaching) {
-                base.StopLog();
-                yield break;
-            }
-
             this.Objects = GameObject.FindObjectsOfType<T>();
             yield return new WaitForSeconds(base.UpdateInterval);
         }
     }
 
-    public void Init(MonoBehaviour self) => self.StartCoroutine(this.ICacheObjects());
+    public void Init(MonoBehaviour self) {
+        base.Self = self;
+        base.Self.StartCoroutine(this.ICacheObjects());
+    }
+
+    public void Stop() {
+        base.Self.StopCoroutine(this.ICacheObjects());
+        Console.Print($"Stopping cache for {this.TypeName} object(s).");
+    }
 }
