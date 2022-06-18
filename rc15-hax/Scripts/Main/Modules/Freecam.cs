@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RC15_HAX;
@@ -8,7 +9,7 @@ public class Freecam : HaxModules {
     Vector3 SimulationCameraPosition { get; set; }
     Vector3 PhantomEndPosition { get; set; }
 
-    public static event Global.Action<bool>? inPhantom;
+    public static event Action<bool> inPhantom;
 
     protected override void OnEnable() {
         base.OnEnable();
@@ -30,7 +31,7 @@ public class Freecam : HaxModules {
     void BecomePhantom() {
         if (!this.IsPhantom) return;
 
-        HaxObjects.SimulationCameraObject.Object.transform.position = this.SimulationCameraPosition;
+        Global.SimulationCameraT.position = this.SimulationCameraPosition;
         this.SimulationCameraPosition += Global.GetNoClipInputVector();
     }
 

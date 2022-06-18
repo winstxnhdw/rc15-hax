@@ -3,12 +3,11 @@
   <PropertyGroup>
 
     <LangVersion>latest</LangVersion>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net35</TargetFramework>
     <RootNamespace>rc15_hax</RootNamespace>
     <ImplicitUsings>disable</ImplicitUsings>
     <Deterministic>false</Deterministic>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Nullable>enable</Nullable>
 
   </PropertyGroup>
 
@@ -33,13 +32,6 @@
     <Reference Include="Photon3Unity3D">
       <HintPath>./References/Photon3Unity3D.dll</HintPath>
     </Reference>
-
-    <Reference Include="System"/>
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Drawing"/>
-    <Reference Include="System.Threading"/>
-    <Reference Include="System.Configuration"/>
-    <Reference Include="mscorlib"/>
 
   </ItemGroup>
 

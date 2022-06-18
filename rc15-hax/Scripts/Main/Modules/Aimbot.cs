@@ -1,5 +1,5 @@
 using UnityEngine;
-using Simulation;
+
 namespace RC15_HAX;
 public class Aimbot : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableAimbot"); }
@@ -40,8 +40,7 @@ public class Aimbot : HaxModules {
     }
 
     void StopAimbot() {
-        SimulationCamera simulationCamera = HaxObjects.SimulationCameraObject.Object;
-        Global.Camera.transform.position = simulationCamera.transform.position;
-        Global.Camera.transform.eulerAngles = simulationCamera.transform.eulerAngles;
+        Global.Camera.transform.position = Global.SimulationCameraT.position;
+        Global.Camera.transform.eulerAngles = Global.SimulationCameraT.eulerAngles;
     }
 }

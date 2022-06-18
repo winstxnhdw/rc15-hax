@@ -1,5 +1,4 @@
 using Simulation;
-
 namespace RC15_HAX;
 public class RailMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRailMod"); }
@@ -31,9 +30,9 @@ public class RailMod : HaxModules {
             railFirePeriods[i] = HaxSettings.GetValue<float>($"railFirePeriod{i}");
         }
 
-        fireTimingData.railReloadDuration = railReloadDurations;
-        fireTimingData.railFirePeriod = railFirePeriods;
-        fireTimingData.railFireDelay = HaxSettings.GetValue<float>("railFireDelay");
+        Global.SetInternalFieldValue(fireTimingData, "railReloadDuration", railReloadDurations);
+        Global.SetInternalFieldValue(fireTimingData, "railFirePeriod", railFirePeriods);
+        Global.SetInternalFieldValue(fireTimingData, "railFireDelay", HaxSettings.GetValue<float>("railFireDelay"));
         fireTimingData.Start();
     }
 }

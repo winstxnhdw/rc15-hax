@@ -1,22 +1,23 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace RC15_HAX;
 public class InputListener : HaxComponents {
-    public static event Global.Action? onF8Press;
-    public static event Global.Action? onF9Press;
-    public static event Global.Action? onF10Press;
-    public static event Global.Action? onF11Press;
-    public static event Global.Action? onBackquotePress;
-    public static event Global.Action? onBackslashPress;
-    public static event Global.Action? onAlpha1Press;
-    public static event Global.Action? onAlpha3Press;
-    public static event Global.Action? onLeftControl;
-    public static event Global.Action? onLeftControlUp;
-    public static event Global.Action? onEscapePress;
-    public static event Global.Action? onPausePress;
+    public static event Action onF8Press;
+    public static event Action onF9Press;
+    public static event Action onF10Press;
+    public static event Action onF11Press;
+    public static event Action onBackquotePress;
+    public static event Action onBackslashPress;
+    public static event Action onAlpha1Press;
+    public static event Action onAlpha3Press;
+    public static event Action onLeftControl;
+    public static event Action onLeftControlUp;
+    public static event Action onEscapePress;
+    public static event Action onPausePress;
 
-    Dictionary<Global.Func<bool>, Global.Action> keyActionsDict = new Dictionary<Global.Func<bool>, Global.Action>() {
+    Dictionary<Func<bool>, Action> keyActionsDict = new Dictionary<Func<bool>, Action>() {
         {() => Input.GetKey(KeyCode.LeftControl),     () => InputListener.onLeftControl?.Invoke()},
         {() => Input.GetKeyUp(KeyCode.LeftControl),   () => InputListener.onLeftControlUp?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.F8),          () => InputListener.onF8Press?.Invoke()},
@@ -37,7 +38,7 @@ public class InputListener : HaxComponents {
     }
 
     void KeyboardListener() {
-        foreach (KeyValuePair<Global.Func<bool>, Global.Action> keyAction in this.keyActionsDict) {
+        foreach (KeyValuePair<Func<bool>, Action> keyAction in this.keyActionsDict) {
             if (!(keyAction.Key())) continue;
             keyAction.Value();
         }

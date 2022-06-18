@@ -27,9 +27,8 @@ public class ConsoleInputField : HaxComponents {
 
         bool commandFound = false;
 
-        // for (int i = 0; i < DebugController.CommandList.Count; i++) {
         foreach (object command in DebugController.CommandList) {
-            DebugCommandBase? commandBase = command as DebugCommandBase;
+            DebugCommandBase commandBase = command as DebugCommandBase;
             if (commandBase!.Name != input[0]) continue;
 
             commandFound = true;

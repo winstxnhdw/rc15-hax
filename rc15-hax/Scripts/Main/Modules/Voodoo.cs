@@ -34,13 +34,13 @@ public class Voodoo : HaxModules {
         if (!this.IsDoingBlackMagic) return;
 
         Rigidbody rigidbody = this.VoodooBodies[this.CycleIndex % this.VoodooBodies.Count].Rigidbody;
-        Transform rigidbodyTransform = rigidbody.transform;
-        Transform simulationBoardTransform = rigidbodyTransform.parent;
+        Transform rigidbodyT = rigidbody.transform;
+        Transform simulationBoardT = rigidbodyT.parent;
         Vector3 desiredPosition = this.SpawnPoint + this.CameraForwardSpawnPoint;
 
-        rigidbodyTransform.position = desiredPosition;
-        rigidbodyTransform.localRotation = Quaternion.identity;
-        simulationBoardTransform.position = desiredPosition;
+        rigidbodyT.position = desiredPosition;
+        rigidbodyT.localRotation = Quaternion.identity;
+        simulationBoardT.position = desiredPosition;
     }
 
     void ToggleVoodoo() {

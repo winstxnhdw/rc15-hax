@@ -1,11 +1,13 @@
+using System;
 using UnityEngine;
+
 namespace RC15_HAX;
 
 public class UndergroundSpawn : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("SpawnUnderground"); }
-    float UndergroundPositionY { get => -10.0f; }
+    float UndergroundPositionY { get => -HaxSettings.GetValue<float>("UndergroundPositionOffset"); }
 
-    public static event Global.Action? spawnedUnderground;
+    public static event Action spawnedUnderground;
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;

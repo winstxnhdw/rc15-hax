@@ -12,7 +12,7 @@ public class NoCameraShake : HaxModules {
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
 
-        StartCoroutine(StoreCameraTransform());
+        this.DisableCameraShake();
         base.OnEnable();
     }
 
@@ -28,7 +28,11 @@ public class NoCameraShake : HaxModules {
         Global.Camera.transform.localRotation = this.StoredCameraRotation;
     }
 
-    IEnumerator StoreCameraTransform() {
+    void DisableCameraShake() {
+        StartCoroutine(this.IStoreCameraTransform());
+    }
+
+    IEnumerator IStoreCameraTransform() {
         while (true) {
             yield return null;
             this.StoredCameraPosition = Global.Camera.transform.localPosition;

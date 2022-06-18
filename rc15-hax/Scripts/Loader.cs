@@ -32,21 +32,21 @@ public class Loader : MonoBehaviour {
         AddHaxModules<Player>();
 
         AddHaxModules<FakeCrosshair>();
-        AddHaxModules<NoCameraShake>();
         AddHaxModules<NoFog>();
+        AddHaxModules<NoCameraShake>();
         AddHaxModules<UndergroundSpawn>();
 
         AddHaxModules<PlasmaMod>();
-        AddHaxModules<WeaponMod>();
         AddHaxModules<RailMod>();
         AddHaxModules<SMGMod>();
         AddHaxModules<TeslaMod>();
+        // AddHaxModules<WeaponMod>();
 
-        AddHaxModules<AerofoilMod>();
-        AddHaxModules<JetMod>();
-        AddHaxModules<WheelMod>();
-        AddHaxModules<RotorMod>();
-        AddHaxModules<LegMod>();
+        // AddHaxModules<AerofoilMod>();
+        // AddHaxModules<JetMod>();
+        // AddHaxModules<WheelMod>();
+        // AddHaxModules<RotorMod>();
+        // AddHaxModules<LegMod>();
     }
 
     public static void Unload() {

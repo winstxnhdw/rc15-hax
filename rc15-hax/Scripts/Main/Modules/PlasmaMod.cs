@@ -6,41 +6,41 @@ public class PlasmaMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
-
-        HaxObjects.PlasmaCannonObjects.Init(this);
+        base.OnEnable();
         this.ModPlamsaTimingData();
+        // HaxObjects.PlasmaCannonObjects.Init(this);
     }
 
     protected override void OnDisable() {
         if (!this.ModEnabled) return;
-
-        HaxObjects.PlasmaCannonObjects.StopLog();
-        this.ModPlasma();
+        base.OnDisable();
+        // HaxObjects.PlasmaCannonObjects.StopLog();
+        // this.ModPlasma();
     }
 
-    void Update() {
-        this.ModPlasma();
-    }
+    // void Update() {
+    //     this.ModPlasma();
+    // }
 
-    void ModPlasma() {
-        if (!this.ModEnabled) return;
+    // void ModPlasma() {
+    //     if (!this.ModEnabled) return;
 
-        foreach (PlasmaCannon plasmaCannon in HaxObjects.PlasmaCannonObjects.Objects) {
-            base.ModifyValues(ref plasmaCannon.secondPlasmaShot.fireTwice, "fireTwice");
+    //     foreach (PlasmaCannon plasmaCannon in HaxObjects.PlasmaCannonObjects.Objects) {
+    //         base.ModifyValues(ref plasmaCannon.secondPlasmaShot.fireTwice, "fireTwice");
 
-            base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDelay, "secondFireDelay");
+    //         base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDelay, "secondFireDelay");
 
-            base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDeviation, "secondFireDeviation");
+    //         base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDeviation, "secondFireDeviation");
 
-            base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileSpeed, "PlasmaProjectileSpeed");
+    //         base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileSpeed, "PlasmaProjectileSpeed");
 
-            base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileRange, "PlasmaProjectileRange");
+    //         base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileRange, "PlasmaProjectileRange");
 
-            base.DefaultStored = true;
-        }
+    //         base.DefaultStored = true;
+    //     }
 
-        this.ModPlamsaTimingData();
-    }
+    //     this.ModPlamsaTimingData();
+    // }
 
     void ModPlamsaTimingData() {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
@@ -52,7 +52,8 @@ public class PlasmaMod : HaxModules {
             plasmaFirePeriods[i] = HaxSettings.GetValue<float>($"plasmaFirePeriod{i}");
         }
 
-        fireTimingData.plasmaFirePeriod = plasmaFirePeriods;
-        fireTimingData.plasmaFlamFirePeriod = HaxSettings.GetValue<float>("plasmaFlamFirePeriod");
+        Global.SetInternalFieldValue(fireTimingData, "plasmaFirePeriod", plasmaFirePeriods);
+        Global.SetInternalFieldValue(fireTimingData, "plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
+        fireTimingData.Start();
     }
 }

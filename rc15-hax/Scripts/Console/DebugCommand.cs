@@ -1,8 +1,10 @@
+using System;
+
 namespace RC15_HAX;
 public class DebugCommand : DebugCommandBase {
-    Global.Action Command { get; set; }
+    Action Command { get; set; }
 
-    public DebugCommand(string commandName, string commandDescription, string commandFormat, Global.Action command) : base(commandName, commandDescription, commandFormat) {
+    public DebugCommand(string commandName, string commandDescription, string commandFormat, Action command) : base(commandName, commandDescription, commandFormat) {
         this.Command = command;
     }
 
@@ -12,9 +14,9 @@ public class DebugCommand : DebugCommandBase {
 }
 
 public class DebugCommand<T> : DebugCommandBase {
-    Global.Action<T> Command { get; set; }
+    Action<T> Command { get; set; }
 
-    public DebugCommand(string commandName, string commandDescription, string commandFormat, Global.Action<T> command) : base(commandName, commandDescription, commandFormat) {
+    public DebugCommand(string commandName, string commandDescription, string commandFormat, Action<T> command) : base(commandName, commandDescription, commandFormat) {
         this.Command = command;
     }
 

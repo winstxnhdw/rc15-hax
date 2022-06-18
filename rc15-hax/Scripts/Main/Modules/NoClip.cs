@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RC15_HAX;
@@ -6,7 +7,7 @@ public class NoClip : HaxModules {
     bool InPhantom { get; set; } = false;
     float NoClipSpeedGranularity { get => HaxSettings.GetValue<float>("NoClipSpeedGranularity"); }
 
-    public static event Global.Action<bool>? noClipped;
+    public static event Action<bool> noClipped;
 
     protected override void OnEnable() {
         base.OnEnable();

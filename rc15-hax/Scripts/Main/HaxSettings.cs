@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace RC15_HAX;
@@ -95,16 +96,18 @@ public static class HaxSettings {
         // NoClip parameters
         {"NoClipSpeedMultiplier",               SetParams("1")},
         {"NoClipSpeedGranularity",              SetParams("0.1")},
+        // UndergroundSpawn parameters
+        {"SpawnUnderground",                    SetParams("False")},
+        {"UndergroundPositionOffset",           SetParams("10")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
         {"EnableTeslaMod",                      SetParams("True")},
         {"NoCameraShake",                       SetParams("True")},
-        {"SpawUnderground",                     SetParams("False")},
         {"VoodooForwardOffset",                 SetParams("10")}
     };
 
-    public static T? GetValue<T>(string key, string defaultValue = "") {
-        Dictionary<string, Global.Func<string, T>> valueParserDict = new Dictionary<string, Global.Func<string, T>>() {
+    public static T GetValue<T>(string key, string defaultValue = "") {
+        Dictionary<string, Func<string, T>> valueParserDict = new Dictionary<string, Func<string, T>>() {
             {"System.Boolean", (string paramValue) => {
                 if (!bool.TryParse(paramValue, out bool value)) PrintInvalidType<T>(key, paramValue);
                 return (T)(object)value;
@@ -129,7 +132,7 @@ public static class HaxSettings {
             return default;
         }
 
-        if (!valueParserDict.TryGetValue(typeof(T).FullName, out Global.Func<string, T> valueParser)) {
+        if (!valueParserDict.TryGetValue(typeof(T).FullName, out Func<string, T> valueParser)) {
             Console.Print("No valid type specified.");
             return default;
         }
