@@ -56,6 +56,15 @@ public class TeslaMod : HaxModules {
         }
     }
 
+    void TeslaShark() {
+        int maxTeslaPerRow = 10;
+        int teslaRows = (int)Mathf.Ceil(TeslaBladeTransformList.Count / maxTeslaPerRow);
+
+        for (int i = 0; i < this.TeslaBladeTransformList.Count; i++) {
+
+        }
+    }
+
     IEnumerator ITeslaField() {
         Rigidbody playerBody = HaxObjects.PlayerRigidbody;
         Transform cameraT = Global.Camera.transform;

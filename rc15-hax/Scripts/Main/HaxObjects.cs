@@ -21,7 +21,6 @@ public class HaxObjects : HaxComponents {
     // public static ObjectsCache<CubeAerofoil> AerofoilObjects { get; } = new ObjectsCache<CubeAerofoil>();
     // public static ObjectsCache<CubeJet> CubeJetObjects { get; } = new ObjectsCache<CubeJet>();
     // public static ObjectsCache<CubeRotor> RotorObjects { get; } = new ObjectsCache<CubeRotor>();
-    // public static ObjectsCache<CubeWheel> WheelObjects { get; } = new ObjectsCache<CubeWheel>();
     // public static ObjectsCache<CubeLeg> LegObjects { get; } = new ObjectsCache<CubeLeg>();
 
     protected override void Start() {

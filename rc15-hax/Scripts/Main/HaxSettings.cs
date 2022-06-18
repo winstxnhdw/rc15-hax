@@ -67,7 +67,9 @@ public static class HaxSettings {
         {"EnableWheelMod",                      SetParams("False")},
         {"maxRPM",                              SetParams("1000")},
         {"groundFrictionMultiplier",            SetParams("8")},
-        {"stoppingBrakeTorque",                 SetParams("4000")},
+        {"stoppingBrakeTorque",                 SetParams("1000000000000")},
+        {"motorizedBrakeTorque",                SetParams("1000000000000")},
+        {"freeWheelBrakeTorque",                SetParams("1000000000000")},
         {"maxSteeringAngle",                    SetParams("30")},
         // Aerofoil parameters
         {"EnableAerofoilMod",                   SetParams("False")},
