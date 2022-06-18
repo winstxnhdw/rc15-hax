@@ -4,6 +4,7 @@ using Simulation;
 namespace RC15_HAX;
 public class HaxObjects : HaxComponents {
     static ObjectCache<LocalPlayerRigidbody> playerRigidbody = new ObjectCache<LocalPlayerRigidbody>(0.5f);
+
     public static Rigidbody PlayerRigidbody {
         get {
             if (playerRigidbody.Object == null) return null;
@@ -11,7 +12,6 @@ public class HaxObjects : HaxComponents {
         }
     }
 
-    public static ObjectCache<CameraShake> CameraShakeObject { get; } = new ObjectCache<CameraShake>();
     public static ObjectCache<FireTimingData> FireTimingDataObject { get; } = new ObjectCache<FireTimingData>();
 
     // public static ObjectsCache<BaseWeapon> BaseWeaponObjects { get; } = new ObjectsCache<BaseWeapon>();
