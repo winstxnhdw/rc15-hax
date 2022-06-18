@@ -19,6 +19,7 @@ public class PlayerESP : HaxModules {
 
     protected override void OnDisable() {
         base.OnDisable();
+        this.PreviousRigidbodyDict.Clear();
         HaxObjects.Rigidbodies.Stop();
     }
 
@@ -31,7 +32,7 @@ public class PlayerESP : HaxModules {
     }
 
     void CalculateESP() {
-        this.PreviousRigidbodyDict = new Dictionary<int, Body>(PlayerESP.RigidbodyDict);
+        // this.PreviousRigidbodyDict = new Dictionary<int, Body>(PlayerESP.RigidbodyDict);
         PlayerESP.RigidbodyDict.Clear();
 
         foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
@@ -50,6 +51,7 @@ public class PlayerESP : HaxModules {
                 this.RigidBodyID++;
             }
 
+            this.PreviousRigidbodyDict[rigidbodyInstanceID] = currentBody;
             PlayerESP.RigidbodyDict.Add(rigidbodyInstanceID, currentBody);
         }
     }
