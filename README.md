@@ -14,7 +14,7 @@
 
 - Windows 10/11
 - [Microsoft .NET SDK](https://dotnet.microsoft.com/en-us/download)
-- Microsoft .NET Framework 3.5
+- [Microsoft .NET Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
 - C# 10.0
 
 ## Installation
