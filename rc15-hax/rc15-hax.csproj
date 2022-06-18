@@ -17,10 +17,6 @@
       <HintPath>./rc15-hax/References/Assembly-CSharp-debug.dll</HintPath>
     </Reference>
 
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>./References/Assembly-CSharp-firstpass.dll</HintPath>
-    </Reference>
-
     <Reference Include="UnityEngine">
       <HintPath>./References/UnityEngine.dll</HintPath>
     </Reference>

@@ -17,6 +17,8 @@ public static class HaxSettings {
         {"BaseInAccuracyDegrees",               SetParams("0")},
         {"MovementInAccuracyDegrees",           SetParams("0")},
         {"RepeatFireInAccuracyTotalDegrees",    SetParams("0")},
+        {"accuracyNonRecoverTime",              SetParams("0")},
+        {"accuracyDecayTime",                   SetParams("0")},
         // Weapon movement limits
         {"AimSpeed",                            SetParams("1000000000000")},
         {"MaxHorizAngle",                       SetParams("180")},
@@ -58,7 +60,9 @@ public static class HaxSettings {
         {"railFireDelay",                       SetParams("0.8")},
         // Tesla Blade parameters
         {"EnableTeslaMod",                      SetParams("True")},
-        {"EnableTeslaField",                    SetParams("True")},
+        {"TeslaFieldRadius",                    SetParams("7")},
+        {"TeslaRendererOffset",                 SetParams("0.5")},
+        {"TeslaFieldRate",                      SetParams("0.05")},
         // Wheel parameters
         {"EnableWheelMod",                      SetParams("False")},
         {"maxRPM",                              SetParams("1000")},

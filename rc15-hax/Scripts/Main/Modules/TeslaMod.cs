@@ -6,23 +6,33 @@ namespace RC15_HAX;
 public class TeslaMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableTeslaMod"); }
     bool UsingTeslaField { get; set; } = false;
+    bool RenderTeslaField { get; set; } = false;
+    int TeslaFieldStateIndex { get; set; } = 0;
     float TeslaFieldOffset { get => Global.twoPi / TeslaBladeTransformList.Count; }
-    float TeslaFieldRadius { get => 7.0f; }
+    float TeslaFieldRadius { get => HaxSettings.GetValue<float>("TeslaFieldRadius"); }
+    float TeslaFieldRate { get => HaxSettings.GetValue<float>("TeslaFieldRate"); }
+    float TeslaRendererOffset { get => HaxSettings.GetValue<float>("TeslaRendererOffset"); }
 
     List<Transform> TeslaBladeTransformList { get; } = new List<Transform>();
+
+    string[] TeslaFieldStates = new string[] {
+        "Enabled",
+        "Render",
+        "Disabled"
+    };
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        InputListener.onF5Press += this.ToggleTeslaField;
+        InputListener.onF5Press += this.CycleTeslaFieldStates;
     }
 
     protected override void OnDisable() {
         if (!this.ModEnabled) return;
 
         base.OnDisable();
-        InputListener.onF5Press -= this.ToggleTeslaField;
+        InputListener.onF5Press -= this.CycleTeslaFieldStates;
     }
 
     void Update() {
@@ -49,7 +59,6 @@ public class TeslaMod : HaxModules {
     IEnumerator ITeslaField() {
         Rigidbody playerBody = HaxObjects.PlayerRigidbody;
         Transform cameraT = Global.Camera.transform;
-        float teslaRendererOffset = 0.5f;
 
         while (true) {
             for (int i = 0; i < this.TeslaBladeTransformList.Count; i++) {
@@ -62,19 +71,34 @@ public class TeslaMod : HaxModules {
                 teslaBladeT.up = teslaBladeT.position - playerBody.worldCenterOfMass;
                 teslaBladeT.localPosition = teslaPosition;
 
+                if (!this.RenderTeslaField) continue;
                 Transform teslaRendererT = teslaBladeT.GetChild(0);
                 teslaRendererT.localScale = new Vector3(0.11f, 0.11f, 1.0f / 60.0f) * 0.25f;
-                teslaRendererT.position = cameraT.up * 5f + (playerBody.worldCenterOfMass + cameraT.forward * 7.5f) + cameraT.right * ((-this.TeslaBladeTransformList.Count / 2.0f + (i * 1)) * teslaRendererOffset);
+                teslaRendererT.position = cameraT.up * 5f + (playerBody.worldCenterOfMass + cameraT.forward * 7.5f) + cameraT.right * ((-this.TeslaBladeTransformList.Count / 2.0f + (i * 1.0f)) * this.TeslaRendererOffset);
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(this.TeslaFieldRate);
         }
     }
 
-    void ToggleTeslaField() {
-        this.UsingTeslaField = !this.UsingTeslaField;
-        StartCoroutine(this.ITeslaField());
+    void CycleTeslaFieldStates() {
+        switch (this.TeslaFieldStates[this.TeslaFieldStateIndex % this.TeslaFieldStates.Length]) {
+            case "Enabled":
+                this.RenderTeslaField = false;
+                this.UsingTeslaField = true;
+                StartCoroutine(this.ITeslaField());
+                break;
 
-        if (!this.UsingTeslaField) StopCoroutine(this.ITeslaField());
+            case "Render":
+                this.RenderTeslaField = true;
+                break;
+
+            case "Disabled":
+                this.UsingTeslaField = false;
+                StopCoroutine(this.ITeslaField());
+                break;
+        }
+
+        this.TeslaFieldStateIndex++;
     }
 }

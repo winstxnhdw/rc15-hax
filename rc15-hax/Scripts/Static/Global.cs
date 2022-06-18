@@ -22,6 +22,12 @@ public static class Global {
             .SetValue(type, value);
     }
 
+    public static T GetInternalFieldValue<T>(object type, string fieldName) {
+        return (T)type.GetType()
+                      .GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance)
+                      .GetValue(type);
+    }
+
     public static void PrintAllAncestors(Transform transform) {
         Console.Print($"Layer {transform.gameObject.layer}: {transform.name}");
 
