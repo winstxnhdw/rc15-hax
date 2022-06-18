@@ -3,8 +3,18 @@ using Simulation;
 
 namespace RC15_HAX;
 public class HaxObjects : HaxComponents {
-    static ObjectCache<LocalPlayerRigidbody> playerRigidbody = new ObjectCache<LocalPlayerRigidbody>(1);
-    public static Rigidbody PlayerRigidbody { get => playerRigidbody.Object.GetComponent<Rigidbody>(); }
+    static ObjectCache<LocalPlayerRigidbody> playerRigidbody = new ObjectCache<LocalPlayerRigidbody>(0.5f);
+    public static Rigidbody PlayerRigidbody {
+        get {
+            if (playerRigidbody.Object == null) {
+                Rigidbody rigidbody = new GameObject().AddComponent<Rigidbody>();
+                rigidbody.name = "PlayerRigidbodyNotFound";
+                return rigidbody;
+            }
+
+            return HaxObjects.playerRigidbody.Object.GetComponent<Rigidbody>();
+        }
+    }
 
     public static ObjectCache<CameraShake> CameraShakeObject { get; } = new ObjectCache<CameraShake>();
     public static ObjectCache<FireTimingData> FireTimingDataObject { get; } = new ObjectCache<FireTimingData>();
@@ -13,7 +23,7 @@ public class HaxObjects : HaxComponents {
     public static ObjectsCache<BaseWeapon> BaseWeaponObjects { get; } = new ObjectsCache<BaseWeapon>();
     public static ObjectsCache<PlasmaCannon> PlasmaCannonObjects { get; } = new ObjectsCache<PlasmaCannon>();
 
-    public static ObjectsCache<Rigidbody> Rigidbodies { get; } = new ObjectsCache<Rigidbody>(2);
+    public static ObjectsCache<Rigidbody> Rigidbodies { get; } = new ObjectsCache<Rigidbody>(1.0f);
     public static ObjectsCache<CubeAerofoil> AerofoilObjects { get; } = new ObjectsCache<CubeAerofoil>();
     public static ObjectsCache<CubeJet> CubeJetObjects { get; } = new ObjectsCache<CubeJet>();
     public static ObjectsCache<CubeRotor> RotorObjects { get; } = new ObjectsCache<CubeRotor>();

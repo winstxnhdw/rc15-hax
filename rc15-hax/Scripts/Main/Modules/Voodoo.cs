@@ -26,14 +26,21 @@ public class Voodoo : HaxModules {
         this.SummonVoodoo();
     }
 
+    void FixedUpdate() {
+        this.SummonVoodoo();
+    }
+
     void SummonVoodoo() {
         if (!this.IsDoingBlackMagic) return;
 
         Rigidbody rigidbody = this.VoodooBodies[this.CycleIndex % this.VoodooBodies.Count].Rigidbody;
+        Transform rigidbodyTransform = rigidbody.transform;
+        Transform simulationBoardTransform = rigidbodyTransform.parent;
+        Vector3 desiredPosition = this.SpawnPoint + this.CameraForwardSpawnPoint;
 
-        Transform simulationBoardTransform = rigidbody.gameObject.transform.parent;
-
-        simulationBoardTransform.position += this.SpawnPoint + this.CameraForwardSpawnPoint - rigidbody.worldCenterOfMass;
+        rigidbodyTransform.position = desiredPosition;
+        rigidbodyTransform.localRotation = Quaternion.identity;
+        simulationBoardTransform.position = desiredPosition;
     }
 
     void ToggleVoodoo() {
@@ -42,11 +49,6 @@ public class Voodoo : HaxModules {
         this.SpawnPoint = HaxObjects.PlayerRigidbody.worldCenterOfMass;
         this.CameraForwardSpawnPoint = Global.Camera.transform.forward * this.VoodooForwardOffset;
 
-        if (this.IsDoingBlackMagic) return;
-
-        this.CycleIndex++;
-        foreach (Body body in PlayerESP.RigidbodyDict.Values) {
-            body.Rigidbody.gameObject.transform.parent.position = Vector3.zero;
-        }
+        if (!this.IsDoingBlackMagic) this.CycleIndex++;
     }
 }

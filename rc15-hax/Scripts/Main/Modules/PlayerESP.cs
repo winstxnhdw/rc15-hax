@@ -35,7 +35,8 @@ public class PlayerESP : HaxModules {
         PlayerESP.RigidbodyDict.Clear();
 
         foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
-            if (rigidbody.name != "RigidBodyParent__" && !rigidbody.name.StartsWith("AIB")) continue;
+            if (rigidbody.gameObject.layer != 0) continue;
+            if (rigidbody.name == HaxObjects.PlayerRigidbody.name) continue;
 
             int rigidbodyInstanceID = rigidbody.GetInstanceID();
             Body currentBody;

@@ -1,28 +1,39 @@
+using System.Collections;
+using UnityEngine;
+
 namespace RC15_HAX;
 public class NoCameraShake : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("NoCameraShake"); }
+    Vector3 StoredCameraPosition { get; set; }
+    Quaternion StoredCameraRotation { get; set; }
+    bool IsStored { get; set; } = false;
+
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
 
+        StartCoroutine(StoreCameraTransform());
         base.OnEnable();
-        HaxObjects.CameraShakeObject.Init(this);
-        this.DisableCameraShake();
     }
 
     protected override void OnDisable() {
         if (!this.ModEnabled) return;
-
         base.OnDisable();
-        HaxObjects.CameraShakeObject.StopLog();
-        this.EnableCameraShake();
     }
 
-    void DisableCameraShake() {
-        HaxObjects.CameraShakeObject.Object.enabled = false;
+    void LateUpdate() {
+        if (!this.IsStored) return;
+
+        Global.Camera.transform.localPosition = this.StoredCameraPosition;
+        Global.Camera.transform.localRotation = this.StoredCameraRotation;
     }
 
-    void EnableCameraShake() {
-        HaxObjects.CameraShakeObject.Object.enabled = true;
+    IEnumerator StoreCameraTransform() {
+        while (true) {
+            yield return null;
+            this.StoredCameraPosition = Global.Camera.transform.localPosition;
+            this.StoredCameraRotation = Global.Camera.transform.localRotation;
+            this.IsStored = true;
+        }
     }
 }
