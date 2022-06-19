@@ -26,7 +26,7 @@ public static class HaxSettings {
         {"MaxVerticalAngle",                    SetParams("180")},
         {"MinVerticalAngle",                    SetParams("-180")},
         // SMG parameters
-        {"EnableSMGMod",                        SetParams("True")},
+        {"EnableSMGMod",                        SetParams("False")},
         {"groupFirePeriod0",                    SetParams("0")},
         {"groupFirePeriod1",                    SetParams("0")},
         {"groupFirePeriod2",                    SetParams("0")},
