@@ -18,14 +18,38 @@ public static class Global {
 
     public static void SetInternalFieldValue(object type, string fieldName, object value) {
         type.GetType()
-            .GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance)
+            .GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField)
             .SetValue(type, value);
     }
 
     public static T GetInternalFieldValue<T>(object type, string fieldName) {
         return (T)type.GetType()
-                      .GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance)
+                      .GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField)
                       .GetValue(type);
+    }
+
+    public static object GetInternalProperty(object type, string propertyName) {
+        return type.GetType()
+                   .GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty)
+                   .GetValue(type, null);
+    }
+
+    public static object GetPublicProperty(object type, string propertyName) {
+        return type.GetType()
+                   .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty)
+                   .GetValue(type, null);
+    }
+
+    public static T InvokePublicMethod<T>(object type, string methodName, object[] param) {
+        return (T)type.GetType()
+                      .GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod)
+                      .Invoke(type, param);
+    }
+
+    public static T InvokeInternalMethod<T>(object type, string methodName, object[] param) {
+        return (T)type.GetType()
+                      .GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod)
+                      .Invoke(type, param);
     }
 
     public static void PrintAllAncestors(Transform transform) {

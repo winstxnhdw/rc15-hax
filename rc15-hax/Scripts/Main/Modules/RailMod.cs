@@ -1,5 +1,6 @@
 using System.Linq;
 using Simulation;
+
 namespace RC15_HAX;
 public class RailMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRailMod"); }
