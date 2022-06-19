@@ -1,3 +1,4 @@
+using System.Linq;
 using Simulation;
 namespace RC15_HAX;
 public class RailMod : HaxModules {
@@ -21,14 +22,10 @@ public class RailMod : HaxModules {
         if (fireTimingData == null) return;
 
         float[] railReloadDurations = new float[6];
-        for (int i = 0; i < 4; i++) {
-            railReloadDurations[i] = HaxSettings.GetValue<float>($"railReloadDuration{i}");
-        }
+        railReloadDurations.Take(4).Select((x, i) => x = HaxSettings.GetValue<float>($"railReloadDuration{i}"));
 
         float[] railFirePeriods = new float[6];
-        for (int i = 1; i < 6; i++) {
-            railFirePeriods[i] = HaxSettings.GetValue<float>($"railFirePeriod{i}");
-        }
+        railFirePeriods.Skip(1).Select((x, i) => x = HaxSettings.GetValue<float>($"railFirePeriod{i}"));
 
         Global.SetInternalFieldValue(fireTimingData, "railReloadDuration", railReloadDurations);
         Global.SetInternalFieldValue(fireTimingData, "railFirePeriod", railFirePeriods);

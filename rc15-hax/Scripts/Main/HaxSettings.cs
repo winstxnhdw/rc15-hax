@@ -110,6 +110,7 @@ public static class HaxSettings {
         {"UndergroundPositionOffset",           SetParams("10")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
+        {"EnableEnemyRadarMod",                 SetParams("True")},
         {"NoCameraShake",                       SetParams("True")},
         {"VoodooForwardOffset",                 SetParams("10")}
     };

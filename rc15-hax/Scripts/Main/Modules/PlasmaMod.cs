@@ -1,5 +1,5 @@
 using Simulation;
-
+using System.Linq;
 namespace RC15_HAX;
 public class PlasmaMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlasmaMod"); }
@@ -46,12 +46,7 @@ public class PlasmaMod : HaxModules {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
         if (fireTimingData == null) return;
 
-        float[] plasmaFirePeriods = new float[6];
-
-        for (int i = 0; i < 6; i++) {
-            plasmaFirePeriods[i] = HaxSettings.GetValue<float>($"plasmaFirePeriod{i}");
-        }
-
+        float[] plasmaFirePeriods = (from i in Enumerable.Range(0, 6) select HaxSettings.GetValue<float>($"plasmaFirePeriod{i}")).ToArray();
         Global.SetInternalFieldValue(fireTimingData, "plasmaFirePeriod", plasmaFirePeriods);
         Global.SetInternalFieldValue(fireTimingData, "plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
         fireTimingData.Start();
