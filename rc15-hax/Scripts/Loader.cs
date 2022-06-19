@@ -6,17 +6,18 @@ public class Loader : MonoBehaviour {
     public static GameObject HaxModules { get; } = new GameObject();
 
     static void AddHaxModules<T>() where T : Component => Loader.HaxModules.AddComponent<T>();
+    static void AddHaxGameObject<T>() where T : Component => Loader.HaxGameObject.AddComponent<T>();
 
     public static void Load() {
         DontDestroyOnLoad(Loader.HaxGameObject);
 
-        Loader.HaxGameObject.AddComponent<CursorController>();
-        Loader.HaxGameObject.AddComponent<DebugController>();
-        Loader.HaxGameObject.AddComponent<InputListener>();
-        Loader.HaxGameObject.AddComponent<Console>();
-        Loader.HaxGameObject.AddComponent<ConsoleInputField>();
-        Loader.HaxGameObject.AddComponent<Hax>();
-        Loader.HaxGameObject.AddComponent<HaxObjects>();
+        AddHaxGameObject<CursorController>();
+        AddHaxGameObject<DebugController>();
+        AddHaxGameObject<InputListener>();
+        AddHaxGameObject<Console>();
+        AddHaxGameObject<ConsoleInputField>();
+        AddHaxGameObject<Hax>();
+        AddHaxGameObject<HaxObjects>();
 
         Loader.LoadHaxModules();
     }
@@ -43,9 +44,9 @@ public class Loader : MonoBehaviour {
         AddHaxModules<TeslaMod>();
 
         AddHaxModules<EnemyRadarMod>();
+        AddHaxModules<WheelMod>();
         // AddHaxModules<AerofoilMod>();
         // AddHaxModules<JetMod>();
-        // AddHaxModules<WheelMod>();
         // AddHaxModules<RotorMod>();
         // AddHaxModules<LegMod>();
     }
