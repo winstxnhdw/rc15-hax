@@ -17,14 +17,14 @@ public class PingAll : HaxModules {
 
         base.OnEnable();
         this.GetPlayerID();
-        this.StartCoroutine(this.IPingAllEnemies());
+        // this.StartCoroutine(this.IPingAllEnemies());
     }
 
     protected override void OnDisable() {
         if (!this.ModEnabled) return;
 
         base.OnDisable();
-        StopCoroutine(this.IPingAllEnemies());
+        // StopCoroutine(this.IPingAllEnemies());
     }
 
     void GetPlayerID() {
@@ -35,11 +35,11 @@ public class PingAll : HaxModules {
         // this.EnemyIDs = Global.InvokePublicMethod<ReadOnlyCollection<int>>(playerTeamsContainer, "GetPlayersOnTeam", new object[] { TargetType.Player, playerTeamID == 0 ? 1 : 0 });
     }
 
-    IEnumerator IPingAllEnemies() {
-        while (true) {
-            // this.EnemyIDs.ToList().ForEach(enemyID => Global.InvokeInternalMethod<object>(this.SpotManager, "SendEnemySpotted", new object[] { enemyID }));
-            // yield return new WaitForSeconds(this.PingAllInterval);
-        }
-    }
+    // IEnumerator IPingAllEnemies() {
+    //     while (true) {
+    //         // this.EnemyIDs.ToList().ForEach(enemyID => Global.InvokeInternalMethod<object>(this.SpotManager, "SendEnemySpotted", new object[] { enemyID }));
+    //         // yield return new WaitForSeconds(this.PingAllInterval);
+    //     }
+    // }
 
 }

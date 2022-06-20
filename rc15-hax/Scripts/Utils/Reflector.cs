@@ -12,16 +12,19 @@ public class Reflector {
     const BindingFlags PublicProperty = BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty;
     const BindingFlags PublicMethod = BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod;
 
-    Type Type { get; }
+    object Obj { get; }
 
-    public Reflector(object type) {
-        this.Type = type.GetType();
+    public Reflector(object obj) {
+        this.Obj = obj;
     }
+
+    Type GetObjectType(object obj) => obj.GetType();
 
     public T GetInternalField<T>(string variableName) {
         try {
-            return (T)this.Type.GetField(variableName, Reflector.InternalField)
-                               .GetValue(this.Type);
+            return (T)this.GetObjectType(this.Obj)
+                          .GetField(variableName, Reflector.InternalField)
+                          .GetValue(this.Obj);
         }
 
         catch (Exception e) {
@@ -32,8 +35,9 @@ public class Reflector {
 
     public object GetInternalProperty(string propertyName) {
         try {
-            return this.Type.GetProperty(propertyName, Reflector.InternalProperty)
-                            .GetValue(this.Type, null);
+            return this.GetObjectType(this.Obj)
+                       .GetProperty(propertyName, Reflector.InternalProperty)
+                       .GetValue(this.Obj, null);
         }
 
         catch (Exception e) {
@@ -44,8 +48,9 @@ public class Reflector {
 
     public T GetPublicField<T>(string variableName) {
         try {
-            return (T)this.Type.GetField(variableName, Reflector.PublicField)
-                               .GetValue(this.Type);
+            return (T)this.GetObjectType(this.Obj)
+                          .GetField(variableName, Reflector.PublicField)
+                          .GetValue(this.Obj);
         }
 
         catch (Exception e) {
@@ -56,8 +61,9 @@ public class Reflector {
 
     public object GetPublicProperty(string propertyName) {
         try {
-            return this.Type.GetProperty(propertyName, Reflector.PublicProperty)
-                            .GetValue(this.Type, null);
+            return this.GetObjectType(this.Obj)
+                       .GetProperty(propertyName, Reflector.PublicProperty)
+                       .GetValue(this.Obj, null);
         }
 
         catch (Exception e) {
@@ -68,8 +74,9 @@ public class Reflector {
 
     public Reflector SetInternalField(string variableName, object value) {
         try {
-            this.Type.GetField(variableName, Reflector.InternalField)
-                     .SetValue(this.Type, value);
+            this.GetObjectType(this.Obj)
+                .GetField(variableName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField)
+                .SetValue(this.Obj, value);
         }
 
         catch (Exception e) {
@@ -81,8 +88,9 @@ public class Reflector {
 
     public Reflector SetPublicField(string variableName, object value) {
         try {
-            this.Type.GetField(variableName, Reflector.PublicField)
-                     .SetValue(this.Type, value);
+            this.GetObjectType(this.Obj)
+                .GetField(variableName, Reflector.PublicField)
+                .SetValue(this.Obj, value);
         }
 
         catch (Exception e) {
@@ -94,8 +102,9 @@ public class Reflector {
 
     public Reflector InvokeInternalMethod(string methodName, object[] parameters) {
         try {
-            this.Type.GetMethod(methodName, Reflector.InternalMethod)
-                     .Invoke(this.Type, parameters);
+            this.GetObjectType(this.Obj)
+                .GetMethod(methodName, Reflector.InternalMethod)
+                .Invoke(this.Obj, parameters);
         }
 
         catch (Exception e) {
@@ -107,8 +116,9 @@ public class Reflector {
 
     public Reflector InvokePublicMethod(string methodName, params object[] args) {
         try {
-            this.Type.GetMethod(methodName, Reflector.PublicMethod)
-                     .Invoke(this.Type, args);
+            this.GetObjectType(this.Obj)
+                .GetMethod(methodName, Reflector.PublicMethod)
+                .Invoke(this.Obj, args);
         }
 
         catch (Exception e) {

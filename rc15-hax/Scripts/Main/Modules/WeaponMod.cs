@@ -59,13 +59,10 @@ public class WeaponMod : HaxModules {
     // }
 
     void ModWeaponTimingData() {
-        Console.Print("Test");
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
 
-        new Reflector(fireTimingData).SetInternalField("accuracyRecoverTime", HaxSettings.GetValue<float>("accuracyRecoverTime"))
+        new Reflector(fireTimingData).SetInternalField("accuracyNonRecoverTime", HaxSettings.GetValue<float>("accuracyNonRecoverTime"))
                                      .SetInternalField("accuracyDecayTime", HaxSettings.GetValue<float>("accuracyDecayTime"));
         fireTimingData.Start();
-        Console.Print("finsihed");
-
     }
 }
