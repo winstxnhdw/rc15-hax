@@ -20,9 +20,9 @@ public class EnemyRadarMod : HaxModules {
         if (!this.ModEnabled) return;
 
         foreach (CubeEnemyRadar enemyRadar in HaxObjects.PlayerRigidbody.gameObject.GetComponentsInChildren<CubeEnemyRadar>()) {
-            Global.SetInternalFieldValue(enemyRadar, "_lastTargetCheck", 31);
-            Global.SetInternalFieldValue(enemyRadar, "_range", float.MaxValue);
-            Global.SetInternalFieldValue(enemyRadar, "antiJammerPower", float.MaxValue);
+            new Reflector(enemyRadar).SetInternalField("_lastTargetCheck", 31)
+                                     .SetInternalField("_range", float.MaxValue)
+                                     .SetPublicField("antiJammerPower", float.MaxValue);
         }
     }
 }

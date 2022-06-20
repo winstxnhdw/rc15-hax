@@ -20,15 +20,14 @@ public class WheelMod : HaxModules {
         if (!this.ModEnabled) return;
 
         foreach (CubeWheel cubeWheel in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeWheel>()) {
-            Global.SetInternalFieldValue(cubeWheel, "wheelMass", 0.0f);
-            Global.SetInternalFieldValue(cubeWheel, "massPerWheel", 0.0f);
-            Global.SetInternalFieldValue(cubeWheel, "maxRPM", HaxSettings.GetValue<float>("maxRPM"));
-            Global.SetInternalFieldValue(cubeWheel, "maxSteeringAngle", HaxSettings.GetValue<float>("maxSteeringAngle"));
-            Global.SetInternalFieldValue(cubeWheel, "stoppingBrakeTorque", HaxSettings.GetValue<float>("stoppingBrakeTorque"));
-            Global.SetInternalFieldValue(cubeWheel, "motorizedBrakeTorque", HaxSettings.GetValue<float>("motorizedBrakeTorque"));
-            Global.SetInternalFieldValue(cubeWheel, "freeWheelBrakeTorque", HaxSettings.GetValue<float>("freeWheelBrakeTorque"));
-            Global.GetInternalFieldValue<WheelFriction>(cubeWheel, "friction").groundFrictionMultiplier = HaxSettings.GetValue<float>("groundFrictionMultiplier");
-
+            new Reflector(cubeWheel).SetInternalField("wheelMass", 0.0f)
+                                    .SetInternalField("massPerWheel", 0.0f)
+                                    .SetInternalField("maxRPM", HaxSettings.GetValue<float>("maxRPM"))
+                                    .SetInternalField("maxSteeringAngle", HaxSettings.GetValue<float>("maxSteeringAngle"))
+                                    .SetInternalField("stoppingBrakeTorque", HaxSettings.GetValue<float>("stoppingBrakeTorque"))
+                                    .SetInternalField("motorizedBrakeTorque", HaxSettings.GetValue<float>("motorizedBrakeTorque"))
+                                    .SetInternalField("freeWheelBrakeTorque", HaxSettings.GetValue<float>("freeWheelBrakeTorque"))
+                                    .GetInternalField<WheelFriction>("friction").groundFrictionMultiplier = HaxSettings.GetValue<float>("groundFrictionMultiplier");
         }
     }
 }

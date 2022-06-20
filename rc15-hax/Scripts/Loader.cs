@@ -31,6 +31,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<Freecam>();
         AddHaxModules<Voodoo>();
         AddHaxModules<Player>();
+        AddHaxModules<PingAll>();
 
         AddHaxModules<FakeCrosshair>();
         AddHaxModules<NoFog>();

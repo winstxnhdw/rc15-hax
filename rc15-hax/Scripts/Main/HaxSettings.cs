@@ -108,6 +108,9 @@ public static class HaxSettings {
         // UndergroundSpawn parameters
         {"SpawnUnderground",                    SetParams("False")},
         {"UndergroundPositionOffset",           SetParams("10")},
+        // PingAll parameters
+        {"EnablePingAll",                       SetParams("True")},
+        {"PingAllInterval",                     SetParams("2")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
         {"EnableEnemyRadarMod",                 SetParams("True")},

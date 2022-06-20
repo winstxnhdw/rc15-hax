@@ -1,5 +1,5 @@
 using Simulation;
-
+using UnityEngine;
 namespace RC15_HAX;
 public class WeaponMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableWeaponMod"); }
@@ -20,9 +20,16 @@ public class WeaponMod : HaxModules {
         // this.ModWeapon();
     }
 
-    // void Update() {
-    //     this.ModWeapon();
-    // }
+    void Update() {
+        // this.ModWeapon();
+        // foreach (Object baseWeapon in HaxObjects.BaseWeaponObjects.Objects) {
+        //     Reflector weaponReflection = new Reflector(baseWeapon);
+        //     WeaponInfo weaponStats = weaponReflection.GetInternalField<WeaponInfo>("WeaponStats");
+        //     weaponStats.AimSpeed = 100000000.0f;
+        //     weaponReflection.SetInternalField("WeaponStats", weaponStats);
+        //     Console.Print(weaponReflection.GetInternalField<WeaponInfo>("WeaponStats").AimSpeed);
+        // }
+    }
 
     // void ModWeapon() {
     //     if (!this.ModEnabled) return;
@@ -52,10 +59,13 @@ public class WeaponMod : HaxModules {
     // }
 
     void ModWeaponTimingData() {
+        Console.Print("Test");
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
 
-        Global.SetInternalFieldValue(fireTimingData, "accuracyNonRecoverTime", HaxSettings.GetValue<float>("accuracyNonRecoverTime"));
-        Global.SetInternalFieldValue(fireTimingData, "accuracyDecayTime", HaxSettings.GetValue<float>("accuracyDecayTime"));
+        new Reflector(fireTimingData).SetInternalField("accuracyRecoverTime", HaxSettings.GetValue<float>("accuracyRecoverTime"))
+                                     .SetInternalField("accuracyDecayTime", HaxSettings.GetValue<float>("accuracyDecayTime"));
         fireTimingData.Start();
+        Console.Print("finsihed");
+
     }
 }

@@ -47,8 +47,8 @@ public class PlasmaMod : HaxModules {
         if (fireTimingData == null) return;
 
         float[] plasmaFirePeriods = (from i in Enumerable.Range(0, 6) select HaxSettings.GetValue<float>($"plasmaFirePeriod{i}")).ToArray();
-        Global.SetInternalFieldValue(fireTimingData, "plasmaFirePeriod", plasmaFirePeriods);
-        Global.SetInternalFieldValue(fireTimingData, "plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
+        new Reflector(fireTimingData).SetInternalField("plasmaFirePeriod", plasmaFirePeriods)
+                                     .SetInternalField("plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
         fireTimingData.Start();
     }
 }

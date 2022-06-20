@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,15 +53,19 @@ public class Console : HaxComponents {
 
     public static void ScrollToBottom() => Console.Scroll = new Vector2(0.0f, Console.Viewport.height);
 
-    public static void Print(object log) => ConsoleSettings.Logs.Add(log.ToString());
 
-    public static void Print(IList<string> logs) => ConsoleSettings.Logs.AddRange(logs);
+    public static void Print(object log) {
+        string strLog = log.ToString();
 
-    public static void Print(IList<bool> logs) => Print(new List<bool>(logs).ConvertAll(x => x.ToString()));
+        if (strLog.Contains("\n")) {
+            Print(strLog.Split(Environment.NewLine.ToCharArray()));
+            return;
+        }
 
-    public static void Print(IList<float> logs) => Print(new List<float>(logs).ConvertAll(x => x.ToString()));
+        ConsoleSettings.Logs.Add(strLog);
+    }
 
-    public static void Print(IList<int> logs) => Print(new List<int>(logs).ConvertAll(x => x.ToString()));
+    public static void Print(IList<object> logs) => ConsoleSettings.Logs.AddRange(new List<object>(logs).ConvertAll(x => x.ToString().Trim(Environment.NewLine.ToCharArray())));
 
     void OnDestroy() {
         InputListener.onBackquotePress -= this.ShowConsole;

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace RC15_HAX;
-readonly public struct Body {
+public class Body {
     float OriginalMass { get; }
     float DeltaTime { get; }
     Vector3 PreviousPosition { get; }
