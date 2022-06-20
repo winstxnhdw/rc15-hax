@@ -17,8 +17,6 @@ public static class HaxSettings {
         {"BaseInAccuracyDegrees",               SetParams("0")},
         {"MovementInAccuracyDegrees",           SetParams("0")},
         {"RepeatFireInAccuracyTotalDegrees",    SetParams("0")},
-        {"accuracyNonRecoverTime",              SetParams("0")},
-        {"accuracyDecayTime",                   SetParams("0")},
         // Weapon movement limits
         {"AimSpeed",                            SetParams("1000000000000")},
         {"MaxHorizAngle",                       SetParams("180")},
@@ -108,6 +106,9 @@ public static class HaxSettings {
         // UndergroundSpawn parameters
         {"SpawnUnderground",                    SetParams("False")},
         {"UndergroundPositionOffset",           SetParams("10")},
+        // PingAll parameters
+        {"EnablePingAll",                       SetParams("True")},
+        {"PingAllInterval",                     SetParams("2")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
         {"EnableEnemyRadarMod",                 SetParams("True")},

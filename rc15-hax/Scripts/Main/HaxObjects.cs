@@ -13,8 +13,6 @@ public class HaxObjects : HaxComponents {
     }
 
     public static ObjectCache<FireTimingData> FireTimingDataObject { get; } = new ObjectCache<FireTimingData>();
-
-    // public static ObjectsCache<BaseWeapon> BaseWeaponObjects { get; } = new ObjectsCache<BaseWeapon>();
     // public static ObjectsCache<PlasmaCannon> PlasmaCannonObjects { get; } = new ObjectsCache<PlasmaCannon>();
 
     public static ObjectsCache<Rigidbody> Rigidbodies { get; } = new ObjectsCache<Rigidbody>(1.0f);

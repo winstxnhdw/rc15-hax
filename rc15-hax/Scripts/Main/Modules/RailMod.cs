@@ -28,9 +28,9 @@ public class RailMod : HaxModules {
         float[] railFirePeriods = new float[6];
         railFirePeriods.Skip(1).Select((x, i) => x = HaxSettings.GetValue<float>($"railFirePeriod{i}"));
 
-        Global.SetInternalFieldValue(fireTimingData, "railReloadDuration", railReloadDurations);
-        Global.SetInternalFieldValue(fireTimingData, "railFirePeriod", railFirePeriods);
-        Global.SetInternalFieldValue(fireTimingData, "railFireDelay", HaxSettings.GetValue<float>("railFireDelay"));
+        new Reflector(fireTimingData).SetInternalField("railReloadDuration", railReloadDurations)
+                                     .SetInternalField("railFirePeriod", railFirePeriods)
+                                     .SetInternalField("railFireDelay", HaxSettings.GetValue<float>("railFireDelay"));
         fireTimingData.Start();
     }
 }
