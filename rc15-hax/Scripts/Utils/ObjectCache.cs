@@ -6,16 +6,22 @@ namespace RC15_HAX;
 
 public class ObjectCache : ObjectCacheBase {
     public UnityEngine.Object Object { get; set; }
-    public Type ObjectType { get; set; }
-    // string TypeName { get => typeof(T).FullName; }
+    Type ObjectType { get; set; }
+    string TypeName { get => this.ObjectType.FullName; }
 
     public ObjectCache(string componentName, float updateInterval = 2.0f) : base(updateInterval) {
-        this.ObjectType = Type.GetType(componentName);
-        this.Object = GameObject.FindObjectOfType(this.ObjectType);
+        this.ObjectType = Global.GetRobocraftObject(componentName);
+        try {
+            this.Object = GameObject.FindObjectOfType(this.ObjectType);
+        }
+
+        catch (Exception e) {
+            Console.Print($"Unable to find object of type {this.TypeName}:\n{e}");
+        }
     }
 
     IEnumerator ICacheObjects() {
-        // Console.Print($"Caching {this.TypeName} object(s)..");
+        Console.Print($"Caching {this.TypeName} object(s)..");
 
         while (true) {
             this.Object = GameObject.FindObjectOfType(this.ObjectType);
@@ -30,7 +36,7 @@ public class ObjectCache : ObjectCacheBase {
 
     public void Stop() {
         base.Self.StopCoroutine(this.ICacheObjects());
-        // Console.Print($"Stopping cache for {this.TypeName} object(s).");
+        Console.Print($"Stopping cache for {this.TypeName} object(s).");
     }
 }
 

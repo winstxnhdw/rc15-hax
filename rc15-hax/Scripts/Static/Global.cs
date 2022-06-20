@@ -1,9 +1,14 @@
+using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace RC15_HAX;
 public static class Global {
     public const float twoPi = Mathf.PI * 2.0f;
     static Camera camera = Camera.main;
+    static Assembly RobocraftAssembly { get => Assembly.Load("Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"); }
+
+    public static Type GetRobocraftObject(string componentName) => Global.RobocraftAssembly.GetType(componentName);
 
     public static bool IsNullOrWhiteSpace(string value) {
         if (value == null) return true;

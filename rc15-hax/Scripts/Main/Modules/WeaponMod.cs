@@ -1,4 +1,3 @@
-using Simulation;
 using UnityEngine;
 namespace RC15_HAX;
 public class WeaponMod : HaxModules {
@@ -7,62 +6,49 @@ public class WeaponMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
-
         base.OnEnable();
-        this.ModWeaponTimingData();
-        // HaxObjects.BaseWeaponObjects.Init(this);
     }
 
     protected override void OnDisable() {
         if (!this.ModEnabled) return;
+
         base.OnDisable();
-        // HaxObjects.BaseWeaponObjects.StopLog();
-        // this.ModWeapon();
+        this.ModWeapon();
     }
 
     void Update() {
-        // this.ModWeapon();
-        // foreach (Object baseWeapon in HaxObjects.BaseWeaponObjects.Objects) {
-        //     Reflector weaponReflection = new Reflector(baseWeapon);
-        //     WeaponInfo weaponStats = weaponReflection.GetInternalField<WeaponInfo>("WeaponStats");
-        //     weaponStats.AimSpeed = 100000000.0f;
-        //     weaponReflection.SetInternalField("WeaponStats", weaponStats);
-        //     Console.Print(weaponReflection.GetInternalField<WeaponInfo>("WeaponStats").AimSpeed);
-        // }
+        this.ModWeapon();
     }
 
-    // void ModWeapon() {
-    //     if (!this.ModEnabled) return;
+    void ModWeapon() {
+        if (!this.ModEnabled) return;
 
-    //     foreach (BaseWeapon baseWeapon in HaxObjects.BaseWeaponObjects.Objects) {
-    //         // Accuracy
-    //         base.ModifyValues(ref baseWeapon.WeaponStats.RecoilForce, "RecoilForce");
-    //         base.ModifyValues(ref baseWeapon.Accuracy.BaseInAccuracyDegrees, "BaseInAccuracyDegrees");
-    //         base.ModifyValues(ref baseWeapon.Accuracy.MovementInAccuracyDegrees, "MovementInAccuracyDegrees");
-    //         base.ModifyValues(ref baseWeapon.Accuracy.RepeatFireInAccuracyTotalDegrees, "RepeatFireInAccuracyTotalDegrees");
+        foreach (Object baseWeapon in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftObject("BaseWeapon"))) {
+            Reflector weaponReflection = new Reflector(baseWeapon);
+            WeaponInfo WeaponStats = weaponReflection.GetInternalField<WeaponInfo>("WeaponStats");
+            WeaponAccuracy Accuracy = weaponReflection.GetInternalField<WeaponAccuracy>("Accuracy");
+            WeaponMoveLimits MoveLimits = weaponReflection.GetInternalField<WeaponMoveLimits>("MoveLimits");
 
-    //         // Movement limits
-    //         base.ModifyValues(ref baseWeapon.WeaponStats.AimSpeed, "AimSpeed");
-    //         base.ModifyValues(ref baseWeapon.MoveLimits.MaxHorizAngle, "MaxHorizAngle");
-    //         base.ModifyValues(ref baseWeapon.MoveLimits.MinHorizAngle, "MinHorizAngle");
-    //         base.ModifyValues(ref baseWeapon.MoveLimits.MaxVerticalAngle, "MaxVerticalAngle");
-    //         base.ModifyValues(ref baseWeapon.MoveLimits.MinVerticalAngle, "MinVerticalAngle");
+            // Accuracy
+            base.ModifyValues(ref WeaponStats.RecoilForce, "RecoilForce");
+            base.ModifyValues(ref Accuracy.BaseInAccuracyDegrees, "BaseInAccuracyDegrees");
+            base.ModifyValues(ref Accuracy.MovementInAccuracyDegrees, "MovementInAccuracyDegrees");
+            base.ModifyValues(ref Accuracy.RepeatFireInAccuracyTotalDegrees, "RepeatFireInAccuracyTotalDegrees");
 
-    //         // Projectile
-    //         if (this.ProjectileModEnabled) {
-    //             base.ModifyValues(ref baseWeapon.WeaponStats.ProjectileSpeed, "ProjectileSpeed");
-    //             base.ModifyValues(ref baseWeapon.WeaponStats.ProjectileRange, "ProjectileRange");
-    //         };
+            // Movement limits
+            base.ModifyValues(ref WeaponStats.AimSpeed, "AimSpeed");
+            base.ModifyValues(ref MoveLimits.MaxHorizAngle, "MaxHorizAngle");
+            base.ModifyValues(ref MoveLimits.MinHorizAngle, "MinHorizAngle");
+            base.ModifyValues(ref MoveLimits.MaxVerticalAngle, "MaxVerticalAngle");
+            base.ModifyValues(ref MoveLimits.MinVerticalAngle, "MinVerticalAngle");
 
-    //         base.DefaultStored = true;
-    //     }
-    // }
+            // Projectile
+            if (this.ProjectileModEnabled) {
+                base.ModifyValues(ref WeaponStats.ProjectileSpeed, "ProjectileSpeed");
+                base.ModifyValues(ref WeaponStats.ProjectileRange, "ProjectileRange");
+            };
 
-    void ModWeaponTimingData() {
-        FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
-
-        new Reflector(fireTimingData).SetInternalField("accuracyNonRecoverTime", HaxSettings.GetValue<float>("accuracyNonRecoverTime"))
-                                     .SetInternalField("accuracyDecayTime", HaxSettings.GetValue<float>("accuracyDecayTime"));
-        fireTimingData.Start();
+            base.DefaultStored = true;
+        }
     }
 }
