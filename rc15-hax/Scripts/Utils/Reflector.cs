@@ -7,10 +7,16 @@ public class Reflector {
     const BindingFlags InternalField = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField;
     const BindingFlags InternalProperty = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty;
     const BindingFlags InternalMethod = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod;
+    const BindingFlags StaticInternalField = BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetField;
+    const BindingFlags StaticInternalProperty = BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetProperty;
+    const BindingFlags StaticInternalMethod = BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod;
 
     const BindingFlags PublicField = BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetField;
     const BindingFlags PublicProperty = BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty;
     const BindingFlags PublicMethod = BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod;
+    const BindingFlags PublicStaticField = BindingFlags.Public | BindingFlags.Static | BindingFlags.GetField;
+    const BindingFlags PublicStaticProperty = BindingFlags.Public | BindingFlags.Static | BindingFlags.GetProperty;
+    const BindingFlags PublicStaticMethod = BindingFlags.Public | BindingFlags.Static | BindingFlags.InvokeMethod;
 
     object Obj { get; }
 
@@ -133,6 +139,19 @@ public class Reflector {
             return (T)this.GetObjectType(this.Obj)
                           .GetMethod(methodName, Reflector.PublicMethod)
                           .Invoke(this.Obj, args);
+        }
+
+        catch (Exception e) {
+            this.LogReflectionError(e);
+            return default;
+        }
+    }
+
+    public T InvokePublicStaticMethod<T>(string methodName, params object[] args) {
+        try {
+            return (T)this.GetObjectType(this.Obj)
+                          .GetMethod(methodName, Reflector.PublicStaticMethod)
+                          .Invoke(null, args);
         }
 
         catch (Exception e) {
