@@ -24,7 +24,13 @@ public class Reflector {
         this.Obj = obj;
     }
 
+    public Reflector(Type obj) {
+        this.Obj = obj;
+    }
+
     Type GetObjectType(object obj) => obj.GetType();
+
+    Type GetObjectType(Type obj) => obj;
 
     public T GetInternalField<T>(string variableName) {
         try {
@@ -121,7 +127,7 @@ public class Reflector {
         return this;
     }
 
-    public T InvokeInternalMethod<T>(string methodName, object[] args) {
+    public T InvokeInternalMethod<T>(string methodName, params object[] args) {
         try {
             return (T)this.GetObjectType(this.Obj)
                           .GetMethod(methodName, Reflector.InternalMethod)
