@@ -3,18 +3,13 @@ using Simulation;
 
 namespace RC15_HAX;
 public class SMGMod : HaxModules {
-    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableSMGMod"); }
+    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableSMGMod"); }
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
         this.ModSMG();
-    }
-
-    protected override void OnDisable() {
-        if (!this.ModEnabled) return;
-        base.OnDisable();
     }
 
     void ModSMG() {

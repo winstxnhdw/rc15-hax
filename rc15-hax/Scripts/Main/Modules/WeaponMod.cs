@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace RC15_HAX;
 public class WeaponMod : HaxModules {
-    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableWeaponMod"); }
+    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableWeaponMod"); }
     bool ProjectileModEnabled { get => HaxSettings.GetValue<bool>("EnableProjectileMod"); }
 
     protected override void OnEnable() {

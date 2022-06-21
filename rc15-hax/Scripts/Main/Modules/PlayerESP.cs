@@ -2,17 +2,9 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class PlayerESP : HaxModules {
-    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlayerESP"); }
+    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlayerESP"); }
     float TextBottomPadding { get => HaxSettings.GetValue<float>("TextBottomPadding"); }
     float OutlineBoxSize { get => HaxSettings.GetValue<float>("OutlineBoxSize") * Settings.SizeRatio; }
-
-    protected override void OnEnable() {
-        base.OnEnable();
-    }
-
-    protected override void OnDisable() {
-        base.OnDisable();
-    }
 
     void OnGUI() {
         this.DrawESP();

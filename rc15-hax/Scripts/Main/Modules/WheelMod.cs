@@ -1,24 +1,15 @@
 namespace RC15_HAX;
 public class WheelMod : HaxModules {
-    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableWheelMod"); }
+    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableWheelMod"); }
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
         base.OnEnable();
-    }
-
-    protected override void OnDisable() {
-        if (!this.ModEnabled) return;
-        base.OnDisable();
-    }
-
-    void Update() {
-        this.ModWheel();
+        new ModCoroutine(this, this.ModWheel).Init(2.0f);
     }
 
     void ModWheel() {
-        if (!this.ModEnabled) return;
-
         foreach (CubeWheel cubeWheel in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeWheel>()) {
             new Reflector(cubeWheel).SetInternalField("wheelMass", 0.0f)
                                     .SetInternalField("massPerWheel", 0.0f)

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class NoFog : HaxModules {
-    bool ModEnabled { get => HaxSettings.GetValue<bool>("NoFog"); }
+    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("NoFog"); }
     const float DefaultFarClipPlane = 650.0f;
 
     protected override void OnEnable() {
@@ -25,7 +25,7 @@ public class NoFog : HaxModules {
     }
 
     void DisableNoFog() {
-        RenderSettings.fog = true;
-        Global.Camera.farClipPlane = NoFog.DefaultFarClipPlane;
+        // RenderSettings.fog = true;
+        // Global.Camera.farClipPlane = NoFog.DefaultFarClipPlane;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Simulation;
 namespace RC15_HAX;
 public class PlasmaMod : HaxModules {
-    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlasmaMod"); }
+    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlasmaMod"); }
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;

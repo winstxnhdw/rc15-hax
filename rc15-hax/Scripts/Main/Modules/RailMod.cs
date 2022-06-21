@@ -3,19 +3,13 @@ using Simulation;
 
 namespace RC15_HAX;
 public class RailMod : HaxModules {
-    bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRailMod"); }
+    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRailMod"); }
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
         this.ModRail();
-    }
-
-    protected override void OnDisable() {
-        if (!this.ModEnabled) return;
-
-        base.OnDisable();
     }
 
     void ModRail() {
