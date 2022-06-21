@@ -1,48 +1,56 @@
-using Simulation;
+using System.Reflection;
 using System.Linq;
+using UnityEngine;
+using Simulation;
 namespace RC15_HAX;
 public class PlasmaMod : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlasmaMod"); }
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
         base.OnEnable();
-        this.ModPlamsaTimingData();
-        // HaxObjects.PlasmaCannonObjects.Init(this);
+        this.ModPlasmaTimingData();
     }
 
     protected override void OnDisable() {
         if (!this.ModEnabled) return;
+
         base.OnDisable();
-        // HaxObjects.PlasmaCannonObjects.StopLog();
         // this.ModPlasma();
     }
 
-    // void Update() {
-    //     this.ModPlasma();
-    // }
+    void Update() {
+        this.ModPlasma();
+    }
 
-    // void ModPlasma() {
-    //     if (!this.ModEnabled) return;
+    void ModPlasma() {
+        if (!this.ModEnabled) return;
 
-    //     foreach (PlasmaCannon plasmaCannon in HaxObjects.PlasmaCannonObjects.Objects) {
-    //         base.ModifyValues(ref plasmaCannon.secondPlasmaShot.fireTwice, "fireTwice");
+        foreach (Object plasmaCannon in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("PlasmaCannon"))) {
+            object internalPlasma = new Reflector(plasmaCannon).GetInternalField<object>("_internalWeapon");
+            Reflector internalPlasmaReflection = new Reflector(internalPlasma);
+            object weaponManager = internalPlasmaReflection.SetInternalField("_currentDamage", 1000000)
+                                    .SetInternalField("_currentExplosionRadius", 20.0f)
+                                    .GetInternalField<object>("weaponManager");
+            // object actualRefirePeriodProperty = new Reflector(weaponManager).GetInternalProperty("actualRefirePeriod");
+            // new Reflector(actualRefirePeriodProperty).SetInternalField(0.1f);
 
-    //         base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDelay, "secondFireDelay");
+            // base.ModifyValues(ref plasmaCannon.secondPlasmaShot.fireTwice, "fireTwice");
 
-    //         base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDeviation, "secondFireDeviation");
+            // base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDelay, "secondFireDelay");
 
-    //         base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileSpeed, "PlasmaProjectileSpeed");
+            // base.ModifyValues(ref plasmaCannon.secondPlasmaShot.secondFireDeviation, "secondFireDeviation");
 
-    //         base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileRange, "PlasmaProjectileRange");
+            // base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileSpeed, "PlasmaProjectileSpeed");
 
-    //         base.DefaultStored = true;
-    //     }
+            // base.ModifyValues(ref plasmaCannon.WeaponStats.ProjectileRange, "PlasmaProjectileRange");
 
-    //     this.ModPlamsaTimingData();
-    // }
+            // base.DefaultStored = true;
+        }
+    }
 
-    void ModPlamsaTimingData() {
+    void ModPlasmaTimingData() {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
         if (fireTimingData == null) return;
 

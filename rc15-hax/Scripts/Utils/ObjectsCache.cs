@@ -10,7 +10,7 @@ public class ObjectsCache : ObjectCacheBase {
     string TypeName { get => this.ObjectType.FullName; }
 
     public ObjectsCache(string componentName, float updateInterval = 5.0f) : base(updateInterval) {
-        this.ObjectType = Global.GetRobocraftObject(componentName);
+        this.ObjectType = Global.GetRobocraftType(componentName);
 
         try {
             this.Objects = GameObject.FindObjectsOfType(this.ObjectType);

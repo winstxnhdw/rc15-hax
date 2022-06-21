@@ -46,6 +46,7 @@ public class Reflector {
         }
     }
 
+
     public T GetPublicField<T>(string variableName) {
         try {
             return (T)this.GetObjectType(this.Obj)
@@ -91,6 +92,20 @@ public class Reflector {
             this.GetObjectType(this.Obj)
                 .GetField(variableName, Reflector.PublicField)
                 .SetValue(this.Obj, value);
+        }
+
+        catch (Exception e) {
+            this.LogReflectionError(e);
+        }
+
+        return this;
+    }
+
+    public Reflector SetPublicProperty(string propertyName, object value) {
+        try {
+            this.GetObjectType(this.Obj)
+                .GetProperty(propertyName, Reflector.PublicProperty)
+                .SetValue(this.Obj, value, null);
         }
 
         catch (Exception e) {
