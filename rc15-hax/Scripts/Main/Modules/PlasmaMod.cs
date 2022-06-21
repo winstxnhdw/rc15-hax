@@ -30,9 +30,9 @@ public class PlasmaMod : HaxModules {
         foreach (Object plasmaCannon in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("PlasmaCannon"))) {
             object internalPlasma = new Reflector(plasmaCannon).GetInternalField<object>("_internalWeapon");
             Reflector internalPlasmaReflection = new Reflector(internalPlasma);
-            object weaponManager = internalPlasmaReflection.SetInternalField("_currentDamage", 1000000)
-                                    .SetInternalField("_currentExplosionRadius", 20.0f)
-                                    .GetInternalField<object>("weaponManager");
+            internalPlasmaReflection.SetInternalField("_currentDamage", 1000000)
+                                    .SetInternalField("_currentExplosionRadius", 20.0f);
+            // .GetInternalField<object>("weaponManager");
             // object actualRefirePeriodProperty = new Reflector(weaponManager).GetInternalProperty("actualRefirePeriod");
             // new Reflector(actualRefirePeriodProperty).SetInternalField(0.1f);
 
@@ -52,11 +52,9 @@ public class PlasmaMod : HaxModules {
 
     void ModPlasmaTimingData() {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
-        if (fireTimingData == null) return;
-
         float[] plasmaFirePeriods = (from i in Enumerable.Range(0, 6) select HaxSettings.GetValue<float>($"plasmaFirePeriod{i}")).ToArray();
         new Reflector(fireTimingData).SetInternalField("plasmaFirePeriod", plasmaFirePeriods)
-                                     .SetInternalField("plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
+                                    .SetInternalField("plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
         fireTimingData.Start();
     }
 }

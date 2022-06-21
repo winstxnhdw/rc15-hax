@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Simulation;
 
 namespace RC15_HAX;
 public class TeslaMod : HaxModules {
@@ -36,11 +37,25 @@ public class TeslaMod : HaxModules {
     }
 
     void Update() {
+        if (!this.ModEnabled) return;
+
+        this.NoCollisionTesla();
         this.ModTesla();
     }
 
     void ModTesla() {
-        if (!this.ModEnabled) return;
+        foreach (Object teslaRam in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeTeslaRam>()) {
+            object internalTesla = new Reflector(teslaRam).GetInternalProperty("internalTeslaRam");
+
+            Reflector internalNanoReflection = new Reflector(internalTesla).SetInternalField("_damage", int.MaxValue)
+                                                         .SetInternalField("_forceMagnitude", float.MaxValue)
+                                                         .SetInternalField("_selfDamage", 0)
+                                                         .SetInternalField("_ownerId", 0);
+
+        }
+    }
+
+    void NoCollisionTesla() {
         this.TeslaBladeTransformList.Clear();
 
         foreach (Collider collider in HaxObjects.PlayerRigidbody.gameObject.GetComponentsInChildren<Collider>()) {

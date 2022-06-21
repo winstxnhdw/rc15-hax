@@ -28,11 +28,10 @@ public class NanoMod : HaxModules {
         foreach (Object nanoBeam in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("Simulation.NanoBeam"))) {
             object internalNano = new Reflector(nanoBeam).GetInternalField<object>("_internalWeapon");
 
-            Reflector internalNanoReflection = new Reflector(internalNano).SetInternalField("_damagePerSecond", 1000000)
-                                                         .SetInternalField("_healPerSecond", 1000000)
+            Reflector internalNanoReflection = new Reflector(internalNano).SetInternalField("_damagePerSecond", int.MaxValue)
+                                                         .SetInternalField("_healPerSecond", int.MaxValue)
                                                          .SetInternalField("_range", float.MaxValue);
 
-            Console.Print(internalNanoReflection.GetInternalField<float>("_range"));
             // object actualRefirePeriodProperty = new Reflector(weaponManager).GetInternalProperty("actualRefirePeriod");
             // new Reflector(actualRefirePeriodProperty).SetInternalField(0.1f);
 
