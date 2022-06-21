@@ -56,6 +56,11 @@ public static class HaxSettings {
         {"railFirePeriod4",                     SetParams("0.3")},
         {"railFirePeriod5",                     SetParams("0.3")},
         {"railFireDelay",                       SetParams("0.8")},
+        // Nano Beam parameters
+        {"EnableNanoMod",                       SetParams("True")},
+        {"NanoDPS",                             SetParams("500000")},
+        {"NanoHPS",                             SetParams("2147483647")},
+        {"NanoRange",                           SetParams("1000000000000")},
         // Tesla Blade parameters
         {"EnableTeslaMod",                      SetParams("True")},
         {"TeslaFieldRadius",                    SetParams("7")},
