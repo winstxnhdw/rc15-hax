@@ -8,7 +8,13 @@ public static class Global {
     static Camera camera = Camera.main;
     static Assembly RobocraftAssembly { get => Assembly.Load("Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"); }
 
-    public static Type GetRobocraftType(string componentName) => Global.RobocraftAssembly.GetType(componentName);
+    public static Type GetRobocraftType(string componentName) {
+        Type component = Global.RobocraftAssembly.GetType(componentName);
+
+        if (component == null) Console.Print($"Invalid RobocraftType: {componentName}");
+
+        return component;
+    }
 
     public static bool IsNullOrWhiteSpace(string value) {
         if (value == null) return true;

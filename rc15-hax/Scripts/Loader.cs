@@ -40,6 +40,7 @@ public class Loader : MonoBehaviour {
 
         AddHaxModules<WeaponMod>();
         AddHaxModules<PlasmaMod>();
+        AddHaxModules<NanoMod>();
         AddHaxModules<RailMod>();
         AddHaxModules<SMGMod>();
         AddHaxModules<TeslaMod>();
