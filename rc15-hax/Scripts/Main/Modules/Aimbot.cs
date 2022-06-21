@@ -40,7 +40,7 @@ public class Aimbot : HaxModules {
     }
 
     void StopAimbot() {
-        Global.Camera.transform.position = Global.SimulationCameraT.position;
-        Global.Camera.transform.eulerAngles = Global.SimulationCameraT.eulerAngles;
+        Global.Camera.transform.position = Global.SimulationCameraTransform.position;
+        Global.Camera.transform.eulerAngles = Global.SimulationCameraTransform.eulerAngles;
     }
 }

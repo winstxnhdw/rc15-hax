@@ -31,7 +31,7 @@ public class Freecam : HaxModules {
     void BecomePhantom() {
         if (!this.IsPhantom) return;
 
-        Global.SimulationCameraT.position = this.SimulationCameraPosition;
+        Global.SimulationCameraTransform.position = this.SimulationCameraPosition;
         this.SimulationCameraPosition += Global.GetNoClipInputVector();
     }
 

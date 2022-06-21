@@ -26,43 +26,35 @@ public static class Global {
         return true;
     }
 
-    public static void PrintAllDescendents(Transform transform) {
-        Console.Print($"Layer {transform.gameObject.layer}: {transform.name}");
-
-        foreach (Transform child in transform) {
-            Global.PrintAllDescendents(child);
-        }
-    }
-
     public static Vector3 GetNoClipInputVector() {
-        Transform cameraT = Global.Camera.transform;
+        Transform cameraTransform = Global.Camera.transform;
         Vector3 directionVector = Vector3.zero;
 
         // Forward-back
         if (Input.GetKey(KeyCode.W)) {
-            directionVector += cameraT.forward;
+            directionVector += cameraTransform.forward;
         }
 
         else if (Input.GetKey(KeyCode.S)) {
-            directionVector -= cameraT.forward;
+            directionVector -= cameraTransform.forward;
         }
 
         // Right-left
         if (Input.GetKey(KeyCode.D)) {
-            directionVector += cameraT.right;
+            directionVector += cameraTransform.right;
         }
 
         else if (Input.GetKey(KeyCode.A)) {
-            directionVector -= cameraT.right;
+            directionVector -= cameraTransform.right;
         }
 
         // Up-down
         if (Input.GetKey(KeyCode.Space)) {
-            directionVector += cameraT.up;
+            directionVector += cameraTransform.up;
         }
 
         else if (Input.GetKey(KeyCode.LeftShift)) {
-            directionVector -= cameraT.up;
+            directionVector -= cameraTransform.up;
         }
 
         return directionVector * NoClipSettings.NoClipSpeedMultiplier;
@@ -75,5 +67,5 @@ public static class Global {
         }
     }
 
-    public static Transform SimulationCameraT => Global.camera.transform.parent;
+    public static Transform SimulationCameraTransform => Global.camera.transform.parent;
 }
