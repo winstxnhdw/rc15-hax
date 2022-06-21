@@ -115,32 +115,30 @@ public class Reflector {
         return this;
     }
 
-    public Reflector InvokeInternalMethod(string methodName, object[] parameters) {
+    public T InvokeInternalMethod<T>(string methodName, object[] args) {
         try {
-            this.GetObjectType(this.Obj)
-                .GetMethod(methodName, Reflector.InternalMethod)
-                .Invoke(this.Obj, parameters);
+            return (T)this.GetObjectType(this.Obj)
+                          .GetMethod(methodName, Reflector.InternalMethod)
+                          .Invoke(this.Obj, args);
         }
 
         catch (Exception e) {
             this.LogReflectionError(e);
+            return default;
         }
-
-        return this;
     }
 
-    public Reflector InvokePublicMethod(string methodName, params object[] args) {
+    public T InvokePublicMethod<T>(string methodName, params object[] args) {
         try {
-            this.GetObjectType(this.Obj)
-                .GetMethod(methodName, Reflector.PublicMethod)
-                .Invoke(this.Obj, args);
+            return (T)this.GetObjectType(this.Obj)
+                          .GetMethod(methodName, Reflector.PublicMethod)
+                          .Invoke(this.Obj, args);
         }
 
         catch (Exception e) {
             this.LogReflectionError(e);
+            return default;
         }
-
-        return this;
     }
 
     public void LogReflectionError(Exception e) {
