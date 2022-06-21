@@ -16,16 +16,19 @@ public class TeslaMod : HaxModules {
 
     List<Transform> TeslaBladeTransformList { get; } = new List<Transform>();
 
-    string[] TeslaFieldStates = new string[] {
-        "Enabled",
-        "Render",
-        "Disabled"
-    };
+    string[] TeslaFieldStates {
+        get => new string[] {
+            "Enabled",
+            "Render",
+            "Disabled"
+        };
+    }
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
+        new ModCoroutine(this, this.ModTesla);
         InputListener.onF5Press += this.CycleTeslaFieldStates;
     }
 
@@ -37,26 +40,21 @@ public class TeslaMod : HaxModules {
     }
 
     void Update() {
-        if (!this.ModEnabled) return;
-
         this.NoCollisionTesla();
-        this.ModTesla();
     }
 
     void ModTesla() {
         foreach (Object teslaRam in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeTeslaRam>()) {
             object internalTesla = new Reflector(teslaRam).GetInternalProperty("internalTeslaRam");
-
-            Reflector internalNanoReflection = new Reflector(internalTesla).SetInternalField("_damage", 1000000)
-                                                         .SetInternalField("_forceMagnitude", 100000.0f)
-                                                         .SetInternalField("_selfDamage", 0);
-
+            new Reflector(internalTesla).SetInternalField("_damage", HaxSettings.GetValue<int>("TeslaDamage"))
+                                        .SetInternalField("_selfDamage", HaxSettings.GetValue<int>("TeslaSelfDamage"));
         }
     }
 
     void NoCollisionTesla() {
-        this.TeslaBladeTransformList.Clear();
+        if (!this.ModEnabled) return;
 
+        this.TeslaBladeTransformList.Clear();
         foreach (Collider collider in HaxObjects.PlayerRigidbody.gameObject.GetComponentsInChildren<Collider>()) {
             string colliderName = collider.transform.name;
 

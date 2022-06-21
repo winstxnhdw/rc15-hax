@@ -6,7 +6,9 @@ public class WeaponMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
         base.OnEnable();
+        new ModCoroutine(this, this.ModWeapon);
     }
 
     protected override void OnDisable() {
@@ -16,13 +18,7 @@ public class WeaponMod : HaxModules {
         this.ModWeapon();
     }
 
-    void Update() {
-        this.ModWeapon();
-    }
-
     void ModWeapon() {
-        if (!this.ModEnabled) return;
-
         foreach (Object baseWeapon in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("BaseWeapon"))) {
             Reflector weaponReflection = new Reflector(baseWeapon);
             WeaponInfo WeaponStats = weaponReflection.GetInternalField<WeaponInfo>("WeaponStats");

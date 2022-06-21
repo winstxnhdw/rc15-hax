@@ -63,6 +63,8 @@ public static class HaxSettings {
         {"NanoRange",                           SetParams("1000000000000")},
         // Tesla Blade parameters
         {"EnableTeslaMod",                      SetParams("True")},
+        {"TeslaDamage",                         SetParams("500000")},
+        {"TeslaSelfDamage",                     SetParams("0")},
         {"TeslaFieldRadius",                    SetParams("7")},
         {"TeslaRendererOffset",                 SetParams("0.5")},
         {"TeslaFieldRate",                      SetParams("0.05")},

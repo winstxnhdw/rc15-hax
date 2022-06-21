@@ -8,7 +8,9 @@ public class NanoMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
         base.OnEnable();
+        new ModCoroutine(this, this.ModNano);
     }
 
     protected override void OnDisable() {
@@ -16,13 +18,7 @@ public class NanoMod : HaxModules {
         base.OnDisable();
     }
 
-    void Update() {
-        this.ModNano();
-    }
-
     void ModNano() {
-        if (!this.ModEnabled) return;
-
         foreach (Object nanoBeam in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("Simulation.NanoBeam"))) {
             object internalNano = new Reflector(nanoBeam).GetInternalField<object>("_internalWeapon");
             new Reflector(internalNano).SetInternalField("_damagePerSecond", HaxSettings.GetValue<int>("NanoDPS"))
