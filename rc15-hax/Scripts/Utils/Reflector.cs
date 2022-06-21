@@ -113,6 +113,20 @@ public class Reflector {
         return this;
     }
 
+    public Reflector SetInternalStaticField(string variableName, object value) {
+        try {
+            this.GetObjectType(this.Obj)
+                .GetField(variableName, Reflector.StaticInternalField)
+                .SetValue(null, value);
+        }
+
+        catch (Exception e) {
+            this.LogReflectionError(e);
+        }
+
+        return this;
+    }
+
     public Reflector SetPublicProperty(string propertyName, object value) {
         try {
             this.GetObjectType(this.Obj)
