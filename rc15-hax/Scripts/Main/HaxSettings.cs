@@ -8,15 +8,15 @@ public static class HaxSettings {
     // Max int value is 2147483647
     public static Dictionary<string, Params> Params { get; } = new Dictionary<string, Params> {
         // Weapon projectile parameters
-        {"EnableProjectileMod",                 SetParams("False")},
+        {"EnableProjectileSpeedMod",            SetParams("False")},
         {"ProjectileSpeed",                     SetParams("1000000000000")},
-        {"ProjectileRange",                     SetParams("1000000000000")},
         // Weapon accuracy parameters
         {"EnableWeaponMod",                     SetParams("True")},
         {"RecoilForce",                         SetParams("0")},
         {"BaseInAccuracyDegrees",               SetParams("0")},
         {"MovementInAccuracyDegrees",           SetParams("0")},
         {"RepeatFireInAccuracyTotalDegrees",    SetParams("0")},
+        {"ProjectileRange",                     SetParams("1000000000000")},
         // Weapon movement limits
         {"AimSpeed",                            SetParams("1000000000000")},
         {"MaxHorizAngle",                       SetParams("180")},

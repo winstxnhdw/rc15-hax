@@ -2,7 +2,7 @@ using UnityEngine;
 namespace RC15_HAX;
 public class WeaponMod : HaxModules {
     protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableWeaponMod"); }
-    bool ProjectileModEnabled { get => HaxSettings.GetValue<bool>("EnableProjectileMod"); }
+    bool ProjectileSpeedModEnabled { get => HaxSettings.GetValue<bool>("EnableProjectileSpeedMod"); }
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
@@ -30,6 +30,7 @@ public class WeaponMod : HaxModules {
             base.ModifyValues(ref Accuracy.BaseInAccuracyDegrees, "BaseInAccuracyDegrees");
             base.ModifyValues(ref Accuracy.MovementInAccuracyDegrees, "MovementInAccuracyDegrees");
             base.ModifyValues(ref Accuracy.RepeatFireInAccuracyTotalDegrees, "RepeatFireInAccuracyTotalDegrees");
+            base.ModifyValues(ref WeaponStats.ProjectileRange, "ProjectileRange");
 
             // Movement limits
             base.ModifyValues(ref WeaponStats.AimSpeed, "AimSpeed");
@@ -39,10 +40,7 @@ public class WeaponMod : HaxModules {
             base.ModifyValues(ref MoveLimits.MinVerticalAngle, "MinVerticalAngle");
 
             // Projectile
-            if (this.ProjectileModEnabled) {
-                base.ModifyValues(ref WeaponStats.ProjectileSpeed, "ProjectileSpeed");
-                base.ModifyValues(ref WeaponStats.ProjectileRange, "ProjectileRange");
-            };
+            if (this.ProjectileSpeedModEnabled) base.ModifyValues(ref WeaponStats.ProjectileSpeed, "ProjectileSpeed");
 
             base.DefaultStored = true;
         }
