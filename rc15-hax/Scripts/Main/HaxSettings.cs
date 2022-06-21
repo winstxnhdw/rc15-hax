@@ -101,7 +101,7 @@ public static class HaxSettings {
         {"NoFog",                               SetParams("True")},
         {"farClipPlane",                        SetParams("100000")},
         // NoClip parameters
-        {"NoClipSpeedMultiplier",               SetParams("1")},
+        {"NoClipSpeedMultiplier",               SetParams("0.8")},
         {"NoClipSpeedGranularity",              SetParams("0.1")},
         // UndergroundSpawn parameters
         {"SpawnUnderground",                    SetParams("False")},

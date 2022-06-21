@@ -65,7 +65,13 @@ public class Console : HaxComponents {
         ConsoleSettings.Logs.Add(strLog);
     }
 
-    public static void Print(IList<object> logs) => ConsoleSettings.Logs.AddRange(new List<object>(logs).ConvertAll(x => x.ToString().Trim(Environment.NewLine.ToCharArray())));
+    public static void Print(IList<string> logs) => ConsoleSettings.Logs.AddRange(new List<string>(logs).ConvertAll(x => x.Trim(Environment.NewLine.ToCharArray())));
+
+    public static void Print(IList<int> logs) => Print(new List<int>(logs).ConvertAll(x => x.ToString()));
+
+    public static void Print(IList<float> logs) => Print(new List<float>(logs).ConvertAll(x => x.ToString()));
+
+    public static void Print(IList<bool> logs) => Print(new List<bool>(logs).ConvertAll(x => x.ToString()));
 
     void OnDestroy() {
         InputListener.onBackquotePress -= this.ShowConsole;
