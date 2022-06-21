@@ -10,7 +10,7 @@ public class NanoMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModNano);
+        new ModCoroutine(this, this.ModNano).Init(2.0f);
     }
 
     protected override void OnDisable() {

@@ -96,6 +96,10 @@ public static class HaxSettings {
         {"jumpHeight",                          SetParams("2")},
         {"maxWorkingSpeed",                     SetParams("11")},
         {"maxLateralSpeed",                     SetParams("9")},
+        // Enemy Radar parameters
+        {"EnableEnemyRadarMod",                 SetParams("True")},
+        {"EnemyRadarRange",                     SetParams("1000000000000")},
+        {"antiJammerPower",                     SetParams("1000000000000")},
         // Fake crosshair
         {"GapSize",                             SetParams("7")},
         {"Thickness",                           SetParams("3")},
@@ -118,7 +122,6 @@ public static class HaxSettings {
         {"PingAllInterval",                     SetParams("2")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
-        {"EnableEnemyRadarMod",                 SetParams("True")},
         {"NoCameraShake",                       SetParams("True")},
         {"VoodooForwardOffset",                 SetParams("10")}
     };

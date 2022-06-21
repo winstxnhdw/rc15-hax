@@ -31,12 +31,7 @@ public class PlasmaMod : HaxModules {
             object internalPlasma = new Reflector(plasmaCannon).GetInternalField<object>("_internalWeapon");
             Reflector internalPlasmaReflection = new Reflector(internalPlasma);
             internalPlasmaReflection.SetInternalField("_currentDamage", 1000000)
-                                    .SetInternalField("_currentExplosionRadius", 20.0f)
-                                    .SetInternalField("_ownerId", 3);
-
-            // .GetInternalField<object>("weaponManager");
-            // object actualRefirePeriodProperty = new Reflector(weaponManager).GetInternalProperty("actualRefirePeriod");
-            // new Reflector(actualRefirePeriodProperty).SetInternalField(0.1f);
+                                    .SetInternalField("_currentExplosionRadius", 20.0f);
 
             // base.ModifyValues(ref plasmaCannon.secondPlasmaShot.fireTwice, "fireTwice");
 

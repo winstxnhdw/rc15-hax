@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RC15_HAX;
@@ -6,60 +5,25 @@ public class PlayerESP : HaxModules {
     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePlayerESP"); }
     float TextBottomPadding { get => HaxSettings.GetValue<float>("TextBottomPadding"); }
     float OutlineBoxSize { get => HaxSettings.GetValue<float>("OutlineBoxSize") * Settings.SizeRatio; }
-    int RigidBodyID { get; set; }
-
-    public static Dictionary<int, Body> RigidbodyDict { get; } = new Dictionary<int, Body>();
-    Dictionary<int, Body> PreviousRigidbodyDict { get; set; } = new Dictionary<int, Body>();
 
     protected override void OnEnable() {
         base.OnEnable();
-        HaxObjects.Rigidbodies.Init(this);
-        this.RigidBodyID = 0;
     }
 
     protected override void OnDisable() {
         base.OnDisable();
-        this.PreviousRigidbodyDict.Clear();
-        HaxObjects.Rigidbodies.Stop();
     }
 
     void OnGUI() {
         this.DrawESP();
     }
 
-    void FixedUpdate() {
-        this.CalculateESP();
-    }
-
-    void CalculateESP() {
-        // this.PreviousRigidbodyDict = new Dictionary<int, Body>(PlayerESP.RigidbodyDict);
-        PlayerESP.RigidbodyDict.Clear();
-
-        foreach (Rigidbody rigidbody in HaxObjects.Rigidbodies.Objects) {
-            if (rigidbody.gameObject.layer != 0) continue;
-            if (rigidbody.name == HaxObjects.PlayerRigidbody.name) continue;
-
-            int rigidbodyInstanceID = rigidbody.GetInstanceID();
-            Body currentBody;
-
-            if (this.PreviousRigidbodyDict.TryGetValue(rigidbodyInstanceID, out Body body)) {
-                currentBody = new Body(body, rigidbody);
-            }
-
-            else {
-                currentBody = new Body(this.RigidBodyID, rigidbody, Time.fixedDeltaTime);
-                this.RigidBodyID++;
-            }
-
-            this.PreviousRigidbodyDict[rigidbodyInstanceID] = currentBody;
-            PlayerESP.RigidbodyDict.Add(rigidbodyInstanceID, currentBody);
-        }
-    }
-
     void DrawESP() {
         if (!this.ModEnabled) return;
 
-        foreach (Body currentBody in PlayerESP.RigidbodyDict.Values) {
+        foreach (Body currentBody in Enemy.RigidbodyDict.Values) {
+            if (currentBody.Rigidbody == null) continue;
+
             Vector3 bodyScreenPosition = currentBody.ScreenPosition;
             if (bodyScreenPosition.z <= 0.0f) continue;
 

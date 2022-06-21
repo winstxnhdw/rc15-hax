@@ -4,7 +4,9 @@ public class EnemyRadarMod : HaxModules {
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
+
         base.OnEnable();
+        new ModCoroutine(this, this.ModEnemyRadar).Init();
     }
 
     protected override void OnDisable() {
@@ -13,7 +15,6 @@ public class EnemyRadarMod : HaxModules {
     }
 
     void LateUpdate() {
-        this.ModEnemyRadar();
     }
 
     void ModEnemyRadar() {
@@ -21,8 +22,8 @@ public class EnemyRadarMod : HaxModules {
 
         foreach (CubeEnemyRadar enemyRadar in HaxObjects.PlayerRigidbody.gameObject.GetComponentsInChildren<CubeEnemyRadar>()) {
             new Reflector(enemyRadar).SetInternalField("_lastTargetCheck", 31)
-                                     .SetInternalField("_range", float.MaxValue)
-                                     .SetPublicField("antiJammerPower", float.MaxValue);
+                                     .SetInternalField("_range", HaxSettings.GetValue<float>("EnemyRadarRange"))
+                                     .SetPublicField("antiJammerPower", HaxSettings.GetValue<float>("antiJammerPower"));
         }
     }
 }

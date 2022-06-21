@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Voodoo : HaxModules {
-    List<Body> VoodooBodies { get; set; } = new List<Body>(PlayerESP.RigidbodyDict.Values);
+    List<Body> VoodooBodies { get; set; } = new List<Body>(Enemy.RigidbodyDict.Values);
     Vector3 SpawnPoint { get; set; } = Vector3.zero;
     Vector3 CameraForwardSpawnPoint { get; set; } = Vector3.zero;
     float VoodooForwardOffset { get => HaxSettings.GetValue<float>("VoodooForwardOffset"); }
@@ -45,7 +45,7 @@ public class Voodoo : HaxModules {
 
     void ToggleVoodoo() {
         this.IsDoingBlackMagic = !this.IsDoingBlackMagic;
-        this.VoodooBodies = new List<Body>(PlayerESP.RigidbodyDict.Values);
+        this.VoodooBodies = new List<Body>(Enemy.RigidbodyDict.Values);
         this.SpawnPoint = HaxObjects.PlayerRigidbody.worldCenterOfMass;
         this.CameraForwardSpawnPoint = Global.Camera.transform.forward * this.VoodooForwardOffset;
 

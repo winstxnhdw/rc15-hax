@@ -26,7 +26,7 @@ public class Aimbot : HaxModules {
         float closestBodyOnScreen = float.MaxValue;
         Vector3 closestBodyPosition = Vector3.zero;
 
-        foreach (Body body in PlayerESP.RigidbodyDict.Values) {
+        foreach (Body body in Enemy.RigidbodyDict.Values) {
             if (body.ScreenPosition.z <= 0.0f) continue;
             float crosshairToBodyDistance = (body.ScreenPosition2D - ScreenInfo.GetScreenCentre()).sqrMagnitude;
 

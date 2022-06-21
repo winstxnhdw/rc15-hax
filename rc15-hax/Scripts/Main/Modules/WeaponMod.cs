@@ -8,7 +8,7 @@ public class WeaponMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModWeapon);
+        new ModCoroutine(this, this.ModWeapon).Init(2.0f);
     }
 
     protected override void OnDisable() {

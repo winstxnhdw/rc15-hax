@@ -28,7 +28,7 @@ public class TeslaMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModTesla);
+        new ModCoroutine(this, this.ModTesla).Init(2.0f);
         InputListener.onF5Press += this.CycleTeslaFieldStates;
     }
 

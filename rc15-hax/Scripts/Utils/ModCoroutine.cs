@@ -3,19 +3,30 @@ using System.Collections;
 using UnityEngine;
 
 public class ModCoroutine {
+    MonoBehaviour Self { get; }
     Action ModFunction { get; }
     float UpdateInterval { get; }
 
-    public ModCoroutine(MonoBehaviour self, Action modFunction, float updateInterval = 2.0f) {
+    public ModCoroutine(MonoBehaviour self, Action modFunction) {
+        this.Self = self;
         this.ModFunction = modFunction;
-        this.UpdateInterval = updateInterval;
-        self.StartCoroutine(this.IModInvoke());
+    }
+
+    public void Init(float updateInterval) => Self.StartCoroutine(this.IModInvoke(updateInterval));
+
+    public void Init() => Self.StartCoroutine(this.IModInvoke());
+
+    IEnumerator IModInvoke(float updateInterval) {
+        while (true) {
+            this.ModFunction();
+            yield return new WaitForSeconds(updateInterval);
+        }
     }
 
     IEnumerator IModInvoke() {
         while (true) {
             this.ModFunction();
-            yield return new WaitForSeconds(this.UpdateInterval);
+            yield return new WaitForEndOfFrame();
         }
     }
 }
