@@ -9,10 +9,10 @@ public class SMGMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        this.ModSMG();
+        new ModCoroutine(this, this.ModSMGTimingData).Init(5.0f);
     }
 
-    void ModSMG() {
+    void ModSMGTimingData() {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
         if (fireTimingData == null) return;
 

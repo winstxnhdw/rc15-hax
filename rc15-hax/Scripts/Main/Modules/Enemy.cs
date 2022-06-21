@@ -3,14 +3,19 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Enemy : HaxModules {
+    public static int EnemyTeamIndex { get; set; }
+    public static List<int> EnemyIndexList { get; set; }
     public static Dictionary<int, Body> RigidbodyDict { get; } = new Dictionary<int, Body>();
+
     Dictionary<int, Body> PreviousRigidbodyDict { get; set; } = new Dictionary<int, Body>();
     int RigidBodyID { get; set; }
+
 
     protected override void OnEnable() {
         base.OnEnable();
 
         this.RigidBodyID = 0;
+        new ModCoroutine(this, this.GetAllEnemyID).Init(1.0f);
         HaxObjects.Rigidbodies.Init(this);
     }
 
@@ -23,6 +28,14 @@ public class Enemy : HaxModules {
 
     void FixedUpdate() {
         this.GetEnemyRigidbodies();
+    }
+
+    void GetAllEnemyID() {
+        if (Teams.PlayerTeamsContainerReflection == null) return;
+
+        Enemy.EnemyTeamIndex = Teams.PlayerID == 0 ? 1 : 0;
+        Enemy.EnemyIndexList = Teams.PlayerTeamsContainerReflection
+                                    .InvokePublicMethod<List<int>>("GetPlayersOnEnemyTeam", Teams.Player);
     }
 
     void GetEnemyRigidbodies() {

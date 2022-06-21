@@ -118,6 +118,7 @@ public static class HaxSettings {
         {"SpawnUnderground",                    SetParams("False")},
         {"UndergroundPositionOffset",           SetParams("10")},
         // PingAll parameters
+        {"EnablePingMod",                       SetParams("True")},
         {"EnablePingAll",                       SetParams("True")},
         {"PingAllInterval",                     SetParams("2")},
         // General parameters

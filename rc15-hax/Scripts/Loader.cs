@@ -30,10 +30,11 @@ public class Loader : MonoBehaviour {
         AddHaxModules<NoClip>();
         AddHaxModules<Freecam>();
         AddHaxModules<Voodoo>();
-        AddHaxModules<PingAll>();
+        AddHaxModules<PingMod>();
 
         AddHaxModules<Enemy>();
         AddHaxModules<Player>();
+        AddHaxModules<Teams>();
 
         AddHaxModules<FakeCrosshair>();
         AddHaxModules<NoFog>();

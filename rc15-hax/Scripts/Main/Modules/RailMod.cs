@@ -9,10 +9,10 @@ public class RailMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        this.ModRail();
+        new ModCoroutine(this, this.ModRailTimingData).Init(5.0f);
     }
 
-    void ModRail() {
+    void ModRailTimingData() {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
         if (fireTimingData == null) return;
 

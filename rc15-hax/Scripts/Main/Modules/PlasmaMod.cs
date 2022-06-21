@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Linq;
 using UnityEngine;
 using Simulation;
@@ -10,7 +9,7 @@ public class PlasmaMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        this.ModPlasmaTimingData();
+        new ModCoroutine(this, this.ModPlasmaTimingData).Init(5.0f);
     }
 
     protected override void OnDisable() {
@@ -49,6 +48,8 @@ public class PlasmaMod : HaxModules {
 
     void ModPlasmaTimingData() {
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
+        if (fireTimingData == null) return;
+
         float[] plasmaFirePeriods = (from i in Enumerable.Range(0, 6) select HaxSettings.GetValue<float>($"plasmaFirePeriod{i}")).ToArray();
         new Reflector(fireTimingData).SetInternalField("plasmaFirePeriod", plasmaFirePeriods)
                                      .SetInternalField("plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
