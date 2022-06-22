@@ -25,8 +25,8 @@ public class Teams : HaxModules {
 
         this.GetSpotManager();
         this.GetPlayerContainers();
-        this.GetPlayerInfo();
         this.GetPlayerNames();
+        new ModCoroutine(this, this.GetPlayerInfo).Init(2.0f);
         new ModCoroutine(this, this.GetPlayers).Init(2.0f);
     }
 
@@ -42,11 +42,11 @@ public class Teams : HaxModules {
     void GetPlayerContainers() {
         Teams.SpotManagerReflection = new Reflector(Teams.SpotManager);
         Teams.PlayerTeamsContainer = Teams.SpotManagerReflection.GetPublicProperty("playerTeamsContainer");
+        Teams.PlayerTeamsContainerReflection = new Reflector(Teams.PlayerTeamsContainer);
         Teams.LivePlayersContainer = Teams.SpotManagerReflection.GetPublicProperty("livePlayersContainer");
     }
 
     void GetPlayerInfo() {
-        Teams.PlayerTeamsContainerReflection = new Reflector(Teams.PlayerTeamsContainer);
         Teams.PlayerID = Teams.PlayerTeamsContainerReflection.GetInternalField<int>("_localPlayerId");
         Teams.PlayerTeamID = Teams.PlayerTeamsContainerReflection.InvokePublicMethod<int>("GetPlayerTeam", Teams.Player, Teams.PlayerID);
     }
@@ -57,6 +57,7 @@ public class Teams : HaxModules {
     }
 
     void GetPlayers() {
+        Teams.AllPlayers.Clear();
         Dictionary<int, string> blueTeamPlayers = new Dictionary<int, string>();
         Dictionary<int, string> redTeamPlayers = new Dictionary<int, string>();
 
