@@ -49,6 +49,18 @@ public class DebugController : HaxComponents {
                     }
                     return;
 
+                case "team":
+                    foreach (KeyValuePair<int, string> player in Teams.AllPlayers[Teams.PlayerTeamID]) {
+                        Console.Print($"Your team:\n#{player.Key}: {player.Value}");
+                    }
+                    return;
+
+                case "enemy":
+                    foreach (KeyValuePair<int, string> player in Teams.AllPlayers[Enemy.EnemyTeamID]) {
+                        Console.Print($"Enemy team:\n#{player.Key}: {player.Value}");
+                    }
+                    return;
+
                 default:
                     Console.Print($"Invalid argument.");
                     return;

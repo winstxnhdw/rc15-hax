@@ -37,8 +37,9 @@ public class ConsoleInputField : HaxComponents {
                 (command as DebugCommand)?.Invoke();
             }
 
-            if (Global.IsNullOrWhiteSpace(input[1])) {
+            if (input.Length <= 1) {
                 Console.Print("Invalid argument.");
+                continue;
             }
 
             else if (command as DebugCommand<string> != null) {
@@ -50,7 +51,7 @@ public class ConsoleInputField : HaxComponents {
             Console.Print($"Command '{input[0]}' not found.");
         }
 
-        ConsoleSettings.FieldText = string.Empty;
+        ConsoleInputField.ClearInputField();
         Console.ScrollToBottom();
     }
 
@@ -64,5 +65,9 @@ public class ConsoleInputField : HaxComponents {
     void CreateTextField() {
         GUI.backgroundColor = Color.clear;
         ConsoleSettings.FieldText = GUI.TextField(ConsoleSettings.FieldRect, ConsoleSettings.FieldText);
+    }
+
+    public static void ClearInputField() {
+        ConsoleSettings.FieldText = string.Empty;
     }
 }

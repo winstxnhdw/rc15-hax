@@ -49,7 +49,10 @@ public class Console : HaxComponents {
         ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
     }
 
-    void HideConsole() => ConsoleSettings.ShowConsole = false;
+    void HideConsole() {
+        ConsoleInputField.ClearInputField();
+        ConsoleSettings.ShowConsole = false;
+    }
 
     public static void ScrollToBottom() => Console.Scroll = new Vector2(0.0f, Console.Viewport.height);
 

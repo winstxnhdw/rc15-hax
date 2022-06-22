@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Enemy : HaxModules {
-    public static int EnemyTeamIndex { get; set; }
+    public static int EnemyTeamID { get; set; }
     public static List<int> EnemyIndexList { get; set; }
     public static Dictionary<int, Body> RigidbodyDict { get; } = new Dictionary<int, Body>();
 
@@ -14,6 +14,7 @@ public class Enemy : HaxModules {
     protected override void OnEnable() {
         base.OnEnable();
 
+        InputListener.onF6Press += this.MakeAllEnemiesFire;
         this.RigidBodyID = 0;
         new ModCoroutine(this, this.GetAllEnemyID).Init(1.0f);
         HaxObjects.Rigidbodies.Init(this);
@@ -22,6 +23,7 @@ public class Enemy : HaxModules {
     protected override void OnDisable() {
         base.OnDisable();
 
+        InputListener.onF6Press -= this.MakeAllEnemiesFire;
         this.PreviousRigidbodyDict.Clear();
         HaxObjects.Rigidbodies.Stop();
     }
@@ -30,10 +32,26 @@ public class Enemy : HaxModules {
         this.GetEnemyRigidbodies();
     }
 
+    void MakeAllEnemiesFire() {
+        foreach (Body body in Enemy.RigidbodyDict.Values) {
+            foreach (Object baseWeapon in body.Rigidbody.GetComponentsInChildren(Global.GetRobocraftType("BaseWeapon"))) {
+                try {
+                    object internalWeapon = new Reflector(baseWeapon).GetInternalProperty("weapon");
+                    Reflector internalWeaponReflection = new Reflector(internalWeapon);
+                    internalWeaponReflection.InvokeInternalMethod<object>("FireWeapon");
+                }
+
+                catch (System.Exception e) {
+                    Console.Print($"Weapon {baseWeapon.name} cannot be forced to fire.\n{e}");
+                }
+            }
+        }
+    }
+
     void GetAllEnemyID() {
         if (Teams.PlayerTeamsContainerReflection == null) return;
 
-        Enemy.EnemyTeamIndex = Teams.PlayerTeamID == 0 ? 1 : 0;
+        Enemy.EnemyTeamID = Teams.PlayerTeamID == 0 ? 1 : 0;
         Enemy.EnemyIndexList = Teams.PlayerTeamsContainerReflection
                                     .InvokePublicMethod<List<int>>("GetPlayersOnEnemyTeam", Teams.Player);
     }

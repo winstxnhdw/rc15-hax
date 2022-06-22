@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Simulation;
 namespace RC15_HAX;
 public class Teams : HaxModules {
+    const int blueTeamId = 0;
+    const int redTeamId = 1;
+
     public static TargetType Player { get => TargetType.Player; }
     public static Reflector PlayerTeamsContainerReflection { get; set; }
     public static Reflector PlayerNamesContainerReflection { get; set; }
@@ -23,7 +26,8 @@ public class Teams : HaxModules {
         this.GetSpotManager();
         this.GetPlayerContainers();
         this.GetPlayerInfo();
-        this.GetPlayers();
+        this.GetPlayerNames();
+        new ModCoroutine(this, this.GetPlayers).Init(2.0f);
     }
 
     protected override void OnDisable() {
@@ -38,7 +42,6 @@ public class Teams : HaxModules {
     void GetPlayerContainers() {
         Teams.SpotManagerReflection = new Reflector(Teams.SpotManager);
         Teams.PlayerTeamsContainer = Teams.SpotManagerReflection.GetPublicProperty("playerTeamsContainer");
-        Teams.PlayerNamesContainer = Teams.SpotManagerReflection.GetPublicProperty("playerNamesContainer");
         Teams.LivePlayersContainer = Teams.SpotManagerReflection.GetPublicProperty("livePlayersContainer");
     }
 
@@ -48,19 +51,20 @@ public class Teams : HaxModules {
         Teams.PlayerTeamID = Teams.PlayerTeamsContainerReflection.InvokePublicMethod<int>("GetPlayerTeam", Teams.Player, Teams.PlayerID);
     }
 
-    void GetPlayers() {
-        int blueTeamId = 0;
-        int redTeamId = 0;
+    void GetPlayerNames() {
+        Teams.PlayerNamesContainer = Teams.SpotManagerReflection.GetPublicProperty("playerNamesContainer");
         Teams.PlayerNamesContainerReflection = new Reflector(Teams.PlayerNamesContainer);
+    }
 
+    void GetPlayers() {
         Dictionary<int, string> blueTeamPlayers = new Dictionary<int, string>();
         Dictionary<int, string> redTeamPlayers = new Dictionary<int, string>();
 
-        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, blueTeamId)) {
+        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, Teams.blueTeamId)) {
             blueTeamPlayers.Add(player, Teams.PlayerNamesContainerReflection.InvokePublicMethod<string>("GetPlayerName", player));
         }
 
-        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, redTeamId)) {
+        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, Teams.redTeamId)) {
             redTeamPlayers.Add(player, Teams.PlayerNamesContainerReflection.InvokePublicMethod<string>("GetPlayerName", player));
         }
 
