@@ -16,7 +16,7 @@ public class PlasmaMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnDisable();
-        // this.ModPlasma();
+        this.ModPlasma();
     }
 
     void ModPlasma() {
