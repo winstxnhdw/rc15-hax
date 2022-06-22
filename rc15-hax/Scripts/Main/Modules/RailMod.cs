@@ -1,4 +1,5 @@
 using System.Linq;
+using UnityEngine;
 using Simulation;
 
 namespace RC15_HAX;
@@ -9,10 +10,16 @@ public class RailMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModRailTimingData).Init(5.0f);
+        new ModCoroutine(this, this.ModRail).Init(5.0f);
     }
 
-    void ModRailTimingData() {
+    void ModRail() {
+        foreach (Object railGun in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("RailGun"))) {
+            object internalRail = new Reflector(railGun).GetInternalField<object>("_internalWeapon");
+            Reflector internalRailReflection = new Reflector(internalRail);
+            internalRailReflection.SetInternalField("_currentDamageInflicted", HaxSettings.GetValue<int>("RailDamage"));
+        }
+
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
         if (fireTimingData == null) return;
 

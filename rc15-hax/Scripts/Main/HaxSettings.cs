@@ -32,6 +32,8 @@ public static class HaxSettings {
         {"groupFirePeriod4",                    SetParams("0")},
         // Plasma Cannon parameters
         {"EnablePlasmaMod",                     SetParams("True")},
+        {"PlasmaDamage",                        SetParams("500000")},
+        {"ExplosionRadius",                     SetParams("20")},
         {"fireTwice",                           SetParams("True")},
         {"secondFireDelay",                     SetParams("0")},
         {"secondFireDeviation",                 SetParams("0")},
@@ -46,6 +48,7 @@ public static class HaxSettings {
         {"plasmaFlamFirePeriod",                SetParams("0")},
         // Rail Launcher parameters
         {"EnableRailMod",                       SetParams("True")},
+        {"RailDamage",                          SetParams("100000")},
         {"railReloadDuration0",                 SetParams("0")},
         {"railReloadDuration1",                 SetParams("8")},
         {"railReloadDuration2",                 SetParams("8")},
@@ -119,7 +122,7 @@ public static class HaxSettings {
         {"UndergroundPositionOffset",           SetParams("10")},
         // PingAll parameters
         {"EnablePingMod",                       SetParams("True")},
-        {"EnablePingAll",                       SetParams("True")},
+        {"EnablePingAll",                       SetParams("False")},
         {"PingAllInterval",                     SetParams("2")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
