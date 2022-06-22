@@ -38,15 +38,19 @@ public class DebugController : HaxComponents {
             Console.Print($"Velocity: {rigidbody.velocity} m/s");
         });
 
-        DebugCommand<string> players = new DebugCommand<string>("players", "Shows player information.", "players [arg]", (string arg) => {
+        DebugCommand<string> players = new DebugCommand<string>("players", "Shows player information.", "players <arg>", (string arg) => {
             switch (arg) {
                 case "all":
                     foreach (KeyValuePair<int, Dictionary<int, string>> team in Teams.AllPlayers) {
-                        Console.Print($"Team {team.Key}:");
+                        Console.Print($"\nTeam {team.Key}:");
                         foreach (KeyValuePair<int, string> player in team.Value) {
-                            Console.Print($"{player.Value}#{player.Key}");
+                            Console.Print($"#{player.Key}: {player.Value}");
                         }
                     }
+                    return;
+
+                default:
+                    Console.Print($"Invalid argument.");
                     return;
             }
         });
@@ -60,7 +64,8 @@ public class DebugController : HaxComponents {
             clear,
             pause,
             status,
-            me
+            me,
+            players,
         };
 
         this.ConvertSettingsToCommands();
