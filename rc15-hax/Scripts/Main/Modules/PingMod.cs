@@ -18,8 +18,8 @@ public class PingMod : HaxModules {
     void ModPing() {
         if (Teams.SpotManagerReflection == null) return;
 
-        Teams.SpotManagerReflection.SetInternalField("_playerLastFailedSpotAttempt", float.MaxValue)
-                                   .SetInternalField("_playerLastSpotAttempt", float.MaxValue);
+        Teams.SpotManagerReflection.SetInternalField("_playerLastFailedSpotAttempt", -float.MaxValue)
+                                   .SetInternalField("_playerLastSpotAttempt", -float.MaxValue);
     }
 
     void PingAllEnemies() {

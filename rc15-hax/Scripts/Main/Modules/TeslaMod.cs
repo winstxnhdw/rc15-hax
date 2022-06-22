@@ -44,7 +44,7 @@ public class TeslaMod : HaxModules {
     }
 
     void ModTesla() {
-        foreach (Object teslaRam in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeTeslaRam>()) {
+        foreach (CubeTeslaRam teslaRam in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeTeslaRam>()) {
             object internalTesla = new Reflector(teslaRam).GetInternalProperty("internalTeslaRam");
             new Reflector(internalTesla).SetInternalField("_damage", HaxSettings.GetValue<int>("TeslaDamage"))
                                         .SetInternalField("_selfDamage", HaxSettings.GetValue<int>("TeslaSelfDamage"));
@@ -55,12 +55,9 @@ public class TeslaMod : HaxModules {
         if (!this.ModEnabled) return;
 
         this.TeslaBladeTransformList.Clear();
-        foreach (Collider collider in HaxObjects.PlayerRigidbody.gameObject.GetComponentsInChildren<Collider>()) {
+        foreach (Collider collider in HaxObjects.PlayerRigidbody.GetComponentsInChildren<Collider>()) {
             string colliderName = collider.transform.name;
-
-            if (colliderName == "blade" || colliderName.StartsWith("CollisionArm")) {
-                collider.enabled = false;
-            }
+            collider.enabled = !colliderName.StartsWith("CollisionArm");
 
             if (colliderName == "blade1Collision" && this.UsingTeslaField) {
                 this.TeslaBladeTransformList.Add(collider.transform.parent.parent);
