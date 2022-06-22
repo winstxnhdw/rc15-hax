@@ -48,7 +48,7 @@ public static class HaxSettings {
         {"plasmaFlamFirePeriod",                SetParams("0")},
         // Rail Launcher parameters
         {"EnableRailMod",                       SetParams("True")},
-        {"RailDamage",                          SetParams("100000")},
+        {"RailDamage",                          SetParams("80000")},
         {"railReloadDuration0",                 SetParams("0")},
         {"railReloadDuration1",                 SetParams("8")},
         {"railReloadDuration2",                 SetParams("8")},
@@ -123,7 +123,7 @@ public static class HaxSettings {
         // PingAll parameters
         {"EnablePingMod",                       SetParams("True")},
         {"EnablePingAll",                       SetParams("False")},
-        {"PingAllInterval",                     SetParams("2")},
+        {"PingAllInterval",                     SetParams("0.1")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
         {"NoCameraShake",                       SetParams("True")},

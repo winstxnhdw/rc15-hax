@@ -57,7 +57,9 @@ public class TeslaMod : HaxModules {
         this.TeslaBladeTransformList.Clear();
         foreach (Collider collider in HaxObjects.PlayerRigidbody.GetComponentsInChildren<Collider>()) {
             string colliderName = collider.transform.name;
-            collider.enabled = !colliderName.StartsWith("CollisionArm");
+            if (colliderName.StartsWith("CollisionArm")) {
+                collider.enabled = false;
+            }
 
             if (colliderName == "blade1Collision" && this.UsingTeslaField) {
                 this.TeslaBladeTransformList.Add(collider.transform.parent.parent);

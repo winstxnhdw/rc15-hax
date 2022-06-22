@@ -9,9 +9,6 @@ public class EnemyRadarMod : HaxModules {
         new ModCoroutine(this, this.ModEnemyRadar).Init();
     }
 
-    void LateUpdate() {
-    }
-
     void ModEnemyRadar() {
         if (!this.ModEnabled) return;
 
