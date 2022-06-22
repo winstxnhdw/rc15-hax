@@ -5,6 +5,7 @@ namespace RC15_HAX;
 public class Teams : HaxModules {
     public static TargetType Player { get => TargetType.Player; }
     public static Reflector PlayerTeamsContainerReflection { get; set; }
+    public static Reflector PlayerNamesContainerReflection { get; set; }
     public static Reflector SpotManagerReflection { get; set; }
 
     public static int PlayerID { get; set; }
@@ -48,21 +49,22 @@ public class Teams : HaxModules {
     }
 
     void GetPlayers() {
-        ReadOnlyCollection<int> blueTeam = Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, 0);
-        ReadOnlyCollection<int> redTeam = Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, 1);
+        int blueTeamId = 0;
+        int redTeamId = 0;
+        Teams.PlayerNamesContainerReflection = new Reflector(Teams.PlayerNamesContainer);
 
         Dictionary<int, string> blueTeamPlayers = new Dictionary<int, string>();
         Dictionary<int, string> redTeamPlayers = new Dictionary<int, string>();
 
-        foreach (int player in blueTeam) {
-            blueTeamPlayers.Add(player, new Reflector(Teams.PlayerNamesContainer).InvokePublicMethod<string>("GetPlayerName", player));
+        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, blueTeamId)) {
+            blueTeamPlayers.Add(player, Teams.PlayerNamesContainerReflection.InvokePublicMethod<string>("GetPlayerName", player));
         }
 
-        foreach (int player in redTeam) {
-            redTeamPlayers.Add(player, new Reflector(Teams.PlayerNamesContainer).InvokePublicMethod<string>("GetPlayerName", player));
+        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, redTeamId)) {
+            redTeamPlayers.Add(player, Teams.PlayerNamesContainerReflection.InvokePublicMethod<string>("GetPlayerName", player));
         }
 
-        Teams.AllPlayers.Add(0, blueTeamPlayers);
-        Teams.AllPlayers.Add(1, redTeamPlayers);
+        Teams.AllPlayers.Add(blueTeamId, blueTeamPlayers);
+        Teams.AllPlayers.Add(redTeamId, redTeamPlayers);
     }
 }

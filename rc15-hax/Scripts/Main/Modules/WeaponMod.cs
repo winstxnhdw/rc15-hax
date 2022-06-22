@@ -40,7 +40,9 @@ public class WeaponMod : HaxModules {
             base.ModifyValues(ref MoveLimits.MinVerticalAngle, "MinVerticalAngle");
 
             // Projectile
-            if (this.ProjectileSpeedModEnabled) base.ModifyValues(ref WeaponStats.ProjectileSpeed, "ProjectileSpeed");
+            if (this.ProjectileSpeedModEnabled) {
+                base.ModifyValues(ref WeaponStats.ProjectileSpeed, "ProjectileSpeed");
+            }
 
             base.DefaultStored = true;
         }
