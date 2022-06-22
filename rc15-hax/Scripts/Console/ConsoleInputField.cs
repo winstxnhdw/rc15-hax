@@ -37,6 +37,10 @@ public class ConsoleInputField : HaxComponents {
                 (command as DebugCommand)?.Invoke();
             }
 
+            if (Global.IsNullOrWhiteSpace(input[1])) {
+                Console.Print("Invalid argument.");
+            }
+
             else if (command as DebugCommand<string> != null) {
                 (command as DebugCommand<string>)?.Invoke(input[1]);
             }
