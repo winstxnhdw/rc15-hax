@@ -23,7 +23,7 @@ public class DebugController : HaxComponents {
             Console.Print($"HaxPaused: {Hax.HaxPaused}");
         });
 
-        DebugCommand player = new DebugCommand("player", "Shows your status.", "player", () => {
+        DebugCommand me = new DebugCommand("player", "Shows your status.", "player", () => {
             Rigidbody rigidbody = HaxObjects.PlayerRigidbody;
 
             if (rigidbody == null) {
@@ -32,8 +32,23 @@ public class DebugController : HaxComponents {
             }
 
             Console.Print("Exists: true");
+            Console.Print($"Player ID: {Teams.PlayerID}");
+            Console.Print($"Team ID: {Teams.PlayerTeamID}");
             Console.Print($"Position: x: {rigidbody.worldCenterOfMass.x}, y: {rigidbody.worldCenterOfMass.y}, z: {rigidbody.worldCenterOfMass.z}");
             Console.Print($"Velocity: {rigidbody.velocity} m/s");
+        });
+
+        DebugCommand<string> players = new DebugCommand<string>("players", "Shows player information.", "players [arg]", (string arg) => {
+            switch (arg) {
+                case "all":
+                    foreach (KeyValuePair<int, Dictionary<int, string>> team in Teams.AllPlayers) {
+                        Console.Print($"Team {team.Key}:");
+                        foreach (KeyValuePair<int, string> player in team.Value) {
+                            Console.Print($"{player.Value}#{player.Key}");
+                        }
+                    }
+                    return;
+            }
         });
 
         DebugCommand clear = new DebugCommand("clear", "Clears the console.", "clear", Console.ClearConsole);
@@ -45,7 +60,7 @@ public class DebugController : HaxComponents {
             clear,
             pause,
             status,
-            player
+            me
         };
 
         this.ConvertSettingsToCommands();
