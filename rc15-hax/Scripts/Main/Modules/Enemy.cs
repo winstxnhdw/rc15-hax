@@ -33,6 +33,7 @@ public class Enemy : HaxModules {
     void GetAllEnemyID() {
         if (Teams.PlayerTeamsContainerReflection == null) return;
 
+        Enemy.EnemyTeamIndex = Teams.PlayerTeamID == 0 ? 1 : 0;
         Enemy.EnemyIndexList = Teams.PlayerTeamsContainerReflection
                                     .InvokePublicMethod<List<int>>("GetPlayersOnEnemyTeam", Teams.Player);
     }
