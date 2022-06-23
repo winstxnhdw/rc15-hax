@@ -1,6 +1,6 @@
 namespace RC15_HAX;
 public class WheelMod : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableWheelMod"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableWheelMod");
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;

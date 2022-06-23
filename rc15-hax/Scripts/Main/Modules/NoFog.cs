@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class NoFog : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("NoFog"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("NoFog");
     const float DefaultFarClipPlane = 650.0f;
     Reflector HeadLightManagerReflection { get; set; }
 

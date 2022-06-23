@@ -1,6 +1,6 @@
 namespace RC15_HAX;
 public class EnemyRadarMod : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableEnemyRadarMod"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableEnemyRadarMod");
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;

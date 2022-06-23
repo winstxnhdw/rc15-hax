@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Voodoo : HaxModules {
+    float VoodooForwardOffset => HaxSettings.GetValue<float>("VoodooForwardOffset");
+    bool IsDoingBlackMagic { get; set; } = false;
+    int CycleIndex { get; set; } = 0;
     List<Body> VoodooBodies { get; set; } = new List<Body>(Enemy.RigidbodyDict.Values);
     Vector3 SpawnPoint { get; set; } = Vector3.zero;
     Vector3 CameraForwardSpawnPoint { get; set; } = Vector3.zero;
-    float VoodooForwardOffset { get => HaxSettings.GetValue<float>("VoodooForwardOffset"); }
-    bool IsDoingBlackMagic { get; set; } = false;
-    int CycleIndex { get; set; } = 0;
 
     protected override void OnEnable() {
         base.OnEnable();

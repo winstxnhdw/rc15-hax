@@ -1,6 +1,6 @@
 namespace RC15_HAX;
 public class HaxModules : HaxComponents {
-    protected virtual bool ModEnabled { get => true; }
+    protected virtual bool ModEnabled => true;
     protected bool DefaultStored { get; set; } = false;
 
     protected virtual void OnEnable() {

@@ -4,8 +4,8 @@ using UnityEngine;
 namespace RC15_HAX;
 
 public class UndergroundSpawn : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("SpawnUnderground"); }
-    float UndergroundPositionY { get => -HaxSettings.GetValue<float>("UndergroundPositionOffset"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("SpawnUnderground");
+    float UndergroundPositionY => -HaxSettings.GetValue<float>("UndergroundPositionOffset");
 
     public static event Action spawnedUnderground;
 

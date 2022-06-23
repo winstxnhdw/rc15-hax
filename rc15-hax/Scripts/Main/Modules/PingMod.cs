@@ -1,9 +1,8 @@
 namespace RC15_HAX;
 public class PingMod : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnablePingMod"); }
-    bool EnablePingAll { get => HaxSettings.GetValue<bool>("EnablePingAll"); }
-
-    float PingAllInterval { get => HaxSettings.GetValue<float>("PingAllInterval"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnablePingMod");
+    bool EnablePingAll => HaxSettings.GetValue<bool>("EnablePingAll");
+    float PingAllInterval => HaxSettings.GetValue<float>("PingAllInterval");
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;

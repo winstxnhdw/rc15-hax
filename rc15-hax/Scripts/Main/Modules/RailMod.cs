@@ -4,7 +4,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class RailMod : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRailMod"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableRailMod");
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;

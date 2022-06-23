@@ -6,7 +6,7 @@ public class Teams : HaxModules {
     const int blueTeamId = 0;
     const int redTeamId = 1;
 
-    public static TargetType Player { get => TargetType.Player; }
+    public static TargetType Player => TargetType.Player;
     public static Reflector PlayerTeamsContainerReflection { get; set; }
     public static Reflector PlayerNamesContainerReflection { get; set; }
     public static Reflector SpotManagerReflection { get; set; }

@@ -5,7 +5,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class TeslaMod : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableTeslaMod"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableTeslaMod");
     bool UsingTeslaField { get; set; } = false;
     bool RenderTeslaField { get; set; } = false;
     int TeslaFieldStateIndex { get; set; } = 0;

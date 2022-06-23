@@ -5,7 +5,7 @@ namespace RC15_HAX;
 public class NoClip : HaxModules {
     bool IsNoClipping { get; set; } = false;
     bool InPhantom { get; set; } = false;
-    float NoClipSpeedGranularity { get => HaxSettings.GetValue<float>("NoClipSpeedGranularity"); }
+    float NoClipSpeedGranularity => HaxSettings.GetValue<float>("NoClipSpeedGranularity");
 
     public static event Action<bool> noClipped;
 

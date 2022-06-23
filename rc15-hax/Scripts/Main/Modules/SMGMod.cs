@@ -3,7 +3,7 @@ using Simulation;
 
 namespace RC15_HAX;
 public class SMGMod : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableSMGMod"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableSMGMod");
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;

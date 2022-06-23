@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace RC15_HAX;
 public class NanoMod : HaxModules {
-    protected override bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableNanoMod"); }
+    protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableNanoMod");
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;
