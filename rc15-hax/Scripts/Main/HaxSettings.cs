@@ -126,6 +126,7 @@ public static class HaxSettings {
         {"PingAllInterval",                     SetParams("0.1")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
+        {"EnableStealth",                       SetParams("False")},
         {"NoCameraShake",                       SetParams("True")},
         {"VoodooForwardOffset",                 SetParams("10")}
     };

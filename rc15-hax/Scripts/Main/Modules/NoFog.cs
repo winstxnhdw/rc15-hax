@@ -14,6 +14,13 @@ public class NoFog : HaxModules {
         this.HeadLightManagerReflection = new Reflector(Global.GetRobocraftType("Simulation.HeadLightManager"));
     }
 
+    protected override void OnDisable() {
+        if (!this.ModEnabled) return;
+
+        base.OnDisable();
+        RenderSettings.fog = true;
+    }
+
     void LateUpdate() {
         this.EnableNoFog();
     }

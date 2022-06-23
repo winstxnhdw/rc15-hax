@@ -12,12 +12,12 @@ public class Voodoo : HaxModules {
 
     protected override void OnEnable() {
         base.OnEnable();
-        InputListener.onF8Press += this.ToggleVoodoo;
+        InputListener.onF7Press += this.ToggleVoodoo;
     }
 
     protected override void OnDisable() {
         base.OnDisable();
-        InputListener.onF8Press -= this.ToggleVoodoo;
+        InputListener.onF7Press -= this.ToggleVoodoo;
         this.IsDoingBlackMagic = false;
         this.CycleIndex = 0;
     }

@@ -16,13 +16,11 @@ public class TeslaMod : HaxModules {
 
     List<Transform> TeslaBladeTransformList { get; } = new List<Transform>();
 
-    string[] TeslaFieldStates {
-        get => new string[] {
-            "Enabled",
-            "Render",
-            "Disabled"
-        };
-    }
+    string[] TeslaFieldStates => new string[] {
+        "Enabled",
+        "Render",
+        "Disabled"
+    };
 
     protected override void OnEnable() {
         if (!this.ModEnabled) return;

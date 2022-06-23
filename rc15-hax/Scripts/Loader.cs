@@ -41,6 +41,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<NoFog>();
         AddHaxModules<NoCameraShake>();
         AddHaxModules<UndergroundSpawn>();
+        AddHaxModules<Stealth>();
 
         AddHaxModules<WeaponMod>();
         AddHaxModules<PlasmaMod>();

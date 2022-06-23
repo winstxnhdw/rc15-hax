@@ -46,4 +46,13 @@ public static class GUIHelper {
         action();
         GUILayout.EndVertical();
     }
+
+    public static bool CreateToggleAction(string label, bool value, Action<bool> action) {
+        bool result = GUILayout.Toggle(value, $" {label}");
+        action(result);
+
+        return result;
+    }
+
+    public static bool CreateToggle(string label, bool value) => GUILayout.Toggle(value, $" {label}");
 }

@@ -35,6 +35,7 @@ public class ConsoleInputField : HaxComponents {
 
             if (command as DebugCommand != null) {
                 (command as DebugCommand)?.Invoke();
+                continue;
             }
 
             if (input.Length <= 1) {
@@ -44,6 +45,7 @@ public class ConsoleInputField : HaxComponents {
 
             else if (command as DebugCommand<string> != null) {
                 (command as DebugCommand<string>)?.Invoke(input[1]);
+                continue;
             }
         }
 

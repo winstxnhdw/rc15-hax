@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RC15_HAX;
@@ -6,7 +7,7 @@ public class Menu : HaxComponents {
     static Vector2 Scroll { get; set; } = Vector2.zero;
 
     void Awake() {
-        InputListener.onF8Press += this.ToggleMenu;
+        InputListener.onEscapePress += this.HideMenu;
     }
 
     void OnGUI() {
@@ -22,16 +23,23 @@ public class Menu : HaxComponents {
         Menu.Scroll = GUILayout.BeginScrollView(Menu.Scroll);
 
         GUIHelper.HorizontalGroup(() => {
-            GUILayout.Button("Unload Hax");
+            MenuOptions.EnableStealth = GUIHelper.CreateToggle("Stealth", MenuOptions.EnableStealth);
+            MenuOptions.EnablePlayerESP = GUIHelper.CreateToggle("PlayerESP", MenuOptions.EnablePlayerESP);
+        });
+
+        GUIHelper.HorizontalGroup(() => {
+            if (GUILayout.Button("Unload Hax")) Loader.Unload();
         });
 
         GUILayout.EndScrollView();
-        GUI.DragWindow();
+        GUI.DragWindow(MenuSettings.MenuDragBounds);
     }
 
-    void ToggleMenu() => MenuSettings.ShowMenu = !MenuSettings.ShowMenu;
+    public static void ShowMenu() => MenuSettings.ShowMenu = !MenuSettings.ShowMenu;
+
+    void HideMenu() => MenuSettings.ShowMenu = false;
 
     void OnDestroy() {
-        InputListener.onF8Press -= this.ToggleMenu;
+        InputListener.onEscapePress -= this.HideMenu;
     }
 }

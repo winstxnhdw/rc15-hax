@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class PlayerESP : HaxModules {
-    protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnablePlayerESP");
     float TextBottomPadding => HaxSettings.GetValue<float>("TextBottomPadding");
     float OutlineBoxSize => HaxSettings.GetValue<float>("OutlineBoxSize") * Settings.SizeRatio;
 
@@ -11,7 +10,7 @@ public class PlayerESP : HaxModules {
     }
 
     void DrawESP() {
-        if (!this.ModEnabled) return;
+        if (!MenuOptions.EnablePlayerESP) return;
 
         foreach (Body currentBody in Enemy.RigidbodyDict.Values) {
             if (currentBody.Rigidbody == null) continue;

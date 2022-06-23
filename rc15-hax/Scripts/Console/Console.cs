@@ -20,7 +20,6 @@ public class Console : HaxComponents {
     }
 
     void Awake() {
-        InputListener.onBackquotePress += this.ShowConsole;
         InputListener.onEscapePress += this.HideConsole;
     }
 
@@ -55,7 +54,7 @@ public class Console : HaxComponents {
 
     public static void ClearConsole() => Console.Logs.Clear();
 
-    void ShowConsole() {
+    public static void ShowConsole() {
         Console.ScrollToBottom();
         ConsoleSettings.ShowConsole = !ConsoleSettings.ShowConsole;
     }
@@ -88,7 +87,6 @@ public class Console : HaxComponents {
     public static void Print(IList<bool> logs) => Print(new List<bool>(logs).ConvertAll(x => x.ToString()));
 
     void OnDestroy() {
-        InputListener.onBackquotePress -= this.ShowConsole;
         InputListener.onEscapePress -= this.HideConsole;
     }
 }
