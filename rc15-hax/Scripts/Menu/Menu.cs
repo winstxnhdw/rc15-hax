@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace RC15_HAX;
@@ -25,6 +24,7 @@ public class Menu : HaxComponents {
         GUIHelper.HorizontalGroup(() => {
             MenuOptions.EnableStealth = GUIHelper.CreateToggle("Stealth", MenuOptions.EnableStealth);
             MenuOptions.EnablePlayerESP = GUIHelper.CreateToggle("PlayerESP", MenuOptions.EnablePlayerESP);
+            MenuOptions.UseFakeCrosshair = GUIHelper.CreateToggle("FakeCrosshair", MenuOptions.UseFakeCrosshair);
         });
 
         GUIHelper.HorizontalGroup(() => {

@@ -29,7 +29,6 @@ public class InputListener : HaxComponents {
         {() => Input.GetKeyDown(KeyCode.F8),          () => Menu.ShowMenu()},
         {() => Input.GetKeyDown(KeyCode.F9),          () => InputListener.onF9Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.F10),         () => InputListener.onF10Press?.Invoke()},
-        {() => Input.GetKeyDown(KeyCode.F11),         () => InputListener.onF11Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Alpha1),      () => InputListener.onAlpha1Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Alpha3),      () => InputListener.onAlpha3Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.BackQuote),   () => Console.ShowConsole()},

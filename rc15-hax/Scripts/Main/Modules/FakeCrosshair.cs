@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class FakeCrosshair : HaxModules {
-    bool UseFakeCrosshair { get; set; } = false;
     float GapSize => HaxSettings.GetValue<float>("GapSize");
     float Thickness => HaxSettings.GetValue<float>("Thickness");
     float Length => HaxSettings.GetValue<float>("Length");
@@ -14,16 +13,6 @@ public class FakeCrosshair : HaxModules {
 
     void Awake() {
         this.InitialiseCrosshairPositions();
-    }
-
-    protected override void OnEnable() {
-        base.OnEnable();
-        InputListener.onF11Press += this.ToggleCrosshair;
-    }
-
-    protected override void OnDisable() {
-        base.OnDisable();
-        InputListener.onF11Press -= this.ToggleCrosshair;
     }
 
     void OnGUI() {
@@ -42,7 +31,7 @@ public class FakeCrosshair : HaxModules {
     }
 
     void RenderFakeCrosshair() {
-        if (!this.UseFakeCrosshair) return;
+        if (!MenuOptions.UseFakeCrosshair) return;
 
         // Top crosshair
         GUIHelper.DrawBox(this.TopCrosshairPosition, new Size(this.Thickness, this.Length));
@@ -56,6 +45,4 @@ public class FakeCrosshair : HaxModules {
         // Left crosshair
         GUIHelper.DrawBox(this.LeftCrosshairPosition, new Size(this.Length, this.Thickness));
     }
-
-    void ToggleCrosshair() => this.UseFakeCrosshair = !this.UseFakeCrosshair;
 }
