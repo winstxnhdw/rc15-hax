@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Enemy : HaxModules {
-    public static int EnemyTeamID { get; set; }
-    public static List<int> EnemyIndexList { get; set; }
+    public static int EnemyTeamID { get; private set; }
+    public static List<int> EnemyIndexList { get; private set; }
     public static Dictionary<int, Body> RigidbodyDict { get; } = new Dictionary<int, Body>();
 
     Dictionary<int, Body> PreviousRigidbodyDict { get; set; } = new Dictionary<int, Body>();

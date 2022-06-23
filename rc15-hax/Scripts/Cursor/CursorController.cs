@@ -9,7 +9,7 @@ public class CursorController : HaxComponents {
     }
 
     void UnlockCursor() {
-        if (ConsoleSettings.ShowConsole) {
+        if (ConsoleSettings.ShowConsole || MenuSettings.ShowMenu) {
             Screen.lockCursor = false;
             this.CursorLocked = false;
         }

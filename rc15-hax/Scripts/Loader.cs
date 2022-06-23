@@ -16,6 +16,7 @@ public class Loader : MonoBehaviour {
         AddHaxGameObject<InputListener>();
         AddHaxGameObject<Console>();
         AddHaxGameObject<ConsoleInputField>();
+        AddHaxGameObject<Menu>();
         AddHaxGameObject<Hax>();
         AddHaxGameObject<HaxObjects>();
 

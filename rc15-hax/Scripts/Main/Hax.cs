@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace RC15_HAX;
 public class Hax : HaxComponents {
-    public static bool HaxPaused { get; set; } = false;
+    public static bool HaxPaused { get; private set; } = false;
 
     void Awake() {
         InputListener.onPausePress += this.ToggleHaxPause;

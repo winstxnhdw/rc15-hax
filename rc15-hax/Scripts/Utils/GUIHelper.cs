@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RC15_HAX;
@@ -32,5 +33,17 @@ public static class GUIHelper {
     public static void DrawBox(Vector2 position, Size size) {
         Rect rect = new Rect(position.x, position.y, size.Width, size.Height);
         GUI.DrawTexture(rect, Texture2D.whiteTexture, ScaleMode.StretchToFill);
+    }
+
+    public static void HorizontalGroup(Action action) {
+        GUILayout.BeginHorizontal();
+        action();
+        GUILayout.EndHorizontal();
+    }
+
+    public static void VerticalGroup(Action action) {
+        GUILayout.BeginVertical();
+        action();
+        GUILayout.EndVertical();
     }
 }

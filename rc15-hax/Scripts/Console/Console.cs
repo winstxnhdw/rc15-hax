@@ -4,9 +4,20 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Console : HaxComponents {
+    static List<string> logs = new List<string>();
     static List<string> FrozenLogs { get; set; } = new List<string>();
     static Vector2 Scroll { get; set; } = Vector2.zero;
     static Rect Viewport { get; set; } = new Rect(0, 0, 0, 0);
+
+    public static List<string> Logs {
+        get {
+            if (Console.logs.Count > ConsoleSettings.MaxLogs) {
+                Console.logs.RemoveRange(0, Console.logs.Count - ConsoleSettings.MaxLogs);
+            }
+
+            return Console.logs;
+        }
+    }
 
     void Awake() {
         InputListener.onBackquotePress += this.ShowConsole;
@@ -20,7 +31,7 @@ public class Console : HaxComponents {
     void RenderConsole() {
         if (!ConsoleSettings.ShowConsole) return;
 
-        List<string> logs = !ConsoleSettings.PauseConsole ? ConsoleSettings.Logs : Console.FrozenLogs;
+        List<string> logs = !ConsoleSettings.PauseConsole ? Console.Logs : Console.FrozenLogs;
 
         Rect console = ConsoleSettings.ConsoleRect;
         GUI.Box(console, "Console");
@@ -38,11 +49,11 @@ public class Console : HaxComponents {
 
     public static void PauseConsole() {
         Console.FrozenLogs.Clear();
-        Console.FrozenLogs.AddRange(ConsoleSettings.Logs);
+        Console.FrozenLogs.AddRange(Console.Logs);
         ConsoleSettings.PauseConsole = !ConsoleSettings.PauseConsole;
     }
 
-    public static void ClearConsole() => ConsoleSettings.Logs.Clear();
+    public static void ClearConsole() => Console.Logs.Clear();
 
     void ShowConsole() {
         Console.ScrollToBottom();
@@ -65,10 +76,10 @@ public class Console : HaxComponents {
             return;
         }
 
-        ConsoleSettings.Logs.Add(strLog);
+        Console.Logs.Add(strLog);
     }
 
-    public static void Print(IList<string> logs) => ConsoleSettings.Logs.AddRange(new List<string>(logs).ConvertAll(x => x.Trim(Environment.NewLine.ToCharArray())));
+    public static void Print(IList<string> logs) => Console.Logs.AddRange(new List<string>(logs).ConvertAll(x => x.Trim(Environment.NewLine.ToCharArray())));
 
     public static void Print(IList<int> logs) => Print(new List<int>(logs).ConvertAll(x => x.ToString()));
 

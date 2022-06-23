@@ -7,18 +7,18 @@ public class Teams : HaxModules {
     const int redTeamId = 1;
 
     public static TargetType Player => TargetType.Player;
-    public static Reflector PlayerTeamsContainerReflection { get; set; }
-    public static Reflector PlayerNamesContainerReflection { get; set; }
+    public static Reflector PlayerTeamsContainerReflection { get; private set; }
+    public static Reflector PlayerNamesContainerReflection { get; private set; }
     public static Reflector SpotManagerReflection { get; set; }
 
-    public static int PlayerID { get; set; }
-    public static int PlayerTeamID { get; set; }
+    public static int PlayerID { get; private set; }
+    public static int PlayerTeamID { get; private set; }
     public static Dictionary<int, Dictionary<int, string>> AllPlayers { get; } = new Dictionary<int, Dictionary<int, string>>();
 
-    public static object SpotManager { get; set; }
-    public static object PlayerTeamsContainer { get; set; }
-    public static object PlayerNamesContainer { get; set; }
-    public static object LivePlayersContainer { get; set; }
+    public static object SpotManager { get; private set; }
+    public static object PlayerTeamsContainer { get; private set; }
+    public static object PlayerNamesContainer { get; private set; }
+    public static object LivePlayersContainer { get; private set; }
 
     protected override void OnEnable() {
         base.OnEnable();
