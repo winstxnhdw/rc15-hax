@@ -1,0 +1,10 @@
+dnSpy48/
+dnSpy/
+obj/
+bin/
+
+Dockerfile
+
+*.sh
+*.md
+*.json

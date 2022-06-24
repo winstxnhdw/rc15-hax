@@ -12,15 +12,13 @@
 
 ## Requirements
 
-> Does not work on Windows 11
-
-- Windows 10
+- Any Windows platform with [Docker](https://docs.docker.com/desktop/windows/install/) installed
+- [Git Bash](https://git-scm.com/download/win)
 - [Microsoft .NET SDK](https://dotnet.microsoft.com/en-us/download)
-- [Microsoft .NET Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer)
 
 ## Installation
 
-Recursively clone the repository
+If you are on Windows 11, follow the instructions [here](https://github.com/winstxnhdw/rc15-hax/wiki) instead. Otherwise, recursively clone this repository.
 
 ```bash
 git clone --recursive https://github.com/winstxnhdw/rc15-hax.git

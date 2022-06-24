@@ -10,7 +10,6 @@ public class InputListener : HaxComponents {
     public static event Action onF7Press;
     public static event Action onF9Press;
     public static event Action onF10Press;
-    public static event Action onF11Press;
     public static event Action onBackslashPress;
     public static event Action onAlpha1Press;
     public static event Action onAlpha3Press;
