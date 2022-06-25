@@ -26,6 +26,11 @@ public static class Global {
         return true;
     }
 
+    public static void SetActiveGameObject(GameObject go, bool isActive) {
+        if (go.activeSelf == isActive) return;
+        go.SetActive(isActive);
+    }
+
     public static Vector3 GetNoClipInputVector() {
         Transform cameraTransform = Global.Camera.transform;
         Vector3 directionVector = Vector3.zero;

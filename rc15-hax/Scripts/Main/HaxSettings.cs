@@ -154,7 +154,7 @@ public static class HaxSettings {
 
         if (Global.IsNullOrWhiteSpace(paramValue)) {
             Console.Print($"No default values found for {key}.");
-            return default;
+            paramValue = GetParams(key).Current;
         }
 
         if (!valueParserDict.TryGetValue(typeof(T).FullName, out Func<string, T> valueParser)) {
