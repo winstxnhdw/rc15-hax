@@ -36,6 +36,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<Voodoo>();
         AddHaxModules<PingMod>();
         AddHaxModules<NetworkDesync>();
+        AddHaxModules<SelfDestruct>();
 
         DontDisableOnStealth<Enemy>();
         AddHaxModules<Player>();
