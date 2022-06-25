@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RC15_HAX;
@@ -22,9 +23,17 @@ public class Menu : HaxComponents {
         Menu.Scroll = GUILayout.BeginScrollView(Menu.Scroll);
 
         GUIHelper.HorizontalGroup(() => {
-            MenuOptions.EnableStealth = GUIHelper.CreateToggle("Stealth", MenuOptions.EnableStealth);
+            if (GUILayout.Button("Hide")) HideMenu();
+        });
+
+        GUIHelper.HorizontalGroup(() => {
+            MenuOptions.EnableNetworkDesync = GUIHelper.CreateToggle("NetworkDesync", MenuOptions.EnableNetworkDesync);
             MenuOptions.EnablePlayerESP = GUIHelper.CreateToggle("PlayerESP", MenuOptions.EnablePlayerESP);
             MenuOptions.UseFakeCrosshair = GUIHelper.CreateToggle("FakeCrosshair", MenuOptions.UseFakeCrosshair);
+        });
+
+        GUIHelper.HorizontalGroup(() => {
+            MenuOptions.EnableStealth = GUIHelper.CreateToggle("Stealth", MenuOptions.EnableStealth);
         });
 
         GUIHelper.HorizontalGroup(() => {

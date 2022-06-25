@@ -32,8 +32,9 @@ public class Loader : MonoBehaviour {
         AddHaxModules<PlayerESP>();
         AddHaxModules<NoClip>();
         AddHaxModules<Freecam>();
-        AddHaxModules<Voodoo>();
+        // AddHaxModules<Voodoo>();
         AddHaxModules<PingMod>();
+        // AddHaxModules<NetworkDesync>();
 
         DontDisableOnStealth<Enemy>();
         AddHaxModules<Player>();

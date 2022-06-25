@@ -3,23 +3,65 @@ using UnityEngine;
 
 namespace RC15_HAX;
 public class Voodoo : HaxModules {
+    static Voodoo Instance { get; set; }
     float VoodooForwardOffset => HaxSettings.GetValue<float>("VoodooForwardOffset");
-    bool IsDoingBlackMagic { get; set; } = false;
-    int CycleIndex { get; set; } = 0;
-    List<Body> VoodooBodies { get; set; } = new List<Body>(Enemy.RigidbodyDict.Values);
-    Vector3 SpawnPoint { get; set; } = Vector3.zero;
-    Vector3 CameraForwardSpawnPoint { get; set; } = Vector3.zero;
+    public bool IsDoingBlackMagic { get; set; } = false;
+    public int CycleIndex { get; set; } = 0;
+    public List<Body> VoodooBodies { get; set; } = new List<Body>(Enemy.RigidbodyDict.Values);
+    public Vector3 SpawnPoint { get; set; } = Vector3.zero;
+    public Vector3 CameraForwardSpawnPoint { get; set; } = Vector3.zero;
 
-    protected override void OnEnable() {
-        base.OnEnable();
-        InputListener.onF7Press += this.ToggleVoodoo;
+    // void Awake() {
+    //     Voodoo.Instance = this;
+    // }
+
+    // public static Voodoo GetVoodoo() {
+    //     return Voodoo.Instance;
+    // }
+
+    // protected override void OnEnable() {
+    //     base.OnEnable();
+    //     InputListener.onF7Press += this.ToggleVoodoo;
+    // }
+
+    // protected override void OnDisable() {
+    //     base.OnDisable();
+    //     InputListener.onF7Press -= this.ToggleVoodoo;
+    //     this.DestroyVoodooInstance();
+    //     this.IsDoingBlackMagic = false;
+    //     this.CycleIndex = 0;
+    // }
+
+    void ToggleVoodoo() {
+        Console.Print("Toggling Voodoo...");
+        this.IsDoingBlackMagic = !this.IsDoingBlackMagic;
+        this.VoodooBodies = new List<Body>(Enemy.RigidbodyDict.Values);
+        this.SpawnPoint = HaxObjects.PlayerRigidbody.worldCenterOfMass;
+        this.CameraForwardSpawnPoint = Global.Camera.transform.forward * this.VoodooForwardOffset;
+
+        if (!this.IsDoingBlackMagic) {
+            this.CycleIndex++;
+            Console.Print("Destroy Voodoo...");
+            this.DestroyVoodooInstance();
+        }
+
+        else {
+            Console.Print("Add Voodoo...");
+            Loader.HaxModules.AddComponent<VoodooInstance>();
+        }
     }
 
-    protected override void OnDisable() {
-        base.OnDisable();
-        InputListener.onF7Press -= this.ToggleVoodoo;
-        this.IsDoingBlackMagic = false;
-        this.CycleIndex = 0;
+    void DestroyVoodooInstance() {
+        VoodooInstance voodooInstance = Loader.HaxModules.GetComponent<VoodooInstance>();
+        Destroy(voodooInstance);
+    }
+}
+
+public class VoodooInstance : MonoBehaviour {
+    Voodoo Voodoo { get; set; }
+
+    void OnEnable() {
+        // this.Voodoo = Voodoo.GetVoodoo();
     }
 
     void Update() {
@@ -31,24 +73,15 @@ public class Voodoo : HaxModules {
     }
 
     void SummonVoodoo() {
-        if (!this.IsDoingBlackMagic) return;
+        if (!Voodoo.IsDoingBlackMagic) return;
 
-        Rigidbody rigidbody = this.VoodooBodies[this.CycleIndex % this.VoodooBodies.Count].Rigidbody;
+        Rigidbody rigidbody = Voodoo.VoodooBodies[Voodoo.CycleIndex % Voodoo.VoodooBodies.Count].Rigidbody;
         Transform rigidbodyT = rigidbody.transform;
         Transform simulationBoardT = rigidbodyT.parent;
-        Vector3 desiredPosition = this.SpawnPoint + this.CameraForwardSpawnPoint;
+        Vector3 desiredPosition = Voodoo.SpawnPoint + Voodoo.CameraForwardSpawnPoint;
 
         rigidbodyT.position = desiredPosition;
         rigidbodyT.localRotation = Quaternion.identity;
         simulationBoardT.position = desiredPosition;
-    }
-
-    void ToggleVoodoo() {
-        this.IsDoingBlackMagic = !this.IsDoingBlackMagic;
-        this.VoodooBodies = new List<Body>(Enemy.RigidbodyDict.Values);
-        this.SpawnPoint = HaxObjects.PlayerRigidbody.worldCenterOfMass;
-        this.CameraForwardSpawnPoint = Global.Camera.transform.forward * this.VoodooForwardOffset;
-
-        if (!this.IsDoingBlackMagic) this.CycleIndex++;
     }
 }
