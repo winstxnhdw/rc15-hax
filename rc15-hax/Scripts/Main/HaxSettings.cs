@@ -72,8 +72,8 @@ public static class HaxSettings {
         {"TeslaRendererOffset",                 SetParams("0.5")},
         {"TeslaFieldRate",                      SetParams("0.05")},
         // Wheel parameters
-        {"EnableWheelMod",                      SetParams("False")},
-        {"maxRPM",                              SetParams("1000")},
+        {"EnableWheelMod",                      SetParams("True")},
+        {"maxRPM",                              SetParams("400")},
         {"groundFrictionMultiplier",            SetParams("8")},
         {"stoppingBrakeTorque",                 SetParams("1000000000000")},
         {"motorizedBrakeTorque",                SetParams("1000000000000")},

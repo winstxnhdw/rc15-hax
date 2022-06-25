@@ -4,9 +4,11 @@ namespace RC15_HAX;
 public class Loader : MonoBehaviour {
     static GameObject HaxGameObject { get; } = new GameObject();
     public static GameObject HaxModules { get; } = new GameObject();
+    public static GameObject HaxStealthModules { get; } = new GameObject();
 
     static void AddHaxModules<T>() where T : Component => Loader.HaxModules.AddComponent<T>();
     static void AddHaxGameObject<T>() where T : Component => Loader.HaxGameObject.AddComponent<T>();
+    static void DontDisableOnStealth<T>() where T : Component => Loader.HaxStealthModules.AddComponent<T>();
 
     public static void Load() {
         DontDestroyOnLoad(Loader.HaxGameObject);
@@ -33,7 +35,7 @@ public class Loader : MonoBehaviour {
         AddHaxModules<Voodoo>();
         AddHaxModules<PingMod>();
 
-        AddHaxModules<Enemy>();
+        DontDisableOnStealth<Enemy>();
         AddHaxModules<Player>();
         AddHaxModules<Teams>();
 
@@ -41,7 +43,6 @@ public class Loader : MonoBehaviour {
         AddHaxModules<NoFog>();
         AddHaxModules<NoCameraShake>();
         AddHaxModules<UndergroundSpawn>();
-        AddHaxModules<Stealth>();
 
         AddHaxModules<WeaponMod>();
         AddHaxModules<PlasmaMod>();

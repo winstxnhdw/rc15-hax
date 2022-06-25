@@ -1,4 +1,3 @@
-using UnityEngine;
 namespace RC15_HAX;
 public class Hax : HaxComponents {
     public static bool HaxPaused { get; private set; } = false;
@@ -10,17 +9,21 @@ public class Hax : HaxComponents {
     void Update() {
         if (Hax.HaxPaused || HaxObjects.PlayerRigidbody == null) {
             HaxSettings.ParseDefaultValues = true;
-            SetActiveGameObject(Loader.HaxModules, false);
+            Global.SetActiveGameObject(Loader.HaxModules, false);
+            Global.SetActiveGameObject(Loader.HaxStealthModules, false);
+            return;
+        }
+
+        else if (MenuOptions.EnableStealth) {
+            HaxSettings.ParseDefaultValues = true;
+            Global.SetActiveGameObject(Loader.HaxModules, false);
+            Global.SetActiveGameObject(Loader.HaxStealthModules, true);
             return;
         }
 
         HaxSettings.ParseDefaultValues = false;
-        SetActiveGameObject(Loader.HaxModules, true);
-    }
-
-    void SetActiveGameObject(GameObject go, bool isActive) {
-        if (go.activeSelf == isActive) return;
-        go.SetActive(isActive);
+        Global.SetActiveGameObject(Loader.HaxModules, true);
+        Global.SetActiveGameObject(Loader.HaxStealthModules, true);
     }
 
     void ToggleHaxPause() {
