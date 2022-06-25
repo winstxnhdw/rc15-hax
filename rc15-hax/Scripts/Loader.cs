@@ -27,14 +27,15 @@ public class Loader : MonoBehaviour {
 
     static void LoadHaxModules() {
         DontDestroyOnLoad(Loader.HaxModules);
+        DontDestroyOnLoad(Loader.HaxStealthModules);
 
         AddHaxModules<Aimbot>();
         AddHaxModules<PlayerESP>();
         AddHaxModules<NoClip>();
         AddHaxModules<Freecam>();
-        // AddHaxModules<Voodoo>();
+        AddHaxModules<Voodoo>();
         AddHaxModules<PingMod>();
-        // AddHaxModules<NetworkDesync>();
+        AddHaxModules<NetworkDesync>();
 
         DontDisableOnStealth<Enemy>();
         AddHaxModules<Player>();

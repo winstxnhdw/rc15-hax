@@ -11,29 +11,28 @@ public class Voodoo : HaxModules {
     public Vector3 SpawnPoint { get; set; } = Vector3.zero;
     public Vector3 CameraForwardSpawnPoint { get; set; } = Vector3.zero;
 
-    // void Awake() {
-    //     Voodoo.Instance = this;
-    // }
+    void Awake() {
+        Voodoo.Instance = this;
+    }
 
-    // public static Voodoo GetVoodoo() {
-    //     return Voodoo.Instance;
-    // }
+    public static Voodoo GetVoodoo() {
+        return Voodoo.Instance;
+    }
 
-    // protected override void OnEnable() {
-    //     base.OnEnable();
-    //     InputListener.onF7Press += this.ToggleVoodoo;
-    // }
+    protected override void OnEnable() {
+        base.OnEnable();
+        InputListener.onF7Press += this.ToggleVoodoo;
+    }
 
-    // protected override void OnDisable() {
-    //     base.OnDisable();
-    //     InputListener.onF7Press -= this.ToggleVoodoo;
-    //     this.DestroyVoodooInstance();
-    //     this.IsDoingBlackMagic = false;
-    //     this.CycleIndex = 0;
-    // }
+    protected override void OnDisable() {
+        base.OnDisable();
+        InputListener.onF7Press -= this.ToggleVoodoo;
+        this.DestroyVoodooInstance();
+        this.IsDoingBlackMagic = false;
+        this.CycleIndex = 0;
+    }
 
     void ToggleVoodoo() {
-        Console.Print("Toggling Voodoo...");
         this.IsDoingBlackMagic = !this.IsDoingBlackMagic;
         this.VoodooBodies = new List<Body>(Enemy.RigidbodyDict.Values);
         this.SpawnPoint = HaxObjects.PlayerRigidbody.worldCenterOfMass;
@@ -41,12 +40,10 @@ public class Voodoo : HaxModules {
 
         if (!this.IsDoingBlackMagic) {
             this.CycleIndex++;
-            Console.Print("Destroy Voodoo...");
             this.DestroyVoodooInstance();
         }
 
         else {
-            Console.Print("Add Voodoo...");
             Loader.HaxModules.AddComponent<VoodooInstance>();
         }
     }
@@ -61,7 +58,7 @@ public class VoodooInstance : MonoBehaviour {
     Voodoo Voodoo { get; set; }
 
     void OnEnable() {
-        // this.Voodoo = Voodoo.GetVoodoo();
+        this.Voodoo = Voodoo.GetVoodoo();
     }
 
     void Update() {

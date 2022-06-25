@@ -15,5 +15,5 @@ public class NetworkDesync : HaxModules {
         SetNetworkSync(!MenuOptions.EnableNetworkDesync);
     }
 
-    void SetNetworkSync(bool isNetworkDesync) => this.NetworkMachineSyncUnityClient.enabled = isNetworkDesync;
+    void SetNetworkSync(bool isNetworkDesync) => this.NetworkMachineSyncUnityClient.gameObject.SetActive(isNetworkDesync);
 }

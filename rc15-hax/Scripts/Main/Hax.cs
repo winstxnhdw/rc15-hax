@@ -15,6 +15,7 @@ public class Hax : HaxComponents {
         }
 
         else if (MenuOptions.EnableStealth) {
+            Console.Print("test");
             HaxSettings.ParseDefaultValues = true;
             Global.SetActiveGameObject(Loader.HaxModules, false);
             Global.SetActiveGameObject(Loader.HaxStealthModules, true);
@@ -28,7 +29,7 @@ public class Hax : HaxComponents {
 
     void ToggleHaxPause() {
         Hax.HaxPaused = !Hax.HaxPaused;
-        Console.Print("Hax paused!");
+        Console.Print($"Hax {(Hax.HaxPaused ? "paused" : "unpaused")}.");
     }
 
     void OnDestroy() {
