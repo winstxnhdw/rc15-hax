@@ -10,6 +10,7 @@ public class InputListener : HaxComponents {
     public static event Action onF7Press;
     public static event Action onF9Press;
     public static event Action onF10Press;
+    public static event Action onF12Press;
     public static event Action onBackslashPress;
     public static event Action onAlpha1Press;
     public static event Action onAlpha3Press;
@@ -28,6 +29,7 @@ public class InputListener : HaxComponents {
         {() => Input.GetKeyDown(KeyCode.F8),          () => Menu.ShowMenu()},
         {() => Input.GetKeyDown(KeyCode.F9),          () => InputListener.onF9Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.F10),         () => InputListener.onF10Press?.Invoke()},
+        {() => Input.GetKeyDown(KeyCode.F12),         () => InputListener.onF12Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Alpha1),      () => InputListener.onAlpha1Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Alpha3),      () => InputListener.onAlpha3Press?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.BackQuote),   () => Console.ShowConsole()},
