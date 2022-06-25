@@ -72,8 +72,8 @@ public static class HaxSettings {
         {"TeslaRendererOffset",                 SetParams("0.5")},
         {"TeslaFieldRate",                      SetParams("0.05")},
         // Wheel parameters
-        {"EnableWheelMod",                      SetParams("True")},
-        {"maxRPM",                              SetParams("400")},
+        {"EnableWheelMod",                      SetParams("False")},
+        {"maxRPM",                              SetParams("1000")},
         {"groundFrictionMultiplier",            SetParams("8")},
         {"stoppingBrakeTorque",                 SetParams("1000000000000")},
         {"motorizedBrakeTorque",                SetParams("1000000000000")},
@@ -154,7 +154,7 @@ public static class HaxSettings {
 
         if (Global.IsNullOrWhiteSpace(paramValue)) {
             Console.Print($"No default values found for {key}.");
-            return default;
+            paramValue = GetParams(key).Current;
         }
 
         if (!valueParserDict.TryGetValue(typeof(T).FullName, out Func<string, T> valueParser)) {
