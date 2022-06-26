@@ -58,7 +58,7 @@ The repository contains no executables. This assures the user that whatever that
 
 ### No Visual Studio
 
-Most cheats on GitHub, like [MuckInternal](https://github.com/win32kbase/MuckInternal), contain a lot of redundant boilerplate that Visual Studio generates—bloating the codebase and ruining the developer experience—requiring the user to install Visual Studio just to build the source code. On the otherhand, this repository can be used solely with a few commands 
+Most cheats on GitHub, like [MuckInternal](https://github.com/win32kbase/MuckInternal), contain a lot of redundant boilerplate that Visual Studio generates—bloating the codebase and ruining the developer experience—requiring the user to install Visual Studio just to build the source code. On the otherhand, this repository can be used by double-clicking the `launch.bat` file.
 
 ## Featured
 
