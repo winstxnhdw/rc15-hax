@@ -7,8 +7,6 @@
     <TargetFramework>net35</TargetFramework>
     <RootNamespace>rc15_hax</RootNamespace>
     <ImplicitUsings>disable</ImplicitUsings>
-    <Deterministic>false</Deterministic>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 
   </PropertyGroup>
 
