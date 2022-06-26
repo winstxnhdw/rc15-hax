@@ -7,4 +7,4 @@ then
   dotnet build rc15-hax
 fi
 
-submodules/SharpMonoInjector4.8/bin/SharpMonoInjectorCore.exe inject -p RobocraftClient -a bin/rc15-hax.dll -n RC15_HAX -c Loader -m Load
+submodules/SharpMonoInjectorCore/bin/SharpMonoInjectorCore.exe inject -p RobocraftClient -a bin/rc15-hax.dll -n RC15_HAX -c Loader -m Load
