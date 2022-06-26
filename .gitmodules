@@ -2,6 +2,7 @@
 	path = submodules/dnSpy
 	url = https://github.com/dnSpy/dnSpy.git
 	shallow = true
+
 [submodule "submodules/SharpMonoInjectorCore"]
 	path = submodules/SharpMonoInjectorCore
 	url = https://github.com/winstxnhdw/SharpMonoInjectorCore.git
