@@ -1,5 +1,7 @@
 # rc15-hax
 
+> This branch contains the latest working cheat for Robocraft 2015 R4.0 and has since been patched. See the [master](https://github.com/winstxnhdw/rc15-hax) branch for the latest version of this cheat.
+
 <p align="center"><b>World's first open-source internal cheat for Robocraft</b></p>
 
 <div align="center">

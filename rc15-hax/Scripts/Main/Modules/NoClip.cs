@@ -13,7 +13,7 @@ public class NoClip : HaxModules {
         InputListener.onAlpha1Press += this.DecreaseNoClipSpeed;
         InputListener.onAlpha3Press += this.IncreaseNoClipSpeed;
         InputListener.onF9Press += this.ToggleNoClip;
-        Phantom.inPhantom += ListenForPhantom;
+        Freecam.inPhantom += ListenForPhantom;
     }
 
     protected override void OnDisable() {
@@ -21,7 +21,7 @@ public class NoClip : HaxModules {
         InputListener.onAlpha1Press -= this.DecreaseNoClipSpeed;
         InputListener.onAlpha3Press -= this.IncreaseNoClipSpeed;
         InputListener.onF9Press -= this.ToggleNoClip;
-        Phantom.inPhantom -= ListenForPhantom;
+        Freecam.inPhantom -= ListenForPhantom;
 
         this.IsNoClipping = false;
     }
