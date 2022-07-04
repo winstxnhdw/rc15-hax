@@ -13,7 +13,6 @@
 ## Requirements
 
 - Any Windows platform with [Docker](https://docs.docker.com/desktop/windows/install/) installed
-- [Git Bash](https://git-scm.com/download/win)
 - [Microsoft .NET SDK](https://dotnet.microsoft.com/en-us/download)
 - [Robocraft 2015 R4.1](https://drive.google.com/drive/folders/1k3W2OyI84EgYzKfXWOZ_vaffNR01taYn)
 
