@@ -9,7 +9,7 @@ public class DebugCommand : DebugCommandBase {
     }
 
     public void Invoke() {
-        this.Command.Invoke();
+        this.Command();
     }
 }
 
@@ -20,5 +20,5 @@ public class DebugCommand<T> : DebugCommandBase {
         this.Command = command;
     }
 
-    public void Invoke(T value) => this.Command.Invoke(value);
+    public void Invoke(T value) => this.Command(value);
 }
