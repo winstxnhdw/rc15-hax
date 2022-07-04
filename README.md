@@ -8,7 +8,7 @@
 
 ## Abstract
 
-`rc15-hax` is a feature-rich pure internal cheat for the [Robocraft 2015 project](https://github.com/phoenix-softworks/RC15-Launcher-Public) by [Phoenix Softworks](https://github.com/phoenix-softworks). Robocraft is an online vehicular combat game built with Unity Mono. This cheat is aimed at developers that absolutely despise the Visual Studio ecosystem, and since RC15 is Windows-only, so is the cheat. If you have absolutely no developing experience, setting up this cheat will be a challenge, that I implore you to take on.
+`rc15-hax` is a feature-rich pure internal cheat for the [Robocraft 2015 project](https://github.com/phoenix-softworks/RC15-Launcher-Public) by [Phoenix Softworks](https://github.com/phoenix-softworks). Robocraft is an online vehicular combat game built with Unity Mono. This cheat is aimed at developers that absolutely despise the Visual Studio ecosystem, and since RC15 is Windows-only, so is the cheat. If you happen to not have any developing experience, installing this cheat may pose as a challenge—do try your best anyways!
 
 ## Requirements
 
