@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using HarmonyLib;
 namespace RC15_HAX;
 public class Loader : MonoBehaviour {
     static GameObject HaxGameObject { get; } = new GameObject();
@@ -11,7 +11,7 @@ public class Loader : MonoBehaviour {
     static void DontDisableOnStealth<T>() where T : Component => Loader.HaxStealthModules.AddComponent<T>();
 
     public static void Load() {
-        Loader.InitialiseHarmonyPatches();
+        new Harmony("winstxnhdw.rc15-hax").PatchAll();
         DontDestroyOnLoad(Loader.HaxGameObject);
 
         AddHaxGameObject<CursorController>();
@@ -61,10 +61,6 @@ public class Loader : MonoBehaviour {
         // AddHaxModules<JetMod>();
         // AddHaxModules<RotorMod>();
         // AddHaxModules<LegMod>();
-    }
-
-    static void InitialiseHarmonyPatches() {
-        UnityEnginePatch.PatchUnityEngine();
     }
 
     public static void Unload() {
