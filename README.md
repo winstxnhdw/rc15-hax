@@ -24,7 +24,7 @@ If you are on Windows 11, follow the instructions [here](https://github.com/wins
 git clone --recursive https://github.com/winstxnhdw/rc15-hax.git
 ```
 
-Build and install the dependencies by executing `requirements.bat`. It is not required to build dnSpy if you do not plan on doing any [development](#Development).
+You can now build and install the dependencies by executing `requirements.bat`. It is not required to build dnSpy if you do not plan on doing any [development](#Development).
 
 ## Usage
 
