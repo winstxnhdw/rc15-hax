@@ -24,7 +24,7 @@ If you are on Windows 11, follow the instructions [here](https://github.com/wins
 git clone --recursive https://github.com/winstxnhdw/rc15-hax.git
 ```
 
-Build and install the dependencies by executing `requirements.bat`.
+Build and install the dependencies by executing `requirements.bat`. It is not required to build dnSpy if you do not plan on doing any [development](#Development).
 
 ## Usage
 
@@ -32,12 +32,7 @@ Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fu
 
 ## Development
 
-Compile dnSpy on top of the default requirements.
-
-```bash
-sh requirements.sh --dev
-```
-Run the compiled dnSpy.exe
+[dnSpy](https://github.com/dnSpy/dnSpy) is included as a submodule when you recursively clone this directory. If you plan to contribute to the development, dnSpy is an invaluable tool for browsing the Robocraft source code. You may compile dnSpy by executing `requirements.bat` and entering `Y` when the prompt to build dnSpy appears. You can then run compiled dnSpy executable.
 
 ```bash
 dnSpy48/dnSpy.exe &
