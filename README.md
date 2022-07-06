@@ -24,11 +24,7 @@ If you are on Windows 11, follow the instructions [here](https://github.com/wins
 git clone --recursive https://github.com/winstxnhdw/rc15-hax.git
 ```
 
-Build and install the dependencies by executing `requirements.bat`. If you are planning to do development, you can execute teh following shell script with the `--dev` flag. This will compile dnSpy on top of the default requirements.
-
-```bash
-sh requirements.sh --dev
-```
+Build and install the dependencies by executing `requirements.bat`.
 
 ## Usage
 
@@ -36,16 +32,15 @@ Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fu
 
 ## Development
 
+Compile dnSpy on top of the default requirements.
+
+```bash
+sh requirements.sh --dev
+```
 Run the compiled dnSpy.exe
 
 ```bash
 dnSpy48/dnSpy.exe &
-```
-
-Use the `--dev` flag on `launch.sh` to build before injecting.
-
-```bash
-sh launch.sh --dev
 ```
 
 ## Motivations
