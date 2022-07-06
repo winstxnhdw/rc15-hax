@@ -14,7 +14,7 @@ public class RailMod : HaxModules {
     }
 
     void ModRail() {
-        foreach (Object railGun in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("RailGun"))) {
+        foreach (Object railGun in Robocraft.GetComponentsInChildren(HaxObjects.PlayerRigidbody, "RailGun")) {
             object internalRail = new Reflector(railGun).GetInternalField<object>("_internalWeapon");
             Reflector internalRailReflection = new Reflector(internalRail);
             internalRailReflection.SetInternalField("_currentDamageInflicted", HaxSettings.GetValue<int>("RailDamage"));

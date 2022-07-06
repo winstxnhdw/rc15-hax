@@ -11,7 +11,7 @@ public class NoFog : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        this.HeadLightManagerReflection = new Reflector(Global.GetRobocraftType("Simulation.HeadLightManager"));
+        this.HeadLightManagerReflection = Robocraft.GetReflector("Simulation.HeadLightManager");
     }
 
     protected override void OnDisable() {

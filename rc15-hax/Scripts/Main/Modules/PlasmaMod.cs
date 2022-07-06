@@ -20,7 +20,7 @@ public class PlasmaMod : HaxModules {
     }
 
     void ModPlasma() {
-        foreach (Object plasmaCannon in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("PlasmaCannon"))) {
+        foreach (Object plasmaCannon in Robocraft.GetComponentsInChildren(HaxObjects.PlayerRigidbody, "PlasmaCannon")) {
             Reflector plasmaCannonReflection = new Reflector(plasmaCannon);
             WeaponInfo WeaponStats = plasmaCannonReflection.GetInternalField<WeaponInfo>("WeaponStats");
             SecondPlasmaShot secondPlasmaShot = plasmaCannonReflection.GetInternalField<SecondPlasmaShot>("secondPlasmaShot");

@@ -34,7 +34,7 @@ public class Enemy : HaxModules {
 
     void MakeAllEnemiesFire() {
         foreach (Body body in Enemy.RigidbodyDict.Values) {
-            foreach (Object baseWeapon in body.Rigidbody.GetComponentsInChildren(Global.GetRobocraftType("BaseWeapon"))) {
+            foreach (Object baseWeapon in Robocraft.GetComponentsInChildren(body.Rigidbody, "BaseWeapon")) {
                 try {
                     object internalWeapon = new Reflector(baseWeapon).GetInternalProperty("weapon");
                     Reflector internalWeaponReflection = new Reflector(internalWeapon);

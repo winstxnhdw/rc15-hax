@@ -1,29 +1,26 @@
 using System;
-using UnityEngine;
+using UnityObject = UnityEngine.Object;
 
 namespace RC15_HAX;
 
 public class ObjectCache : ObjectCacheBase {
-    public UnityEngine.Object Object { get; set; }
+    public UnityObject Object { get; set; }
     Type ObjectType { get; }
 
     public ObjectCache(string componentName, float updateInterval = 2.0f) : base(updateInterval) {
-        this.ObjectType = Global.GetRobocraftType(componentName);
-        try {
-            this.FindObject();
-        }
-
-        catch (Exception e) {
-            Console.Print($"Unable to find object of type {this.TypeName()}:\n{e}");
-        }
+        this.ObjectType = Robocraft.GetType(componentName);
+        this.FindObject();
     }
 
     protected override string TypeName() => this.ObjectType.FullName;
 
-    protected override void FindObject() => this.Object = GameObject.FindObjectOfType(this.ObjectType);
+    protected override void FindObject() {
+        this.Object = UnityObject.FindObjectOfType(this.ObjectType);
+        if (this.Object == null) Console.Print($"Unable to find object of type {this.TypeName()}.");
+    }
 }
 
-public class ObjectCache<T> : ObjectCacheBase where T : UnityEngine.Object {
+public class ObjectCache<T> : ObjectCacheBase where T : UnityObject {
     public T Object { get; set; }
 
     public ObjectCache(float updateInterval = 2.0f) : base(updateInterval) {
@@ -32,5 +29,5 @@ public class ObjectCache<T> : ObjectCacheBase where T : UnityEngine.Object {
 
     protected override string TypeName() => typeof(T).FullName;
 
-    protected override void FindObject() => this.Object = GameObject.FindObjectOfType<T>();
+    protected override void FindObject() => this.Object = UnityObject.FindObjectOfType<T>();
 }

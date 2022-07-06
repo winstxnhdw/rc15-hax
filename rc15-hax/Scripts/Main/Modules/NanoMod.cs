@@ -11,7 +11,7 @@ public class NanoMod : HaxModules {
     }
 
     void ModNano() {
-        foreach (Object nanoBeam in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("Simulation.NanoBeam"))) {
+        foreach (Object nanoBeam in Robocraft.GetComponentsInChildren(HaxObjects.PlayerRigidbody, "Simulation.NanoBeam")) {
             object internalNano = new Reflector(nanoBeam).GetInternalField<object>("_internalWeapon");
             new Reflector(internalNano).SetInternalField("_damagePerSecond", HaxSettings.GetValue<int>("NanoDPS"))
                                        .SetInternalField("_healPerSecond", HaxSettings.GetValue<int>("NanoHPS"))

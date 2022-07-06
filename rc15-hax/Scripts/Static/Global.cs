@@ -1,20 +1,9 @@
-using System;
-using System.Reflection;
 using UnityEngine;
 
 namespace RC15_HAX;
 public static class Global {
     public const float twoPi = Mathf.PI * 2.0f;
     static Camera camera = Camera.main;
-    static Assembly RobocraftAssembly => Assembly.Load("Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
-
-    public static Type GetRobocraftType(string componentName) {
-        Type component = Global.RobocraftAssembly.GetType(componentName);
-
-        if (component == null) Console.Print($"Invalid RobocraftType: {componentName}");
-
-        return component;
-    }
 
     public static bool IsNullOrWhiteSpace(string value) {
         if (value == null) return true;

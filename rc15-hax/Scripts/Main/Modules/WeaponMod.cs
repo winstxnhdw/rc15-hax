@@ -19,7 +19,7 @@ public class WeaponMod : HaxModules {
     }
 
     void ModWeapon() {
-        foreach (Object baseWeapon in HaxObjects.PlayerRigidbody.GetComponentsInChildren(Global.GetRobocraftType("BaseWeapon"))) {
+        foreach (Object baseWeapon in Robocraft.GetComponentsInChildren(HaxObjects.PlayerRigidbody, "BaseWeapon")) {
             Reflector weaponReflection = new Reflector(baseWeapon);
             WeaponInfo WeaponStats = weaponReflection.GetInternalField<WeaponInfo>("WeaponStats");
             WeaponAccuracy Accuracy = weaponReflection.GetInternalField<WeaponAccuracy>("Accuracy");
