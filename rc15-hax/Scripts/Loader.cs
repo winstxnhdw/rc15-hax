@@ -11,6 +11,7 @@ public class Loader : MonoBehaviour {
     static void DontDisableOnStealth<T>() where T : Component => Loader.HaxStealthModules.AddComponent<T>();
 
     public static void Load() {
+        Loader.InitialiseHarmonyPatches();
         DontDestroyOnLoad(Loader.HaxGameObject);
 
         AddHaxGameObject<CursorController>();
@@ -60,6 +61,10 @@ public class Loader : MonoBehaviour {
         // AddHaxModules<JetMod>();
         // AddHaxModules<RotorMod>();
         // AddHaxModules<LegMod>();
+    }
+
+    static void InitialiseHarmonyPatches() {
+        UnityEnginePatch.PatchUnityEngine();
     }
 
     public static void Unload() {
