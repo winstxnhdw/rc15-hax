@@ -29,4 +29,6 @@ public class ModCoroutine {
             yield return new WaitForEndOfFrame();
         }
     }
+
+    public static ModCoroutine Create(MonoBehaviour self, Action modFunction) => new ModCoroutine(self, modFunction);
 }

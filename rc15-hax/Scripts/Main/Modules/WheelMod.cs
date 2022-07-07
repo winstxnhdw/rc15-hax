@@ -6,19 +6,20 @@ public class WheelMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModWheel).Init(2.0f);
+        ModCoroutine.Create(this, this.ModWheel).Init(2.0f);
     }
 
     void ModWheel() {
         foreach (CubeWheel cubeWheel in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeWheel>()) {
-            new Reflector(cubeWheel).SetInternalField("wheelMass", 0.0f)
-                                    .SetInternalField("massPerWheel", 0.0f)
-                                    .SetInternalField("maxRPM", HaxSettings.GetValue<float>("maxRPM"))
-                                    .SetInternalField("maxSteeringAngle", HaxSettings.GetValue<float>("maxSteeringAngle"))
-                                    .SetInternalField("stoppingBrakeTorque", HaxSettings.GetValue<float>("stoppingBrakeTorque"))
-                                    .SetInternalField("motorizedBrakeTorque", HaxSettings.GetValue<float>("motorizedBrakeTorque"))
-                                    .SetInternalField("freeWheelBrakeTorque", HaxSettings.GetValue<float>("freeWheelBrakeTorque"))
-                                    .GetInternalField<WheelFriction>("friction").groundFrictionMultiplier = HaxSettings.GetValue<float>("groundFrictionMultiplier");
+            Reflector.Target(cubeWheel)
+                     .SetInternalField("wheelMass", 0.0f)
+                     .SetInternalField("massPerWheel", 0.0f)
+                     .SetInternalField("maxRPM", HaxSettings.GetValue<float>("maxRPM"))
+                     .SetInternalField("maxSteeringAngle", HaxSettings.GetValue<float>("maxSteeringAngle"))
+                     .SetInternalField("stoppingBrakeTorque", HaxSettings.GetValue<float>("stoppingBrakeTorque"))
+                     .SetInternalField("motorizedBrakeTorque", HaxSettings.GetValue<float>("motorizedBrakeTorque"))
+                     .SetInternalField("freeWheelBrakeTorque", HaxSettings.GetValue<float>("freeWheelBrakeTorque"))
+                     .GetInternalField<WheelFriction>("friction").groundFrictionMultiplier = HaxSettings.GetValue<float>("groundFrictionMultiplier");
         }
     }
 }

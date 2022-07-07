@@ -9,7 +9,7 @@ public class PlasmaMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModPlasma).Init(5.0f);
+        ModCoroutine.Create(this, this.ModPlasma).Init(5.0f);
     }
 
     protected override void OnDisable() {
@@ -21,7 +21,7 @@ public class PlasmaMod : HaxModules {
 
     void ModPlasma() {
         foreach (Object plasmaCannon in Robocraft.GetComponentsInChildren(HaxObjects.PlayerRigidbody, "PlasmaCannon")) {
-            Reflector plasmaCannonReflection = new Reflector(plasmaCannon);
+            Reflector plasmaCannonReflection = Reflector.Target(plasmaCannon);
             WeaponInfo WeaponStats = plasmaCannonReflection.GetInternalField<WeaponInfo>("WeaponStats");
             SecondPlasmaShot secondPlasmaShot = plasmaCannonReflection.GetInternalField<SecondPlasmaShot>("secondPlasmaShot");
 
@@ -38,7 +38,7 @@ public class PlasmaMod : HaxModules {
             base.DefaultStored = true;
 
             object internalPlasma = plasmaCannonReflection.GetInternalField<object>("_internalWeapon");
-            Reflector internalPlasmaReflection = new Reflector(internalPlasma);
+            Reflector internalPlasmaReflection = Reflector.Target(internalPlasma);
             internalPlasmaReflection.SetInternalField("_currentDamage", HaxSettings.GetValue<int>("PlasmaDamage"))
                                     .SetInternalField("_currentExplosionRadius", HaxSettings.GetValue<float>("ExplosionRadius"));
         }
@@ -47,7 +47,7 @@ public class PlasmaMod : HaxModules {
         if (fireTimingData == null) return;
 
         float[] plasmaFirePeriods = (from i in Enumerable.Range(0, 6) select HaxSettings.GetValue<float>($"plasmaFirePeriod{i}")).ToArray();
-        new Reflector(fireTimingData).SetInternalField("plasmaFirePeriod", plasmaFirePeriods)
+        Reflector.Target(fireTimingData).SetInternalField("plasmaFirePeriod", plasmaFirePeriods)
                                      .SetInternalField("plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
         fireTimingData.Start();
     }

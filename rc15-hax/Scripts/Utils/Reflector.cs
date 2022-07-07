@@ -195,7 +195,15 @@ public class Reflector {
         }
     }
 
-    public void LogReflectionError(Exception e) {
+    void LogReflectionError(Exception e) {
         Console.Print($"Reflection Error in {new StackFrame(2).GetMethod().Name}:\n{e}");
+    }
+
+    public static Reflector Target(object obj) {
+        return new Reflector(obj);
+    }
+
+    public static Reflector Target(Type objType) {
+        return new Reflector(objType);
     }
 }

@@ -2,6 +2,10 @@
 using HarmonyLib;
 namespace RC15_HAX;
 public class Loader : MonoBehaviour {
+    static string[] Dependencies => new string[] {
+        "0Harmony"
+    };
+
     static GameObject HaxGameObject { get; } = new GameObject();
     public static GameObject HaxModules { get; } = new GameObject();
     public static GameObject HaxStealthModules { get; } = new GameObject();
@@ -11,7 +15,13 @@ public class Loader : MonoBehaviour {
     static void DontDisableOnStealth<T>() where T : Component => Loader.HaxStealthModules.AddComponent<T>();
 
     public static void Load() {
+
+
         new Harmony("winstxnhdw.rc15-hax").PatchAll();
+        Loader.LoadHaxGameObjects();
+    }
+
+    static void LoadHaxGameObjects() {
         DontDestroyOnLoad(Loader.HaxGameObject);
 
         AddHaxGameObject<CursorController>();
