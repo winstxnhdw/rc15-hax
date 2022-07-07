@@ -36,9 +36,8 @@ public class Enemy : HaxModules {
         foreach (Body body in Enemy.RigidbodyDict.Values) {
             foreach (Object baseWeapon in Robocraft.GetComponentsInChildren(body.Rigidbody, "BaseWeapon")) {
                 try {
-                    object internalWeapon = Reflector.Target(baseWeapon)
-                                                     .GetInternalProperty("weapon");
-                    Reflector.Target(internalWeapon)
+                    Reflector.Target(baseWeapon)
+                             .GetInternalProperty("weapon")
                              .InvokeInternalMethod<object>("FireWeapon");
                 }
 

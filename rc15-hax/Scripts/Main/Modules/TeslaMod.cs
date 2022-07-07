@@ -43,9 +43,8 @@ public class TeslaMod : HaxModules {
 
     void ModTesla() {
         foreach (CubeTeslaRam teslaRam in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeTeslaRam>()) {
-            object internalTesla = Reflector.Target(teslaRam)
-                                            .GetInternalProperty("internalTeslaRam");
-            Reflector.Target(internalTesla)
+            Reflector.Target(teslaRam)
+                     .GetInternalProperty("internalTeslaRam")
                      .SetInternalField("_damage", HaxSettings.GetValue<int>("TeslaDamage"))
                      .SetInternalField("_selfDamage", HaxSettings.GetValue<int>("TeslaSelfDamage"));
         }

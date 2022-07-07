@@ -60,11 +60,13 @@ public class Reflector {
         }
     }
 
-    public object GetInternalProperty(string propertyName) {
+    public Reflector GetInternalProperty(string propertyName) {
         try {
-            return this.GetObjectType()
-                       .GetProperty(propertyName, Reflector.InternalProperty)
-                       .GetValue(this.Obj, null);
+            return new Reflector(
+                this.GetObjectType()
+                    .GetProperty(propertyName, Reflector.InternalProperty)
+                    .GetValue(this.Obj, null)
+            );
         }
 
         catch (Exception e) {
@@ -87,11 +89,13 @@ public class Reflector {
         }
     }
 
-    public object GetPublicProperty(string propertyName) {
+    public Reflector GetPublicProperty(string propertyName) {
         try {
-            return this.GetObjectType()
-                       .GetProperty(propertyName, Reflector.PublicProperty)
-                       .GetValue(this.Obj, null);
+            return new Reflector(
+                this.GetObjectType()
+                    .GetProperty(propertyName, Reflector.PublicProperty)
+                    .GetValue(this.Obj, null)
+            );
         }
 
         catch (Exception e) {
