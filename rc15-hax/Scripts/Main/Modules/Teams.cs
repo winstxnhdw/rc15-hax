@@ -9,16 +9,12 @@ public class Teams : HaxModules {
     public static TargetType Player => TargetType.Player;
     public static Reflector PlayerTeamsContainerReflection { get; private set; }
     public static Reflector PlayerNamesContainerReflection { get; private set; }
+    public static Reflector LivePlayersContainerReflection { get; private set; }
     public static Reflector SpotManagerReflection { get; set; }
 
     public static int PlayerID { get; private set; }
     public static int PlayerTeamID { get; private set; }
     public static Dictionary<int, Dictionary<int, string>> AllPlayers { get; } = new Dictionary<int, Dictionary<int, string>>();
-
-    public static object SpotManager { get; private set; }
-    public static object PlayerTeamsContainer { get; private set; }
-    public static object PlayerNamesContainer { get; private set; }
-    public static object LivePlayersContainer { get; private set; }
 
     protected override void OnEnable() {
         base.OnEnable();
@@ -26,8 +22,8 @@ public class Teams : HaxModules {
         this.GetSpotManager();
         this.GetPlayerContainers();
         this.GetPlayerNames();
-        new ModCoroutine(this, this.GetPlayerInfo).Init(2.0f);
-        new ModCoroutine(this, this.GetPlayers).Init(2.0f);
+        ModCoroutine.Create(this, this.GetPlayerInfo).Init(2.0f);
+        ModCoroutine.Create(this, this.GetPlayers).Init(2.0f);
     }
 
     protected override void OnDisable() {
@@ -36,14 +32,13 @@ public class Teams : HaxModules {
     }
 
     void GetSpotManager() {
-        Teams.SpotManager = new Reflector(FindObjectOfType<SpotCooldownDisplay>()).GetInternalProperty("spotManager");
+        Teams.SpotManagerReflection = Reflector.Target(FindObjectOfType<SpotCooldownDisplay>())
+                                               .GetInternalProperty("spotManager");
     }
 
     void GetPlayerContainers() {
-        Teams.SpotManagerReflection = new Reflector(Teams.SpotManager);
-        Teams.PlayerTeamsContainer = Teams.SpotManagerReflection.GetPublicProperty("playerTeamsContainer");
-        Teams.PlayerTeamsContainerReflection = new Reflector(Teams.PlayerTeamsContainer);
-        Teams.LivePlayersContainer = Teams.SpotManagerReflection.GetPublicProperty("livePlayersContainer");
+        Teams.PlayerTeamsContainerReflection = Teams.SpotManagerReflection.GetPublicProperty("playerTeamsContainer");
+        Teams.LivePlayersContainerReflection = Teams.SpotManagerReflection.GetPublicProperty("livePlayersContainer");
     }
 
     void GetPlayerInfo() {
@@ -52,8 +47,7 @@ public class Teams : HaxModules {
     }
 
     void GetPlayerNames() {
-        Teams.PlayerNamesContainer = Teams.SpotManagerReflection.GetPublicProperty("playerNamesContainer");
-        Teams.PlayerNamesContainerReflection = new Reflector(Teams.PlayerNamesContainer);
+        Teams.PlayerNamesContainerReflection = Teams.SpotManagerReflection.GetPublicProperty("playerNamesContainer");
     }
 
     void GetPlayers() {

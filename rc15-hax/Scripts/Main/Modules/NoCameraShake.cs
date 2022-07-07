@@ -15,7 +15,7 @@ public class NoCameraShake : HaxModules {
 
         base.OnEnable();
         StartCoroutine(StoreCameraTransform());
-        this.CameraShakeReflection = new Reflector(Global.Camera.GetComponent<CameraShake>());
+        this.CameraShakeReflection = Reflector.Target(Global.Camera.GetComponent<CameraShake>());
     }
 
     void LateUpdate() {

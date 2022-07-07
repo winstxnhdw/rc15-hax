@@ -8,10 +8,10 @@ public class PingMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModPing).Init(5.0f);
+        ModCoroutine.Create(this, this.ModPing).Init(5.0f);
 
         if (!this.EnablePingAll) return;
-        new ModCoroutine(this, this.PingAllEnemies).Init(this.PingAllInterval);
+        ModCoroutine.Create(this, this.PingAllEnemies).Init(this.PingAllInterval);
     }
 
     void ModPing() {

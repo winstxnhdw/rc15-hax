@@ -6,16 +6,17 @@ public class EnemyRadarMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModEnemyRadar).Init();
+        ModCoroutine.Create(this, this.ModEnemyRadar).Init();
     }
 
     void ModEnemyRadar() {
         if (!this.ModEnabled) return;
 
         foreach (CubeEnemyRadar enemyRadar in HaxObjects.PlayerRigidbody.gameObject.GetComponentsInChildren<CubeEnemyRadar>()) {
-            new Reflector(enemyRadar).SetInternalField("_lastTargetCheck", 31)
-                                     .SetInternalField("_range", HaxSettings.GetValue<float>("EnemyRadarRange"))
-                                     .SetPublicField("antiJammerPower", HaxSettings.GetValue<float>("antiJammerPower"));
+            Reflector.Target(enemyRadar)
+                     .SetInternalField("_lastTargetCheck", 31)
+                     .SetInternalField("_range", HaxSettings.GetValue<float>("EnemyRadarRange"))
+                     .SetPublicField("antiJammerPower", HaxSettings.GetValue<float>("antiJammerPower"));
         }
     }
 }

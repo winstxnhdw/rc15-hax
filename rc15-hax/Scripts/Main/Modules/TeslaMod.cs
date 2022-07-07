@@ -26,7 +26,7 @@ public class TeslaMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModTesla).Init(2.0f);
+        ModCoroutine.Create(this, this.ModTesla).Init(2.0f);
         InputListener.onF5Press += this.CycleTeslaFieldStates;
     }
 
@@ -43,9 +43,10 @@ public class TeslaMod : HaxModules {
 
     void ModTesla() {
         foreach (CubeTeslaRam teslaRam in HaxObjects.PlayerRigidbody.GetComponentsInChildren<CubeTeslaRam>()) {
-            object internalTesla = new Reflector(teslaRam).GetInternalProperty("internalTeslaRam");
-            new Reflector(internalTesla).SetInternalField("_damage", HaxSettings.GetValue<int>("TeslaDamage"))
-                                        .SetInternalField("_selfDamage", HaxSettings.GetValue<int>("TeslaSelfDamage"));
+            Reflector.Target(teslaRam)
+                     .GetInternalProperty("internalTeslaRam")
+                     .SetInternalField("_damage", HaxSettings.GetValue<int>("TeslaDamage"))
+                     .SetInternalField("_selfDamage", HaxSettings.GetValue<int>("TeslaSelfDamage"));
         }
     }
 

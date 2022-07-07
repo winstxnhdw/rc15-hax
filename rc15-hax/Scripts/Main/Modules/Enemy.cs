@@ -16,7 +16,7 @@ public class Enemy : HaxModules {
 
         InputListener.onF6Press += this.MakeAllEnemiesFire;
         this.RigidBodyID = 0;
-        new ModCoroutine(this, this.GetAllEnemyID).Init(1.0f);
+        ModCoroutine.Create(this, this.GetAllEnemyID).Init(1.0f);
         HaxObjects.Rigidbodies.Init(this);
     }
 
@@ -36,9 +36,9 @@ public class Enemy : HaxModules {
         foreach (Body body in Enemy.RigidbodyDict.Values) {
             foreach (Object baseWeapon in Robocraft.GetComponentsInChildren(body.Rigidbody, "BaseWeapon")) {
                 try {
-                    object internalWeapon = new Reflector(baseWeapon).GetInternalProperty("weapon");
-                    Reflector internalWeaponReflection = new Reflector(internalWeapon);
-                    internalWeaponReflection.InvokeInternalMethod<object>("FireWeapon");
+                    Reflector.Target(baseWeapon)
+                             .GetInternalProperty("weapon")
+                             .InvokeInternalMethod<object>("FireWeapon");
                 }
 
                 catch (System.Exception e) {

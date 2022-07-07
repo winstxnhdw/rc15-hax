@@ -60,11 +60,13 @@ public class Reflector {
         }
     }
 
-    public object GetInternalProperty(string propertyName) {
+    public Reflector GetInternalProperty(string propertyName) {
         try {
-            return this.GetObjectType()
-                       .GetProperty(propertyName, Reflector.InternalProperty)
-                       .GetValue(this.Obj, null);
+            return new Reflector(
+                this.GetObjectType()
+                    .GetProperty(propertyName, Reflector.InternalProperty)
+                    .GetValue(this.Obj, null)
+            );
         }
 
         catch (Exception e) {
@@ -87,11 +89,13 @@ public class Reflector {
         }
     }
 
-    public object GetPublicProperty(string propertyName) {
+    public Reflector GetPublicProperty(string propertyName) {
         try {
-            return this.GetObjectType()
-                       .GetProperty(propertyName, Reflector.PublicProperty)
-                       .GetValue(this.Obj, null);
+            return new Reflector(
+                this.GetObjectType()
+                    .GetProperty(propertyName, Reflector.PublicProperty)
+                    .GetValue(this.Obj, null)
+            );
         }
 
         catch (Exception e) {
@@ -195,7 +199,15 @@ public class Reflector {
         }
     }
 
-    public void LogReflectionError(Exception e) {
+    void LogReflectionError(Exception e) {
         Console.Print($"Reflection Error in {new StackFrame(2).GetMethod().Name}:\n{e}");
+    }
+
+    public static Reflector Target(object obj) {
+        return new Reflector(obj);
+    }
+
+    public static Reflector Target(Type objType) {
+        return new Reflector(objType);
     }
 }

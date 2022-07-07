@@ -28,6 +28,12 @@
       <HintPath>./References/Photon3Unity3D.dll</HintPath>
     </Reference>
 
+    <Reference Include="Lib.Harmony">
+      <HintPath>./References/0Harmony.dll</HintPath>
+    </Reference>
+    
+    <EmbeddedResource Include="./References/0Harmony.dll" />
+
   </ItemGroup>
 
 </Project>

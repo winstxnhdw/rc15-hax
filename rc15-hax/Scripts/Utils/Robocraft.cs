@@ -16,5 +16,5 @@ public static class Robocraft {
 
     public static Component[] GetComponentsInChildren(Component baseComponent, string componentName) => baseComponent.GetComponentsInChildren(Robocraft.GetType(componentName));
 
-    public static Reflector GetReflector(string componentName) => new Reflector(Robocraft.GetType(componentName));
+    public static Reflector GetReflector(string componentName) => Reflector.Target(Robocraft.GetType(componentName));
 }

@@ -1,5 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using HarmonyLib;
 
+using UnityEngine;
 namespace RC15_HAX;
 public class Loader : MonoBehaviour {
     static GameObject HaxGameObject { get; } = new GameObject();
@@ -10,7 +15,34 @@ public class Loader : MonoBehaviour {
     static void AddHaxGameObject<T>() where T : Component => Loader.HaxGameObject.AddComponent<T>();
     static void DontDisableOnStealth<T>() where T : Component => Loader.HaxStealthModules.AddComponent<T>();
 
+    static Assembly OnResolveAssembly(object _, ResolveEventArgs args) {
+        Assembly executingAssembly = Assembly.GetExecutingAssembly();
+        string resource = executingAssembly.GetManifestResourceNames().FirstOrDefault(s => s.EndsWith($"{new AssemblyName(args.Name).Name}.dll"));
+
+        using (Stream stream = executingAssembly.GetManifestResourceStream(resource)) {
+            if (stream == null) return null;
+
+            byte[] block = new byte[stream.Length];
+            stream.Read(block, 0, block.Length);
+            return Assembly.Load(block);
+        }
+    }
+
     public static void Load() {
+        AppDomain.CurrentDomain.AssemblyResolve += Loader.OnResolveAssembly;
+
+        Loader.LoadHarmonyPatches();
+        Loader.LoadHaxGameObjects();
+        Loader.LoadHaxModules();
+
+        AppDomain.CurrentDomain.AssemblyResolve -= Loader.OnResolveAssembly;
+    }
+
+    static void LoadHarmonyPatches() {
+        new Harmony("winstxnhdw.rc15-hax").PatchAll();
+    }
+
+    static void LoadHaxGameObjects() {
         DontDestroyOnLoad(Loader.HaxGameObject);
 
         AddHaxGameObject<CursorController>();
@@ -21,8 +53,6 @@ public class Loader : MonoBehaviour {
         AddHaxGameObject<Menu>();
         AddHaxGameObject<Hax>();
         AddHaxGameObject<HaxObjects>();
-
-        Loader.LoadHaxModules();
     }
 
     static void LoadHaxModules() {

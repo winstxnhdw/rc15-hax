@@ -8,7 +8,7 @@ public class WeaponMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModWeapon).Init(2.0f);
+        ModCoroutine.Create(this, this.ModWeapon).Init(2.0f);
     }
 
     protected override void OnDisable() {
@@ -20,7 +20,7 @@ public class WeaponMod : HaxModules {
 
     void ModWeapon() {
         foreach (Object baseWeapon in Robocraft.GetComponentsInChildren(HaxObjects.PlayerRigidbody, "BaseWeapon")) {
-            Reflector weaponReflection = new Reflector(baseWeapon);
+            Reflector weaponReflection = Reflector.Target(baseWeapon);
             WeaponInfo WeaponStats = weaponReflection.GetInternalField<WeaponInfo>("WeaponStats");
             WeaponAccuracy Accuracy = weaponReflection.GetInternalField<WeaponAccuracy>("Accuracy");
             WeaponMoveLimits MoveLimits = weaponReflection.GetInternalField<WeaponMoveLimits>("MoveLimits");

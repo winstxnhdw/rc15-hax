@@ -9,7 +9,7 @@ public class SMGMod : HaxModules {
         if (!this.ModEnabled) return;
 
         base.OnEnable();
-        new ModCoroutine(this, this.ModSMGTimingData).Init(5.0f);
+        ModCoroutine.Create(this, this.ModSMGTimingData).Init(5.0f);
     }
 
     void ModSMGTimingData() {
@@ -17,7 +17,8 @@ public class SMGMod : HaxModules {
         if (fireTimingData == null) return;
 
         float[] groupFirePeriods = (from i in Enumerable.Range(0, 5) select HaxSettings.GetValue<float>($"groupFirePeriod{i}")).ToArray();
-        new Reflector(fireTimingData).SetInternalField("groupFirePeriod", groupFirePeriods);
+        Reflector.Target(fireTimingData)
+                 .SetInternalField("groupFirePeriod", groupFirePeriods);
         fireTimingData.Start();
     }
 }

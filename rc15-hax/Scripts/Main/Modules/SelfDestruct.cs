@@ -11,7 +11,7 @@ public class SelfDestruct : HaxModules {
     }
 
     void DestructSelf() {
-        object destructionReporter = Teams.SpotManagerReflection.GetInternalProperty("destructionReporter");
-        new Reflector(destructionReporter).InvokeInternalMethod<object>("BroadcastDeath", Teams.PlayerID, Teams.PlayerID, true, Teams.Player);
+        Teams.SpotManagerReflection.GetInternalProperty("destructionReporter")
+                                   .InvokeInternalMethod<object>("BroadcastDeath", Teams.PlayerID, Teams.PlayerID, true, Teams.Player);
     }
 }
