@@ -37,10 +37,9 @@ public class PlasmaMod : HaxModules {
 
             base.DefaultStored = true;
 
-            object internalPlasma = plasmaCannonReflection.GetInternalField<object>("_internalWeapon");
-            Reflector.Target(internalPlasma)
-                     .SetInternalField("_currentDamage", HaxSettings.GetValue<int>("PlasmaDamage"))
-                     .SetInternalField("_currentExplosionRadius", HaxSettings.GetValue<float>("ExplosionRadius"));
+            plasmaCannonReflection.GetInternalField("_internalWeapon")
+                                  .SetInternalField("_currentDamage", HaxSettings.GetValue<int>("PlasmaDamage"))
+                                  .SetInternalField("_currentExplosionRadius", HaxSettings.GetValue<float>("ExplosionRadius"));
         }
 
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
@@ -50,7 +49,7 @@ public class PlasmaMod : HaxModules {
         Reflector.Target(fireTimingData)
                  .SetInternalField("plasmaFirePeriod", plasmaFirePeriods)
                  .SetInternalField("plasmaFlamFirePeriod", HaxSettings.GetValue<float>("plasmaFlamFirePeriod"));
-                 
+
         fireTimingData.Start();
     }
 }

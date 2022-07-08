@@ -38,7 +38,7 @@ public class Enemy : HaxModules {
                 try {
                     Reflector.Target(baseWeapon)
                              .GetInternalProperty("weapon")
-                             .InvokeInternalMethod<object>("FireWeapon");
+                             .InvokeInternalMethod("FireWeapon");
                 }
 
                 catch (System.Exception e) {

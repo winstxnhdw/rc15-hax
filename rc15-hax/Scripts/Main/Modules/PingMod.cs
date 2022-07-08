@@ -23,6 +23,6 @@ public class PingMod : HaxModules {
 
     void PingAllEnemies() {
         if (Enemy.EnemyIndexList == null || Teams.SpotManagerReflection == null) return;
-        Enemy.EnemyIndexList.ForEach(enemy => Teams.SpotManagerReflection.InvokeInternalMethod<object>("SendEnemySpotted", enemy));
+        Enemy.EnemyIndexList.ForEach(enemy => Teams.SpotManagerReflection.InvokeInternalMethod("SendEnemySpotted", enemy));
     }
 }

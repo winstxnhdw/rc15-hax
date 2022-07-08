@@ -34,10 +34,10 @@ public class Reflector {
         return this.Obj.GetType();
     }
 
-    public T GetInternalField<T>(string variableName) {
+    T GetField<T>(string variableName, BindingFlags flags) {
         try {
             return (T)this.GetObjectType()
-                          .GetField(variableName, Reflector.InternalField)
+                          .GetField(variableName, flags)
                           .GetValue(this.Obj);
         }
 
@@ -47,24 +47,11 @@ public class Reflector {
         }
     }
 
-    public T GetInternalStaticField<T>(string variableName) {
-        try {
-            return (T)this.GetObjectType()
-                          .GetField(variableName, Reflector.StaticInternalField)
-                          .GetValue(null);
-        }
-
-        catch (Exception e) {
-            this.LogReflectionError(e);
-            return default;
-        }
-    }
-
-    public Reflector GetInternalProperty(string propertyName) {
+    Reflector GetProperty(string propertyName, BindingFlags flags) {
         try {
             return new Reflector(
                 this.GetObjectType()
-                    .GetProperty(propertyName, Reflector.InternalProperty)
+                    .GetProperty(propertyName, flags)
                     .GetValue(this.Obj, null)
             );
         }
@@ -75,39 +62,10 @@ public class Reflector {
         }
     }
 
-
-    public T GetPublicField<T>(string variableName) {
-        try {
-            return (T)this.GetObjectType()
-                          .GetField(variableName, Reflector.PublicField)
-                          .GetValue(this.Obj);
-        }
-
-        catch (Exception e) {
-            this.LogReflectionError(e);
-            return default;
-        }
-    }
-
-    public Reflector GetPublicProperty(string propertyName) {
-        try {
-            return new Reflector(
-                this.GetObjectType()
-                    .GetProperty(propertyName, Reflector.PublicProperty)
-                    .GetValue(this.Obj, null)
-            );
-        }
-
-        catch (Exception e) {
-            this.LogReflectionError(e);
-            return default;
-        }
-    }
-
-    public Reflector SetInternalField(string variableName, object value) {
+    Reflector SetField(string variableName, object value, BindingFlags flags) {
         try {
             this.GetObjectType()
-                .GetField(variableName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField)
+                .GetField(variableName, flags)
                 .SetValue(this.Obj, value);
         }
 
@@ -118,38 +76,10 @@ public class Reflector {
         return this;
     }
 
-    public Reflector SetPublicField(string variableName, object value) {
+    Reflector SetProperty(string propertyName, object value, BindingFlags flags) {
         try {
             this.GetObjectType()
-                .GetField(variableName, Reflector.PublicField)
-                .SetValue(this.Obj, value);
-        }
-
-        catch (Exception e) {
-            this.LogReflectionError(e);
-        }
-
-        return this;
-    }
-
-    public Reflector SetInternalStaticField(string variableName, object value) {
-        try {
-            this.GetObjectType()
-                .GetField(variableName, Reflector.StaticInternalField)
-                .SetValue(null, value);
-        }
-
-        catch (Exception e) {
-            this.LogReflectionError(e);
-        }
-
-        return this;
-    }
-
-    public Reflector SetPublicProperty(string propertyName, object value) {
-        try {
-            this.GetObjectType()
-                .GetProperty(propertyName, Reflector.PublicProperty)
+                .GetProperty(propertyName, flags)
                 .SetValue(this.Obj, value, null);
         }
 
@@ -160,10 +90,10 @@ public class Reflector {
         return this;
     }
 
-    public T InvokeInternalMethod<T>(string methodName, params object[] args) {
+    T InvokeMethod<T>(string methodName, BindingFlags flags, params object[] args) {
         try {
             return (T)this.GetObjectType()
-                          .GetMethod(methodName, Reflector.InternalMethod)
+                          .GetMethod(methodName, flags)
                           .Invoke(this.Obj, args);
         }
 
@@ -173,41 +103,57 @@ public class Reflector {
         }
     }
 
-    public T InvokePublicMethod<T>(string methodName, params object[] args) {
-        try {
-            return (T)this.GetObjectType()
-                          .GetMethod(methodName, Reflector.PublicMethod)
-                          .Invoke(this.Obj, args);
-        }
+    // Field extension methods
+    public T GetInternalField<T>(string variableName) => this.GetField<T>(variableName, Reflector.InternalField);
 
-        catch (Exception e) {
-            this.LogReflectionError(e);
-            return default;
-        }
-    }
+    public T GetInternalStaticField<T>(string variableName) => this.GetField<T>(variableName, Reflector.StaticInternalField);
 
-    public T InvokePublicStaticMethod<T>(string methodName, params object[] args) {
-        try {
-            return (T)this.GetObjectType()
-                          .GetMethod(methodName, Reflector.PublicStaticMethod)
-                          .Invoke(null, args);
-        }
+    public T GetPublicField<T>(string variableName) => this.GetField<T>(variableName, Reflector.PublicField);
 
-        catch (Exception e) {
-            this.LogReflectionError(e);
-            return default;
-        }
-    }
+    public T GetPublicStaticField<T>(string variableName) => this.GetField<T>(variableName, Reflector.PublicStaticField);
 
-    void LogReflectionError(Exception e) {
-        Console.Print($"Reflection Error in {new StackFrame(2).GetMethod().Name}:\n{e}");
-    }
+    public Reflector GetInternalField(string variableName) => new Reflector(this.GetInternalField<object>(variableName));
 
-    public static Reflector Target(object obj) {
-        return new Reflector(obj);
-    }
+    public Reflector GetInternalStaticField(string variableName) => new Reflector(this.GetInternalStaticField<object>(variableName));
 
-    public static Reflector Target(Type objType) {
-        return new Reflector(objType);
-    }
+    public Reflector GetPublicField(string variableName) => new Reflector(this.GetPublicField<object>(variableName));
+
+    public Reflector GetPublicStaticField(string variableName) => new Reflector(this.GetPublicStaticField<object>(variableName));
+
+    public Reflector SetInternalField(string variableName, object value) => this.SetField(variableName, value, Reflector.InternalField);
+
+    public Reflector SetInternalStaticField(string variableName, object value) => this.SetField(variableName, value, Reflector.StaticInternalField);
+
+    public Reflector SetPublicField(string variableName, object value) => this.SetField(variableName, value, Reflector.PublicField);
+
+    public Reflector SetPublicStaticField(string variableName, object value) => this.SetField(variableName, value, Reflector.PublicStaticField);
+
+    // Property extension methods
+    public Reflector GetInternalProperty(string propertyName) => this.GetProperty(propertyName, Reflector.InternalProperty);
+
+    public Reflector GetPublicProperty(string propertyName) => this.GetProperty(propertyName, Reflector.PublicProperty);
+
+    public Reflector SetInternalProperty(string propertyName, object value) => this.SetProperty(propertyName, value, Reflector.InternalProperty);
+
+    public Reflector SetPublicProperty(string propertyName, object value) => this.SetProperty(propertyName, value, Reflector.PublicProperty);
+
+    // Method extension methods
+    public T InvokeInternalMethod<T>(string methodName, params object[] args) => this.InvokeMethod<T>(methodName, Reflector.InternalMethod, args);
+
+    public T InvokePublicMethod<T>(string methodName, params object[] args) => this.InvokeMethod<T>(methodName, Reflector.PublicMethod, args);
+
+    public T InvokePublicStaticMethod<T>(string methodName, params object[] args) => this.InvokeMethod<T>(methodName, Reflector.PublicStaticMethod, args);
+
+    public Reflector InvokeInternalMethod(string methodName, params object[] args) => new Reflector(this.InvokeInternalMethod<object>(methodName, args));
+
+    public Reflector InvokePublicMethod(string methodName, params object[] args) => new Reflector(this.InvokePublicMethod<object>(methodName, args));
+
+    public Reflector InvokePublicStaticMethod(string methodName, params object[] args) => new Reflector(this.InvokePublicStaticMethod<object>(methodName, args));
+
+    // Miscellaneous methods
+    void LogReflectionError(Exception e) => Console.Print($"Reflection Error in {new StackFrame(2).GetMethod().Name}:\n{e}");
+
+    public static Reflector Target(object obj) => new Reflector(obj);
+
+    public static Reflector Target(Type objType) => new Reflector(objType);
 }

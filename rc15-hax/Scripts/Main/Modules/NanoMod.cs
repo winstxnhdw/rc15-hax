@@ -13,7 +13,7 @@ public class NanoMod : HaxModules {
     void ModNano() {
         foreach (Object nanoBeam in Robocraft.GetComponentsInChildren(HaxObjects.PlayerRigidbody, "Simulation.NanoBeam")) {
             Reflector.Target(nanoBeam)
-                     .GetInternalField<object>("_internalWeapon")
+                     .GetInternalField("_internalWeapon")
                      .SetInternalField("_damagePerSecond", HaxSettings.GetValue<int>("NanoDPS"))
                      .SetInternalField("_healPerSecond", HaxSettings.GetValue<int>("NanoHPS"))
                      .SetInternalField("_range", HaxSettings.GetValue<float>("NanoRange"));
