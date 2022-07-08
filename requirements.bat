@@ -1,13 +1,16 @@
 @echo off
 
+set project_name=rc15-hax
+dotnet restore %project_name%
+dotnet build %project_name%
 dotnet build submodules/SharpMonoInjectorCore/SharpMonoInjector.Console
-dotnet build rc15-hax
 
 :dev
 set /p choice=Would you like to build dnSpy? [y/N]: 
 if /i '%choice%'=='Y' goto dnSpy
 echo Skipping dnSpy build..
 pause
+exit
 
 :dnSpy
 dotnet publish submodules/dnSpy -f net48

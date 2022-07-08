@@ -5,6 +5,7 @@ bin/
 
 Dockerfile
 
-*.sh
 *.md
 *.json
+*.bat
+.git*
