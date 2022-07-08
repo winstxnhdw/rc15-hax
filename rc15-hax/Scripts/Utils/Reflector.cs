@@ -26,11 +26,11 @@ public class Reflector {
     object Obj { get; }
     Type ObjType { get; }
 
-    public Reflector(object obj) {
+    Reflector(object obj) {
         this.Obj = obj;
     }
 
-    public Reflector(Type objType) {
+    Reflector(Type objType) {
         this.ObjType = objType;
     }
 
