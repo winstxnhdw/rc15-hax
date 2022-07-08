@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using UnityEngine;
 using HarmonyLib;
 
-using UnityEngine;
 namespace RC15_HAX;
 public class Loader : MonoBehaviour {
     static GameObject HaxGameObject { get; } = new GameObject();
