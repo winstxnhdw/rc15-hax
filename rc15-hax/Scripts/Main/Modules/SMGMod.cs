@@ -19,6 +19,7 @@ public class SMGMod : HaxModules {
         float[] groupFirePeriods = (from i in Enumerable.Range(0, 5) select HaxSettings.GetValue<float>($"groupFirePeriod{i}")).ToArray();
         Reflector.Target(fireTimingData)
                  .SetInternalField("groupFirePeriod", groupFirePeriods);
+                 
         fireTimingData.Start();
     }
 }

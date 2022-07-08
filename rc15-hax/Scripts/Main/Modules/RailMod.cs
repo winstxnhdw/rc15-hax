@@ -15,9 +15,9 @@ public class RailMod : HaxModules {
 
     void ModRail() {
         foreach (Object railGun in Robocraft.GetComponentsInChildren(HaxObjects.PlayerRigidbody, "RailGun")) {
-            object internalRail = Reflector.Target(railGun).GetInternalField<object>("_internalWeapon");
-            Reflector internalRailReflection = Reflector.Target(internalRail);
-            internalRailReflection.SetInternalField("_currentDamageInflicted", HaxSettings.GetValue<int>("RailDamage"));
+            Reflector.Target(railGun)
+                     .GetInternalField<object>("_internalWeapon");
+                     .SetInternalField("_currentDamageInflicted", HaxSettings.GetValue<int>("RailDamage"));
         }
 
         FireTimingData fireTimingData = HaxObjects.FireTimingDataObject.Object;
@@ -29,9 +29,11 @@ public class RailMod : HaxModules {
         float[] railFirePeriods = new float[6];
         railFirePeriods.Skip(1).Select((x, i) => x = HaxSettings.GetValue<float>($"railFirePeriod{i}"));
 
-        Reflector.Target(fireTimingData).SetInternalField("railReloadDuration", railReloadDurations)
-                                     .SetInternalField("railFirePeriod", railFirePeriods)
-                                     .SetInternalField("railFireDelay", HaxSettings.GetValue<float>("railFireDelay"));
+        Reflector.Target(fireTimingData)
+                 .SetInternalField("railReloadDuration", railReloadDurations)
+                 .SetInternalField("railFirePeriod", railFirePeriods)
+                 .SetInternalField("railFireDelay", HaxSettings.GetValue<float>("railFireDelay"));
+                 
         fireTimingData.Start();
     }
 }
