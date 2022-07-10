@@ -35,7 +35,7 @@ Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fu
 [dnSpy](https://github.com/dnSpy/dnSpy) is included as a submodule when you recursively clone this directory. If you plan to contribute to the development, dnSpy is an invaluable tool for browsing the Robocraft source code. You may compile dnSpy by executing `requirements.bat` and entering `Y` when the prompt to build dnSpy appears. You can then run the compiled dnSpy executable.
 
 ```bash
-dnSpy48/dnSpy.exe &
+dnSpy5.0/dnSpy.exe &
 ```
 
 ## Motivations
