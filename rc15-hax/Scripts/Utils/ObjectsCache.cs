@@ -19,6 +19,7 @@ public class ObjectsCache : ObjectCacheBase {
         if (this.Objects == null) Console.Print($"Unable to find object of type {this.TypeName()}.");
     }
 }
+
 public class ObjectsCache<T> : ObjectCacheBase where T : UnityObject {
     public T[] Objects { get; set; }
 
