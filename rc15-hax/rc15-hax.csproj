@@ -13,7 +13,7 @@
   <ItemGroup>
 
     <Reference Include="Assembly-CSharp">
-      <HintPath>./rc15-hax/References/Assembly-CSharp.dll</HintPath>
+      <HintPath>./References/Assembly-CSharp.dll</HintPath>
     </Reference>
 
     <Reference Include="UnityEngine">
