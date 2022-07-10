@@ -15,7 +15,6 @@ public class Hax : HaxComponents {
         }
 
         else if (MenuOptions.EnableStealth) {
-            Console.Print("test");
             HaxSettings.ParseDefaultValues = true;
             Global.SetActiveGameObject(Loader.HaxModules, false);
             Global.SetActiveGameObject(Loader.HaxStealthModules, true);
