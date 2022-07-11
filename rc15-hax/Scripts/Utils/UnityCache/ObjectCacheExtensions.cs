@@ -2,7 +2,6 @@ using System;
 using UnityObject = UnityEngine.Object;
 
 namespace RC15_HAX;
-
 public class ObjectCache : ObjectCacheBase {
     public UnityObject Object { get; set; }
     Type ObjectType { get; }
@@ -18,16 +17,4 @@ public class ObjectCache : ObjectCacheBase {
         this.Object = UnityObject.FindObjectOfType(this.ObjectType);
         if (this.Object == null) Console.Print($"Unable to find object of type {this.TypeName()}.");
     }
-}
-
-public class ObjectCache<T> : ObjectCacheBase where T : UnityObject {
-    public T Object { get; set; }
-
-    public ObjectCache(float updateInterval = 2.0f) : base(updateInterval) {
-        this.FindObject();
-    }
-
-    protected override string TypeName() => typeof(T).FullName;
-
-    protected override void FindObject() => this.Object = UnityObject.FindObjectOfType<T>();
 }
