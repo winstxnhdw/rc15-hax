@@ -1,7 +1,7 @@
 using System.Linq;
 using Simulation;
 
-namespace RC15_HAX;
+namespace Hax;
 public class SMGMod : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableSMGMod");
 
@@ -19,7 +19,7 @@ public class SMGMod : HaxModules {
         float[] groupFirePeriods = (from i in Enumerable.Range(0, 5) select HaxSettings.GetValue<float>($"groupFirePeriod{i}")).ToArray();
         Reflector.Target(fireTimingData)
                  .SetInternalField("groupFirePeriod", groupFirePeriods);
-                 
+
         fireTimingData.Start();
     }
 }

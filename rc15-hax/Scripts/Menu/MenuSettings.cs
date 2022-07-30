@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public static class MenuSettings {
     static float MenuHeight => 0.4f * Screen.height;
 

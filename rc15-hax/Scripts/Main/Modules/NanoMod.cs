@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace RC15_HAX;
+namespace Hax;
 public class NanoMod : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableNanoMod");
 

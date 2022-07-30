@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public static class Hierarchy {
     public static void PrintAllAncestors(Transform transform) {
         Hierarchy.PrintTransformInfo(transform);

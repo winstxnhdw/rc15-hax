@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class NoClip : HaxModules {
     bool IsNoClipping { get; set; } = false;
     bool InPhantom { get; set; } = false;

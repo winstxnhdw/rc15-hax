@@ -1,4 +1,4 @@
-namespace RC15_HAX;
+namespace Hax;
 public static class MenuOptions {
     public static bool EnableStealth { get; set; } = HaxSettings.GetValue<bool>("EnableStealth");
 

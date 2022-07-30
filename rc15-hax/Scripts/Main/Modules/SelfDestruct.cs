@@ -1,4 +1,4 @@
-namespace RC15_HAX;
+namespace Hax;
 public class SelfDestruct : HaxModules {
     protected override void OnEnable() {
         base.OnEnable();

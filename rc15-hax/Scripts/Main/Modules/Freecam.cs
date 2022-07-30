@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Freecam : HaxModules {
     bool IsPhantom { get; set; } = false;
     bool IsNoClipping { get; set; } = false;

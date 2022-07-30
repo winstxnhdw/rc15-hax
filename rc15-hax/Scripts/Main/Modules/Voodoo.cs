@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Voodoo : HaxModules {
     static Voodoo Instance { get; set; }
     float VoodooForwardOffset => HaxSettings.GetValue<float>("VoodooForwardOffset");

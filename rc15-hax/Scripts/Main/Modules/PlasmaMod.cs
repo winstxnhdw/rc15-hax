@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using Simulation;
-namespace RC15_HAX;
+namespace Hax;
 public class PlasmaMod : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnablePlasmaMod");
 

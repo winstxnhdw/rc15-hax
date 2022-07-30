@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Menu : HaxComponents {
     Rect WindowRect { get; set; } = MenuSettings.MenuRect;
     static Vector2 Scroll { get; set; } = Vector2.zero;

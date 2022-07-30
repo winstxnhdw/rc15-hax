@@ -1,6 +1,6 @@
 // using Simulation;
 
-// namespace RC15_HAX;
+// namespace Hax;
 // public class LegMod : HaxModules {
 //     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableLegMod"); }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Body {
     float OriginalMass { get; }
     float DeltaTime { get; }

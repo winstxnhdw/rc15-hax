@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class ConsoleInputField : HaxComponents {
     void OnGUI() {
         Event e = Event.current;

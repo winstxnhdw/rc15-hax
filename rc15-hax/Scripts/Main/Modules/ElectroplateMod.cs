@@ -1,7 +1,7 @@
 // using System.Linq;
 // using Simulation;
 
-// namespace RC15_HAX;
+// namespace Hax;
 // public class ElectroplateMod : HaxModules {
 //     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableRailMod"); }
 

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public static class NoClipSettings {
     static Func<float, float> ClampNoClipSpeed = (float value) => Mathf.Clamp(value, 0.1f, float.MaxValue);
 

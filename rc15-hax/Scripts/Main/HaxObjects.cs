@@ -1,7 +1,7 @@
 using UnityEngine;
 using Simulation;
 
-namespace RC15_HAX;
+namespace Hax;
 public class HaxObjects : HaxComponents {
     static ObjectCache<LocalPlayerRigidbody> playerRigidbody = new ObjectCache<LocalPlayerRigidbody>(0.5f);
 

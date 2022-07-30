@@ -1,6 +1,6 @@
 using System;
 
-namespace RC15_HAX;
+namespace Hax;
 public class DebugCommand : DebugCommandBase {
     Action Command { get; set; }
 

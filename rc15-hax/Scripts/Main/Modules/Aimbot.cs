@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Aimbot : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableAimbot");
 

@@ -1,4 +1,4 @@
-namespace RC15_HAX;
+namespace Hax;
 public class HaxModules : HaxComponents {
     protected virtual bool ModEnabled => true;
     protected bool DefaultStored { get; set; } = false;

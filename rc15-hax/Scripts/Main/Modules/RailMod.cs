@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using Simulation;
 
-namespace RC15_HAX;
+namespace Hax;
 public class RailMod : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableRailMod");
 

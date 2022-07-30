@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public static class ScreenInfo {
     public static Vector2 GetScreenCentre() => new Vector2(Screen.width, Screen.height) * 0.5f;
 

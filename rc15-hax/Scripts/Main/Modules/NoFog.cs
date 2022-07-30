@@ -1,7 +1,7 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class NoFog : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("NoFog");
     const float DefaultFarClipPlane = 650.0f;

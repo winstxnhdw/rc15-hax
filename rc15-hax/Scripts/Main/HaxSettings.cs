@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RC15_HAX;
+namespace Hax;
 public static class HaxSettings {
     public static bool ParseDefaultValues { get; set; } = false;
 

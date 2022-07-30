@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Reflector {
     const BindingFlags Internal = BindingFlags.NonPublic | BindingFlags.Instance;
     const BindingFlags Public = BindingFlags.Public | BindingFlags.Instance;

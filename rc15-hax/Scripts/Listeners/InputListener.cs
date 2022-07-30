@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class InputListener : HaxComponents {
     public static event Action onF4Press;
     public static event Action onF5Press;

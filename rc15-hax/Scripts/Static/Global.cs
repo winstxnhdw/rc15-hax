@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public static class Global {
     public const float twoPi = Mathf.PI * 2.0f;
     static Camera camera = Camera.main;

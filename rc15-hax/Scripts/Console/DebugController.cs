@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class DebugController : HaxComponents {
     public static List<object> CommandList { get; set; } = new List<object>();
 

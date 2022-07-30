@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEngine;
 using HarmonyLib;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Loader : MonoBehaviour {
     static GameObject HaxGameObject { get; } = new GameObject();
     public static GameObject HaxModules { get; } = new GameObject();

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Player : HaxModules {
     protected override void OnEnable() {
         base.OnEnable();

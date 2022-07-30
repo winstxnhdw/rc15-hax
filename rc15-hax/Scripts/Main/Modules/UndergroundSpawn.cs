@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 
 public class UndergroundSpawn : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("SpawnUnderground");

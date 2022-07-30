@@ -1,4 +1,4 @@
-namespace RC15_HAX;
+namespace Hax;
 readonly public struct Size {
     public float Width { get; }
     public float Height { get; }

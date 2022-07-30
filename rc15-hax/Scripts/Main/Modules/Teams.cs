@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using Simulation;
-namespace RC15_HAX;
+namespace Hax;
 public class Teams : HaxModules {
     const int blueTeamId = 0;
     const int redTeamId = 1;

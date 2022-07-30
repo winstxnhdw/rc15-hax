@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace RC15_HAX;
+namespace Hax;
 public class WeaponMod : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableWeaponMod");
     bool ProjectileSpeedModEnabled => HaxSettings.GetValue<bool>("EnableProjectileSpeedMod");

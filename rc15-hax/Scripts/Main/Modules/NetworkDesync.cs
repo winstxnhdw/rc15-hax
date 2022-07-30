@@ -1,4 +1,4 @@
-namespace RC15_HAX;
+namespace Hax;
 public class NetworkDesync : HaxModules {
     NetworkMachineSyncUnityClient networkMachineSyncUnityClient = FindObjectOfType<NetworkMachineSyncUnityClient>();
     NetworkMachineSyncUnityClient NetworkMachineSyncUnityClient {

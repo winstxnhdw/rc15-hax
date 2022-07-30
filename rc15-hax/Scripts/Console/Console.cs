@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Console : HaxComponents {
     static List<string> logs = new List<string>();
     static List<string> FrozenLogs { get; set; } = new List<string>();

@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public static class Robocraft {
     static Assembly RobocraftAssembly => Assembly.Load("Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
 

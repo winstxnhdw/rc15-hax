@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class Enemy : HaxModules {
     public static int EnemyTeamID { get; private set; }
     public static List<int> EnemyIndexList { get; private set; }

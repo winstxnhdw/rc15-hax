@@ -1,4 +1,4 @@
-namespace RC15_HAX;
+namespace Hax;
 public class DebugCommandBase {
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;

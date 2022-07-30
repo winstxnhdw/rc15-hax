@@ -1,4 +1,4 @@
-namespace RC15_HAX;
+namespace Hax;
 public class PingMod : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnablePingMod");
     bool EnablePingAll => HaxSettings.GetValue<bool>("EnablePingAll");

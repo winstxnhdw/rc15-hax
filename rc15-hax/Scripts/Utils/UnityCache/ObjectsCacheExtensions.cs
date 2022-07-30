@@ -1,7 +1,7 @@
 using System;
 using UnityObject = UnityEngine.Object;
 
-namespace RC15_HAX;
+namespace Hax;
 public class ObjectsCache : ObjectCacheBase {
     public UnityObject[] Objects { get; set; }
     Type ObjectType { get; }

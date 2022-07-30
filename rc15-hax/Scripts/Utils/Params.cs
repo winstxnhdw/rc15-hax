@@ -1,4 +1,4 @@
-namespace RC15_HAX;
+namespace Hax;
 public class Params {
     public string Default { get; }
     public string Current { get; }

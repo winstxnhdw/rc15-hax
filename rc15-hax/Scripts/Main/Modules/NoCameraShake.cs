@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class NoCameraShake : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("NoCameraShake");
     Reflector CameraShakeReflection { get; set; }

@@ -1,4 +1,4 @@
-// namespace RC15_HAX;
+// namespace Hax;
 // public class JetMod : HaxModules {
 //     bool ModEnabled { get => HaxSettings.GetValue<bool>("EnableJetMod"); }
 

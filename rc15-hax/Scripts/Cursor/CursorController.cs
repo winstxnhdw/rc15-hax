@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RC15_HAX;
+namespace Hax;
 public class CursorController : HaxComponents {
     bool CursorLocked { get; set; } = false;
 

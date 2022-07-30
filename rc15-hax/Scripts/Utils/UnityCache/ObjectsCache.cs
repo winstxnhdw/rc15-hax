@@ -1,6 +1,6 @@
 using UnityObject = UnityEngine.Object;
 
-namespace RC15_HAX;
+namespace Hax;
 public class ObjectsCache<T> : ObjectCacheBase where T : UnityObject {
     public T[] Objects { get; set; }
 

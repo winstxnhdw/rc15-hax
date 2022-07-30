@@ -3,7 +3,7 @@ using System.Reflection.Emit;
 using UnityEngine;
 using HarmonyLib;
 
-namespace RC15_HAX;
+namespace Hax;
 
 [HarmonyPatch(typeof(Application), "CommitSuicide", typeof(int))]
 public static class UnityEnginePatch {

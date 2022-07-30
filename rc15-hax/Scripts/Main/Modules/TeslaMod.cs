@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Simulation;
 
-namespace RC15_HAX;
+namespace Hax;
 public class TeslaMod : HaxModules {
     protected override bool ModEnabled => HaxSettings.GetValue<bool>("EnableTeslaMod");
     bool UsingTeslaField { get; set; } = false;
