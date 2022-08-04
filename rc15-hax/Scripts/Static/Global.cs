@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Hax;
 public static class Global {
-    public const float twoPi = Mathf.PI * 2.0f;
+    public const float TwoPi = Mathf.PI * 2.0f;
     static Camera camera = Camera.main;
 
     public static bool IsNullOrWhiteSpace(string value) {

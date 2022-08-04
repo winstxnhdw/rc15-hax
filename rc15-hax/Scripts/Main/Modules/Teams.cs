@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Simulation;
 namespace Hax;
 public class Teams : HaxModules {
-    const int blueTeamId = 0;
-    const int redTeamId = 1;
+    const int BlueTeamID = 0;
+    const int RedTeamID = 1;
 
-    public static TargetType Player => TargetType.Player;
+    public const TargetType Player = TargetType.Player;
     public static Reflector PlayerTeamsContainerReflection { get; private set; }
     public static Reflector PlayerNamesContainerReflection { get; private set; }
     public static Reflector LivePlayersContainerReflection { get; private set; }
@@ -55,15 +55,15 @@ public class Teams : HaxModules {
         Dictionary<int, string> blueTeamPlayers = new Dictionary<int, string>();
         Dictionary<int, string> redTeamPlayers = new Dictionary<int, string>();
 
-        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, Teams.blueTeamId)) {
+        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, Teams.BlueTeamID)) {
             blueTeamPlayers.Add(player, Teams.PlayerNamesContainerReflection.InvokePublicMethod<string>("GetPlayerName", player));
         }
 
-        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, Teams.redTeamId)) {
+        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, Teams.RedTeamID)) {
             redTeamPlayers.Add(player, Teams.PlayerNamesContainerReflection.InvokePublicMethod<string>("GetPlayerName", player));
         }
 
-        Teams.AllPlayers.Add(blueTeamId, blueTeamPlayers);
-        Teams.AllPlayers.Add(redTeamId, redTeamPlayers);
+        Teams.AllPlayers.Add(BlueTeamID, blueTeamPlayers);
+        Teams.AllPlayers.Add(RedTeamID, redTeamPlayers);
     }
 }

@@ -9,7 +9,7 @@ public class TeslaMod : HaxModules {
     bool UsingTeslaField { get; set; } = false;
     bool RenderTeslaField { get; set; } = false;
     int TeslaFieldStateIndex { get; set; } = 0;
-    float TeslaFieldOffset { get => Global.twoPi / TeslaBladeTransformList.Count; }
+    float TeslaFieldOffset { get => Global.TwoPi / TeslaBladeTransformList.Count; }
     float TeslaFieldRadius { get => HaxSettings.GetValue<float>("TeslaFieldRadius"); }
     float TeslaFieldRate { get => HaxSettings.GetValue<float>("TeslaFieldRate"); }
     float TeslaRendererOffset { get => HaxSettings.GetValue<float>("TeslaRendererOffset"); }
@@ -82,7 +82,7 @@ public class TeslaMod : HaxModules {
         while (true) {
             for (int i = 0; i < this.TeslaBladeTransformList.Count; i++) {
                 float teslaTimer = Time.time + (this.TeslaFieldOffset * i);
-                Vector3 pointAlongCircle = new Vector3(this.TeslaFieldRadius * Mathf.Cos(teslaTimer * Global.twoPi), 0, this.TeslaFieldRadius * Mathf.Sin(teslaTimer * Global.twoPi));
+                Vector3 pointAlongCircle = new Vector3(this.TeslaFieldRadius * Mathf.Cos(teslaTimer * Global.TwoPi), 0, this.TeslaFieldRadius * Mathf.Sin(teslaTimer * Global.TwoPi));
                 Vector3 teslaPosition = playerBody.transform.InverseTransformPoint(playerBody.worldCenterOfMass) + Quaternion.Euler(0, 0, teslaTimer * 90.0f) * pointAlongCircle;
 
                 Transform teslaBladeT = this.TeslaBladeTransformList[i];

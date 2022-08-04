@@ -6,7 +6,7 @@ public static class ConsoleSettings {
 
     static float ConsoleWidth => Screen.width;
 
-    public static int MaxLogs => 1000;
+    public const int MaxLogs = 1000;
 
     public static float FieldTextTopPadding => Mathf.Clamp(10.0f * Settings.SizeRatio, 0.0f, ConsoleSettings.FieldContainerRect.height);
 
