@@ -122,7 +122,7 @@ public static class HaxSettings {
         {"UndergroundPositionOffset",           SetParams("10")},
         // PingAll parameters
         {"EnablePingMod",                       SetParams("True")},
-        {"EnablePingAll",                       SetParams("False")},
+        {"EnablePingAll",                       SetParams("True")},
         {"PingAllInterval",                     SetParams("0.1")},
         // General parameters
         {"EnableAimbot",                        SetParams("True")},
