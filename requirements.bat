@@ -3,7 +3,7 @@
 set project_name=rc15-hax
 dotnet restore %project_name%
 dotnet build %project_name%
-dotnet build submodules/SharpMonoInjectorCore/SharpMonoInjector
+dotnet publish submodules/SharpMonoInjectorCore/SharpMonoInjector
 
 :dev
 set /p choice=Would you like to build dnSpy? [y/N]: 

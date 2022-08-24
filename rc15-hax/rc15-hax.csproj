@@ -6,7 +6,6 @@
     <LangVersion>latest</LangVersion>
     <TargetFramework>net35</TargetFramework>
     <RootNamespace>rc15_hax</RootNamespace>
-    <ImplicitUsings>disable</ImplicitUsings>
 
   </PropertyGroup>
 
