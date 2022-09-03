@@ -13,6 +13,6 @@ pause
 exit
 
 :dnSpy
-dotnet publish submodules/dnSpy -f net48 -r win-x64
-robocopy submodules/dnSpy/dnSpy/dnSpy/bin/Debug/net48 ./dnSpy /e /move /njh /njs /ndl /nc /ns
+dotnet publish submodules/dnSpy -c Release -f net48
+robocopy submodules/dnSpy/dnSpy/dnSpy/bin/Release/net48 ./dnSpy /e /move /njh /njs /ndl /nc /ns
 pause
