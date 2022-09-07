@@ -35,7 +35,7 @@ public class InputListener : HaxComponents {
         {() => Input.GetKeyDown(KeyCode.BackQuote),   () => Console.ShowConsole()},
         {() => Input.GetKeyDown(KeyCode.Backslash),   () => InputListener.onBackslashPress?.Invoke()},
         {() => Input.GetKeyDown(KeyCode.Escape),      () => InputListener.onEscapePress?.Invoke()},
-        {() => Input.GetKeyDown(KeyCode.Pause),       () => InputListener.onPausePress?.Invoke()},
+        {() => Input.GetKeyDown(KeyCode.Pause),       () => InputListener.onPausePress?.Invoke()}
     };
 
     void Update() {
@@ -44,7 +44,7 @@ public class InputListener : HaxComponents {
 
     void KeyboardListener() {
         foreach (KeyValuePair<Func<bool>, Action> keyAction in this.keyActionsDict) {
-            if (!(keyAction.Key())) continue;
+            if (!keyAction.Key()) continue;
             keyAction.Value();
         }
     }
