@@ -1,0 +1,29 @@
+name: dotnet
+
+on:
+  push:
+    paths:
+      - 'rc15-hax/**'
+      - 'submodules/SharpMonoInjectorCore'
+      - '.github/workflows/main.yml'
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Build rc15-hax
+      run: dotnet build rc15-hax
+
+    - name: Build SharpMonoInjectorCore
+      run: dotnet build submodules/SharpMonoInjectorCore/SharpMonoInjector

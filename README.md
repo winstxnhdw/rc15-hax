@@ -1,5 +1,7 @@
 # rc15-hax
 
+![main.yml](https://github.com/winstxnhdw/rc15-hax/actions/workflows/main.yml/badge.svg)
+
 <p align="center"><b>World's first open-source internal cheat for Robocraft</b></p>
 
 <div align="center">
