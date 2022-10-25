@@ -16,16 +16,16 @@ public class Loader : MonoBehaviour {
     static void DontDisableOnStealth<T>() where T : Component => Loader.HaxStealthModules.AddComponent<T>();
 
     static Assembly OnResolveAssembly(object _, ResolveEventArgs args) {
-        Assembly executingAssembly = Assembly.GetExecutingAssembly();
-        string resource = executingAssembly.GetManifestResourceNames().FirstOrDefault(s => s.EndsWith($"{new AssemblyName(args.Name).Name}.dll"));
+        Assembly assembly = Assembly.GetExecutingAssembly();
 
-        using (Stream stream = executingAssembly.GetManifestResourceStream(resource)) {
-            if (stream == null) return null;
+        using Stream stream = assembly.GetManifestResourceStream(
+            assembly.GetManifestResourceNames()
+                    .First(name => name.EndsWith($"{new AssemblyName(args.Name).Name}.dll"))
+        );
 
-            byte[] block = new byte[stream.Length];
-            stream.Read(block, 0, block.Length);
-            return Assembly.Load(block);
-        }
+        byte[] block = new byte[stream.Length];
+        stream.Read(block, 0, block.Length);
+        return Assembly.Load(block);
     }
 
     public static void Load() {
