@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+namespace Hax;
 public class ModCoroutine {
     MonoBehaviour Self { get; }
     Action ModFunction { get; }

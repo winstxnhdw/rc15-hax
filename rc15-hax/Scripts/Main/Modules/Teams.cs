@@ -31,6 +31,9 @@ public class Teams : HaxModules {
         HaxObjects.Rigidbodies.Stop();
     }
 
+    ReadOnlyCollection<int> GetPlayersOnTeam(int teamID) =>
+        Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, teamID);
+
     void GetSpotManager() {
         Teams.SpotManagerReflection = Reflector.Target(FindObjectOfType<SpotCooldownDisplay>())
                                                .GetInternalProperty("spotManager");
@@ -55,11 +58,11 @@ public class Teams : HaxModules {
         Dictionary<int, string> blueTeamPlayers = new Dictionary<int, string>();
         Dictionary<int, string> redTeamPlayers = new Dictionary<int, string>();
 
-        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, Teams.BlueTeamID)) {
+        foreach (int player in this.GetPlayersOnTeam(Teams.BlueTeamID)) {
             blueTeamPlayers.Add(player, Teams.PlayerNamesContainerReflection.InvokePublicMethod<string>("GetPlayerName", player));
         }
 
-        foreach (int player in Teams.PlayerTeamsContainerReflection.InvokePublicMethod<ReadOnlyCollection<int>>("GetPlayersOnTeam", Teams.Player, Teams.RedTeamID)) {
+        foreach (int player in this.GetPlayersOnTeam(Teams.RedTeamID)) {
             redTeamPlayers.Add(player, Teams.PlayerNamesContainerReflection.InvokePublicMethod<string>("GetPlayerName", player));
         }
 
