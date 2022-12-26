@@ -1,7 +1,6 @@
 @echo off
 
 set project_name=rc15-hax
-dotnet restore %project_name%
 dotnet build %project_name%
 dotnet publish submodules/SharpMonoInjectorCore/SharpMonoInjector
 

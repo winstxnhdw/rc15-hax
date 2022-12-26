@@ -9,6 +9,13 @@
 
   </PropertyGroup>
 
+  <Target Name="CleanBeforeRestore" BeforeTargets="Restore">
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+    <RemoveDir Directories="$(BaseOutputPath)" />
+    <RemoveDir Directories="$(PublishDir)" />
+    <RemoveDir Directories="$(PublishDir)../References/NuGet" />
+  </Target>
+
   <ItemGroup>
 
     <Reference Include="Assembly-CSharp">
@@ -19,9 +26,9 @@
       <HintPath>./References/UnityEngine.dll</HintPath>
     </Reference>
 
-    <PackageReference Include="Lib.Harmony" Version="2.2.1" />
+    <PackageReference Include="Lib.Harmony" Version="2.2.2" />
 
-    <EmbeddedResource Include="./References/NuGet/lib.harmony/2.2.1/lib/net35/0Harmony.dll" />
+    <EmbeddedResource Include="./References/NuGet/lib.harmony/2.2.2/lib/net35/0Harmony.dll" />
 
   </ItemGroup>
 
