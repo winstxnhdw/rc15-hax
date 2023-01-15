@@ -6,8 +6,25 @@
     <LangVersion>latest</LangVersion>
     <TargetFramework>net35</TargetFramework>
     <RootNamespace>rc15_hax</RootNamespace>
+    <ReferencePath>./References</ReferencePath>
 
   </PropertyGroup>
+
+  <ItemGroup>
+
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(ReferencePath)/Assembly-CSharp.dll</HintPath>
+    </Reference>
+
+    <Reference Include="UnityEngine">
+      <HintPath>$(ReferencePath)/UnityEngine.dll</HintPath>
+    </Reference>
+
+    <PackageReference Include="Lib.Harmony" Version="2.2.2" />
+
+    <EmbeddedResource Include="$(ReferencePath)/NuGet/lib.harmony/2.2.2/lib/$(TargetFramework)/0Harmony.dll" />
+
+  </ItemGroup>
 
   <Target Name="CleanBeforeRestore" BeforeTargets="Restore">
     <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
@@ -15,21 +32,5 @@
     <RemoveDir Directories="$(PublishDir)" />
     <RemoveDir Directories="$(PublishDir)../References/NuGet" />
   </Target>
-
-  <ItemGroup>
-
-    <Reference Include="Assembly-CSharp">
-      <HintPath>./References/Assembly-CSharp.dll</HintPath>
-    </Reference>
-
-    <Reference Include="UnityEngine">
-      <HintPath>./References/UnityEngine.dll</HintPath>
-    </Reference>
-
-    <PackageReference Include="Lib.Harmony" Version="2.2.2" />
-
-    <EmbeddedResource Include="./References/NuGet/lib.harmony/2.2.2/lib/net35/0Harmony.dll" />
-
-  </ItemGroup>
 
 </Project>
