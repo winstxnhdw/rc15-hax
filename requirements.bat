@@ -2,10 +2,10 @@
 
 set project_name=rc15-hax
 dotnet build %project_name%
-dotnet publish submodules/SharpMonoInjectorCore/SharpMonoInjector
+dotnet publish submodules/SharpMonoInjectorCore
 
 :dev
-set /p choice=Would you like to build dnSpy? [y/N]: 
+set /p choice=Would you like to build dnSpy? [y/N]:
 if /i '%choice%'=='Y' goto dnSpy
 echo Skipping dnSpy build..
 pause
