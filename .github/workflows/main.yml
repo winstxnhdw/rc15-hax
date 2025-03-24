@@ -15,15 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4.2.2
       with:
-        submodules: recursive
+        show-progress: false
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4.3.1
       with:
         dotnet-version: 8.0.x
+        cache: true
+        cache-dependency-path: rc15-hax/packages.lock.json
 
     - name: Build rc15-hax
       run: dotnet build rc15-hax
-
-    - name: Build SharpMonoInjectorCore
-      run: dotnet build submodules/SharpMonoInjectorCore
