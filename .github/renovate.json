@@ -1,9 +1,14 @@
 {
 	"extends": ["github>winstxnhdw/renovate"],
-	"nuget": {
-		"registryUrls": [
-			"https://api.nuget.org/v3/index.json",
-			"https://nuget.bepinex.dev/v3/index.json"
-		]
-	}
+	"packageRules": [
+		{
+			"matchDatasources": ["nuget"],
+			"matchPackageNames": ["UnityEngine.Modules"],
+			"allowedVersions": "^5.0.0",
+			"registryUrls": [
+				"https://api.nuget.org/v3/index.json",
+				"https://nuget.bepinex.dev/v3/index.json"
+			]
+		}
+	]
 }
