@@ -22,8 +22,7 @@
 
     <PackageReference Include="Lib.Harmony" Version="2.2.2" />
 
-    <EmbeddedResource
-      Include="$(NuGetPackageRoot)/lib.harmony/2.2.2/lib/$(TargetFramework)/0Harmony.dll" />
+    <EmbeddedResource Include="$(NuGetPackageRoot)/lib.harmony/2.2.2/lib/$(TargetFramework)/0Harmony.dll" />
 
   </ItemGroup>
 
