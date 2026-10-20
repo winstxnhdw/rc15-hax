@@ -1,6 +1,8 @@
 @echo off
 
-dotnet build rc15-hax
-start /wait /b ./submodules/SharpMonoInjectorCore/dist/SharpMonoInjector.exe inject -p RobocraftClient -a bin/rc15-hax.dll -n Hax -c Loader -m Load
+if not exist ".git" git init --initial-branch=main
 
-pause
+git remote get-url origin || git remote add origin https://github.com/winstxnhdw/rc15-hax.git
+git pull --rebase --autostash origin main
+dotnet publish launcher\launcher.csproj -restoreProperty:RestoreLockedMode=true
+.\launcher.exe

@@ -1,6 +1,6 @@
-FROM mcr.microsoft.com/dotnet/sdk:11.0
+FROM mcr.microsoft.com/dotnet/sdk:10.0.402
 
+WORKDIR /app
 COPY . .
 
-RUN dotnet build rc15-hax
-RUN dotnet publish submodules/SharpMonoInjectorCore
+RUN dotnet publish launcher/launcher.csproj -c Release -restoreProperty:RestoreLockedMode=true

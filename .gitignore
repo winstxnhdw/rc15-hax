@@ -1,4 +1,3 @@
-dnSpy/
-obj/
 bin/
-Nuget/
+obj/
+/launcher.exe

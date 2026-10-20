@@ -1,10 +1,12 @@
 name: Build
 
 on:
+  pull_request:
   push:
     paths:
       - rc15-hax/**
-      - submodules/SharpMonoInjectorCore
+      - launcher/**
+      - launch.bat
       - .github/workflows/main.yml
 
 jobs:
@@ -22,7 +24,9 @@ jobs:
       with:
         dotnet-version: 10.0.402
         cache: true
-        cache-dependency-path: rc15-hax/packages.lock.json
+        cache-dependency-path: |
+          rc15-hax/packages.lock.json
+          launcher/packages.lock.json
 
-    - name: Build rc15-hax
-      run: dotnet build rc15-hax
+    - name: Publish launcher
+      run: dotnet publish launcher/launcher.csproj -c Release -restoreProperty:RestoreLockedMode=true

@@ -1,18 +1,22 @@
 @echo off
 
+cd /d "%~dp0"
 set app_name=rc15-hax
 
 docker stop %app_name%
 docker rm %app_name%
 
 docker build -t %app_name% .
-docker run --name %app_name% %app_name%
+if errorlevel 1 goto error
+docker create --name %app_name% %app_name%
+if errorlevel 1 goto error
 
-rmdir /s /q bin
-cls
+docker cp %app_name%:/app/launcher.exe .\launcher.exe
+if errorlevel 1 goto error
+.\launcher.exe
+if errorlevel 1 goto error
+exit /b 0
 
-docker cp rc15-hax:/submodules/SharpMonoInjectorCore/dist/ .
-docker cp rc15-hax:/bin/rc15-hax.dll ./bin/
-start /wait /b ./dist/SharpMonoInjector.exe inject -p RobocraftClient -a bin/rc15-hax.dll -n Hax -c Loader -m Load
-
+:error
 pause
+exit /b 1

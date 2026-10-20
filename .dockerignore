@@ -1,10 +1,12 @@
-dnSpy/
 obj/
 bin/
+launcher.exe
+launcher.pdb
 
 Dockerfile
 
 *.md
 *.json
+!**/packages.lock.json
 *.bat
 .git*

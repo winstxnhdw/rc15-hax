@@ -15,40 +15,21 @@
 ## Requirements
 
 - Windows 10 or higher
-- [Microsoft .NET SDK](https://dotnet.microsoft.com/en-us/download)
+- [Microsoft .NET 10.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
+- [Git](https://git-scm.com/download/win)
 - [Robocraft 2015 R4.1](https://drive.google.com/drive/folders/1k3W2OyI84EgYzKfXWOZ_vaffNR01taYn)
 
 ## Installation
 
-If you are on Windows 11, follow the instructions [here](https://github.com/winstxnhdw/rc15-hax/wiki) instead. Otherwise, recursively clone this repository.
+Clone this repository.
 
 ```bash
-git clone --recursive https://github.com/winstxnhdw/rc15-hax.git
+git clone https://github.com/winstxnhdw/rc15-hax.git
 ```
-
-You can now build and install the dependencies by executing `requirements.bat`. It is not required to build dnSpy if you do not plan on doing any [development](#Development).
 
 ## Usage
 
-Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Execute `launch.bat` when you have entered the game lobby. Read the [wiki](https://github.com/winstxnhdw/rc15-hax/wiki/Features) to learn about its features.
-
-## Development
-
-[dnSpy](https://github.com/dnSpy/dnSpy) is included as a submodule when you recursively clone this directory. If you plan to contribute to the development, dnSpy is an invaluable tool for browsing the Robocraft source code. You may compile dnSpy by executing `requirements.bat` and entering `Y` when the prompt to build dnSpy appears. You can then run the compiled dnSpy executable.
-
-```bash
-dnSpy/dnSpy.exe &
-```
-
-## Motivations
-
-### Zero Executables
-
-The repository contains no executables. This assures the user that whatever that has been built originates from the repository and its submodules alone. Even with the best malware scanners, the best way to check for malware is with your own eyes. This level of transparency ensures the safety of the cheat, unlike the sketchy binaries that are found on forums like UnknownCheats/MPGH.
-
-### No Visual Studio
-
-Most cheats on GitHub, like [MuckInternal](https://github.com/win32kbase/MuckInternal), contain a lot of redundant boilerplate that Visual Studio generates—bloating the codebase and ruining the developer experience—requiring the user to install Visual Studio just to build the source code. On the otherhand, this cheat can easily be initialised by executing the `launch.bat` file.
+Download [Robocraft 2015](https://drive.google.com/file/d/1T3i7x2OC0GuELEWjSt_fuWAge-xAsZEi/view?usp=sharing) and register an account [here](https://phoenixsoftworks.net/register.html). Execute `launch.bat` when you have entered the game lobby. The launcher waits for `RobocraftClient` and loads the embedded cheat using the game's Mono runtime. Read the [wiki](https://github.com/winstxnhdw/rc15-hax/wiki/Features) to learn about its features.
 
 ## Featured
 
