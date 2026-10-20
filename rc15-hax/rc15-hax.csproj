@@ -20,7 +20,7 @@
 
     <PackageReference Include="UnityEngine.Modules" Version="5.6.7" />
 
-    <PackageReference Include="Lib.Harmony" Version="2.3.5" GeneratePathProperty="true" />
+    <PackageReference Include="Lib.Harmony" Version="2.4.3" GeneratePathProperty="true" />
 
     <EmbeddedResource Include="$(PkgLib_Harmony)/lib/$(TargetFramework)/0Harmony.dll" />
 
