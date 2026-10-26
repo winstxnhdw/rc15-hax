@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:10.0.402
+FROM mcr.microsoft.com/dotnet/sdk:10.0.403
 
 WORKDIR /app
 COPY . .
