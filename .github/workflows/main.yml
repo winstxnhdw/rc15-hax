@@ -20,9 +20,9 @@ jobs:
         show-progress: false
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v6.0.0
+      uses: actions/setup-dotnet@v6.1.0
       with:
-        dotnet-version: 10.0.402
+        dotnet-version: 10.0.403
         cache: true
         cache-dependency-path: |
           rc15-hax/packages.lock.json
